@@ -1,0 +1,437 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-09-08 14:43+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: dbushandler.cpp:142 mainwindow.cpp:155
+msgid "Wired network"
+msgstr ""
+
+#: infosdialog.cpp:26
+msgid "Network informations"
+msgstr ""
+
+#: infosdialog.cpp:42
+msgid "Unsecured"
+msgstr ""
+
+#: main.cpp:29
+msgid "Wicd Client KDE"
+msgstr ""
+
+#: main.cpp:31
+msgid "A Wicd client for KDE"
+msgstr ""
+
+#: main.cpp:33
+msgid "(c) 2010 Anthony Vital"
+msgstr ""
+
+#: mainwindow.cpp:43
+msgid "Network"
+msgstr ""
+
+#: mainwindow.cpp:47 mainwindow.cpp:228
+msgid "Create an ad-hoc network"
+msgstr ""
+
+#: mainwindow.cpp:48 mainwindow.cpp:274
+msgid "Find a hidden network"
+msgstr ""
+
+#: mainwindow.cpp:56 mainwindow.cpp:215
+msgid "Preferences"
+msgstr ""
+
+#: mainwindow.cpp:58
+msgid "Reload"
+msgstr ""
+
+#: mainwindow.cpp:59
+msgid "Disconnect"
+msgstr ""
+
+#: mainwindow.cpp:68
+msgid "Abort"
+msgstr ""
+
+#: mainwindow.cpp:83
+msgid "Putting interface down..."
+msgstr ""
+
+#: mainwindow.cpp:84
+msgid "Resetting IP address..."
+msgstr ""
+
+#: mainwindow.cpp:85
+msgid "Putting interface up..."
+msgstr ""
+
+#: mainwindow.cpp:86
+msgid "Generating PSK..."
+msgstr ""
+
+#: mainwindow.cpp:87
+msgid "Connection Failed: Bad password."
+msgstr ""
+
+#: mainwindow.cpp:88
+msgid "Generating WPA configuration"
+msgstr ""
+
+#: mainwindow.cpp:89
+msgid "Validating authentication..."
+msgstr ""
+
+#: mainwindow.cpp:90
+msgid "Obtaining IP address..."
+msgstr ""
+
+#: mainwindow.cpp:91
+msgid "Done connecting..."
+msgstr ""
+
+#: mainwindow.cpp:92
+msgid "Connection Failed: Unable to Get IP Address"
+msgstr ""
+
+#: mainwindow.cpp:93
+msgid "Connection Failed: No DHCP offers received."
+msgstr ""
+
+#: mainwindow.cpp:94
+msgid "Verifying access point association..."
+msgstr ""
+
+#: mainwindow.cpp:95
+msgid "Connection failed: Could not contact the wireless access point."
+msgstr ""
+
+#: mainwindow.cpp:96
+msgid "Setting static IP addresses..."
+msgstr ""
+
+#: mainwindow.cpp:97
+msgid "Aborted"
+msgstr ""
+
+#: mainwindow.cpp:98
+msgid "Failed"
+msgstr ""
+
+#: mainwindow.cpp:134
+msgid "Connected to wired network (IP : %1)"
+msgstr ""
+
+#: mainwindow.cpp:145
+msgid "Connected to %1 - %2%3 (IP : %4)"
+msgstr ""
+
+#: mainwindow.cpp:159
+msgid "Disconnected"
+msgstr ""
+
+#: mainwindow.cpp:238
+msgid "Channel"
+msgstr ""
+
+#: mainwindow.cpp:240
+msgid "Activate Internet Connection Sharing"
+msgstr ""
+
+#: mainwindow.cpp:242
+msgid "Use Encryption (WEP only)"
+msgstr ""
+
+#: mainwindow.cpp:243
+msgid "Key"
+msgstr ""
+
+#: mainwindow.cpp:275
+msgid "Hidden Network ESSID"
+msgstr ""
+
+#: networkpropertiesdialog.cpp:34
+msgid "OK"
+msgstr ""
+
+#: networkpropertiesdialog.cpp:39
+msgid "Use Static IPs"
+msgstr ""
+
+#: networkpropertiesdialog.cpp:40
+msgid "IP"
+msgstr ""
+
+#: networkpropertiesdialog.cpp:41
+msgid "Netmask"
+msgstr ""
+
+#: networkpropertiesdialog.cpp:42
+msgid "Gateway"
+msgstr ""
+
+#: networkpropertiesdialog.cpp:43
+msgid "Use Static DNS"
+msgstr ""
+
+#: networkpropertiesdialog.cpp:44 preferencespanel.cpp:54
+msgid "Use global DNS servers"
+msgstr ""
+
+#: networkpropertiesdialog.cpp:45 preferencespanel.cpp:55
+msgid "DNS domain"
+msgstr ""
+
+#: networkpropertiesdialog.cpp:46 preferencespanel.cpp:56
+msgid "Search domain"
+msgstr ""
+
+#: networkpropertiesdialog.cpp:47
+msgid "DNS 1"
+msgstr ""
+
+#: networkpropertiesdialog.cpp:48
+msgid "DNS 2"
+msgstr ""
+
+#: networkpropertiesdialog.cpp:49
+msgid "DNS 3"
+msgstr ""
+
+#: networkpropertiesdialog.cpp:51
+msgid "DHCP Hostname"
+msgstr ""
+
+#: networkpropertiesdialog.cpp:54
+msgid "Automatically connect to this network"
+msgstr ""
+
+#: networkpropertiesdialog.cpp:55
+msgid "Use these settings for all networks sharing this essid"
+msgstr ""
+
+#: networkpropertiesdialog.cpp:56
+msgid "Use Encryption"
+msgstr ""
+
+#: networkpropertiesdialog.cpp:60
+msgid "Scripts"
+msgstr ""
+
+#: networkpropertiesdialog.cpp:197
+msgid "Global DNS has not been enabled in general preferences."
+msgstr ""
+
+#: networkpropertiesdialog.cpp:236 networkpropertiesdialog.cpp:244
+msgid "Invalid adress in %1"
+msgstr ""
+
+#: networkpropertiesdialog.cpp:257
+msgid "%1 is required."
+msgstr ""
+
+#: networkpropertiesdialog.cpp:262
+msgid "This network needs an encryption."
+msgstr ""
+
+#: preferencespanel.cpp:39
+msgid "Network interfaces"
+msgstr ""
+
+#: preferencespanel.cpp:43 preferencespanel.cpp:162
+msgid "Wireless interface"
+msgstr ""
+
+#: preferencespanel.cpp:44
+msgid "Wired interface"
+msgstr ""
+
+#: preferencespanel.cpp:45
+msgid "Always show wired interface"
+msgstr ""
+
+#: preferencespanel.cpp:46
+msgid "Always switch to a wired connection when available"
+msgstr ""
+
+#: preferencespanel.cpp:53
+msgid "Global DNS servers"
+msgstr ""
+
+#: preferencespanel.cpp:57
+msgid "DNS server 1"
+msgstr ""
+
+#: preferencespanel.cpp:58
+msgid "DNS server 2"
+msgstr ""
+
+#: preferencespanel.cpp:59
+msgid "DNS server 3"
+msgstr ""
+
+#: preferencespanel.cpp:69
+msgid "Other"
+msgstr ""
+
+#: preferencespanel.cpp:73
+msgid "Wired automatic connection"
+msgstr ""
+
+#: preferencespanel.cpp:75
+msgid "Use default wired network profile"
+msgstr ""
+
+#: preferencespanel.cpp:76
+msgid "Prompt for wired network profile"
+msgstr ""
+
+#: preferencespanel.cpp:77
+msgid "Use last wired network profile"
+msgstr ""
+
+#: preferencespanel.cpp:83
+msgid "Automatically reconnect on network connection lost"
+msgstr ""
+
+#: preferencespanel.cpp:86
+msgid "Display notifications about connection status"
+msgstr ""
+
+#: preferencespanel.cpp:97 preferencespanel.cpp:98 preferencespanel.cpp:106
+#: preferencespanel.cpp:107 preferencespanel.cpp:115 preferencespanel.cpp:116
+msgid "Automatic (recommended)"
+msgstr ""
+
+#: preferencespanel.cpp:103
+msgid "DHCP client"
+msgstr ""
+
+#: preferencespanel.cpp:112
+msgid "Wired link detection"
+msgstr ""
+
+#: preferencespanel.cpp:121
+msgid "Route table flushing"
+msgstr ""
+
+#: preferencespanel.cpp:131
+msgid "Driver"
+msgstr ""
+
+#: preferencespanel.cpp:142 preferencespanel.cpp:145
+msgid "Backend"
+msgstr ""
+
+#: preferencespanel.cpp:155
+msgid "Debugging"
+msgstr ""
+
+#: preferencespanel.cpp:158
+msgid "Enable debug mode"
+msgstr ""
+
+#: preferencespanel.cpp:165
+msgid "Use dBm to measure signal strength"
+msgstr ""
+
+#: preferencespanel.cpp:166
+msgid "Ping static gateways after connecting to verify association"
+msgstr ""
+
+#: preferencespanel.cpp:172
+msgid "General settings"
+msgstr ""
+
+#: preferencespanel.cpp:173
+msgid "External programs"
+msgstr ""
+
+#: preferencespanel.cpp:174
+msgid "Advanced settings"
+msgstr ""
+
+#: profilemanager.cpp:31
+msgid "Manage profiles"
+msgstr ""
+
+#: profilemanager.cpp:73
+msgid "Add a profile"
+msgstr ""
+
+#: profilemanager.cpp:74
+msgid "New profile name:"
+msgstr ""
+
+#: qtcreator-build/ui_infosdialog.h:110
+msgid "Signal strength :"
+msgstr ""
+
+#: qtcreator-build/ui_infosdialog.h:112
+msgid "Encryption type :"
+msgstr ""
+
+#: qtcreator-build/ui_infosdialog.h:114
+msgid "Access point address :"
+msgstr ""
+
+#: qtcreator-build/ui_infosdialog.h:116
+msgid "Mode :"
+msgstr ""
+
+#: qtcreator-build/ui_infosdialog.h:118
+msgid "Channel :"
+msgstr ""
+
+#: qtcreator-build/ui_profilemanager.h:98
+msgid "Use as default profile (overwrites any previous default)"
+msgstr ""
+
+#: scriptsdialog.cpp:38
+msgid "Configure scripts"
+msgstr ""
+
+#: scriptsdialog.cpp:66 scriptsdialog.cpp:107
+msgid "KAuth returned an error code: %1"
+msgstr ""
+
+#: scriptsdialog.cpp:71
+msgid "Pre-connection script"
+msgstr ""
+
+#: scriptsdialog.cpp:72
+msgid "Post-connection script"
+msgstr ""
+
+#: scriptsdialog.cpp:73
+msgid "Pre-disconnection script"
+msgstr ""
+
+#: scriptsdialog.cpp:74
+msgid "Post-disconnection script"
+msgstr ""
+
+#: translations/rc.cpp:1 rc.cpp:1
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+
+#: translations/rc.cpp:2 rc.cpp:2
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""

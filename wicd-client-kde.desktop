@@ -1,0 +1,14 @@
+[Desktop Entry]
+Exec=wicd-client-kde
+OnlyShowIn=KDE;
+Type=Application
+Terminal=false
+Icon=network-wireless
+GenericName=Wicd client
+GenericName[fr]=Client Wicd
+Name=Wicd Client KDE
+Name[fr]=Wicd Client KDE
+X-KDE-StartupNotify=false
+X-KDE-autostart-after=panel
+X-DBUS-StartupType=Unique
+Categories=Qt;KDE;Network;
