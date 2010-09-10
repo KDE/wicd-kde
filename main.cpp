@@ -17,7 +17,7 @@
  *  along with Wicd Client KDE.  If not, see <http://www.gnu.org/licenses/>.*
  ****************************************************************************/
 
-#include <KApplication>
+#include <KUniqueApplication>
 #include <KCmdLineArgs>
 #include <KAboutData>
 
@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
                           ki18n("(c) 2010 Anthony Vital"));
 
     KCmdLineArgs::init(argc, argv, &aboutData);
-    KApplication app;
+    KUniqueApplication app;
     app.setWindowIcon(KIcon("network-wireless"));
 
     MainWindow *window = new MainWindow();
