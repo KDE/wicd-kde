@@ -72,6 +72,9 @@ MainWindow::MainWindow()
     m_trayicon = new TrayIcon(this);
     m_trayicon->setAssociatedWidget(this);
 
+    //autosave window size
+    setAutoSaveSettings();
+
     connect(m_trayicon, SIGNAL(activateRequested(bool, const QPoint)), this, SLOT(activated()));
     connect(DBusHandler::instance(), SIGNAL(statusChange(Status)), this, SLOT(updateStatus(Status)));
     connect(DBusHandler::instance(), SIGNAL(connectionResultSend(QString)), this, SLOT(handleConnectionResult(QString)));
@@ -112,6 +115,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::activated()
 {
+    restoreWindowSize(autoSaveConfigGroup());
     m_networkPanel->loadList(DBusHandler::instance()->networksList());
 }
 
