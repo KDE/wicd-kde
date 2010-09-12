@@ -1,0 +1,7 @@
+- Change window title.
+- Prevent multiple instances.
+- Save/restore window size on close.
+
+v0.1
+------------------------------------------------
+- Initial release. 
