@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-08 14:43+0200\n"
+"POT-Creation-Date: 2010-09-12 15:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Anthony Vital <anthony.vital@gmail.com>\n"
 "Language-Team: French <anthony.vital@gmail.com>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: dbushandler.cpp:142 mainwindow.cpp:155
+#: dbushandler.cpp:144 mainwindow.cpp:160
 msgid "Wired network"
 msgstr "Réseau filaire"
 
@@ -32,221 +32,221 @@ msgstr "Non sécurisé"
 msgid "Wicd Client KDE"
 msgstr "Wicd Client KDE"
 
-#: main.cpp:31
-msgid "A Wicd client for KDE"
-msgstr "Un client Wicd pour KDE"
+#: main.cpp:31 mainwindow.cpp:37
+msgid "Wicd client for KDE"
+msgstr "Client Wicd pour KDE"
 
 #: main.cpp:33
 msgid "(c) 2010 Anthony Vital"
 msgstr "(c) 2010 Anthony Vital"
 
-#: mainwindow.cpp:43
+#: mainwindow.cpp:44
 msgid "Network"
 msgstr "Réseau"
 
-#: mainwindow.cpp:47 mainwindow.cpp:228
+#: mainwindow.cpp:48 mainwindow.cpp:233
 msgid "Create an ad-hoc network"
 msgstr "Créer un réseau ad-hoc"
 
-#: mainwindow.cpp:48 mainwindow.cpp:274
+#: mainwindow.cpp:49 mainwindow.cpp:279
 msgid "Find a hidden network"
 msgstr "Trouver un réseau caché"
 
-#: mainwindow.cpp:56 mainwindow.cpp:215
+#: mainwindow.cpp:57 mainwindow.cpp:220
 msgid "Preferences"
 msgstr "Préférences"
 
-#: mainwindow.cpp:58
+#: mainwindow.cpp:59
 msgid "Reload"
 msgstr "Recharger"
 
-#: mainwindow.cpp:59
+#: mainwindow.cpp:60
 msgid "Disconnect"
 msgstr "Déconnecter"
 
-#: mainwindow.cpp:68
+#: mainwindow.cpp:69
 msgid "Abort"
 msgstr "Arrêter"
 
-#: mainwindow.cpp:83
+#: mainwindow.cpp:87
 msgid "Putting interface down..."
 msgstr "Arrêt de l'interface..."
 
-#: mainwindow.cpp:84
+#: mainwindow.cpp:88
 msgid "Resetting IP address..."
 msgstr "Reconfiguration de l'adresse IP..."
 
-#: mainwindow.cpp:85
+#: mainwindow.cpp:89
 msgid "Putting interface up..."
 msgstr "Démarrage de l'interface..."
 
-#: mainwindow.cpp:86
+#: mainwindow.cpp:90
 msgid "Generating PSK..."
 msgstr "Génération de la clé PSK..."
 
-#: mainwindow.cpp:87
+#: mainwindow.cpp:91
 msgid "Connection Failed: Bad password."
 msgstr "Échec de la connexion: mot de passe erroné."
 
-#: mainwindow.cpp:88
+#: mainwindow.cpp:92
 msgid "Generating WPA configuration"
 msgstr "Génération du fichier de configuration WPA..."
 
-#: mainwindow.cpp:89
+#: mainwindow.cpp:93
 msgid "Validating authentication..."
 msgstr "Validation de l'authentification..."
 
-#: mainwindow.cpp:90
+#: mainwindow.cpp:94
 msgid "Obtaining IP address..."
 msgstr "Obtention de l'adresse IP..."
 
-#: mainwindow.cpp:91
+#: mainwindow.cpp:95
 msgid "Done connecting..."
 msgstr "Connexion effectuée..."
 
-#: mainwindow.cpp:92
+#: mainwindow.cpp:96
 msgid "Connection Failed: Unable to Get IP Address"
 msgstr "Échec de la connexion: impossible d'obtenir une adresse IP"
 
-#: mainwindow.cpp:93
+#: mainwindow.cpp:97
 msgid "Connection Failed: No DHCP offers received."
 msgstr "Échec de la connexion: aucun bail DHCP reçu."
 
-#: mainwindow.cpp:94
+#: mainwindow.cpp:98
 msgid "Verifying access point association..."
 msgstr "Vérification de l'association au point d'accès..."
 
-#: mainwindow.cpp:95
+#: mainwindow.cpp:99
 msgid "Connection failed: Could not contact the wireless access point."
 msgstr ""
 "Échec de la connexion : impossible de contacter le point d'accès sans fil."
 
-#: mainwindow.cpp:96
+#: mainwindow.cpp:100
 msgid "Setting static IP addresses..."
 msgstr "Configuration des adresses IP statiques..."
 
-#: mainwindow.cpp:97
+#: mainwindow.cpp:101
 msgid "Aborted"
 msgstr "Arrêté"
 
-#: mainwindow.cpp:98
+#: mainwindow.cpp:102
 msgid "Failed"
 msgstr "Échec"
 
-#: mainwindow.cpp:134
+#: mainwindow.cpp:139
 msgid "Connected to wired network (IP : %1)"
 msgstr "Connecté au réseau filaire (IP : %1)"
 
-#: mainwindow.cpp:145
+#: mainwindow.cpp:150
 msgid "Connected to %1 - %2%3 (IP : %4)"
 msgstr "Connecté à %1 - %2%3 (IP : %4)"
 
-#: mainwindow.cpp:159
+#: mainwindow.cpp:164
 msgid "Disconnected"
 msgstr "Déconnecté"
 
-#: mainwindow.cpp:238
+#: mainwindow.cpp:243
 msgid "Channel"
 msgstr "Canal"
 
-#: mainwindow.cpp:240
+#: mainwindow.cpp:245
 msgid "Activate Internet Connection Sharing"
 msgstr "Activer le partage de connexion internet"
 
-#: mainwindow.cpp:242
+#: mainwindow.cpp:247
 msgid "Use Encryption (WEP only)"
 msgstr "Utiliser une clé de chiffrement (WEP uniquement)"
 
-#: mainwindow.cpp:243
+#: mainwindow.cpp:248
 msgid "Key"
 msgstr "Clé"
 
-#: mainwindow.cpp:275
+#: mainwindow.cpp:280
 msgid "Hidden Network ESSID"
 msgstr "ESSID du réseau caché"
 
-#: networkpropertiesdialog.cpp:34
+#: networkpropertiesdialog.cpp:36
 msgid "OK"
 msgstr "OK"
 
-#: networkpropertiesdialog.cpp:39
+#: networkpropertiesdialog.cpp:41
 msgid "Use Static IPs"
 msgstr "Utiliser des adresses IP statiques"
 
-#: networkpropertiesdialog.cpp:40
+#: networkpropertiesdialog.cpp:42
 msgid "IP"
 msgstr "IP"
 
-#: networkpropertiesdialog.cpp:41
+#: networkpropertiesdialog.cpp:43
 msgid "Netmask"
 msgstr "Masque de sous-réseau"
 
-#: networkpropertiesdialog.cpp:42
+#: networkpropertiesdialog.cpp:44
 msgid "Gateway"
 msgstr "Passerelle"
 
-#: networkpropertiesdialog.cpp:43
+#: networkpropertiesdialog.cpp:45
 msgid "Use Static DNS"
 msgstr "Utiliser un serveur DNS statique"
 
-#: networkpropertiesdialog.cpp:44 preferencespanel.cpp:54
+#: networkpropertiesdialog.cpp:46 preferencespanel.cpp:54
 msgid "Use global DNS servers"
 msgstr "Utiliser les serveurs DNS globaux"
 
-#: networkpropertiesdialog.cpp:45 preferencespanel.cpp:55
+#: networkpropertiesdialog.cpp:47 preferencespanel.cpp:55
 msgid "DNS domain"
 msgstr "Domaine DNS"
 
-#: networkpropertiesdialog.cpp:46 preferencespanel.cpp:56
+#: networkpropertiesdialog.cpp:48 preferencespanel.cpp:56
 msgid "Search domain"
 msgstr "Recherche du domaine"
 
-#: networkpropertiesdialog.cpp:47
+#: networkpropertiesdialog.cpp:49
 msgid "DNS 1"
 msgstr "DNS 1"
 
-#: networkpropertiesdialog.cpp:48
+#: networkpropertiesdialog.cpp:50
 msgid "DNS 2"
 msgstr "DNS 2"
 
-#: networkpropertiesdialog.cpp:49
+#: networkpropertiesdialog.cpp:51
 msgid "DNS 3"
 msgstr "DNS 3"
 
-#: networkpropertiesdialog.cpp:51
+#: networkpropertiesdialog.cpp:53
 msgid "DHCP Hostname"
 msgstr "DHCP Hostname"
 
-#: networkpropertiesdialog.cpp:54
+#: networkpropertiesdialog.cpp:56
 msgid "Automatically connect to this network"
 msgstr "Se connecter automatiquement à ce réseau"
 
-#: networkpropertiesdialog.cpp:55
+#: networkpropertiesdialog.cpp:57
 msgid "Use these settings for all networks sharing this essid"
 msgstr "Utiliser ces paramètres pour tous les réseaux partageant cet ESSID"
 
-#: networkpropertiesdialog.cpp:56
+#: networkpropertiesdialog.cpp:58
 msgid "Use Encryption"
 msgstr "Utiliser le chiffrement"
 
-#: networkpropertiesdialog.cpp:60
+#: networkpropertiesdialog.cpp:62
 msgid "Scripts"
 msgstr "Scripts"
 
-#: networkpropertiesdialog.cpp:197
+#: networkpropertiesdialog.cpp:199
 msgid "Global DNS has not been enabled in general preferences."
 msgstr ""
 "Le serveur DNS global n'a pas été activé dans les préférences générales."
 
-#: networkpropertiesdialog.cpp:236 networkpropertiesdialog.cpp:244
+#: networkpropertiesdialog.cpp:238 networkpropertiesdialog.cpp:246
 msgid "Invalid adress in %1"
 msgstr "Adresse invalide dans %1"
 
-#: networkpropertiesdialog.cpp:257
+#: networkpropertiesdialog.cpp:259
 msgid "%1 is required."
 msgstr "%1 est requis."
 
-#: networkpropertiesdialog.cpp:262
+#: networkpropertiesdialog.cpp:264
 msgid "This network needs an encryption."
 msgstr "Ce réseau a besoin d'un chiffrement"
 

@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 
     KAboutData aboutData( "wicd-client-kde", 0, ki18n("Wicd Client KDE"),
                           QByteArray("0.1"),
-                          ki18n("A Wicd client for KDE"),
+                          ki18n("Wicd client for KDE"),
                           KAboutData::License_GPL_V3,
                           ki18n("(c) 2010 Anthony Vital"));
 

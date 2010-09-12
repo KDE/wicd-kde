@@ -34,6 +34,7 @@
 MainWindow::MainWindow()
     : KMainWindow()
 {
+    setPlainCaption(i18n("Wicd client for KDE"));
     setAttribute(Qt::WA_DeleteOnClose, false);
     Wicd::locate();
 
