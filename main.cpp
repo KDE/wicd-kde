@@ -23,6 +23,15 @@
 
 #include "mainwindow.h"
 
+class MyApp : public KUniqueApplication
+{
+public:
+    MyApp() : KUniqueApplication() { KGlobal::ref(); }
+    virtual ~MyApp() {}
+
+    virtual int newInstance() { return 0; }
+};
+
 int main(int argc, char *argv[])
 {
 
@@ -33,7 +42,12 @@ int main(int argc, char *argv[])
                           ki18n("(c) 2010 Anthony Vital"));
 
     KCmdLineArgs::init(argc, argv, &aboutData);
-    KUniqueApplication app;
+    
+    if (!KUniqueApplication::start()) {
+        return 0;
+    }
+    
+    MyApp app;
     app.setWindowIcon(KIcon("network-wireless"));
 
     MainWindow *window = new MainWindow();
