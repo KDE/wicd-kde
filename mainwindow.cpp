@@ -24,12 +24,12 @@
 #include <QToolBar>
 #include <QToolButton>
 #include <QMenu>
-#include <QInputDialog>
 
 #include <KDialog>
 #include <KStatusBar>
 #include <KMessageBox>
 #include <KLocalizedString>
+#include <KInputDialog>
 
 MainWindow::MainWindow()
     : KMainWindow()
@@ -273,9 +273,8 @@ void MainWindow::createAdhocDialog()
 void MainWindow::findHiddenDialog()
 {
     bool ok;
-    QString text = QInputDialog::getText(this, i18n("Find a hidden network"),
-                                         i18n("Hidden Network ESSID"), QLineEdit::Normal,
-                                         "", &ok);
+    QString text = KInputDialog::getText(i18n("Find a hidden network"),
+                                         i18n("Hidden Network ESSID"), QString(), &ok, this);
     if (ok && !text.isEmpty()) {
         DBusHandler::instance()->callWireless("SetHiddenNetworkESSID", text);
         DBusHandler::instance()->scan();

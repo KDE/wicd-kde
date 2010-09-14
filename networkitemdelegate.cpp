@@ -27,9 +27,10 @@
 
 #include <QApplication>
 #include <QPainter>
-#include <QPushButton>
 #include <QProgressBar>
+
 #include <KIcon>
+#include <KPushButton>
 
 NetworkItemDelegate::NetworkItemDelegate(QAbstractItemView *itemView, QObject *parent)
     : KWidgetItemDelegate(itemView, parent)
@@ -113,16 +114,16 @@ QList<QWidget*> NetworkItemDelegate::createItemWidgets() const
     progressBar->setMaximumHeight(10);
     progressBar->setTextVisible(false);
 
-    QPushButton *connectButton = new QPushButton(KIcon("network-connect"), "");
+    QPushButton *connectButton = new KPushButton(KIcon("network-connect"), "");
     connect(connectButton, SIGNAL(clicked()), this, SLOT(toggleConnection()));
 
-    QPushButton *propertiesButton = new QPushButton(KIcon("configure"), "");
+    QPushButton *propertiesButton = new KPushButton(KIcon("configure"), "");
     connect(propertiesButton, SIGNAL(clicked()), this, SLOT(editProperties()));
 
-    QPushButton *informationsButton = new QPushButton(KIcon("dialog-information"), "");
+    QPushButton *informationsButton = new KPushButton(KIcon("dialog-information"), "");
     connect(informationsButton, SIGNAL(clicked()), this, SLOT(showInfos()));
 
-    QPushButton *profilemanagerButton = new QPushButton(KIcon("user-identity"), "");
+    QPushButton *profilemanagerButton = new KPushButton(KIcon("user-identity"), "");
     connect(profilemanagerButton, SIGNAL(clicked()), this, SLOT(showProfileManager()));
 
     return QList<QWidget*>() << progressBar << connectButton << propertiesButton << informationsButton << profilemanagerButton;
@@ -135,12 +136,12 @@ void NetworkItemDelegate::updateItemWidgets (const QList<QWidget*> widgets,
     Q_UNUSED(option)
 
     //progress bar
-    QProgressBar *progressbar = static_cast<QProgressBar*>(widgets[0]);
+    QProgressBar *progressbar = qobject_cast<QProgressBar*>(widgets[0]);
     progressbar->setValue(index.model()->data(index, NetworkModel::QualityRole).toInt());
     progressbar->move(m_spacer+m_iconsize+m_spacer, 25);
 
     //connect button
-    QPushButton *buttonconnect = static_cast<QPushButton*>(widgets[1]);
+    QPushButton *buttonconnect = qobject_cast<QPushButton*>(widgets[1]);
     bool isConnected = index.model()->data(index, NetworkModel::IsConnectedRole).toBool();
     if (isConnected) {
         buttonconnect->setIcon(KIcon("network-disconnect"));
@@ -148,11 +149,11 @@ void NetworkItemDelegate::updateItemWidgets (const QList<QWidget*> widgets,
         buttonconnect->setIcon(KIcon("network-connect"));
     }
     //properties button
-    QPushButton *propertiesbutton = static_cast<QPushButton*>(widgets[2]);
+    QPushButton *propertiesbutton = qobject_cast<QPushButton*>(widgets[2]);
     //informations button
-    QPushButton *informationsbutton = static_cast<QPushButton*>(widgets[3]);
+    QPushButton *informationsbutton = qobject_cast<QPushButton*>(widgets[3]);
     //informations button
-    QPushButton *profilemanagerbutton = static_cast<QPushButton*>(widgets[4]);
+    QPushButton *profilemanagerbutton = qobject_cast<QPushButton*>(widgets[4]);
 
     int verticalShift = (sizeHint(option, index).height()-buttonconnect->height())/2+1;
     buttonconnect->move(option.rect.translated(-buttonconnect->width()-m_spacer
