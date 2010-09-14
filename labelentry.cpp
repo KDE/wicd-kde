@@ -36,8 +36,6 @@ LabelEntry::LabelEntry( QString label, QWidget *parent)
 
 LabelEntry::~LabelEntry()
 {
-    delete m_value;
-    delete m_label;
 }
 
 QString LabelEntry::label() const

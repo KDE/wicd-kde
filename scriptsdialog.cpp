@@ -90,10 +90,6 @@ ScriptsDialog::ScriptsDialog(int networkId, QWidget *parent, Qt::WFlags flags)
 
 ScriptsDialog::~ScriptsDialog()
 {
-    delete m_precon;
-    delete m_postcon;
-    delete m_predis;
-    delete m_postdis;
 }
 
 void ScriptsDialog::save(KAuth::Action *action)

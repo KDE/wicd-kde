@@ -179,27 +179,6 @@ PreferencesPanel::PreferencesPanel( QWidget *parent )
 
 PreferencesPanel::~PreferencesPanel()
 {
-    delete wirelessinterfaceEdit;
-    delete wiredinterfaceEdit;
-    delete alwaysshowwiredBox;
-    delete alwaysswitchtowiredBox;
-    delete useglobaldnsBox;
-    delete dnsdomainEdit;
-    delete searchdomainEdit;
-    delete dns1Edit;
-    delete dns2Edit;
-    delete dns3Edit;
-    delete wiredautoCombo;
-    delete autoreconBox;
-    delete notificationsBox;
-    delete dhcpclientCombo;
-    delete wiredlinkCombo;
-    delete routetableCombo;
-    delete driverCombo;
-    delete backendCombo;
-    delete debuggingBox;
-    delete usedbmBox;
-    delete pingstaticBox;
 }
 
 void PreferencesPanel::load()
@@ -318,7 +297,6 @@ CollapsibleWidget::CollapsibleWidget( const QString& title, QWidget *parent )
 
 CollapsibleWidget::~CollapsibleWidget()
 {
-    delete m_bodyLayout;
 }
 
 void CollapsibleWidget::addWidget(QWidget *widget)

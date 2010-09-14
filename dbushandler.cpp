@@ -32,7 +32,7 @@ void DBusHandler::destroy()
 {
     if (s_instance)
     {
-        delete s_instance;
+        s_instance->deleteLater();
         s_instance = 0;
     }
 }

@@ -108,9 +108,6 @@ MainWindow::MainWindow()
 
 MainWindow::~MainWindow()
 {
-    delete m_trayicon;
-    delete m_networkPanel;
-    delete m_abortButton;
     DBusHandler::destroy();
 }
 

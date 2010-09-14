@@ -34,7 +34,6 @@ NetworkPanel::NetworkPanel( QWidget *parent  = 0)
 
 NetworkPanel::~NetworkPanel()
 {
-    delete m_networkModel;
 }
 
 void NetworkPanel::setBusy(bool busy)

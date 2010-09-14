@@ -141,26 +141,6 @@ NetworkPropertiesDialog::NetworkPropertiesDialog(int networkId, QWidget *parent,
 
 NetworkPropertiesDialog::~NetworkPropertiesDialog()
 {
-    delete m_autoconnectBox;
-    delete m_staticIpBox;
-    delete m_ipEdit;
-    delete m_netmaskEdit;
-    delete m_gatewayEdit;
-    delete m_staticdnsBox;
-    delete m_globaldnsBox;
-    delete m_dnsdomainEdit;
-    delete m_searchdomainEdit;
-    delete m_dns1Edit;
-    delete m_dns2Edit;
-    delete m_dns3Edit;
-    delete m_dhcphostnameBox;
-    delete m_dhcphostnameEdit;
-    delete m_globalSettingsBox;
-    delete m_useEncryptionBox;
-    delete m_encryptionCombo;
-    qDeleteAll(m_encryptLabelEntries);
-    delete m_encryptlayout;
-    delete m_scriptsButton;
 }
 
 void NetworkPropertiesDialog::toggleIpCheckbox(bool toggled)
@@ -273,11 +253,12 @@ void NetworkPropertiesDialog::validate()
 void NetworkPropertiesDialog::encryptMethodChanged()
 {
     //remove previous label entries
-    foreach (LabelEntry* le, m_encryptLabelEntries) {
-        m_encryptlayout->removeWidget(le);
-        delete le;
+    QMap< QString, LabelEntry* >::iterator i = m_encryptLabelEntries.begin();
+    while (i != m_encryptLabelEntries.end()) {
+        m_encryptlayout->removeWidget(i.value());
+        delete i.value();
+        i = m_encryptLabelEntries.erase(i);
     }
-    m_encryptLabelEntries.clear();
 
     //new index
     int index = m_encryptionCombo->currentIndex();
