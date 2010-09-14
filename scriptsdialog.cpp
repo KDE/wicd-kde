@@ -58,10 +58,10 @@ ScriptsDialog::ScriptsDialog(int networkId, QWidget *parent, Qt::WFlags flags)
     }
     args["key"] = m_key;
 
-    KAuth::Action *readscriptsAction = new KAuth::Action(QString("org.kde.wicdclient.scripts.read"));
-    readscriptsAction->setHelperID("org.kde.wicdclient.scripts");
-    readscriptsAction->setArguments(args);
-    KAuth::ActionReply readReply = readscriptsAction->execute();
+    KAuth::Action readscriptsAction("org.kde.wicdclient.scripts.read");
+    readscriptsAction.setHelperID("org.kde.wicdclient.scripts");
+    readscriptsAction.setArguments(args);
+    KAuth::ActionReply readReply = readscriptsAction.execute();
     if (readReply.failed()) {
         KMessageBox::sorry(this, i18n("KAuth returned an error code: %1", readReply.errorCode()));
         QTimer::singleShot(0, this, SLOT(close()));
@@ -78,7 +78,7 @@ ScriptsDialog::ScriptsDialog(int networkId, QWidget *parent, Qt::WFlags flags)
     m_predis->setText(Tools::noneToBlank(readReply.data().value("predisconnectscript").toString()));
     m_postdis->setText(Tools::noneToBlank(readReply.data().value("postdisconnectscript").toString()));
     
-    KAuth::Action *savescriptsAction = new KAuth::Action(QString("org.kde.wicdclient.scripts.save"));
+    KAuth::Action *savescriptsAction = new KAuth::Action("org.kde.wicdclient.scripts.save");
     savescriptsAction->setHelperID("org.kde.wicdclient.scripts");
     savescriptsAction->setArguments(args);
     button(KDialog::Ok)->setAuthAction(savescriptsAction);
