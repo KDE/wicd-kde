@@ -22,6 +22,7 @@
 #include <QFile>
 #include <QProcess>
 #include <QDebug>
+#include <QHostAddress>
 
 namespace Wicd {
 
@@ -121,21 +122,8 @@ namespace Tools {
 
     bool isValidIP(const QString& ip)
     {
-        if (ip.count(".") == 3) {
-            QStringList ipNumbers = ip.split(".");
-            foreach (QString subIP, ipNumbers) {
-                if (subIP.toInt()>255)
-                    return false;
-                QChar *data = subIP.data();
-                while (!data->isNull()) {
-                    if (!data->isDigit())
-                        return false;
-                    ++data;
-                }
-            }
-            return true;
-        }
-        return false;
+        QHostAddress address(ip);
+        return address.protocol() != QAbstractSocket::UnknownNetworkLayerProtocol;
     }
 
     QString blankToNone(const QString &text)
