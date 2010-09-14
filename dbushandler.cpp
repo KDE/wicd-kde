@@ -241,8 +241,11 @@ QVariant DBusHandler::call(QDBusInterface *interface,
     QDBusMessage reply = interface->call(query, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
     if (reply.arguments().length() > 1) {
         return QVariant(reply.arguments());
+    } else if (reply.arguments().length() > 0) {
+        return reply.arguments().at(0);
+    } else {
+        return QVariant();
     }
-    return reply.arguments().at(0);
 }
 
 const QDBusArgument & operator<<(QDBusArgument &arg, const Status &status) {
