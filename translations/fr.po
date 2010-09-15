@@ -431,9 +431,9 @@ msgstr "Script de post-déconnexion"
 #: translations/rc.cpp:1 rc.cpp:1
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "Anthony Vital"
 
 #: translations/rc.cpp:2 rc.cpp:2
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "anthony.vital@gmail.com"

@@ -18,6 +18,12 @@
  ****************************************************************************/
 
 #include "trayicon.h"
+#include <KMenu>
+#include <KIcon>
+#include <KAboutApplicationDialog>
+#include <KCmdLineArgs>
+#include <KAboutData>
+#include <KLocalizedString>
 
 TrayIcon::TrayIcon( QObject *parent )
     : KStatusNotifierItem( parent )
@@ -27,6 +33,8 @@ TrayIcon::TrayIcon( QObject *parent )
     setCategory(KStatusNotifierItem::Communications);
     setIcon("network-disconnect");
     setToolTipTitle("Wicd");
+    KAboutApplicationDialog *aboutDialog = new KAboutApplicationDialog(KCmdLineArgs::aboutData());
+    contextMenu()->addAction(KIcon("help-about"), i18n("About"), aboutDialog, SLOT(show()));
 }
 
 void TrayIcon::setIcon(const QString &name)

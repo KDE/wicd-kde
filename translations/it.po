@@ -434,9 +434,9 @@ msgstr "Script post-disconnessione"
 #, fuzzy
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "I vostri indirizzi di posta elettronica"
+msgstr "Gianluca Boiano"
 
 #: translations/rc.cpp:2 rc.cpp:2
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "Le vostre caselle di posta"
+msgstr "morf3089@gmail.com"
