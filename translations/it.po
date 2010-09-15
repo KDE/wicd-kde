@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-12 15:13+0200\n"
+"POT-Creation-Date: 2010-09-15 18:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Gianluca Boiano <morf3089@gmail.com>\n"
 "Language-Team: Italian <morf3089@gmail.com>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Language: it_IT\n"
 
-#: dbushandler.cpp:144 mainwindow.cpp:160
+#: dbushandler.cpp:144 mainwindow.cpp:170
 msgid "Wired network"
 msgstr "Rete cablata"
 
@@ -29,15 +29,15 @@ msgstr "Dettagli rete"
 msgid "Unsecured"
 msgstr "Non sicuro"
 
-#: main.cpp:29
+#: main.cpp:38
 msgid "Wicd Client KDE"
 msgstr "Wicd Client KDE"
 
-#: main.cpp:31 mainwindow.cpp:37
+#: main.cpp:40 mainwindow.cpp:37
 msgid "Wicd client for KDE"
 msgstr "Client Wicd per KDE"
 
-#: main.cpp:33
+#: main.cpp:42
 msgid "(c) 2010 Anthony Vital"
 msgstr "(c) 2010 Anthony Vital"
 
@@ -45,15 +45,15 @@ msgstr "(c) 2010 Anthony Vital"
 msgid "Network"
 msgstr "Rete"
 
-#: mainwindow.cpp:48 mainwindow.cpp:233
+#: mainwindow.cpp:48 mainwindow.cpp:246
 msgid "Create an ad-hoc network"
 msgstr "Crea rete Ad-Hoc"
 
-#: mainwindow.cpp:49 mainwindow.cpp:279
+#: mainwindow.cpp:49 mainwindow.cpp:292
 msgid "Find a hidden network"
 msgstr "Cerca una rete nascosta"
 
-#: mainwindow.cpp:57 mainwindow.cpp:220
+#: mainwindow.cpp:57 mainwindow.cpp:233
 msgid "Preferences"
 msgstr "Preferenze"
 
@@ -134,35 +134,45 @@ msgstr "Annullato"
 msgid "Failed"
 msgstr "Non riuscito"
 
-#: mainwindow.cpp:139
-msgid "Connected to wired network (IP : %1)"
+#: mainwindow.cpp:132
+#, fuzzy
+msgid "Connected to wired network"
 msgstr "Connesso alla rete cablata (IP : %1)"
 
-#: mainwindow.cpp:150
-msgid "Connected to %1 - %2%3 (IP : %4)"
-msgstr "Connesso a %1 - %2%3 (IP : %4)"
+#: mainwindow.cpp:135
+#, fuzzy
+msgid "Connected to wireless network"
+msgstr "Connesso alla rete cablata (IP : %1)"
 
-#: mainwindow.cpp:164
+#: mainwindow.cpp:138 mainwindow.cpp:174
 msgid "Disconnected"
 msgstr "Disconnesso"
 
-#: mainwindow.cpp:243
+#: mainwindow.cpp:149
+msgid "Connected to wired network (IP : %1)"
+msgstr "Connesso alla rete cablata (IP : %1)"
+
+#: mainwindow.cpp:160
+msgid "Connected to %1 - %2%3 (IP : %4)"
+msgstr "Connesso a %1 - %2%3 (IP : %4)"
+
+#: mainwindow.cpp:256
 msgid "Channel"
 msgstr "Canale"
 
-#: mainwindow.cpp:245
+#: mainwindow.cpp:258
 msgid "Activate Internet Connection Sharing"
 msgstr "Attiva la condivisione della connessione a Internet"
 
-#: mainwindow.cpp:247
+#: mainwindow.cpp:260
 msgid "Use Encryption (WEP only)"
 msgstr "Usa cifratura (solo WEP)"
 
-#: mainwindow.cpp:248
+#: mainwindow.cpp:261
 msgid "Key"
 msgstr "Chiave"
 
-#: mainwindow.cpp:280
+#: mainwindow.cpp:293
 msgid "Hidden Network ESSID"
 msgstr "ESSID di rete nascosta"
 
@@ -234,19 +244,19 @@ msgstr "Usa cifratura"
 msgid "Scripts"
 msgstr "Script"
 
-#: networkpropertiesdialog.cpp:199
+#: networkpropertiesdialog.cpp:179
 msgid "Global DNS has not been enabled in general preferences."
 msgstr "Il DNS globale non è stato abilitato nelle preferenze generali."
 
-#: networkpropertiesdialog.cpp:238 networkpropertiesdialog.cpp:246
+#: networkpropertiesdialog.cpp:218 networkpropertiesdialog.cpp:226
 msgid "Invalid adress in %1"
 msgstr "Indirizzo non valido nella voce %1"
 
-#: networkpropertiesdialog.cpp:259
+#: networkpropertiesdialog.cpp:239
 msgid "%1 is required."
 msgstr "%1 è richiesto."
 
-#: networkpropertiesdialog.cpp:264
+#: networkpropertiesdialog.cpp:244
 msgid "This network needs an encryption."
 msgstr "Questa rete richiede l'abilitazione della cifratura"
 
@@ -254,7 +264,7 @@ msgstr "Questa rete richiede l'abilitazione della cifratura"
 msgid "Network interfaces"
 msgstr "Interfacce di rete"
 
-#: preferencespanel.cpp:43 preferencespanel.cpp:162
+#: preferencespanel.cpp:43 preferencespanel.cpp:159
 msgid "Wireless interface"
 msgstr "Interfaccia wireless"
 
@@ -310,62 +320,58 @@ msgstr "Usa l'ultimo profilo utilizzato per la connessione cablata automatica"
 msgid "Automatically reconnect on network connection lost"
 msgstr "Riconnetti automaticamente in caso di disconnessione"
 
-#: preferencespanel.cpp:86
-msgid "Display notifications about connection status"
-msgstr "Mostra notifiche sullo stato della connessione"
-
-#: preferencespanel.cpp:97 preferencespanel.cpp:98 preferencespanel.cpp:106
-#: preferencespanel.cpp:107 preferencespanel.cpp:115 preferencespanel.cpp:116
+#: preferencespanel.cpp:94 preferencespanel.cpp:95 preferencespanel.cpp:103
+#: preferencespanel.cpp:104 preferencespanel.cpp:112 preferencespanel.cpp:113
 msgid "Automatic (recommended)"
 msgstr "Automatico (consigliato)"
 
-#: preferencespanel.cpp:103
+#: preferencespanel.cpp:100
 msgid "DHCP client"
 msgstr "Client DHCP"
 
-#: preferencespanel.cpp:112
+#: preferencespanel.cpp:109
 msgid "Wired link detection"
 msgstr "Rilevamento collegamento cablato"
 
-#: preferencespanel.cpp:121
+#: preferencespanel.cpp:118
 msgid "Route table flushing"
 msgstr "Svuotamento delle tabelle di routing..."
 
-#: preferencespanel.cpp:131
+#: preferencespanel.cpp:128
 msgid "Driver"
 msgstr "Driver"
 
-#: preferencespanel.cpp:142 preferencespanel.cpp:145
+#: preferencespanel.cpp:139 preferencespanel.cpp:142
 msgid "Backend"
 msgstr "Backend"
 
-#: preferencespanel.cpp:155
+#: preferencespanel.cpp:152
 msgid "Debugging"
 msgstr "Debug"
 
-#: preferencespanel.cpp:158
+#: preferencespanel.cpp:155
 msgid "Enable debug mode"
 msgstr "Abilita modalità di debug"
 
-#: preferencespanel.cpp:165
+#: preferencespanel.cpp:162
 msgid "Use dBm to measure signal strength"
 msgstr "Usa dBm per misurare la potenza del segnale"
 
-#: preferencespanel.cpp:166
+#: preferencespanel.cpp:163
 msgid "Ping static gateways after connecting to verify association"
 msgstr ""
 "Dopo la connessione fare il ping dei gateway statici per verificare "
 "l'associazione"
 
-#: preferencespanel.cpp:172
+#: preferencespanel.cpp:169
 msgid "General settings"
 msgstr "Impostazioni generali"
 
-#: preferencespanel.cpp:173
+#: preferencespanel.cpp:170
 msgid "External programs"
 msgstr "Programmi esterni"
 
-#: preferencespanel.cpp:174
+#: preferencespanel.cpp:171
 msgid "Advanced settings"
 msgstr "Impostazioni avanzate"
 
@@ -410,7 +416,7 @@ msgstr ""
 msgid "Configure scripts"
 msgstr "Configura script"
 
-#: scriptsdialog.cpp:66 scriptsdialog.cpp:107
+#: scriptsdialog.cpp:66 scriptsdialog.cpp:103
 msgid "KAuth returned an error code: %1"
 msgstr "KAuth ha ritornato il seguente codice d'errore: %1"
 
@@ -440,3 +446,10 @@ msgstr "Gianluca Boiano"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "morf3089@gmail.com"
+
+#: trayicon.cpp:37
+msgid "About"
+msgstr ""
+
+#~ msgid "Display notifications about connection status"
+#~ msgstr "Mostra notifiche sullo stato della connessione"
