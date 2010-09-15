@@ -27,7 +27,7 @@
 
 #include <KDialog>
 #include <KStatusBar>
-#include <KMessageBox>
+#include <KNotification>
 #include <KLocalizedString>
 #include <KInputDialog>
 
@@ -127,6 +127,19 @@ void MainWindow::updateStatus(Status status)
             m_networkPanel->setBusy(false);
             m_abortButton->setVisible(false);
             m_networkPanel->loadList(DBusHandler::instance()->networksList());
+            switch (status.State) {
+            case WicdState::WIRED:
+                notify("connected", i18n("Connected to wired network"));
+                break;
+            case WicdState::WIRELESS:
+                notify("connected", i18n("Connected to wireless network"));
+                break;
+            case WicdState::NOT_CONNECTED:
+                notify("disconnected", i18n("Disconnected"));
+                break;
+            default:
+                break;
+            }
         }
         m_status = status;
     }
@@ -181,12 +194,15 @@ void MainWindow::handleConnectionResult(const QString &result)
 {
     QStringList validMessages;
     validMessages << "Success" << "aborted";
-    if ((!validMessages.contains(result)) && this->isVisible()) {
-        if (m_messageTable.contains(result))
-            KMessageBox::error(this, m_messageTable.value(result));
-        else
-            KMessageBox::error(this, result);
+    if (!validMessages.contains(result)) {
+        notify("error", m_messageTable.value(result));
     }
+}
+
+void MainWindow::notify(const QString &event, const QString &message)
+{
+    if (m_status.State != 10)//don't notify on startup
+        KNotification::event(event, message);
 }
 
 void MainWindow::forceUpdateStatus()

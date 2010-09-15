@@ -53,7 +53,6 @@ private:
     LabelEntry* dns3Edit;
     QComboBox* wiredautoCombo;
     QCheckBox* autoreconBox;
-    QCheckBox* notificationsBox;
     QComboBox* dhcpclientCombo;
     QComboBox* wiredlinkCombo;
     QComboBox* routetableCombo;

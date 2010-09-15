@@ -83,9 +83,6 @@ PreferencesPanel::PreferencesPanel( QWidget *parent )
     autoreconBox = new QCheckBox(i18n("Automatically reconnect on network connection lost"));
     generalLayout->addWidget(autoreconBox);
 
-    notificationsBox = new QCheckBox(i18n("Display notifications about connection status"));
-    generalLayout->addWidget(notificationsBox);
-
     generalLayout->addStretch();
 
     QWidget* externalPanel = new QWidget(this);
@@ -199,7 +196,6 @@ void PreferencesPanel::load()
 
     wiredautoCombo->setCurrentIndex(DBusHandler::instance()->callDaemon("GetWiredAutoConnectMethod").toInt()-1);
     autoreconBox->setChecked(DBusHandler::instance()->callDaemon("GetAutoReconnect").toBool());
-    notificationsBox->setEnabled(false);//info in wpath
 
     //external
     QString appname = dhcplist.value(DBusHandler::instance()->callDaemon("GetDHCPClient").toInt());
@@ -239,7 +235,6 @@ void PreferencesPanel::save() const
     DBusHandler::instance()->callDaemon("SetWiredAutoConnectMethod", wiredautoCombo->currentIndex()+1);
     DBusHandler::instance()->callDaemon("SetAutoReconnect", autoreconBox->isChecked());
     DBusHandler::instance()->callDaemon("SetAutoReconnect", autoreconBox->isChecked());
-    //    +notifications... info in wpath
 
     //external
     int wicdindex = dhcplist.indexOf(dhcpclientCombo->currentText());

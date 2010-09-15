@@ -1,3 +1,8 @@
+- Add KNotification support.
+- Add About dialog.
+
+v0.1.1
+------------------------------------------------
 - Add italian translation.
 - Change window title.
 - Prevent multiple instances.
