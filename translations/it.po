@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-15 18:13+0200\n"
+"POT-Creation-Date: 2010-09-16 16:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Gianluca Boiano <morf3089@gmail.com>\n"
 "Language-Team: Italian <morf3089@gmail.com>\n"
@@ -437,7 +437,6 @@ msgid "Post-disconnection script"
 msgstr "Script post-disconnessione"
 
 #: translations/rc.cpp:1 rc.cpp:1
-#, fuzzy
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "Gianluca Boiano"
