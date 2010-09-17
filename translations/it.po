@@ -135,14 +135,12 @@ msgid "Failed"
 msgstr "Non riuscito"
 
 #: mainwindow.cpp:132
-#, fuzzy
 msgid "Connected to wired network"
-msgstr "Connesso alla rete cablata (IP : %1)"
+msgstr "Connesso alla rete cablata"
 
 #: mainwindow.cpp:135
-#, fuzzy
 msgid "Connected to wireless network"
-msgstr "Connesso alla rete cablata (IP : %1)"
+msgstr "Connesso alla rete wireless"
 
 #: mainwindow.cpp:138 mainwindow.cpp:174
 msgid "Disconnected"
@@ -448,7 +446,7 @@ msgstr "morf3089@gmail.com"
 
 #: trayicon.cpp:37
 msgid "About"
-msgstr ""
+msgstr "Informazioni"
 
 #~ msgid "Display notifications about connection status"
 #~ msgstr "Mostra notifiche sullo stato della connessione"
