@@ -316,7 +316,7 @@ msgstr "Usar el último perfil de red cableada"
 
 #: preferencespanel.cpp:83
 msgid "Automatically reconnect on network connection lost"
-msgstr "Reconectar automáticamente al perder la conexíon de red"
+msgstr "Reconectar automáticamente al perder la conexión de red"
 
 #: preferencespanel.cpp:94 preferencespanel.cpp:95 preferencespanel.cpp:103
 #: preferencespanel.cpp:104 preferencespanel.cpp:112 preferencespanel.cpp:113
@@ -414,7 +414,7 @@ msgstr "Configurar los scripts"
 
 #: scriptsdialog.cpp:66 scriptsdialog.cpp:103
 msgid "KAuth returned an error code: %1"
-msgstr "KAuth finalizado con código de error: %1"
+msgstr "KAuth ha finalizado con código de error: %1"
 
 #: scriptsdialog.cpp:71
 msgid "Pre-connection script"
