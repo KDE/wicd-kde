@@ -145,7 +145,7 @@ void MainWindow::updateStatus(Status status)
     }
     QString message;
     if (status.State == WicdState::WIRED) {
-        m_trayicon->setIcon("network-wired");
+        m_trayicon->setIcon("network-wired-activated");
         message = i18n("Connected to wired network (IP : %1)", status.Infos.at(0));//info(0) ip
     } else if (status.State == WicdState::WIRELESS) {
         int quality = status.Infos.at(2).toInt();//info(2) quality
@@ -170,7 +170,7 @@ void MainWindow::updateStatus(Status status)
         wired ? message.prepend(i18n("Wired network")+": ") : message.prepend(status.Infos.at(1)+": ");
         QTimer::singleShot(500, this, SLOT(forceUpdateStatus()));
     } else {
-        m_trayicon->setIcon("network-disconnect");
+        m_trayicon->setIcon("network-wired");
         message = i18n("Disconnected");
     }
     m_trayicon->setToolTipSubTitle(message);
@@ -180,13 +180,13 @@ void MainWindow::updateStatus(Status status)
 void MainWindow::setWirelessIcon(int quality)
 {
     if (quality <= 25) {
-        m_trayicon->setIcon("network-wireless-connected-25");
+        m_trayicon->setIcon("network-wireless-25");
     } else if (quality <= 50) {
-        m_trayicon->setIcon("network-wireless-connected-50");
+        m_trayicon->setIcon("network-wireless-50");
     } else if (quality <= 75) {
-        m_trayicon->setIcon("network-wireless-connected-75");
+        m_trayicon->setIcon("network-wireless-75");
     } else {
-        m_trayicon->setIcon("network-wireless-connected-100");
+        m_trayicon->setIcon("network-wireless-100");
     }
 }
 

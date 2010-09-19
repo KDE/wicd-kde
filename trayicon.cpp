@@ -31,7 +31,7 @@ TrayIcon::TrayIcon( QObject *parent )
     setObjectName("wicdclientkde.statusnotifieritem");
     setStatus(KStatusNotifierItem::Active);
     setCategory(KStatusNotifierItem::Communications);
-    setIcon("network-disconnect");
+    setIcon("network-wired");
     setToolTipTitle("Wicd");
     KAboutApplicationDialog *aboutDialog = new KAboutApplicationDialog(KCmdLineArgs::aboutData());
     contextMenu()->addAction(KIcon("help-about"), i18n("About"), aboutDialog, SLOT(show()));
