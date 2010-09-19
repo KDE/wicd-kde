@@ -29,6 +29,9 @@ class TrayIcon : public KStatusNotifierItem
 public:
      TrayIcon( QObject *parent );
      void setIcon( const QString &name );
+
+private slots:
+     void showAbout() const;
 };
 
 #endif

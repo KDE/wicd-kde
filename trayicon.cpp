@@ -22,7 +22,6 @@
 #include <KIcon>
 #include <KAboutApplicationDialog>
 #include <KCmdLineArgs>
-#include <KAboutData>
 #include <KLocalizedString>
 
 TrayIcon::TrayIcon( QObject *parent )
@@ -33,8 +32,7 @@ TrayIcon::TrayIcon( QObject *parent )
     setCategory(KStatusNotifierItem::Communications);
     setIcon("network-wired");
     setToolTipTitle("Wicd");
-    KAboutApplicationDialog *aboutDialog = new KAboutApplicationDialog(KCmdLineArgs::aboutData());
-    contextMenu()->addAction(KIcon("help-about"), i18n("About"), aboutDialog, SLOT(show()));
+    contextMenu()->addAction(KIcon("help-about"), i18n("About"), this, SLOT(showAbout()));
 }
 
 void TrayIcon::setIcon(const QString &name)
@@ -43,4 +41,10 @@ void TrayIcon::setIcon(const QString &name)
         setIconByName(name);
         setToolTipIconByName(name);
     }
+}
+
+void TrayIcon::showAbout() const
+{
+     KAboutApplicationDialog aboutDialog(KCmdLineArgs::aboutData());
+     aboutDialog.exec();
 }
