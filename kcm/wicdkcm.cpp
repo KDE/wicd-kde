@@ -1,21 +1,4 @@
 /*
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
-
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License along
-    with this program; if not, write to the Free Software Foundation, Inc.,
-    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-
 */
 
 #include "wicdkcm.h"
@@ -27,18 +10,23 @@
 #include <kaboutdata.h>
 #include <kdeversion.h>
 
-#include <solid/control/networkmanager.h>
+//solid specific includes
+#include <solid/devicenotifier.h>
+#include <solid/device.h>
+#include <solid/deviceinterface.h>
+#include <solid/networkinterface.h>
 
 K_PLUGIN_FACTORY(WicdKCMModuleFactory, registerPlugin<WicdKCM>();)
-K_EXPORT_PLUGIN(WicdKCMModuleFactory("kcmwicd"))
+        K_EXPORT_PLUGIN(WicdKCMModuleFactory("kcmwicd"))
 
-WicdKCM::WicdKCM(QWidget* parent, const QVariantList& )
-        : KCModule(WicdKCMModuleFactory::componentData(), parent)
+        WicdKCM::WicdKCM(QWidget* parent, const QVariantList& )
+            : KCModule(WicdKCMModuleFactory::componentData(), parent)
 {
-    KAboutData *about =
-    new KAboutData(I18N_NOOP("kcmwicd"), 0, ki18n("Wicd Configuration"),
-                   0, KLocalizedString(), KAboutData::License_GPL,
-                   ki18n("(c) 2009 Dario Freddi"));
+    KGlobal::locale()->insertCatalog("wicd-client-kde");
+
+    KAboutData *about = new KAboutData(I18N_NOOP("kcmwicd"), 0, ki18n("Wicd Configuration"),
+                                       0, KLocalizedString(), KAboutData::License_GPL,
+                                       ki18n("(c) 2009 Dario Freddi"));
 
     about->addAuthor(ki18n("Dario Freddi"), ki18n("Maintainer"), "drf@kde.org", "http://drfav.wordpress.com");
     setAboutData( about );
@@ -47,10 +35,6 @@ WicdKCM::WicdKCM(QWidget* parent, const QVariantList& )
 
     m_ui = new Ui::WicdKcmWidget;
     m_ui->setupUi(this);
-
-#if KDE_IS_VERSION(4,3,68)
-    setNeedsAuthorization(true);
-#endif
 
     init();
 }
@@ -72,25 +56,26 @@ void WicdKCM::init()
     m_wicdMisc["mii-tool"] = 2;
     m_wicdMisc["ip"] = 1;
     m_wicdMisc["route"] = 2;
-    m_wicdMisc["gksudo"] = 1;
-    m_wicdMisc["kdesu"] = 2;
-    m_wicdMisc["ktsuss"] = 3;
+    //    m_wicdMisc["gksudo"] = 1;
+    //    m_wicdMisc["kdesu"] = 2;
+    //    m_wicdMisc["ktsuss"] = 3;
     m_wicdMisc[i18n("Automatic (recommended)")] = 0;
 
     // Feature++: show the interfaces in a combobox thanks to solid
-    foreach (Solid::Control::NetworkInterface *iface, Solid::Control::NetworkManager::networkInterfaces()) {
-        if (iface->type() == Solid::Control::NetworkInterface::Ieee8023) {
-            m_ui->wiredBox->addItem(iface->uni());
-        } else if (iface->type() == Solid::Control::NetworkInterface::Ieee80211) {
-            m_ui->wirelessBox->addItem(iface->uni());
+    QList<Solid::Device> list = Solid::Device::listFromType(Solid::DeviceInterface::NetworkInterface, QString());
+    foreach (Solid::Device device, list)
+    {
+        Solid::NetworkInterface *netiface = device.as<Solid::NetworkInterface>();
+        if (netiface->isWireless()) {
+            m_ui->wirelessBox->addItem(netiface->ifaceName());
+        } else {
+            m_ui->wiredBox->addItem(netiface->ifaceName());
         }
     }
 
     // Load wpa supplicant drivers
-    QStringList wpaDrivers;
-    wpaDrivers << "wext" << "hostap"<< "madwifi"<< "atmel" << "ndiswrapper"<< "ipw";
-    QDBusMessage msg = WicdDbusInterface::instance()->wireless().call("GetWpaSupplicantDrivers", wpaDrivers);
-    wpaDrivers = msg.arguments().at(0).toStringList();
+    QDBusMessage msg = WicdDbusInterface::instance()->wireless().call("GetWpaSupplicantDrivers");
+    QStringList wpaDrivers = msg.arguments().at(0).toStringList();
     wpaDrivers << "ralink_legacy";
     m_ui->wpaSupplicantBox->addItems(wpaDrivers);
 
@@ -134,16 +119,16 @@ void WicdKCM::init()
 
     tmpVal.clear();
 
-    // Graphical sudo
-    m_ui->sudoBox->addItem(i18n("Automatic (recommended)"));
-    tmpVal << "gksudo" << "kdesu" << "ktsuss";
-    foreach (const QString &str, tmpVal) {
-        if (WicdDbusInterface::instance()->daemon().call("GetAppAvailable", str).arguments().at(0).toBool()) {
-            m_ui->sudoBox->addItem(str);
-        }
-    }
+    //    // Graphical sudo
+    //    m_ui->sudoBox->addItem(i18n("Automatic (recommended)"));
+    //    tmpVal << "gksudo" << "kdesu" << "ktsuss";
+    //    foreach (const QString &str, tmpVal) {
+    //        if (WicdDbusInterface::instance()->daemon().call("GetAppAvailable", str).arguments().at(0).toBool()) {
+    //            m_ui->sudoBox->addItem(str);
+    //        }
+    //    }
 
-    tmpVal.clear();
+    //    tmpVal.clear();
 
     // Now for the wired automatic connection
     m_ui->automaticWiredBox->addItem(i18n("Use default wired network profile"), 1);
@@ -159,7 +144,7 @@ void WicdKCM::init()
     connect(m_ui->dhcpBox, SIGNAL(currentIndexChanged(int)), this, SLOT(changed()));
     connect(m_ui->wiredLinkBox, SIGNAL(currentIndexChanged(int)), this, SLOT(changed()));
     connect(m_ui->routeBox, SIGNAL(currentIndexChanged(int)), this, SLOT(changed()));
-    connect(m_ui->sudoBox, SIGNAL(currentIndexChanged(int)), this, SLOT(changed()));
+    //    connect(m_ui->sudoBox, SIGNAL(currentIndexChanged(int)), this, SLOT(changed()));
 
     connect(m_ui->automaticWiredBox, SIGNAL(currentIndexChanged(int)), this, SLOT(changed()));
 
@@ -201,11 +186,11 @@ void WicdKCM::load()
             m_ui->routeBox->setCurrentItem(key);
         }
     }
-    foreach (const QString &key, m_wicdMisc.keys(WicdDbusInterface::instance()->daemon().call("GetSudoApp").arguments().at(0).toInt())) {
-        if (m_ui->sudoBox->contains(key)) {
-            m_ui->sudoBox->setCurrentItem(key);
-        }
-    }
+    //    foreach (const QString &key, m_wicdMisc.keys(WicdDbusInterface::instance()->daemon().call("GetSudoApp").arguments().at(0).toInt())) {
+    //        if (m_ui->sudoBox->contains(key)) {
+    //            m_ui->sudoBox->setCurrentItem(key);
+    //        }
+    //    }
 
     m_ui->automaticWiredBox->setCurrentIndex(WicdDbusInterface::instance()->daemon().call("GetWiredAutoConnectMethod").arguments().at(0).toInt() - 1);
 
@@ -243,7 +228,7 @@ void WicdKCM::save()
     WicdDbusInterface::instance()->daemon().call("SetDHCPClient", m_wicdMisc[m_ui->dhcpBox->currentText()]);
     WicdDbusInterface::instance()->daemon().call("SetLinkDetectionTool", m_wicdMisc[m_ui->wiredLinkBox->currentText()]);
     WicdDbusInterface::instance()->daemon().call("SetFlushTool", m_wicdMisc[m_ui->routeBox->currentText()]);
-    WicdDbusInterface::instance()->daemon().call("SetSudoApp", m_wicdMisc[m_ui->sudoBox->currentText()]);
+    //    WicdDbusInterface::instance()->daemon().call("SetSudoApp", m_wicdMisc[m_ui->sudoBox->currentText()]);
 
     WicdDbusInterface::instance()->daemon().call("SetWiredAutoConnectMethod", m_ui->automaticWiredBox->itemData(m_ui->automaticWiredBox->currentIndex()));
 
