@@ -19,17 +19,21 @@
 
 #include "mainwindow.h"
 #include "global.h"
-#include "preferencespanel.h"
+#include "labelentry.h"
 
 #include <QToolBar>
 #include <QToolButton>
 #include <QMenu>
+
+#include <QVBoxLayout>
+#include <QCheckBox>
 
 #include <KDialog>
 #include <KStatusBar>
 #include <KNotification>
 #include <KLocalizedString>
 #include <KInputDialog>
+#include <KToolInvocation>
 
 MainWindow::MainWindow()
     : KMainWindow()
@@ -229,15 +233,7 @@ void MainWindow::cancelConnect() const
 
 void MainWindow::showPreferences()
 {
-    KDialog dialog(this);
-    dialog.setCaption(i18n("Preferences"));
-    dialog.setModal(true);
-    PreferencesPanel* preferencesPanel = new PreferencesPanel();
-    dialog.setMainWidget(preferencesPanel);
-    int accepted = dialog.exec();
-    if (accepted) {
-        preferencesPanel->save();
-    }
+    KToolInvocation::startServiceByDesktopName("kcm_wicd");
 }
 
 void MainWindow::createAdhocDialog()

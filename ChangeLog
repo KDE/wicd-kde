@@ -1,3 +1,4 @@
+- The preferences panel is now a KCM.
 - Use KNetworkManager icons + Bonus: use monochromatic icons if available
 - Add spanish translation.
 - Add chinese simplified translation.

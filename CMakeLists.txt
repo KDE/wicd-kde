@@ -5,6 +5,7 @@ include_directories( ${KDE4_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR} )
 
 macro_ensure_version("4.3.80" ${KDE_VERSION} KSTATUSNOTIFIERITEM_FOUND)
 
+add_subdirectory( kcm )
 add_subdirectory( icons )
 add_subdirectory( translations )
 
@@ -18,7 +19,6 @@ set(client_SRCS
     networkpropertiesdialog.cpp
     profilemanager.cpp
     infosdialog.cpp
-    preferencespanel.cpp
     networkmodel.cpp
     networkitemdelegate.cpp
     trayicon.cpp
