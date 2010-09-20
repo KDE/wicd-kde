@@ -1,0 +1,18 @@
+[Desktop Entry]
+Exec=kcmshell4 wicd
+Icon=wicd-client
+Type=Service
+X-KDE-ServiceTypes=KCModule
+
+X-KDE-Library=kcm_wicd
+X-KDE-ParentApp=kcontrol
+
+X-KDE-System-Settings-Parent-Category=computer-administration
+
+Name=Wicd settings
+
+Comment=System-wide preferences for the Wicd daemon
+
+X-KDE-Keywords=wicd,network,wireless,wired,connection
+
+Categories=Qt;KDE;X-KDE-settings-system;

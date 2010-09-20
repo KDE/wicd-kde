@@ -1,0 +1,4 @@
+[org.kde.kcontrol.kcmclock.save]
+Name=Save Wicd settings
+Description=Authentication is required to save Wicd global settings
+Policy=auth_admin
