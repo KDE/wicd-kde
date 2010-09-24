@@ -34,9 +34,8 @@ msgid "kcmwicd"
 msgstr ""
 
 #: kcm/wicdkcm.cpp:27
-#, fuzzy
 msgid "Wicd Configuration"
-msgstr "Creazione del file di configurazione WPA...."
+msgstr "Configurazione di Wicd"
 
 #: kcm/wicdkcm.cpp:29
 msgid "(c) 2009 Dario Freddi"
