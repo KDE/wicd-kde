@@ -94,6 +94,16 @@ void NetworkItemDelegate::paint(QPainter *painter,
         painter->drawText(option.rect.translated(m_spacer+m_iconsize+m_spacer, 22),
                           flags,
                           Wicd::currentprofile);
+    } else {
+	font.setWeight(QFont::Normal);
+        font.setItalic(true);
+        painter->setFont(font);
+      	QString signal;
+	if (DBusHandler::instance()->callDaemon("GetSignalDisplayType").toInt())
+	    signal = DBusHandler::instance()->callWireless("GetWirelessProperty", networkId, "strength").toString()+" dBm";
+	else
+	    signal = DBusHandler::instance()->callWireless("GetWirelessProperty", networkId, "quality").toString()+"%";
+	painter->drawText( option.rect.translated( m_spacer+m_iconsize+m_spacer+100+m_spacer, 22 ), signal );
     }
     painter->restore();
 }
