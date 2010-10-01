@@ -32,6 +32,8 @@ public:
         EncryptionRole = Qt::UserRole + 2,
         IdRole = Qt::UserRole + 4,
         IsConnectedRole = Qt::UserRole + 5,
+        UseDbmRole = Qt::UserRole + 6,
+        StrengthRole = Qt::UserRole + 7
     };
 
     NetworkModel(QObject *parent = 0);

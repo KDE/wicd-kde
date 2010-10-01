@@ -150,6 +150,8 @@ NetworkInfos DBusHandler::wirelessProperties(const int &networkId) const
     NetworkInfos properties;
     properties.insert("networkId", networkId);
     properties.insert("essid", call(m_wireless, "GetWirelessProperty", networkId, "essid").toString());
+    properties.insert("usedbm", call(m_daemon, "GetSignalDisplayType").toBool());
+    properties.insert("strength", call(m_wireless, "GetWirelessProperty", networkId, "strength").toInt());
     properties.insert("quality", call(m_wireless, "GetWirelessProperty", networkId, "quality").toInt());
     properties.insert("encryption", call(m_wireless, "GetWirelessProperty", networkId, "encryption").toBool());
     properties.insert("connected", false);

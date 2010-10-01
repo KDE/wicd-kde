@@ -67,6 +67,10 @@ QVariant NetworkModel::data(const QModelIndex &index, int role) const
         return (*it).value("networkId");
     case EssidRole:
         return (*it).value("essid");
+    case UseDbmRole:
+        return (*it).value("usedbm");
+    case StrengthRole:
+        return (*it).value("strength");
     case QualityRole:
         return (*it).value("quality");
     case EncryptionRole:

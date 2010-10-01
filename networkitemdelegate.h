@@ -50,6 +50,7 @@ private slots:
 private:
     static const int m_iconsize = 30;
     static const int m_spacer = 4;
+    static const int m_progressbarlength = 100;
 };
 
 #endif

@@ -44,6 +44,8 @@ void NetworkItemDelegate::paint(QPainter *painter,
 
     int networkId = index.model()->data(index, NetworkModel::IdRole).toInt();
     QString essid = index.model()->data(index, NetworkModel::EssidRole).toString();
+    bool usedbm = index.model()->data(index, NetworkModel::UseDbmRole).toBool();
+    int strength = index.model()->data(index, NetworkModel::StrengthRole).toInt();
     int quality = index.model()->data(index, NetworkModel::QualityRole).toInt();
     bool encryption = index.model()->data(index, NetworkModel::EncryptionRole).toBool();
 
@@ -99,11 +101,11 @@ void NetworkItemDelegate::paint(QPainter *painter,
         font.setItalic(true);
         painter->setFont(font);
       	QString signal;
-	if (DBusHandler::instance()->callDaemon("GetSignalDisplayType").toInt())
-	    signal = DBusHandler::instance()->callWireless("GetWirelessProperty", networkId, "strength").toString()+" dBm";
+        if (usedbm)
+            signal = QString::number(strength)+" dBm";
 	else
-	    signal = DBusHandler::instance()->callWireless("GetWirelessProperty", networkId, "quality").toString()+"%";
-	painter->drawText( option.rect.translated( m_spacer+m_iconsize+m_spacer+100+m_spacer, 22 ), signal );
+            signal = QString::number(quality)+"%";
+        painter->drawText( option.rect.translated( m_spacer+m_iconsize+m_spacer+m_progressbarlength+m_spacer, 22 ), signal );
     }
     painter->restore();
 }
@@ -120,7 +122,7 @@ QSize NetworkItemDelegate::sizeHint(const QStyleOptionViewItem &, const QModelIn
 QList<QWidget*> NetworkItemDelegate::createItemWidgets() const
 {
     QProgressBar *progressBar = new QProgressBar();
-    progressBar->setMinimumWidth(100);
+    progressBar->setFixedWidth(m_progressbarlength);
     progressBar->setMaximumHeight(10);
     progressBar->setTextVisible(false);
 
