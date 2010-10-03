@@ -20,7 +20,6 @@
 #include "trayicon.h"
 #include "infosdialog.h"
 
-#include <KAction>
 #include <KMenu>
 #include <KIcon>
 #include <KAboutApplicationDialog>
@@ -54,17 +53,14 @@ void TrayIcon::showAbout() const
      aboutDialog.exec();
 }
 
-void TrayIcon::addActions()
-{
-    KAction *action = new KAction(KIcon("help-about"), i18n("Connection Info"), this);
-    connect(action, SIGNAL(triggered()), this, SLOT(connectionInfoRequested()));
-    contextMenu()->addAction(action);
-
-    contextMenu()->addAction(KIcon("network-wireless"), i18n("About"), this, SLOT(showAbout()));
-}
-
-void TrayIcon::connectionInfoRequested()
+void TrayIcon::connectionInfoRequested() const
 {
     InfosDialog dialog;
     dialog.exec();
+}
+
+void TrayIcon::addActions()
+{
+    contextMenu()->addAction(KIcon("help-about"), i18n("Connection infos"), this, SLOT(connectionInfoRequested()));
+    contextMenu()->addAction(KIcon("network-wireless"), i18n("About"), this, SLOT(showAbout()));
 }

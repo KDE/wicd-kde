@@ -34,7 +34,7 @@ public:
 private:
     void init();
 
-    QFormLayout *formLayout;
+    QFormLayout *m_layout;
 };
 
 #endif // INFOSDIALOG_H

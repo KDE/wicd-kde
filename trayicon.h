@@ -32,7 +32,7 @@ public:
 
 private slots:
      void showAbout() const;
-     void connectionInfoRequested();
+     void connectionInfoRequested() const;
 
 private:
      void addActions();
