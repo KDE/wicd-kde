@@ -26,6 +26,7 @@
 #include <kpluginfactory.h>
 #include <kaboutdata.h>
 #include <kdeversion.h>
+#include <kconfiggroup.h>
 
 //solid specific includes
 #include <solid/devicenotifier.h>
@@ -34,10 +35,11 @@
 #include <solid/networkinterface.h>
 
 K_PLUGIN_FACTORY(WicdKCMModuleFactory, registerPlugin<WicdKCM>();)
-        K_EXPORT_PLUGIN(WicdKCMModuleFactory("kcmwicd"))
+K_EXPORT_PLUGIN(WicdKCMModuleFactory("kcmwicd"))
 
-        WicdKCM::WicdKCM(QWidget* parent, const QVariantList& )
-            : KCModule(WicdKCMModuleFactory::componentData(), parent)
+WicdKCM::WicdKCM(QWidget* parent, const QVariantList& )
+    : KCModule(WicdKCMModuleFactory::componentData(), parent)
+    , m_clientConfig(KSharedConfig::openConfig("wicd-client-kderc", KConfig::NoGlobals))
 {
     KGlobal::locale()->insertCatalog("wicd-client-kde");
 
@@ -179,6 +181,10 @@ void WicdKCM::init()
     connect(m_ui->searchDomainEdit, SIGNAL(textChanged(QString)), this, SLOT(changed()));
 
     connect(m_ui->backendBox, SIGNAL(currentIndexChanged(int)), this, SLOT(changed()));
+
+    connect(m_ui->tooltipsBox, SIGNAL(stateChanged(int)), this, SLOT(changed()));
+    connect(m_ui->displayqualityBox, SIGNAL(stateChanged(int)), this, SLOT(changed()));
+    connect(m_ui->autoscanBox, SIGNAL(stateChanged(int)), this, SLOT(changed()));
 }
 
 void WicdKCM::load()
@@ -233,6 +239,11 @@ void WicdKCM::load()
     }
 
     m_ui->backendBox->setCurrentItem(WicdDbusInterface::instance()->daemon().call("GetSavedBackend").arguments().at(0).toString());
+
+    KConfigGroup config(m_clientConfig, "Client");
+    m_ui->tooltipsBox->setChecked(config.readEntry("Show tooltips", false));
+    m_ui->displayqualityBox->setChecked(config.readEntry("Show signal strength", false));
+    m_ui->autoscanBox->setChecked(config.readEntry("Autoscan", false));
 }
 
 void WicdKCM::save()
@@ -263,6 +274,17 @@ void WicdKCM::save()
     }
 
     WicdDbusInterface::instance()->daemon().call("SetBackend", m_ui->backendBox->currentText());
+
+    KConfigGroup config(m_clientConfig, "Client");
+    config.writeEntry("Show tooltips", m_ui->tooltipsBox->isChecked());
+    config.writeEntry("Show signal strength", m_ui->displayqualityBox->isChecked());
+    config.writeEntry("Autoscan", m_ui->autoscanBox->isChecked());
+    m_clientConfig->sync();
+
+    QDBusInterface client("org.kde.wicd-client-kde", "/Client");
+    if (client.isValid()) {
+        client.call("reloadConfig");
+    }
 }
 
 void WicdKCM::defaults()

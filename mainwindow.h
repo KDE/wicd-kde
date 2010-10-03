@@ -30,10 +30,14 @@
 class MainWindow : public KMainWindow
 {
     Q_OBJECT
+    Q_CLASSINFO("D-Bus Interface", "org.kde.wicd-client-kde")
 
 public:
     MainWindow();
     ~MainWindow();
+
+public slots:
+    Q_SCRIPTABLE void reloadConfig();
 
 private slots:
     void activated();
@@ -55,6 +59,7 @@ private:
     NetworkPanel *m_networkPanel;
     KPushButton *m_abortButton;
     Status m_status;
+    bool m_autoscan;
     QHash<QString, QString> m_messageTable;
 
 };

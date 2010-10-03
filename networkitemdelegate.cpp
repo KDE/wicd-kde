@@ -31,6 +31,10 @@
 
 #include <KIcon>
 #include <KPushButton>
+#include <KLocalizedString>
+
+bool NetworkItemDelegate::m_useTooltips(false);
+bool NetworkItemDelegate::m_showStrength(false);
 
 NetworkItemDelegate::NetworkItemDelegate(QAbstractItemView *itemView, QObject *parent)
     : KWidgetItemDelegate(itemView, parent)
@@ -96,7 +100,7 @@ void NetworkItemDelegate::paint(QPainter *painter,
         painter->drawText(option.rect.translated(m_spacer+m_iconsize+m_spacer, 22),
                           flags,
                           Wicd::currentprofile);
-    } else {
+    } else if (m_showStrength) {
 	font.setWeight(QFont::Normal);
         font.setItalic(true);
         painter->setFont(font);
@@ -166,6 +170,18 @@ void NetworkItemDelegate::updateItemWidgets (const QList<QWidget*> widgets,
     QPushButton *informationsbutton = qobject_cast<QPushButton*>(widgets[3]);
     //informations button
     QPushButton *profilemanagerbutton = qobject_cast<QPushButton*>(widgets[4]);
+
+    if (m_useTooltips) {
+        buttonconnect->setToolTip( isConnected ? i18n("Disconnect") : i18n("Connect"));
+        propertiesbutton->setToolTip(i18n("Properties"));
+        informationsbutton->setToolTip(i18n("Informations"));
+        profilemanagerbutton->setToolTip(i18n("Manage profiles"));
+    } else {
+        buttonconnect->setToolTip("");
+        propertiesbutton->setToolTip("");
+        informationsbutton->setToolTip("");
+        profilemanagerbutton->setToolTip("");
+    }
 
     int verticalShift = (sizeHint(option, index).height()-buttonconnect->height())/2+1;
     buttonconnect->move(option.rect.translated(-buttonconnect->width()-m_spacer

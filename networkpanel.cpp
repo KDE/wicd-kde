@@ -46,6 +46,16 @@ void NetworkPanel::loadList(const QMap<int, NetworkInfos> &list)
     m_networkModel->loadData(list);
 }
 
+void NetworkPanel::showTooltips(bool show)
+{
+    NetworkItemDelegate::useTooltips(show);
+}
+
+void NetworkPanel::showSignalStrength(bool show)
+{
+    NetworkItemDelegate::showStrength(show);
+}
+
 void NetworkPanel::toggleConnection(const QModelIndex & index)
 {
     NetworkItemDelegate *item = static_cast<NetworkItemDelegate*>(itemDelegate(index));

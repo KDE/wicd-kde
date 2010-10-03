@@ -38,6 +38,7 @@
 MainWindow::MainWindow()
     : KMainWindow()
 {
+    QDBusConnection::sessionBus().registerObject("/Client", this, QDBusConnection::ExportScriptableSlots);
     setPlainCaption(i18n("Wicd client for KDE"));
     setAttribute(Qt::WA_DeleteOnClose, false);
     Wicd::locate();
@@ -79,6 +80,8 @@ MainWindow::MainWindow()
 
     //autosave window size
     setAutoSaveSettings();
+    //load ui prefs
+    reloadConfig();
 
     connect(m_trayicon, SIGNAL(activateRequested(bool, const QPoint)), this, SLOT(activated()));
     connect(DBusHandler::instance(), SIGNAL(statusChange(Status)), this, SLOT(updateStatus(Status)));
@@ -118,6 +121,21 @@ MainWindow::~MainWindow()
 void MainWindow::activated()
 {
     restoreWindowSize(autoSaveConfigGroup());
+    if (m_autoscan) {
+        DBusHandler::instance()->scan();
+    } else {
+        m_networkPanel->loadList(DBusHandler::instance()->networksList());
+    }
+}
+
+void MainWindow::reloadConfig()
+{
+    KSharedConfigPtr m_clientConfig = KSharedConfig::openConfig("wicd-client-kderc", KConfig::NoGlobals);
+    KConfigGroup configGroup(m_clientConfig, "Client");
+    m_networkPanel->showTooltips(configGroup.readEntry("Show tooltips", false));
+    m_networkPanel->showSignalStrength(configGroup.readEntry("Show signal strength", false));
+    m_autoscan = configGroup.readEntry("Autoscan", false);
+    //force widgets update in itemdelegate
     m_networkPanel->loadList(DBusHandler::instance()->networksList());
 }
 

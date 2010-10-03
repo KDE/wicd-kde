@@ -28,6 +28,8 @@ class NetworkItemDelegate : public KWidgetItemDelegate
 public:
     NetworkItemDelegate(QAbstractItemView *itemView, QObject *parent = 0);
     ~NetworkItemDelegate();
+    static void useTooltips(bool use) { m_useTooltips = use; }
+    static void showStrength(bool show) { m_showStrength = show; }
 
     virtual void paint(QPainter *painter,
                        const QStyleOptionViewItem &option,
@@ -51,6 +53,8 @@ private:
     static const int m_iconsize = 30;
     static const int m_spacer = 4;
     static const int m_progressbarlength = 100;
+    static bool m_useTooltips;
+    static bool m_showStrength;
 };
 
 #endif

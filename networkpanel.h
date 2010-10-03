@@ -33,6 +33,8 @@ public:
     ~NetworkPanel();
     void setBusy(bool busy);
     void loadList(const QMap<int, NetworkInfos> &list);
+    void showTooltips(bool show);
+    void showSignalStrength(bool show);
 
 private slots:
     void toggleConnection(const QModelIndex &index);
