@@ -21,13 +21,20 @@
 #define INFOSDIALOG_H
 
 #include <KDialog>
+#include <QFormLayout>
 
 class InfosDialog : public KDialog
 {
     Q_OBJECT
 
 public:
-    InfosDialog(int networkId = -1, QWidget *parent = 0);
+    InfosDialog(int networkId, QWidget *parent = 0);
+    InfosDialog(QWidget *parent = 0);
+
+private:
+    void init();
+
+    QFormLayout *formLayout;
 };
 
 #endif // INFOSDIALOG_H
