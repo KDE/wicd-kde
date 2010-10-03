@@ -31,24 +31,24 @@ msgstr "不安全的"
 
 #: kcm/wicdkcm.cpp:27
 msgid "kcmwicd"
-msgstr ""
+msgstr "kcmwicd"
 
 #: kcm/wicdkcm.cpp:27
 #, fuzzy
 msgid "Wicd Configuration"
-msgstr "生成 WAP 配置"
+msgstr "Wicd 设置"
 
 #: kcm/wicdkcm.cpp:29
 msgid "(c) 2009 Dario Freddi"
-msgstr ""
+msgstr "(c) 2009 Dario Freddi"
 
 #: kcm/wicdkcm.cpp:31
 msgid "Dario Freddi"
-msgstr ""
+msgstr "Dario Freddi"
 
 #: kcm/wicdkcm.cpp:31
 msgid "Maintainer"
-msgstr ""
+msgstr "维护者"
 
 #: kcm/wicdkcm.cpp:62 kcm/wicdkcm.cpp:90 kcm/wicdkcm.cpp:101
 #: kcm/wicdkcm.cpp:112
@@ -69,11 +69,11 @@ msgstr "使用上次使用的有线网络方案"
 
 #: main.cpp:38
 msgid "Wicd Client KDE"
-msgstr "Wicd KDE 客户端"
+msgstr "Wicd KDE 前端"
 
 #: main.cpp:40 mainwindow.cpp:41
 msgid "Wicd client for KDE"
-msgstr "Wicd KDE 客户端"
+msgstr "Wicd KDE 前端"
 
 #: main.cpp:42
 msgid "(c) 2010 Anthony Vital"
@@ -149,11 +149,11 @@ msgstr "连接失败: 无法获得 IP 地址"
 
 #: mainwindow.cpp:101
 msgid "Connection Failed: No DHCP offers received."
-msgstr "连接失败: DHCP@@@"
+msgstr "连接失败: DHCP 未收到可用的地址  "
 
 #: mainwindow.cpp:102
 msgid "Verifying access point association..."
-msgstr "认证 AP"
+msgstr "确认 AP 关联"
 
 #: mainwindow.cpp:103
 msgid "Connection failed: Could not contact the wireless access point."
