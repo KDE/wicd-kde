@@ -24,7 +24,7 @@ set(client_SRCS
     trayicon.cpp
     dbushandler.cpp)
 
-kde4_add_ui_files(client_SRCS profilemanager.ui infosdialog.ui)
+kde4_add_ui_files(client_SRCS profilemanager.ui)
 
 kde4_add_executable( wicd-client-kde ${client_SRCS} )
 target_link_libraries( wicd-client-kde ${KDE4_KDEUI_LIBS} )

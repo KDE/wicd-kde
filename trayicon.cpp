@@ -18,11 +18,15 @@
  ****************************************************************************/
 
 #include "trayicon.h"
+#include "infosdialog.h"
+
+#include <KAction>
 #include <KMenu>
 #include <KIcon>
 #include <KAboutApplicationDialog>
 #include <KCmdLineArgs>
 #include <KLocalizedString>
+
 
 TrayIcon::TrayIcon( QObject *parent )
     : KStatusNotifierItem( parent )
@@ -32,7 +36,8 @@ TrayIcon::TrayIcon( QObject *parent )
     setCategory(KStatusNotifierItem::Communications);
     setIcon("network-wired");
     setToolTipTitle("Wicd");
-    contextMenu()->addAction(KIcon("help-about"), i18n("About"), this, SLOT(showAbout()));
+
+    addActions();
 }
 
 void TrayIcon::setIcon(const QString &name)
@@ -47,4 +52,19 @@ void TrayIcon::showAbout() const
 {
      KAboutApplicationDialog aboutDialog(KCmdLineArgs::aboutData());
      aboutDialog.exec();
+}
+
+void TrayIcon::addActions()
+{
+    KAction *action = new KAction(KIcon("help-about"), i18n("Connection Info"), this);
+    connect(action, SIGNAL(triggered()), this, SLOT(connectionInfoRequested()));
+    contextMenu()->addAction(action);
+
+    contextMenu()->addAction(KIcon("network-wireless"), i18n("About"), this, SLOT(showAbout()));
+}
+
+void TrayIcon::connectionInfoRequested()
+{
+    InfosDialog dialog;
+    dialog.exec();
 }

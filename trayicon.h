@@ -32,6 +32,10 @@ public:
 
 private slots:
      void showAbout() const;
+     void connectionInfoRequested();
+
+private:
+     void addActions();
 };
 
 #endif

@@ -20,7 +20,6 @@
 #ifndef INFOSDIALOG_H
 #define INFOSDIALOG_H
 
-#include "ui_infosdialog.h"
 #include <KDialog>
 
 class InfosDialog : public KDialog
@@ -28,10 +27,7 @@ class InfosDialog : public KDialog
     Q_OBJECT
 
 public:
-    InfosDialog(int networkId, QWidget *parent = 0);
-
-private:
-    Ui::InfosDialog ui;
+    InfosDialog(int networkId = -1, QWidget *parent = 0);
 };
 
 #endif // INFOSDIALOG_H
