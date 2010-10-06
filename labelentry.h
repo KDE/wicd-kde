@@ -41,6 +41,9 @@ public:
     void setText(const QString &text);
     void setEchoMode(QLineEdit::EchoMode mode);
 
+signals:
+    void editingFinished();
+
 public slots:
     void setEnabled(bool enable);
 

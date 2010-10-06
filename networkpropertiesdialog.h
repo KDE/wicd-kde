@@ -38,6 +38,7 @@ public:
     ~NetworkPropertiesDialog();
 
 private slots:
+    void autoComplete();
     void toggleIpCheckbox(bool toggled);
     void toggleStaticDnsCheckbox(bool toggled);
     void toggleGlobalDnsCheckbox(bool toggled);

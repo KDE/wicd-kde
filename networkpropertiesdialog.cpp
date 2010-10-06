@@ -90,6 +90,7 @@ NetworkPropertiesDialog::NetworkPropertiesDialog(int networkId, QWidget *parent,
     widget->setLayout(vboxlayout);
     setMainWidget( widget );
 
+    connect(m_ipEdit, SIGNAL(editingFinished()), this, SLOT(autoComplete()));
     connect(m_staticIpBox, SIGNAL(toggled(bool)), this, SLOT(toggleIpCheckbox(bool)));
     connect(m_staticdnsBox, SIGNAL(toggled(bool)), this, SLOT(toggleStaticDnsCheckbox(bool)));
     connect(m_globaldnsBox, SIGNAL(toggled(bool)), this, SLOT(toggleGlobalDnsCheckbox(bool)));
@@ -140,6 +141,22 @@ NetworkPropertiesDialog::NetworkPropertiesDialog(int networkId, QWidget *parent,
 
 NetworkPropertiesDialog::~NetworkPropertiesDialog()
 {
+}
+
+void NetworkPropertiesDialog::autoComplete()
+{
+    bool valid = Tools::isValidIP(m_ipEdit->text());
+    if (valid) {
+        if (m_gatewayEdit->text().isEmpty()) {
+            QStringList ipNumbers = m_ipEdit->text().split(".");
+            ipNumbers.replace(3, "1");
+            m_gatewayEdit->setText(ipNumbers.join("."));
+        }
+        if (m_netmaskEdit->text().isEmpty())
+            m_netmaskEdit->setText("255.255.255.0");
+    } else if (!m_ipEdit->text().isEmpty()) {
+        KMessageBox::sorry(0, QString(i18n("Invalid IP address entered.")));
+    }
 }
 
 void NetworkPropertiesDialog::toggleIpCheckbox(bool toggled)

@@ -32,6 +32,7 @@ LabelEntry::LabelEntry( QString label, QWidget *parent)
     m_value->setMinimumWidth(200);
     boxlayout->addWidget(m_label);
     boxlayout->addWidget(m_value);
+    connect(m_value, SIGNAL(editingFinished()), this, SIGNAL(editingFinished()));
 }
 
 LabelEntry::~LabelEntry()
