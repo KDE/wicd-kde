@@ -27,9 +27,9 @@ class MyApp : public KUniqueApplication
 {
 public:
     MyApp() : KUniqueApplication() { KGlobal::ref(); }
-    virtual ~MyApp() {}
+    ~MyApp() {}
 
-    virtual int newInstance() { return 0; }
+    int newInstance() { return 0; }
 };
 
 int main(int argc, char *argv[])

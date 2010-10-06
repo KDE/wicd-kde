@@ -37,6 +37,7 @@ public:
     ~LabelEntry();
     QString label() const;
     QString text() const;
+    int labelMinimumWidth() const;
     void setText(const QString &text);
     void setEchoMode(QLineEdit::EchoMode mode);
 

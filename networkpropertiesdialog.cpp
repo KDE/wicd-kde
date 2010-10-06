@@ -23,13 +23,11 @@
 
 #include <KMessageBox>
 #include <KLocalizedString>
-#include <QDebug>
 
 NetworkPropertiesDialog::NetworkPropertiesDialog(int networkId, QWidget *parent, Qt::WFlags flags)
     : KDialog(parent, flags)
     , m_networkId(networkId)
 {
-    qDebug()<<m_networkId;
     setModal(true);
     setButtons( KDialog::User1 | KDialog::Cancel );
     button(KDialog::User1)->setIcon(KIcon("dialog-ok"));
@@ -39,18 +37,19 @@ NetworkPropertiesDialog::NetworkPropertiesDialog(int networkId, QWidget *parent,
     QVBoxLayout *vboxlayout = new QVBoxLayout();
 
     m_staticIpBox = new QCheckBox(i18n("Use Static IPs"));
-    m_ipEdit = new LabelEntry(i18n("IP"));
-    m_netmaskEdit = new LabelEntry(i18n("Netmask"));
-    m_gatewayEdit = new LabelEntry(i18n("Gateway"));
+    m_ipEdit = new LabelEntry(i18n("IP :"));
+    m_netmaskEdit = new LabelEntry(i18n("Netmask :"));
+    m_gatewayEdit = new LabelEntry(i18n("Gateway :"));
     m_staticdnsBox = new QCheckBox(i18n("Use Static DNS"));
     m_globaldnsBox = new QCheckBox(i18n("Use global DNS servers"));
-    m_dnsdomainEdit = new LabelEntry(i18n("DNS domain"));
-    m_searchdomainEdit = new LabelEntry(i18n("Search domain"));
-    m_dns1Edit = new LabelEntry(i18n("DNS 1"));
-    m_dns2Edit = new LabelEntry(i18n("DNS 2"));
-    m_dns3Edit = new LabelEntry(i18n("DNS 3"));
-    m_dhcphostnameBox = new QCheckBox();
-    m_dhcphostnameEdit = new LabelEntry(i18n("DHCP Hostname"));
+    m_dnsdomainEdit = new LabelEntry(i18n("DNS domain :"));
+    m_searchdomainEdit = new LabelEntry(i18n("Search domain :"));
+    m_dns1Edit = new LabelEntry(i18n("DNS server 1 :"));
+    m_dns2Edit = new LabelEntry(i18n("DNS server 2 :"));
+    m_dns3Edit = new LabelEntry(i18n("DNS server 3 :"));
+    m_dhcphostnameBox = new QCheckBox(i18n("DHCP Hostname :"));
+    m_dhcphostnameBox->setMinimumWidth(m_dns3Edit->labelMinimumWidth());
+    m_dhcphostnameEdit = new QLineEdit();
 
     //optionnal: wireless
     m_autoconnectBox = new QCheckBox(i18n("Automatically connect to this network"));
@@ -276,7 +275,7 @@ void NetworkPropertiesDialog::encryptMethodChanged()
             QString key = field.toStringList().value(0);
             QString value = field.toStringList().value(1);
             //new field implies new label entry
-            LabelEntry* entry = new LabelEntry(value.replace("_", " ").remove("*"));
+            LabelEntry* entry = new LabelEntry(value.replace("_", " ").remove("*")+" :");
             entry->setEchoMode(QLineEdit::PasswordEchoOnEdit);
             entry->setText(DBusHandler::instance()->callWireless("GetWirelessProperty", m_networkId, key).toString());
             m_encryptlayout->addWidget(entry);

@@ -48,6 +48,11 @@ QString LabelEntry::text() const
     return m_value->text();
 }
 
+int LabelEntry::labelMinimumWidth() const
+{
+    return m_label->minimumWidth();
+}
+
 void LabelEntry::setText(const QString &text)
 {
     m_value->setText(text);

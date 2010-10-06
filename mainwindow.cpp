@@ -263,16 +263,16 @@ void MainWindow::createAdhocDialog()
     QWidget *widget = new QWidget(&dialog);
     QVBoxLayout *vboxlayout = new QVBoxLayout();
 
-    LabelEntry *essidEdit = new LabelEntry("ESSID");
+    LabelEntry *essidEdit = new LabelEntry("ESSID :");
     essidEdit->setText("My_Adhoc_Network");
-    LabelEntry *ipEdit = new LabelEntry("IP");
+    LabelEntry *ipEdit = new LabelEntry("IP :");
     ipEdit->setText("169.254.12.10");
-    LabelEntry *channelEdit = new LabelEntry(i18n("Channel"));
+    LabelEntry *channelEdit = new LabelEntry(i18n("Channel :"));
     channelEdit->setText("3");
     QCheckBox *icsBox = new QCheckBox(i18n("Activate Internet Connection Sharing"));//useless?
     icsBox->setEnabled(false);
     QCheckBox *wepBox = new QCheckBox(i18n("Use Encryption (WEP only)"));
-    LabelEntry *keyEdit = new LabelEntry(i18n("Key"));
+    LabelEntry *keyEdit = new LabelEntry(i18n("Key :"));
     keyEdit->setEnabled(false);
     connect(wepBox, SIGNAL(toggled(bool)), keyEdit, SLOT(setEnabled(bool)));
 

@@ -72,7 +72,7 @@ InfosDialog::InfosDialog(QWidget *parent)
     }
     else if (status.State == WicdState::WIRELESS) {
         m_layout->addRow(new QLabel(i18n("Connection type :")), new QLabel(i18nc("Connection type :", "Wireless")));
-        m_layout->addRow(new QLabel(i18n("SSID :")), new QLabel(status.Infos.at(1)));
+        m_layout->addRow(new QLabel(i18n("ESSID :")), new QLabel(status.Infos.at(1)));
         m_layout->addRow(new QLabel(i18n("Speed :")), new QLabel(status.Infos.at(4)));
         m_layout->addRow(new QLabel(i18n("IP :")), new QLabel(status.Infos.at(0)));
 

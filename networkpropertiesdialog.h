@@ -68,7 +68,7 @@ private:
     LabelEntry *m_dns2Edit;
     LabelEntry *m_dns3Edit;
     QCheckBox *m_dhcphostnameBox;
-    LabelEntry *m_dhcphostnameEdit;
+    QLineEdit *m_dhcphostnameEdit;
     QCheckBox* m_globalSettingsBox;
     QCheckBox* m_useEncryptionBox;
     QComboBox* m_encryptionCombo;

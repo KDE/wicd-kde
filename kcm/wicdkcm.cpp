@@ -29,9 +29,7 @@
 #include <kconfiggroup.h>
 
 //solid specific includes
-#include <solid/devicenotifier.h>
 #include <solid/device.h>
-#include <solid/deviceinterface.h>
 #include <solid/networkinterface.h>
 
 K_PLUGIN_FACTORY(WicdKCMModuleFactory, registerPlugin<WicdKCM>();)
@@ -76,9 +74,6 @@ void WicdKCM::init()
     m_wicdMisc["mii-tool"] = 2;
     m_wicdMisc["ip"] = 1;
     m_wicdMisc["route"] = 2;
-    //    m_wicdMisc["gksudo"] = 1;
-    //    m_wicdMisc["kdesu"] = 2;
-    //    m_wicdMisc["ktsuss"] = 3;
     m_wicdMisc[i18n("Automatic (recommended)")] = 0;
 
     // Feature++: show the interfaces in a combobox thanks to solid
@@ -139,17 +134,6 @@ void WicdKCM::init()
 
     tmpVal.clear();
 
-    //    // Graphical sudo
-    //    m_ui->sudoBox->addItem(i18n("Automatic (recommended)"));
-    //    tmpVal << "gksudo" << "kdesu" << "ktsuss";
-    //    foreach (const QString &str, tmpVal) {
-    //        if (WicdDbusInterface::instance()->daemon().call("GetAppAvailable", str).arguments().at(0).toBool()) {
-    //            m_ui->sudoBox->addItem(str);
-    //        }
-    //    }
-
-    //    tmpVal.clear();
-
     // Now for the wired automatic connection
     m_ui->automaticWiredBox->addItem(i18n("Use default wired network profile"), 1);
     m_ui->automaticWiredBox->addItem(i18n("Prompt for wired network profile"), 2);
@@ -164,7 +148,6 @@ void WicdKCM::init()
     connect(m_ui->dhcpBox, SIGNAL(currentIndexChanged(int)), this, SLOT(changed()));
     connect(m_ui->wiredLinkBox, SIGNAL(currentIndexChanged(int)), this, SLOT(changed()));
     connect(m_ui->routeBox, SIGNAL(currentIndexChanged(int)), this, SLOT(changed()));
-    //    connect(m_ui->sudoBox, SIGNAL(currentIndexChanged(int)), this, SLOT(changed()));
 
     connect(m_ui->automaticWiredBox, SIGNAL(currentIndexChanged(int)), this, SLOT(changed()));
 
@@ -210,11 +193,6 @@ void WicdKCM::load()
             m_ui->routeBox->setCurrentItem(key);
         }
     }
-    //    foreach (const QString &key, m_wicdMisc.keys(WicdDbusInterface::instance()->daemon().call("GetSudoApp").arguments().at(0).toInt())) {
-    //        if (m_ui->sudoBox->contains(key)) {
-    //            m_ui->sudoBox->setCurrentItem(key);
-    //        }
-    //    }
 
     m_ui->automaticWiredBox->setCurrentIndex(WicdDbusInterface::instance()->daemon().call("GetWiredAutoConnectMethod").arguments().at(0).toInt() - 1);
 
@@ -223,12 +201,6 @@ void WicdKCM::load()
     m_ui->wpaSupplicantBox->setCurrentItem(WicdDbusInterface::instance()->daemon().call("GetWPADriver").arguments().at(0).toString());
 
     m_ui->useDNSBox->setChecked(WicdDbusInterface::instance()->daemon().call("GetUseGlobalDNS").arguments().at(0).toBool());
-
-    // Lazy workaround
-    if (!m_ui->useDNSBox->isChecked()) {
-        m_ui->useDNSBox->setChecked(true);
-        m_ui->useDNSBox->setChecked(false);
-    }
 
     if (m_ui->useDNSBox->isChecked()) {
         m_ui->server1Edit->setText(WicdDbusInterface::instance()->daemon().call("GetGlobalDNSAddresses").arguments().at(0).toString());
@@ -257,7 +229,6 @@ void WicdKCM::save()
     WicdDbusInterface::instance()->daemon().call("SetDHCPClient", m_wicdMisc[m_ui->dhcpBox->currentText()]);
     WicdDbusInterface::instance()->daemon().call("SetLinkDetectionTool", m_wicdMisc[m_ui->wiredLinkBox->currentText()]);
     WicdDbusInterface::instance()->daemon().call("SetFlushTool", m_wicdMisc[m_ui->routeBox->currentText()]);
-    //    WicdDbusInterface::instance()->daemon().call("SetSudoApp", m_wicdMisc[m_ui->sudoBox->currentText()]);
 
     WicdDbusInterface::instance()->daemon().call("SetWiredAutoConnectMethod", m_ui->automaticWiredBox->itemData(m_ui->automaticWiredBox->currentIndex()));
 
