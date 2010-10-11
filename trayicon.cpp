@@ -21,6 +21,7 @@
 #include "infosdialog.h"
 
 #include <KMenu>
+#include <KHelpMenu>
 #include <KIcon>
 #include <KAboutApplicationDialog>
 #include <KCmdLineArgs>
@@ -37,6 +38,8 @@ TrayIcon::TrayIcon( QObject *parent )
     setToolTipTitle("Wicd");
 
     addActions();
+    KHelpMenu *mHelpMenu = new KHelpMenu(0, KCmdLineArgs::aboutData(), false);
+    contextMenu()->addMenu(mHelpMenu->menu())->setIcon(KIcon("help-contents"));
 }
 
 void TrayIcon::setIcon(const QString &name)
@@ -45,12 +48,6 @@ void TrayIcon::setIcon(const QString &name)
         setIconByName(name);
         setToolTipIconByName(name);
     }
-}
-
-void TrayIcon::showAbout() const
-{
-     KAboutApplicationDialog aboutDialog(KCmdLineArgs::aboutData());
-     aboutDialog.exec();
 }
 
 void TrayIcon::connectionInfoRequested() const
@@ -62,5 +59,4 @@ void TrayIcon::connectionInfoRequested() const
 void TrayIcon::addActions()
 {
     contextMenu()->addAction(KIcon("help-about"), i18n("Connection infos"), this, SLOT(connectionInfoRequested()));
-    contextMenu()->addAction(KIcon("network-wireless"), i18n("About"), this, SLOT(showAbout()));
 }

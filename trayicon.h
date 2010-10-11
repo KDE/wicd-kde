@@ -31,7 +31,6 @@ public:
      void setIcon( const QString &name );
 
 private slots:
-     void showAbout() const;
      void connectionInfoRequested() const;
 
 private:

@@ -40,6 +40,17 @@ int main(int argc, char *argv[])
                           ki18n("Wicd client for KDE"),
                           KAboutData::License_GPL_V3,
                           ki18n("(c) 2010 Anthony Vital"));
+    aboutData.addAuthor(ki18n("Anthony Vital"), ki18n("Author"), "anthony.vital@gmail.com");
+    aboutData.addCredit(ki18n("Dario Freddi"), ki18n("Contributor and original KCM author"), "drf@kde.org", "http://drfav.wordpress.com");
+    aboutData.addCredit(ki18n("Brieuc Roblin"), ki18n("Contributor"), "brieuc.roblin@gmail.com");
+    aboutData.addCredit(ki18n("Yoann Laissus"), ki18n("Contributor"), "yoann.laissus@gmail.com");
+    aboutData.addCredit(ki18n("Gianluca Boiano"), ki18n("Translator"), "morf3089@gmail.com");
+    aboutData.addCredit(ki18n("Jekyll Wu"), ki18n("Translator"), "adaptee@gmail.com");
+    aboutData.addCredit(ki18n("Carlos López"), ki18n("Translator"), "musikolo at hotmail dot com");
+    aboutData.addCredit(ki18n("Attila Szabo"), ki18n("Translator"), "a.szabo38@gmail.com");
+    aboutData.addCredit(ki18n("Márcio Moraes"), ki18n("Translator"), "marciopanto@gmail.com");
+    aboutData.addCredit(ki18n("Pavel Fric"), ki18n("Translator"), "pavelfric@seznam.cz");
+    aboutData.setBugAddress("anthony.vital@gmail.com");
     aboutData.setProgramIconName("network-wireless");
 
     KCmdLineArgs::init(argc, argv, &aboutData);
