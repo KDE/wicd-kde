@@ -1,11 +1,14 @@
 [org.kde.wicdclient.scripts.read]
 Name=Read scripts
+Name[fr]=Lire les scripts
 Description=Requesting root privileges to read scripts
+Description[fr]=Lire les scripts requiert les privilèges du superutilisateur
 Policy=auth_admin
 Persistence=session
 
 [org.kde.wicdclient.scripts.save]
 Name=Save scripts
-Description=Requesting root privileges to save scripts
+Name[fr]=Enregistrer les scripts
+Description=Enregistrer les scripts requiert les privilèges du superutilisateur
 Policy=auth_admin
 Persistence=session
