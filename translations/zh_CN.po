@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-21 17:48+0200\n"
+"POT-Creation-Date: 2010-10-19 19:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Jekyll Wu <adaptee@gmail.com>\n"
 "Language-Team: Chinese Simplified <adaptee@gmail.com>\n"
@@ -17,53 +17,123 @@ msgstr ""
 "X-Generator: Lokalize 1.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: dbushandler.cpp:144 mainwindow.cpp:174
+#: dbushandler.cpp:144 mainwindow.cpp:194
 msgid "Wired network"
 msgstr "有线网络"
 
-#: infosdialog.cpp:26
-msgid "Network informations"
-msgstr "网络信息"
+#: infosdialog.cpp:40 infosdialog.cpp:83
+msgid "Signal strength :"
+msgstr "信号强度 :"
 
-#: infosdialog.cpp:42
+#: infosdialog.cpp:46
 msgid "Unsecured"
 msgstr "不安全的"
 
-#: kcm/wicdkcm.cpp:27
+#: infosdialog.cpp:47
+msgid "Encryption type :"
+msgstr "加密类型 :"
+
+#: infosdialog.cpp:50
+msgid "Access point address :"
+msgstr "AP 地址 :"
+
+#: infosdialog.cpp:53
+msgid "Mode :"
+msgstr "模式 :"
+
+#: infosdialog.cpp:56 mainwindow.cpp:272
+msgid "Channel :"
+msgstr "频道 :"
+
+#: infosdialog.cpp:67 infosdialog.cpp:86
+msgid "State :"
+msgstr ""
+
+#: infosdialog.cpp:67
+#, fuzzy
+msgid "Connecting"
+msgstr "连接完毕 ..."
+
+#: infosdialog.cpp:70 infosdialog.cpp:74
+#, fuzzy
+msgid "Connection type :"
+msgstr "加密类型 :"
+
+#: infosdialog.cpp:70
+msgctxt "Connection type :"
+msgid "Wired"
+msgstr ""
+
+#: infosdialog.cpp:71 infosdialog.cpp:77 networkpropertiesdialog.cpp:40
+msgid "IP :"
+msgstr ""
+
+#: infosdialog.cpp:74
+#, fuzzy
+msgctxt "Connection type :"
+msgid "Wireless"
+msgstr "无线接口"
+
+#: infosdialog.cpp:75
+msgid "ESSID :"
+msgstr ""
+
+#: infosdialog.cpp:76
+msgid "Speed :"
+msgstr ""
+
+#: infosdialog.cpp:86 mainwindow.cpp:162 mainwindow.cpp:198
+msgid "Disconnected"
+msgstr "连接已断开"
+
+#: infosdialog.cpp:92
+msgid "Network informations"
+msgstr "网络信息"
+
+#: kcm/wicdkcm.cpp:44
 msgid "kcmwicd"
 msgstr "kcmwicd"
 
-#: kcm/wicdkcm.cpp:27
+#: kcm/wicdkcm.cpp:44
 #, fuzzy
 msgid "Wicd Configuration"
 msgstr "Wicd 设置"
 
-#: kcm/wicdkcm.cpp:29
+#: kcm/wicdkcm.cpp:46
 msgid "(c) 2009 Dario Freddi"
 msgstr "(c) 2009 Dario Freddi"
 
-#: kcm/wicdkcm.cpp:31
+#: kcm/wicdkcm.cpp:48 main.cpp:44
 msgid "Dario Freddi"
 msgstr "Dario Freddi"
 
-#: kcm/wicdkcm.cpp:31
-msgid "Maintainer"
-msgstr "维护者"
+#: kcm/wicdkcm.cpp:48
+msgid "Original author"
+msgstr ""
 
-#: kcm/wicdkcm.cpp:62 kcm/wicdkcm.cpp:90 kcm/wicdkcm.cpp:101
-#: kcm/wicdkcm.cpp:112
+#: kcm/wicdkcm.cpp:49 main.cpp:43
+#, fuzzy
+msgid "Anthony Vital"
+msgstr "(c) 2010 Anthony Vital"
+
+#: kcm/wicdkcm.cpp:49
+msgid "Developer"
+msgstr ""
+
+#: kcm/wicdkcm.cpp:77 kcm/wicdkcm.cpp:105 kcm/wicdkcm.cpp:116
+#: kcm/wicdkcm.cpp:127
 msgid "Automatic (recommended)"
 msgstr "自动(推荐)"
 
-#: kcm/wicdkcm.cpp:134
+#: kcm/wicdkcm.cpp:138
 msgid "Use default wired network profile"
 msgstr "使用默认的有线网络方案"
 
-#: kcm/wicdkcm.cpp:135
+#: kcm/wicdkcm.cpp:139
 msgid "Prompt for wired network profile"
 msgstr "提示用户选择有线网络方案"
 
-#: kcm/wicdkcm.cpp:136
+#: kcm/wicdkcm.cpp:140
 msgid "Use last wired network profile"
 msgstr "使用上次使用的有线网络方案"
 
@@ -71,7 +141,7 @@ msgstr "使用上次使用的有线网络方案"
 msgid "Wicd Client KDE"
 msgstr "Wicd KDE 前端"
 
-#: main.cpp:40 mainwindow.cpp:41
+#: main.cpp:40 mainwindow.cpp:42
 msgid "Wicd client for KDE"
 msgstr "Wicd KDE 前端"
 
@@ -79,225 +149,283 @@ msgstr "Wicd KDE 前端"
 msgid "(c) 2010 Anthony Vital"
 msgstr "(c) 2010 Anthony Vital"
 
-#: mainwindow.cpp:48
+#: main.cpp:43
+msgid "Author"
+msgstr ""
+
+#: main.cpp:44
+msgid "Contributor and original KCM author"
+msgstr ""
+
+#: main.cpp:45
+msgid "Brieuc Roblin"
+msgstr ""
+
+#: main.cpp:45 main.cpp:46
+msgid "Contributor"
+msgstr ""
+
+#: main.cpp:46
+msgid "Yoann Laissus"
+msgstr ""
+
+#: main.cpp:47
+msgid "Gianluca Boiano"
+msgstr ""
+
+#: main.cpp:47 main.cpp:48 main.cpp:49 main.cpp:50 main.cpp:51 main.cpp:52
+msgid "Translator"
+msgstr ""
+
+#: main.cpp:48
+msgid "Jekyll Wu"
+msgstr ""
+
+#: main.cpp:49
+msgid "Carlos López"
+msgstr ""
+
+#: main.cpp:50
+msgid "Attila Szabo"
+msgstr ""
+
+#: main.cpp:51
+msgid "Márcio Moraes"
+msgstr ""
+
+#: main.cpp:52
+msgid "Pavel Fric"
+msgstr ""
+
+#: mainwindow.cpp:49
 msgid "Network"
 msgstr "网络"
 
-#: mainwindow.cpp:52 mainwindow.cpp:242
+#: mainwindow.cpp:54 mainwindow.cpp:262
 msgid "Create an ad-hoc network"
 msgstr "创建 ad-hoc 网络"
 
-#: mainwindow.cpp:53 mainwindow.cpp:288
+#: mainwindow.cpp:55 mainwindow.cpp:308
 msgid "Find a hidden network"
 msgstr "搜索隐藏网络"
 
-#: mainwindow.cpp:61
+#: mainwindow.cpp:62
 msgid "Preferences"
 msgstr "设置"
 
-#: mainwindow.cpp:63
+#: mainwindow.cpp:64
 msgid "Reload"
 msgstr "刷新"
 
-#: mainwindow.cpp:64
+#: mainwindow.cpp:65 networkitemdelegate.cpp:175
 msgid "Disconnect"
 msgstr "断开"
 
-#: mainwindow.cpp:73
+#: mainwindow.cpp:76
 msgid "Abort"
 msgstr "中止"
 
-#: mainwindow.cpp:91
+#: mainwindow.cpp:96
 msgid "Putting interface down..."
 msgstr "停用接口 ..."
 
-#: mainwindow.cpp:92
+#: mainwindow.cpp:97
 msgid "Resetting IP address..."
 msgstr "重新设置 IP 地址 ..."
 
-#: mainwindow.cpp:93
+#: mainwindow.cpp:98
 msgid "Putting interface up..."
 msgstr "启用接口 ..."
 
-#: mainwindow.cpp:94
+#: mainwindow.cpp:99
 msgid "Generating PSK..."
 msgstr "生成 PSK ..."
 
-#: mainwindow.cpp:95
+#: mainwindow.cpp:100
 msgid "Connection Failed: Bad password."
 msgstr "连接失败: 密码错误"
 
-#: mainwindow.cpp:96
+#: mainwindow.cpp:101
 msgid "Generating WPA configuration"
 msgstr "生成 WAP 配置"
 
-#: mainwindow.cpp:97
+#: mainwindow.cpp:102
 msgid "Validating authentication..."
 msgstr "验证认证信息..."
 
-#: mainwindow.cpp:98
+#: mainwindow.cpp:103
 msgid "Obtaining IP address..."
 msgstr "获取 IP 地址 ..."
 
-#: mainwindow.cpp:99
+#: mainwindow.cpp:104
 msgid "Done connecting..."
 msgstr "连接完毕 ..."
 
-#: mainwindow.cpp:100
+#: mainwindow.cpp:105
 msgid "Connection Failed: Unable to Get IP Address"
 msgstr "连接失败: 无法获得 IP 地址"
 
-#: mainwindow.cpp:101
+#: mainwindow.cpp:106
 msgid "Connection Failed: No DHCP offers received."
 msgstr "连接失败: DHCP 未收到可用的地址  "
 
-#: mainwindow.cpp:102
+#: mainwindow.cpp:107
 msgid "Verifying access point association..."
 msgstr "确认 AP 关联"
 
-#: mainwindow.cpp:103
+#: mainwindow.cpp:108
 msgid "Connection failed: Could not contact the wireless access point."
 msgstr "连接失败: 无法联络无线 AP"
 
-#: mainwindow.cpp:104
+#: mainwindow.cpp:109
 msgid "Setting static IP addresses..."
 msgstr "设置静态 IP 地址..."
 
-#: mainwindow.cpp:105
+#: mainwindow.cpp:110
 msgid "Aborted"
 msgstr "已中止"
 
-#: mainwindow.cpp:106
+#: mainwindow.cpp:111
 msgid "Failed"
 msgstr "已失败"
 
-#: mainwindow.cpp:136
+#: mainwindow.cpp:156
 msgid "Connected to wired network"
 msgstr "连接至有线网络"
 
-#: mainwindow.cpp:139
+#: mainwindow.cpp:159
 msgid "Connected to wireless network"
 msgstr "连接至无线网络"
 
-#: mainwindow.cpp:142 mainwindow.cpp:178
-msgid "Disconnected"
-msgstr "连接已断开"
-
-#: mainwindow.cpp:153
+#: mainwindow.cpp:173
 msgid "Connected to wired network (IP : %1)"
 msgstr "连接至有线网络 (IP : %1)"
 
-#: mainwindow.cpp:164
+#: mainwindow.cpp:184
 msgid "Connected to %1 - %2%3 (IP : %4)"
 msgstr "连接至 %1 - %2%3 (IP : %4)"
 
-#: mainwindow.cpp:252
-msgid "Channel"
-msgstr "频道"
-
-#: mainwindow.cpp:254
+#: mainwindow.cpp:274
 msgid "Activate Internet Connection Sharing"
 msgstr "启用网络连接共享"
 
-#: mainwindow.cpp:256
+#: mainwindow.cpp:276
 msgid "Use Encryption (WEP only)"
 msgstr "启用加密(只支持WEP)"
 
-#: mainwindow.cpp:257
-msgid "Key"
-msgstr "密钥"
+#: mainwindow.cpp:277
+msgid "Key :"
+msgstr ""
 
-#: mainwindow.cpp:289
+#: mainwindow.cpp:309
 msgid "Hidden Network ESSID"
 msgstr "隐藏网络的 ESSID"
 
-#: networkpropertiesdialog.cpp:36
+#: networkitemdelegate.cpp:175
+#, fuzzy
+msgid "Connect"
+msgstr "断开"
+
+#: networkitemdelegate.cpp:176
+msgid "Properties"
+msgstr ""
+
+#: networkitemdelegate.cpp:177
+#, fuzzy
+msgid "Informations"
+msgstr "网络信息"
+
+#: networkitemdelegate.cpp:178 profilemanager.cpp:31
+msgid "Manage profiles"
+msgstr "管理方案"
+
+#: networkpropertiesdialog.cpp:34
 msgid "OK"
 msgstr "OK"
 
-#: networkpropertiesdialog.cpp:41
+#: networkpropertiesdialog.cpp:39
 msgid "Use Static IPs"
 msgstr "使用静态 IP"
 
-#: networkpropertiesdialog.cpp:42
-msgid "IP"
-msgstr "IP 地址"
-
-#: networkpropertiesdialog.cpp:43
-msgid "Netmask"
+#: networkpropertiesdialog.cpp:41
+#, fuzzy
+msgid "Netmask :"
 msgstr "子网掩码"
 
-#: networkpropertiesdialog.cpp:44
-msgid "Gateway"
+#: networkpropertiesdialog.cpp:42
+#, fuzzy
+msgid "Gateway :"
 msgstr "网关"
 
-#: networkpropertiesdialog.cpp:45
+#: networkpropertiesdialog.cpp:43
 msgid "Use Static DNS"
 msgstr "使用静态 DNS"
 
-#: networkpropertiesdialog.cpp:46 qtcreator-build/kcm/ui_kcmwidget.h:429
+#: networkpropertiesdialog.cpp:44 qtcreator-build/kcm/ui_kcmwidget.h:451
 msgid "Use global DNS servers"
 msgstr "使用全局 DNS 服务器"
 
-#: networkpropertiesdialog.cpp:47
-msgid "DNS domain"
-msgstr "DNS 域"
+#: networkpropertiesdialog.cpp:45 qtcreator-build/kcm/ui_kcmwidget.h:452
+msgid "DNS domain :"
+msgstr "DNS 域 :"
 
-#: networkpropertiesdialog.cpp:48
-msgid "Search domain"
-msgstr "搜索域"
+#: networkpropertiesdialog.cpp:46 qtcreator-build/kcm/ui_kcmwidget.h:453
+msgid "Search domain :"
+msgstr "搜索域 :"
 
-#: networkpropertiesdialog.cpp:49
-msgid "DNS 1"
-msgstr "DNS 服务器 1"
+#: networkpropertiesdialog.cpp:47 qtcreator-build/kcm/ui_kcmwidget.h:454
+msgid "DNS server 1 :"
+msgstr "DNS 服务器 1 :"
+
+#: networkpropertiesdialog.cpp:48 qtcreator-build/kcm/ui_kcmwidget.h:455
+msgid "DNS server 2 :"
+msgstr "DNS 服务器 2 :"
+
+#: networkpropertiesdialog.cpp:49 qtcreator-build/kcm/ui_kcmwidget.h:456
+msgid "DNS server 3 :"
+msgstr "DNS 服务器 3 :"
 
 #: networkpropertiesdialog.cpp:50
-msgid "DNS 2"
-msgstr "DNS 服务器 2"
-
-#: networkpropertiesdialog.cpp:51
-msgid "DNS 3"
-msgstr "DNS 服务器 3"
-
-#: networkpropertiesdialog.cpp:53
-msgid "DHCP Hostname"
+#, fuzzy
+msgid "DHCP Hostname :"
 msgstr "DHCP 主机名"
 
-#: networkpropertiesdialog.cpp:56
+#: networkpropertiesdialog.cpp:55
 msgid "Automatically connect to this network"
 msgstr "自动连接该网络"
 
-#: networkpropertiesdialog.cpp:57
+#: networkpropertiesdialog.cpp:56
 msgid "Use these settings for all networks sharing this essid"
 msgstr "这些设置作用于共享该 essid 的所有网络"
 
-#: networkpropertiesdialog.cpp:58
+#: networkpropertiesdialog.cpp:57
 msgid "Use Encryption"
 msgstr "使用加密"
 
-#: networkpropertiesdialog.cpp:62
+#: networkpropertiesdialog.cpp:61
 msgid "Scripts"
 msgstr "脚本"
 
-#: networkpropertiesdialog.cpp:179
+#: networkpropertiesdialog.cpp:158
+#, fuzzy
+msgid "Invalid IP address entered."
+msgstr "非法地址: %1"
+
+#: networkpropertiesdialog.cpp:195
 msgid "Global DNS has not been enabled in general preferences."
 msgstr "基本设置中未启用全局DNS"
 
-#: networkpropertiesdialog.cpp:218 networkpropertiesdialog.cpp:226
+#: networkpropertiesdialog.cpp:234 networkpropertiesdialog.cpp:242
 msgid "Invalid adress in %1"
 msgstr "非法地址: %1"
 
-#: networkpropertiesdialog.cpp:239
+#: networkpropertiesdialog.cpp:255
 msgid "%1 is required."
 msgstr "%1 不能为空."
 
-#: networkpropertiesdialog.cpp:244
+#: networkpropertiesdialog.cpp:260
 msgid "This network needs an encryption."
 msgstr "该网络需要加密"
-
-#: profilemanager.cpp:31
-msgid "Manage profiles"
-msgstr "管理方案"
 
 #: profilemanager.cpp:73
 msgid "Add a profile"
@@ -307,141 +435,117 @@ msgstr "添加新方案"
 msgid "New profile name:"
 msgstr "新方案名称"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:423
+#: qtcreator-build/kcm/ui_kcmwidget.h:445
 msgid "Network interfaces"
 msgstr "网络接口"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:424
+#: qtcreator-build/kcm/ui_kcmwidget.h:446
 msgid "Wireless interface :"
 msgstr "无线接口 :"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:425
+#: qtcreator-build/kcm/ui_kcmwidget.h:447
 msgid "Wired interface :"
 msgstr "有线接口 :"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:426
+#: qtcreator-build/kcm/ui_kcmwidget.h:448
 msgid "Always show wired interface"
 msgstr "总是显示有线接口"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:427
+#: qtcreator-build/kcm/ui_kcmwidget.h:449
 msgid "Always switch to a wired connection when available"
 msgstr "有线连接可用时，总是切换到有线连接"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:428
+#: qtcreator-build/kcm/ui_kcmwidget.h:450
 msgid "Global DNS servers"
 msgstr "全局 DNS 服务器"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:430
-msgid "DNS domain :"
-msgstr "DNS 域 :"
-
-#: qtcreator-build/kcm/ui_kcmwidget.h:431
-msgid "Search domain :"
-msgstr "搜索域 :"
-
-#: qtcreator-build/kcm/ui_kcmwidget.h:432
-msgid "DNS server 1 :"
-msgstr "DNS 服务器 1 :"
-
-#: qtcreator-build/kcm/ui_kcmwidget.h:433
-msgid "DNS server 2 :"
-msgstr "DNS 服务器 2 :"
-
-#: qtcreator-build/kcm/ui_kcmwidget.h:434
-msgid "DNS server 3 :"
-msgstr "DNS 服务器 3 :"
-
-#: qtcreator-build/kcm/ui_kcmwidget.h:435
+#: qtcreator-build/kcm/ui_kcmwidget.h:457
+#: qtcreator-build/kcm/ui_kcmwidget.h:465
 msgid "Other"
 msgstr "其它"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:436
+#: qtcreator-build/kcm/ui_kcmwidget.h:458
 msgid "Wired automatic connection :"
 msgstr "自动连接有线接口 :"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:437
+#: qtcreator-build/kcm/ui_kcmwidget.h:459
 msgid "Automatically reconnect on network connection loss"
 msgstr "网络连接丢失后自动重连"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:438
+#: qtcreator-build/kcm/ui_kcmwidget.h:460
 msgid "General settings"
 msgstr "基本设置"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:439
+#: qtcreator-build/kcm/ui_kcmwidget.h:461
+#, fuzzy
+msgid "Client settings"
+msgstr "基本设置"
+
+#: qtcreator-build/kcm/ui_kcmwidget.h:462
+msgid "Show tooltips"
+msgstr ""
+
+#: qtcreator-build/kcm/ui_kcmwidget.h:463
+#, fuzzy
+msgid "Show signal strength"
+msgstr "信号强度 :"
+
+#: qtcreator-build/kcm/ui_kcmwidget.h:464
+#, fuzzy
+msgid "Automatically scan on open"
+msgstr "自动连接该网络"
+
+#: qtcreator-build/kcm/ui_kcmwidget.h:466
 msgid "DHCP client :"
 msgstr "DHCP 客户端 :"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:440
+#: qtcreator-build/kcm/ui_kcmwidget.h:467
 msgid "Wired link detection :"
 msgstr "有线连接检测 :"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:441
+#: qtcreator-build/kcm/ui_kcmwidget.h:468
 msgid "Route table flushing :"
 msgstr "路由表更新 :"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:442
+#: qtcreator-build/kcm/ui_kcmwidget.h:469
 msgid "External programs"
 msgstr "外部程序"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:443
-msgid "WPA Supplicant "
+#: qtcreator-build/kcm/ui_kcmwidget.h:470
+msgid "Miscellaneous"
 msgstr ""
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:444
-msgid "Driver :"
-msgstr "驱动 :"
+#: qtcreator-build/kcm/ui_kcmwidget.h:471
+msgid "WPA Supplicant driver :"
+msgstr ""
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:445
-msgid "Backend"
-msgstr "后端"
-
-#: qtcreator-build/kcm/ui_kcmwidget.h:446
+#: qtcreator-build/kcm/ui_kcmwidget.h:472
 msgid "Backend :"
 msgstr "后端 :"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:447
+#: qtcreator-build/kcm/ui_kcmwidget.h:473
 msgid "Debugging"
 msgstr "调试"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:448
+#: qtcreator-build/kcm/ui_kcmwidget.h:474
 msgid "Enable debug mode"
 msgstr "启用调试模式"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:449
+#: qtcreator-build/kcm/ui_kcmwidget.h:475
 msgid "Wireless interface"
 msgstr "无线接口"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:450
+#: qtcreator-build/kcm/ui_kcmwidget.h:476
 msgid "Use dBm to measure signal strength"
 msgstr "基于 dBm 测量信号强度"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:451
+#: qtcreator-build/kcm/ui_kcmwidget.h:477
 msgid "Ping static gateways after connecting to verify association"
 msgstr "连接后 Ping 静态网关，确认关联"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:452
+#: qtcreator-build/kcm/ui_kcmwidget.h:478
 msgid "Advanced settings"
 msgstr "高级设置"
-
-#: qtcreator-build/ui_infosdialog.h:110
-msgid "Signal strength :"
-msgstr "信号强度 :"
-
-#: qtcreator-build/ui_infosdialog.h:112
-msgid "Encryption type :"
-msgstr "加密类型 :"
-
-#: qtcreator-build/ui_infosdialog.h:114
-msgid "Access point address :"
-msgstr "AP 地址 :"
-
-#: qtcreator-build/ui_infosdialog.h:116
-msgid "Mode :"
-msgstr "模式 :"
-
-#: qtcreator-build/ui_infosdialog.h:118
-msgid "Channel :"
-msgstr "频道 :"
 
 #: qtcreator-build/ui_profilemanager.h:98
 msgid "Use as default profile (overwrites any previous default)"
@@ -481,6 +585,42 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "adaptee@gmail.com"
 
-#: trayicon.cpp:35
-msgid "About"
-msgstr "关于"
+#: trayicon.cpp:61
+msgid "Connection infos"
+msgstr ""
+
+#~ msgid "Maintainer"
+#~ msgstr "维护者"
+
+#~ msgid "Channel"
+#~ msgstr "频道"
+
+#~ msgid "Key"
+#~ msgstr "密钥"
+
+#~ msgid "IP"
+#~ msgstr "IP 地址"
+
+#~ msgid "DNS domain"
+#~ msgstr "DNS 域"
+
+#~ msgid "Search domain"
+#~ msgstr "搜索域"
+
+#~ msgid "DNS 1"
+#~ msgstr "DNS 服务器 1"
+
+#~ msgid "DNS 2"
+#~ msgstr "DNS 服务器 2"
+
+#~ msgid "DNS 3"
+#~ msgstr "DNS 服务器 3"
+
+#~ msgid "Driver :"
+#~ msgstr "驱动 :"
+
+#~ msgid "Backend"
+#~ msgstr "后端"
+
+#~ msgid "About"
+#~ msgstr "关于"

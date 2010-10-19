@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-21 17:48+0200\n"
+"POT-Creation-Date: 2010-10-19 19:13+0200\n"
 "PO-Revision-Date: 2010-09-16 16:06+0200\n"
 "Last-Translator: Carlos López\n"
 "Language-Team: Spanish <musikolo at hotmail dot com>\n"
@@ -17,53 +17,123 @@ msgstr ""
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: dbushandler.cpp:144 mainwindow.cpp:174
+#: dbushandler.cpp:144 mainwindow.cpp:194
 msgid "Wired network"
 msgstr "Red cableada"
 
-#: infosdialog.cpp:26
-msgid "Network informations"
-msgstr "Información de red"
+#: infosdialog.cpp:40 infosdialog.cpp:83
+msgid "Signal strength :"
+msgstr "Potencia de la señal:"
 
-#: infosdialog.cpp:42
+#: infosdialog.cpp:46
 msgid "Unsecured"
 msgstr "Inseguro"
 
-#: kcm/wicdkcm.cpp:27
+#: infosdialog.cpp:47
+msgid "Encryption type :"
+msgstr "Tipo de cifrado:"
+
+#: infosdialog.cpp:50
+msgid "Access point address :"
+msgstr "Dirección del punto de acceso:"
+
+#: infosdialog.cpp:53
+msgid "Mode :"
+msgstr "Modo:"
+
+#: infosdialog.cpp:56 mainwindow.cpp:272
+msgid "Channel :"
+msgstr "Canal:"
+
+#: infosdialog.cpp:67 infosdialog.cpp:86
+msgid "State :"
+msgstr ""
+
+#: infosdialog.cpp:67
+#, fuzzy
+msgid "Connecting"
+msgstr "Conexión efectuada..."
+
+#: infosdialog.cpp:70 infosdialog.cpp:74
+#, fuzzy
+msgid "Connection type :"
+msgstr "Tipo de cifrado:"
+
+#: infosdialog.cpp:70
+msgctxt "Connection type :"
+msgid "Wired"
+msgstr ""
+
+#: infosdialog.cpp:71 infosdialog.cpp:77 networkpropertiesdialog.cpp:40
+msgid "IP :"
+msgstr ""
+
+#: infosdialog.cpp:74
+#, fuzzy
+msgctxt "Connection type :"
+msgid "Wireless"
+msgstr "Interfaz inalámbrico"
+
+#: infosdialog.cpp:75
+msgid "ESSID :"
+msgstr ""
+
+#: infosdialog.cpp:76
+msgid "Speed :"
+msgstr ""
+
+#: infosdialog.cpp:86 mainwindow.cpp:162 mainwindow.cpp:198
+msgid "Disconnected"
+msgstr "Desconectado"
+
+#: infosdialog.cpp:92
+msgid "Network informations"
+msgstr "Información de red"
+
+#: kcm/wicdkcm.cpp:44
 msgid "kcmwicd"
 msgstr ""
 
-#: kcm/wicdkcm.cpp:27
+#: kcm/wicdkcm.cpp:44
 #, fuzzy
 msgid "Wicd Configuration"
 msgstr "Generando la configuración WPA"
 
-#: kcm/wicdkcm.cpp:29
+#: kcm/wicdkcm.cpp:46
 msgid "(c) 2009 Dario Freddi"
 msgstr ""
 
-#: kcm/wicdkcm.cpp:31
+#: kcm/wicdkcm.cpp:48 main.cpp:44
 msgid "Dario Freddi"
 msgstr ""
 
-#: kcm/wicdkcm.cpp:31
-msgid "Maintainer"
+#: kcm/wicdkcm.cpp:48
+msgid "Original author"
 msgstr ""
 
-#: kcm/wicdkcm.cpp:62 kcm/wicdkcm.cpp:90 kcm/wicdkcm.cpp:101
-#: kcm/wicdkcm.cpp:112
+#: kcm/wicdkcm.cpp:49 main.cpp:43
+#, fuzzy
+msgid "Anthony Vital"
+msgstr "(c) 2010 Anthony Vital"
+
+#: kcm/wicdkcm.cpp:49
+msgid "Developer"
+msgstr ""
+
+#: kcm/wicdkcm.cpp:77 kcm/wicdkcm.cpp:105 kcm/wicdkcm.cpp:116
+#: kcm/wicdkcm.cpp:127
 msgid "Automatic (recommended)"
 msgstr "Automatico (recomendado)"
 
-#: kcm/wicdkcm.cpp:134
+#: kcm/wicdkcm.cpp:138
 msgid "Use default wired network profile"
 msgstr "Usar el perfil de red cableada por defecto"
 
-#: kcm/wicdkcm.cpp:135
+#: kcm/wicdkcm.cpp:139
 msgid "Prompt for wired network profile"
 msgstr "Preguntar por el perfil de red cableada"
 
-#: kcm/wicdkcm.cpp:136
+#: kcm/wicdkcm.cpp:140
 msgid "Use last wired network profile"
 msgstr "Usar el último perfil de red cableada"
 
@@ -71,7 +141,7 @@ msgstr "Usar el último perfil de red cableada"
 msgid "Wicd Client KDE"
 msgstr "Wicd Client KDE"
 
-#: main.cpp:40 mainwindow.cpp:41
+#: main.cpp:40 mainwindow.cpp:42
 msgid "Wicd client for KDE"
 msgstr "Cliente Wicd parar KDE"
 
@@ -79,226 +149,284 @@ msgstr "Cliente Wicd parar KDE"
 msgid "(c) 2010 Anthony Vital"
 msgstr "(c) 2010 Anthony Vital"
 
-#: mainwindow.cpp:48
+#: main.cpp:43
+msgid "Author"
+msgstr ""
+
+#: main.cpp:44
+msgid "Contributor and original KCM author"
+msgstr ""
+
+#: main.cpp:45
+msgid "Brieuc Roblin"
+msgstr ""
+
+#: main.cpp:45 main.cpp:46
+msgid "Contributor"
+msgstr ""
+
+#: main.cpp:46
+msgid "Yoann Laissus"
+msgstr ""
+
+#: main.cpp:47
+msgid "Gianluca Boiano"
+msgstr ""
+
+#: main.cpp:47 main.cpp:48 main.cpp:49 main.cpp:50 main.cpp:51 main.cpp:52
+msgid "Translator"
+msgstr ""
+
+#: main.cpp:48
+msgid "Jekyll Wu"
+msgstr ""
+
+#: main.cpp:49
+msgid "Carlos López"
+msgstr ""
+
+#: main.cpp:50
+msgid "Attila Szabo"
+msgstr ""
+
+#: main.cpp:51
+msgid "Márcio Moraes"
+msgstr ""
+
+#: main.cpp:52
+msgid "Pavel Fric"
+msgstr ""
+
+#: mainwindow.cpp:49
 msgid "Network"
 msgstr "Red"
 
-#: mainwindow.cpp:52 mainwindow.cpp:242
+#: mainwindow.cpp:54 mainwindow.cpp:262
 msgid "Create an ad-hoc network"
 msgstr "Crear una red ad-hoc"
 
-#: mainwindow.cpp:53 mainwindow.cpp:288
+#: mainwindow.cpp:55 mainwindow.cpp:308
 msgid "Find a hidden network"
 msgstr "Buscar redes ocultas"
 
-#: mainwindow.cpp:61
+#: mainwindow.cpp:62
 msgid "Preferences"
 msgstr "Preferencias"
 
-#: mainwindow.cpp:63
+#: mainwindow.cpp:64
 msgid "Reload"
 msgstr "Recargar"
 
-#: mainwindow.cpp:64
+#: mainwindow.cpp:65 networkitemdelegate.cpp:175
 msgid "Disconnect"
 msgstr "Desconectar"
 
-#: mainwindow.cpp:73
+#: mainwindow.cpp:76
 msgid "Abort"
 msgstr "Abortar"
 
-#: mainwindow.cpp:91
+#: mainwindow.cpp:96
 msgid "Putting interface down..."
 msgstr "Desactivando el interfaz..."
 
-#: mainwindow.cpp:92
+#: mainwindow.cpp:97
 msgid "Resetting IP address..."
 msgstr "Reiniciando la dirección IP..."
 
-#: mainwindow.cpp:93
+#: mainwindow.cpp:98
 msgid "Putting interface up..."
 msgstr "Activando el interfaz..."
 
-#: mainwindow.cpp:94
+#: mainwindow.cpp:99
 msgid "Generating PSK..."
 msgstr "Generando la clave PSK..."
 
-#: mainwindow.cpp:95
+#: mainwindow.cpp:100
 msgid "Connection Failed: Bad password."
 msgstr "Conexión fallida: Contraseña errónea."
 
-#: mainwindow.cpp:96
+#: mainwindow.cpp:101
 msgid "Generating WPA configuration"
 msgstr "Generando la configuración WPA"
 
-#: mainwindow.cpp:97
+#: mainwindow.cpp:102
 msgid "Validating authentication..."
 msgstr "Validando la autentificación..."
 
-#: mainwindow.cpp:98
+#: mainwindow.cpp:103
 msgid "Obtaining IP address..."
 msgstr "Obteniendo la dirección IP..."
 
-#: mainwindow.cpp:99
+#: mainwindow.cpp:104
 msgid "Done connecting..."
 msgstr "Conexión efectuada..."
 
-#: mainwindow.cpp:100
+#: mainwindow.cpp:105
 msgid "Connection Failed: Unable to Get IP Address"
 msgstr "Conexión fallida: No ha sido posible obtener la dirección IP"
 
-#: mainwindow.cpp:101
+#: mainwindow.cpp:106
 msgid "Connection Failed: No DHCP offers received."
 msgstr "Conexión fallida: No se ha obtenido respuesta DHCP."
 
-#: mainwindow.cpp:102
+#: mainwindow.cpp:107
 msgid "Verifying access point association..."
 msgstr "Verificando la asociación del punto de acceso..."
 
-#: mainwindow.cpp:103
+#: mainwindow.cpp:108
 msgid "Connection failed: Could not contact the wireless access point."
 msgstr "Conexión fallida : No se ha podido contactar con el punto de acceso."
 
-#: mainwindow.cpp:104
+#: mainwindow.cpp:109
 msgid "Setting static IP addresses..."
 msgstr "Configurando las direcciones IPs estáticas..."
 
-#: mainwindow.cpp:105
+#: mainwindow.cpp:110
 msgid "Aborted"
 msgstr "Abortado"
 
-#: mainwindow.cpp:106
+#: mainwindow.cpp:111
 msgid "Failed"
 msgstr "Fallido"
 
-#: mainwindow.cpp:136
+#: mainwindow.cpp:156
 msgid "Connected to wired network"
 msgstr "Conectado a la red cableada"
 
-#: mainwindow.cpp:139
+#: mainwindow.cpp:159
 msgid "Connected to wireless network"
 msgstr "Conectado a la red inalámbrica"
 
-#: mainwindow.cpp:142 mainwindow.cpp:178
-msgid "Disconnected"
-msgstr "Desconectado"
-
-#: mainwindow.cpp:153
+#: mainwindow.cpp:173
 msgid "Connected to wired network (IP : %1)"
 msgstr "Conectado a la red cableada (IP : %1)"
 
-#: mainwindow.cpp:164
+#: mainwindow.cpp:184
 msgid "Connected to %1 - %2%3 (IP : %4)"
 msgstr "Conectado a %1 - %2%3 (IP : %4)"
 
-#: mainwindow.cpp:252
-msgid "Channel"
-msgstr "Canal"
-
-#: mainwindow.cpp:254
+#: mainwindow.cpp:274
 msgid "Activate Internet Connection Sharing"
 msgstr "Activar la compartición de la conexión de red"
 
-#: mainwindow.cpp:256
+#: mainwindow.cpp:276
 msgid "Use Encryption (WEP only)"
 msgstr "Usar cifrado (sólo WEP)"
 
-#: mainwindow.cpp:257
-msgid "Key"
-msgstr "Clave"
+#: mainwindow.cpp:277
+msgid "Key :"
+msgstr ""
 
-#: mainwindow.cpp:289
+#: mainwindow.cpp:309
 msgid "Hidden Network ESSID"
 msgstr "ESSID de la red oculta"
 
-#: networkpropertiesdialog.cpp:36
+#: networkitemdelegate.cpp:175
+#, fuzzy
+msgid "Connect"
+msgstr "Desconectar"
+
+#: networkitemdelegate.cpp:176
+msgid "Properties"
+msgstr ""
+
+#: networkitemdelegate.cpp:177
+#, fuzzy
+msgid "Informations"
+msgstr "Información de red"
+
+#: networkitemdelegate.cpp:178 profilemanager.cpp:31
+msgid "Manage profiles"
+msgstr "Administrar los perfiles"
+
+#: networkpropertiesdialog.cpp:34
 msgid "OK"
 msgstr "OK"
 
-#: networkpropertiesdialog.cpp:41
+#: networkpropertiesdialog.cpp:39
 msgid "Use Static IPs"
 msgstr "Usar direcciones IPs estáticas"
 
-#: networkpropertiesdialog.cpp:42
-msgid "IP"
-msgstr "IP"
-
-#: networkpropertiesdialog.cpp:43
-msgid "Netmask"
+#: networkpropertiesdialog.cpp:41
+#, fuzzy
+msgid "Netmask :"
 msgstr "Máscara de red"
 
-#: networkpropertiesdialog.cpp:44
-msgid "Gateway"
+#: networkpropertiesdialog.cpp:42
+#, fuzzy
+msgid "Gateway :"
 msgstr "Pasarela"
 
-#: networkpropertiesdialog.cpp:45
+#: networkpropertiesdialog.cpp:43
 msgid "Use Static DNS"
 msgstr "Usar servidor DNS estático"
 
-#: networkpropertiesdialog.cpp:46 qtcreator-build/kcm/ui_kcmwidget.h:429
+#: networkpropertiesdialog.cpp:44 qtcreator-build/kcm/ui_kcmwidget.h:451
 msgid "Use global DNS servers"
 msgstr "Usar servidores DNS globales"
 
-#: networkpropertiesdialog.cpp:47
-msgid "DNS domain"
-msgstr "Dominio DNS"
+#: networkpropertiesdialog.cpp:45 qtcreator-build/kcm/ui_kcmwidget.h:452
+msgid "DNS domain :"
+msgstr "Dominio DNS :"
 
-#: networkpropertiesdialog.cpp:48
-msgid "Search domain"
-msgstr "Dominio de búsqueda"
+#: networkpropertiesdialog.cpp:46 qtcreator-build/kcm/ui_kcmwidget.h:453
+msgid "Search domain :"
+msgstr "Dominio de búsqueda :"
 
-#: networkpropertiesdialog.cpp:49
-msgid "DNS 1"
-msgstr "DNS 1"
+#: networkpropertiesdialog.cpp:47 qtcreator-build/kcm/ui_kcmwidget.h:454
+msgid "DNS server 1 :"
+msgstr "Servidor DNS 1 :"
+
+#: networkpropertiesdialog.cpp:48 qtcreator-build/kcm/ui_kcmwidget.h:455
+msgid "DNS server 2 :"
+msgstr "Servidor DNS 2 :"
+
+#: networkpropertiesdialog.cpp:49 qtcreator-build/kcm/ui_kcmwidget.h:456
+msgid "DNS server 3 :"
+msgstr "Servidor DNS 3 :"
 
 #: networkpropertiesdialog.cpp:50
-msgid "DNS 2"
-msgstr "DNS 2"
-
-#: networkpropertiesdialog.cpp:51
-msgid "DNS 3"
-msgstr "DNS 3"
-
-#: networkpropertiesdialog.cpp:53
-msgid "DHCP Hostname"
+#, fuzzy
+msgid "DHCP Hostname :"
 msgstr "DHCP Hostname"
 
-#: networkpropertiesdialog.cpp:56
+#: networkpropertiesdialog.cpp:55
 msgid "Automatically connect to this network"
 msgstr "Conectar automáticamente a esta red"
 
-#: networkpropertiesdialog.cpp:57
+#: networkpropertiesdialog.cpp:56
 msgid "Use these settings for all networks sharing this essid"
 msgstr ""
 "Utilizar esta configuración para todas las redes que compartan este ESSID"
 
-#: networkpropertiesdialog.cpp:58
+#: networkpropertiesdialog.cpp:57
 msgid "Use Encryption"
 msgstr "Usar cifrado"
 
-#: networkpropertiesdialog.cpp:62
+#: networkpropertiesdialog.cpp:61
 msgid "Scripts"
 msgstr "Scripts"
 
-#: networkpropertiesdialog.cpp:179
+#: networkpropertiesdialog.cpp:158
+#, fuzzy
+msgid "Invalid IP address entered."
+msgstr "Dirección inválida en %1"
+
+#: networkpropertiesdialog.cpp:195
 msgid "Global DNS has not been enabled in general preferences."
 msgstr "El servidor DNS no ha sido activado en la opciones generales."
 
-#: networkpropertiesdialog.cpp:218 networkpropertiesdialog.cpp:226
+#: networkpropertiesdialog.cpp:234 networkpropertiesdialog.cpp:242
 msgid "Invalid adress in %1"
 msgstr "Dirección inválida en %1"
 
-#: networkpropertiesdialog.cpp:239
+#: networkpropertiesdialog.cpp:255
 msgid "%1 is required."
 msgstr "Se requiere %1."
 
-#: networkpropertiesdialog.cpp:244
+#: networkpropertiesdialog.cpp:260
 msgid "This network needs an encryption."
 msgstr "Esta red usa cifrado."
-
-#: profilemanager.cpp:31
-msgid "Manage profiles"
-msgstr "Administrar los perfiles"
 
 #: profilemanager.cpp:73
 msgid "Add a profile"
@@ -308,141 +436,117 @@ msgstr "Añadir un perfil"
 msgid "New profile name:"
 msgstr "Nombre del nuevo perfil:"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:423
+#: qtcreator-build/kcm/ui_kcmwidget.h:445
 msgid "Network interfaces"
 msgstr "Interfaces de red"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:424
+#: qtcreator-build/kcm/ui_kcmwidget.h:446
 msgid "Wireless interface :"
 msgstr "Interfaz inalámbrico :"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:425
+#: qtcreator-build/kcm/ui_kcmwidget.h:447
 msgid "Wired interface :"
 msgstr "Interfaz cableado :"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:426
+#: qtcreator-build/kcm/ui_kcmwidget.h:448
 msgid "Always show wired interface"
 msgstr "Mostrar siempre los interfaces cableados"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:427
+#: qtcreator-build/kcm/ui_kcmwidget.h:449
 msgid "Always switch to a wired connection when available"
 msgstr "Usar siempre que sea posible una conexón cableada"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:428
+#: qtcreator-build/kcm/ui_kcmwidget.h:450
 msgid "Global DNS servers"
 msgstr "Servidores DNS globales"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:430
-msgid "DNS domain :"
-msgstr "Dominio DNS :"
-
-#: qtcreator-build/kcm/ui_kcmwidget.h:431
-msgid "Search domain :"
-msgstr "Dominio de búsqueda :"
-
-#: qtcreator-build/kcm/ui_kcmwidget.h:432
-msgid "DNS server 1 :"
-msgstr "Servidor DNS 1 :"
-
-#: qtcreator-build/kcm/ui_kcmwidget.h:433
-msgid "DNS server 2 :"
-msgstr "Servidor DNS 2 :"
-
-#: qtcreator-build/kcm/ui_kcmwidget.h:434
-msgid "DNS server 3 :"
-msgstr "Servidor DNS 3 :"
-
-#: qtcreator-build/kcm/ui_kcmwidget.h:435
+#: qtcreator-build/kcm/ui_kcmwidget.h:457
+#: qtcreator-build/kcm/ui_kcmwidget.h:465
 msgid "Other"
 msgstr "Otro"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:436
+#: qtcreator-build/kcm/ui_kcmwidget.h:458
 msgid "Wired automatic connection :"
 msgstr "Conexión cableada automática :"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:437
+#: qtcreator-build/kcm/ui_kcmwidget.h:459
 msgid "Automatically reconnect on network connection loss"
 msgstr "Reconectar automáticamente al perder la conexión de red"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:438
+#: qtcreator-build/kcm/ui_kcmwidget.h:460
 msgid "General settings"
 msgstr "Configuración general"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:439
+#: qtcreator-build/kcm/ui_kcmwidget.h:461
+#, fuzzy
+msgid "Client settings"
+msgstr "Configuración general"
+
+#: qtcreator-build/kcm/ui_kcmwidget.h:462
+msgid "Show tooltips"
+msgstr ""
+
+#: qtcreator-build/kcm/ui_kcmwidget.h:463
+#, fuzzy
+msgid "Show signal strength"
+msgstr "Potencia de la señal:"
+
+#: qtcreator-build/kcm/ui_kcmwidget.h:464
+#, fuzzy
+msgid "Automatically scan on open"
+msgstr "Conectar automáticamente a esta red"
+
+#: qtcreator-build/kcm/ui_kcmwidget.h:466
 msgid "DHCP client :"
 msgstr "Cliente DHCP :"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:440
+#: qtcreator-build/kcm/ui_kcmwidget.h:467
 msgid "Wired link detection :"
 msgstr "Detección de red cableada :"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:441
+#: qtcreator-build/kcm/ui_kcmwidget.h:468
 msgid "Route table flushing :"
 msgstr "Purgar la tabla de enrutamiento :"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:442
+#: qtcreator-build/kcm/ui_kcmwidget.h:469
 msgid "External programs"
 msgstr "Programas externos"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:443
-msgid "WPA Supplicant "
+#: qtcreator-build/kcm/ui_kcmwidget.h:470
+msgid "Miscellaneous"
 msgstr ""
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:444
-msgid "Driver :"
-msgstr "Controlador :"
+#: qtcreator-build/kcm/ui_kcmwidget.h:471
+msgid "WPA Supplicant driver :"
+msgstr ""
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:445
-msgid "Backend"
-msgstr "Backend"
-
-#: qtcreator-build/kcm/ui_kcmwidget.h:446
+#: qtcreator-build/kcm/ui_kcmwidget.h:472
 msgid "Backend :"
 msgstr "Backend :"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:447
+#: qtcreator-build/kcm/ui_kcmwidget.h:473
 msgid "Debugging"
 msgstr "Depurando"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:448
+#: qtcreator-build/kcm/ui_kcmwidget.h:474
 msgid "Enable debug mode"
 msgstr "Activar el modo de depuración"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:449
+#: qtcreator-build/kcm/ui_kcmwidget.h:475
 msgid "Wireless interface"
 msgstr "Interfaz inalámbrico"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:450
+#: qtcreator-build/kcm/ui_kcmwidget.h:476
 msgid "Use dBm to measure signal strength"
 msgstr "Utilizar dBm para medir la potencia de la señal"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:451
+#: qtcreator-build/kcm/ui_kcmwidget.h:477
 msgid "Ping static gateways after connecting to verify association"
 msgstr "Hacer ping a las pasarelas estáticas para verificar la asociación"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:452
+#: qtcreator-build/kcm/ui_kcmwidget.h:478
 msgid "Advanced settings"
 msgstr "Opciones avanzadas"
-
-#: qtcreator-build/ui_infosdialog.h:110
-msgid "Signal strength :"
-msgstr "Potencia de la señal:"
-
-#: qtcreator-build/ui_infosdialog.h:112
-msgid "Encryption type :"
-msgstr "Tipo de cifrado:"
-
-#: qtcreator-build/ui_infosdialog.h:114
-msgid "Access point address :"
-msgstr "Dirección del punto de acceso:"
-
-#: qtcreator-build/ui_infosdialog.h:116
-msgid "Mode :"
-msgstr "Modo:"
-
-#: qtcreator-build/ui_infosdialog.h:118
-msgid "Channel :"
-msgstr "Canal:"
 
 #: qtcreator-build/ui_profilemanager.h:98
 msgid "Use as default profile (overwrites any previous default)"
@@ -483,9 +587,42 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "musikolo at hotmail dot com"
 
-#: trayicon.cpp:35
-msgid "About"
-msgstr "Acerca de"
+#: trayicon.cpp:61
+msgid "Connection infos"
+msgstr ""
+
+#~ msgid "Channel"
+#~ msgstr "Canal"
+
+#~ msgid "Key"
+#~ msgstr "Clave"
+
+#~ msgid "IP"
+#~ msgstr "IP"
+
+#~ msgid "DNS domain"
+#~ msgstr "Dominio DNS"
+
+#~ msgid "Search domain"
+#~ msgstr "Dominio de búsqueda"
+
+#~ msgid "DNS 1"
+#~ msgstr "DNS 1"
+
+#~ msgid "DNS 2"
+#~ msgstr "DNS 2"
+
+#~ msgid "DNS 3"
+#~ msgstr "DNS 3"
+
+#~ msgid "Driver :"
+#~ msgstr "Controlador :"
+
+#~ msgid "Backend"
+#~ msgstr "Backend"
+
+#~ msgid "About"
+#~ msgstr "Acerca de"
 
 #~ msgid "Display notifications about connection status"
 #~ msgstr "Mostrar las notificaciones del estado de la conexión"
