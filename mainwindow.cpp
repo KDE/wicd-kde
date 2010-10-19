@@ -21,9 +21,9 @@
 #include "global.h"
 #include "labelentry.h"
 
-#include <QToolBar>
+#include <KToolBar>
 #include <QToolButton>
-#include <QMenu>
+#include <KMenu>
 
 #include <QVBoxLayout>
 #include <QCheckBox>
@@ -47,15 +47,15 @@ MainWindow::MainWindow()
     QToolButton *moreButton = new QToolButton();
     moreButton->setIcon(KIcon("network-wireless"));
     moreButton->setText(i18n("Network"));
+    moreButton->setPopupMode(QToolButton::InstantPopup);
     moreButton->setToolButtonStyle(Qt::ToolButtonFollowStyle);
 
-    QMenu *moreMenu = new QMenu();
+    KMenu *moreMenu = new KMenu();
     moreMenu->addAction(KIcon("list-add"), i18n("Create an ad-hoc network"), this, SLOT(createAdhocDialog()));
     moreMenu->addAction(KIcon("edit-find"), i18n("Find a hidden network"), this, SLOT(findHiddenDialog()));
     moreButton->setMenu(moreMenu);
-    moreButton->setPopupMode(QToolButton::InstantPopup);
 
-    QToolBar *toolbar = new QToolBar(this);
+    KToolBar *toolbar = new KToolBar(this);
     toolbar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
     toolbar->addWidget(moreButton);
     toolbar->addSeparator();
@@ -63,6 +63,8 @@ MainWindow::MainWindow()
     toolbar->addSeparator();
     toolbar->addAction(KIcon("view-refresh"), i18n("Reload"), DBusHandler::instance(), SLOT(scan()));
     toolbar->addAction(KIcon("network-disconnect"), i18n("Disconnect"), DBusHandler::instance(), SLOT(disconnect()));
+    connect(toolbar, SIGNAL(toolButtonStyleChanged(Qt::ToolButtonStyle)),
+            moreButton, SLOT(setToolButtonStyle(Qt::ToolButtonStyle)));
 
     addToolBar(toolbar);
 
