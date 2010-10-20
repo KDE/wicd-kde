@@ -47,44 +47,41 @@ msgstr "频道 :"
 
 #: infosdialog.cpp:67 infosdialog.cpp:86
 msgid "State :"
-msgstr ""
+msgstr "状态 :"
 
 #: infosdialog.cpp:67
-#, fuzzy
 msgid "Connecting"
-msgstr "连接完毕 ..."
+msgstr "连接中 ..."
 
 #: infosdialog.cpp:70 infosdialog.cpp:74
-#, fuzzy
 msgid "Connection type :"
-msgstr "加密类型 :"
+msgstr "连接类型 :"
 
 #: infosdialog.cpp:70
 msgctxt "Connection type :"
 msgid "Wired"
-msgstr ""
+msgstr "有线接口"
 
 #: infosdialog.cpp:71 infosdialog.cpp:77 networkpropertiesdialog.cpp:40
 msgid "IP :"
-msgstr ""
+msgstr "IP 地址 :"
 
 #: infosdialog.cpp:74
-#, fuzzy
 msgctxt "Connection type :"
 msgid "Wireless"
 msgstr "无线接口"
 
 #: infosdialog.cpp:75
 msgid "ESSID :"
-msgstr ""
+msgstr "ESSID :"
 
 #: infosdialog.cpp:76
 msgid "Speed :"
-msgstr ""
+msgstr "速度 :"
 
 #: infosdialog.cpp:86 mainwindow.cpp:162 mainwindow.cpp:198
 msgid "Disconnected"
-msgstr "连接已断开"
+msgstr "已断开"
 
 #: infosdialog.cpp:92
 msgid "Network informations"
@@ -95,7 +92,6 @@ msgid "kcmwicd"
 msgstr "kcmwicd"
 
 #: kcm/wicdkcm.cpp:44
-#, fuzzy
 msgid "Wicd Configuration"
 msgstr "Wicd 设置"
 
@@ -109,16 +105,15 @@ msgstr "Dario Freddi"
 
 #: kcm/wicdkcm.cpp:48
 msgid "Original author"
-msgstr ""
+msgstr "原作者"
 
 #: kcm/wicdkcm.cpp:49 main.cpp:43
-#, fuzzy
 msgid "Anthony Vital"
-msgstr "(c) 2010 Anthony Vital"
+msgstr "Anthony Vital"
 
 #: kcm/wicdkcm.cpp:49
 msgid "Developer"
-msgstr ""
+msgstr "开发者"
 
 #: kcm/wicdkcm.cpp:77 kcm/wicdkcm.cpp:105 kcm/wicdkcm.cpp:116
 #: kcm/wicdkcm.cpp:127
@@ -151,11 +146,11 @@ msgstr "(c) 2010 Anthony Vital"
 
 #: main.cpp:43
 msgid "Author"
-msgstr ""
+msgstr "作者"
 
 #: main.cpp:44
 msgid "Contributor and original KCM author"
-msgstr ""
+msgstr "贡献者和 KCM 的作者"
 
 #: main.cpp:45
 msgid "Brieuc Roblin"
@@ -163,7 +158,7 @@ msgstr ""
 
 #: main.cpp:45 main.cpp:46
 msgid "Contributor"
-msgstr ""
+msgstr "贡献者"
 
 #: main.cpp:46
 msgid "Yoann Laissus"
@@ -175,7 +170,7 @@ msgstr ""
 
 #: main.cpp:47 main.cpp:48 main.cpp:49 main.cpp:50 main.cpp:51 main.cpp:52
 msgid "Translator"
-msgstr ""
+msgstr "翻译者"
 
 #: main.cpp:48
 msgid "Jekyll Wu"
@@ -315,23 +310,21 @@ msgstr "启用加密(只支持WEP)"
 
 #: mainwindow.cpp:277
 msgid "Key :"
-msgstr ""
+msgstr "密钥 :"
 
 #: mainwindow.cpp:309
 msgid "Hidden Network ESSID"
 msgstr "隐藏网络的 ESSID"
 
 #: networkitemdelegate.cpp:175
-#, fuzzy
 msgid "Connect"
-msgstr "断开"
+msgstr "连接"
 
 #: networkitemdelegate.cpp:176
 msgid "Properties"
-msgstr ""
+msgstr "属性"
 
 #: networkitemdelegate.cpp:177
-#, fuzzy
 msgid "Informations"
 msgstr "网络信息"
 
@@ -348,14 +341,12 @@ msgid "Use Static IPs"
 msgstr "使用静态 IP"
 
 #: networkpropertiesdialog.cpp:41
-#, fuzzy
 msgid "Netmask :"
-msgstr "子网掩码"
+msgstr "子网掩码 :"
 
 #: networkpropertiesdialog.cpp:42
-#, fuzzy
 msgid "Gateway :"
-msgstr "网关"
+msgstr "网关 :"
 
 #: networkpropertiesdialog.cpp:43
 msgid "Use Static DNS"
@@ -386,9 +377,8 @@ msgid "DNS server 3 :"
 msgstr "DNS 服务器 3 :"
 
 #: networkpropertiesdialog.cpp:50
-#, fuzzy
 msgid "DHCP Hostname :"
-msgstr "DHCP 主机名"
+msgstr "DHCP 主机名 :"
 
 #: networkpropertiesdialog.cpp:55
 msgid "Automatically connect to this network"
@@ -407,9 +397,8 @@ msgid "Scripts"
 msgstr "脚本"
 
 #: networkpropertiesdialog.cpp:158
-#, fuzzy
 msgid "Invalid IP address entered."
-msgstr "非法地址: %1"
+msgstr "输入的 IP 地址不合法"
 
 #: networkpropertiesdialog.cpp:195
 msgid "Global DNS has not been enabled in general preferences."
@@ -477,23 +466,20 @@ msgid "General settings"
 msgstr "基本设置"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:461
-#, fuzzy
 msgid "Client settings"
-msgstr "基本设置"
+msgstr "前端设置"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:462
 msgid "Show tooltips"
-msgstr ""
+msgstr "显示提示信息"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:463
-#, fuzzy
 msgid "Show signal strength"
-msgstr "信号强度 :"
+msgstr "显示信号强度"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:464
-#, fuzzy
 msgid "Automatically scan on open"
-msgstr "自动连接该网络"
+msgstr "打开后自动扫描网络"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:466
 msgid "DHCP client :"
@@ -513,11 +499,11 @@ msgstr "外部程序"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:470
 msgid "Miscellaneous"
-msgstr ""
+msgstr "杂项"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:471
 msgid "WPA Supplicant driver :"
-msgstr ""
+msgstr "WPA Supplicant 驱动 :"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:472
 msgid "Backend :"
@@ -587,7 +573,7 @@ msgstr "adaptee@gmail.com"
 
 #: trayicon.cpp:61
 msgid "Connection infos"
-msgstr ""
+msgstr "连接信息"
 
 #~ msgid "Maintainer"
 #~ msgstr "维护者"

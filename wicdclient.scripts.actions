@@ -2,9 +2,11 @@
 Name=Read scripts
 Name[fr]=Lire les scripts
 Name[cs]=Číst skripty
+Name[zh_CN]=读取脚本
 Description=Requesting root privileges to read scripts
 Description[fr]=Lire les scripts requiert les privilèges du superutilisateur
 Description[cs]=Čtení skriptů vyžaduje oprávnění superuživatele
+Description[zh_CN]=请求 root 特权，以读取脚本
 Policy=auth_admin
 Persistence=session
 
@@ -12,8 +14,10 @@ Persistence=session
 Name=Save scripts
 Name[fr]=Enregistrer les scripts
 Name[cs]=Uložit skripty
+Name[zh_CN]=保存脚本
 Description=Requesting root privileges to save scripts
 Description[fr]=Enregistrer les scripts requiert les privilèges du superutilisateur
 Description[cs]=Uložení skriptů vyžaduje oprávnění superuživatele
+Description[zh_CN]=请求 root 特权，以保存脚本
 Policy=auth_admin
 Persistence=session
