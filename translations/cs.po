@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-10-19 19:13+0200\n"
-"PO-Revision-Date: 2010-09-27 12:26+0200\n"
-"Last-Translator: Pavel Fric <fripohled@blogspot.com>\n"
+"PO-Revision-Date: 2010-10-20 06:15+0200\n"
+"Last-Translator: Pavel Fric\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 1.1\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: dbushandler.cpp:144 mainwindow.cpp:194
@@ -48,40 +48,37 @@ msgstr "Kanál:"
 
 #: infosdialog.cpp:67 infosdialog.cpp:86
 msgid "State :"
-msgstr ""
+msgstr "Stav:"
 
 #: infosdialog.cpp:67
-#, fuzzy
 msgid "Connecting"
-msgstr "Připojování dokončeno..."
+msgstr "Připojuje se"
 
 #: infosdialog.cpp:70 infosdialog.cpp:74
-#, fuzzy
 msgid "Connection type :"
-msgstr "Typ šifrování:"
+msgstr "Typ připojení:"
 
 #: infosdialog.cpp:70
 msgctxt "Connection type :"
 msgid "Wired"
-msgstr ""
+msgstr "Drátový"
 
 #: infosdialog.cpp:71 infosdialog.cpp:77 networkpropertiesdialog.cpp:40
 msgid "IP :"
-msgstr ""
+msgstr "IP:"
 
 #: infosdialog.cpp:74
-#, fuzzy
 msgctxt "Connection type :"
 msgid "Wireless"
-msgstr "Rozhraní bezdrátové sítě"
+msgstr "Bezdrátový"
 
 #: infosdialog.cpp:75
 msgid "ESSID :"
-msgstr ""
+msgstr "ESSID:"
 
 #: infosdialog.cpp:76
 msgid "Speed :"
-msgstr ""
+msgstr "Rychlost:"
 
 #: infosdialog.cpp:86 mainwindow.cpp:162 mainwindow.cpp:198
 msgid "Disconnected"
@@ -109,16 +106,15 @@ msgstr "Dario Freddi"
 
 #: kcm/wicdkcm.cpp:48
 msgid "Original author"
-msgstr ""
+msgstr "Původní autor"
 
 #: kcm/wicdkcm.cpp:49 main.cpp:43
-#, fuzzy
 msgid "Anthony Vital"
-msgstr "(c) 2010 Anthony Vital"
+msgstr "Anthony Vital"
 
 #: kcm/wicdkcm.cpp:49
 msgid "Developer"
-msgstr ""
+msgstr "Vývojář"
 
 #: kcm/wicdkcm.cpp:77 kcm/wicdkcm.cpp:105 kcm/wicdkcm.cpp:116
 #: kcm/wicdkcm.cpp:127
@@ -151,51 +147,51 @@ msgstr "(c) 2010 Anthony Vital"
 
 #: main.cpp:43
 msgid "Author"
-msgstr ""
+msgstr "Autor"
 
 #: main.cpp:44
 msgid "Contributor and original KCM author"
-msgstr ""
+msgstr "Přispěvatel a původní autor KCM"
 
 #: main.cpp:45
 msgid "Brieuc Roblin"
-msgstr ""
+msgstr "Brieuc Roblin"
 
 #: main.cpp:45 main.cpp:46
 msgid "Contributor"
-msgstr ""
+msgstr "Přispěvatel"
 
 #: main.cpp:46
 msgid "Yoann Laissus"
-msgstr ""
+msgstr "Yoann Laissus"
 
 #: main.cpp:47
 msgid "Gianluca Boiano"
-msgstr ""
+msgstr "Gianluca Boiano"
 
 #: main.cpp:47 main.cpp:48 main.cpp:49 main.cpp:50 main.cpp:51 main.cpp:52
 msgid "Translator"
-msgstr ""
+msgstr "Překladatel"
 
 #: main.cpp:48
 msgid "Jekyll Wu"
-msgstr ""
+msgstr "Jekyll Wu"
 
 #: main.cpp:49
 msgid "Carlos López"
-msgstr ""
+msgstr "Carlos López"
 
 #: main.cpp:50
 msgid "Attila Szabo"
-msgstr ""
+msgstr "Attila Szabo"
 
 #: main.cpp:51
 msgid "Márcio Moraes"
-msgstr ""
+msgstr "Márcio Moraes"
 
 #: main.cpp:52
 msgid "Pavel Fric"
-msgstr ""
+msgstr "Pavel Fric"
 
 #: mainwindow.cpp:49
 msgid "Network"
@@ -317,25 +313,23 @@ msgstr "Použít šifrování (pouze WEP)"
 
 #: mainwindow.cpp:277
 msgid "Key :"
-msgstr ""
+msgstr "Klíč:"
 
 #: mainwindow.cpp:309
 msgid "Hidden Network ESSID"
 msgstr "ESSID skryté sítě"
 
 #: networkitemdelegate.cpp:175
-#, fuzzy
 msgid "Connect"
-msgstr "Odpojit"
+msgstr "Spojit"
 
 #: networkitemdelegate.cpp:176
 msgid "Properties"
-msgstr ""
+msgstr "Vlastnosti"
 
 #: networkitemdelegate.cpp:177
-#, fuzzy
 msgid "Informations"
-msgstr "Informace o síti"
+msgstr "Informace"
 
 #: networkitemdelegate.cpp:178 profilemanager.cpp:31
 msgid "Manage profiles"
@@ -350,14 +344,12 @@ msgid "Use Static IPs"
 msgstr "Použít statické IP"
 
 #: networkpropertiesdialog.cpp:41
-#, fuzzy
 msgid "Netmask :"
-msgstr "Síťová maska"
+msgstr "Síťová maska:"
 
 #: networkpropertiesdialog.cpp:42
-#, fuzzy
 msgid "Gateway :"
-msgstr "Vstupní brána"
+msgstr "Brána:"
 
 #: networkpropertiesdialog.cpp:43
 msgid "Use Static DNS"
@@ -388,9 +380,8 @@ msgid "DNS server 3 :"
 msgstr "Server DNS 3:"
 
 #: networkpropertiesdialog.cpp:50
-#, fuzzy
 msgid "DHCP Hostname :"
-msgstr "Název hostitele DHCP"
+msgstr "Název hostitele DHCP:"
 
 #: networkpropertiesdialog.cpp:55
 msgid "Automatically connect to this network"
@@ -409,9 +400,8 @@ msgid "Scripts"
 msgstr "Skripty"
 
 #: networkpropertiesdialog.cpp:158
-#, fuzzy
 msgid "Invalid IP address entered."
-msgstr "Neplatná adresa v %1"
+msgstr "Zadána neplatná adresa IP."
 
 #: networkpropertiesdialog.cpp:195
 msgid "Global DNS has not been enabled in general preferences."
@@ -480,23 +470,20 @@ msgid "General settings"
 msgstr "Obecná nastavení"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:461
-#, fuzzy
 msgid "Client settings"
-msgstr "Obecná nastavení"
+msgstr "Nastavení klienta"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:462
 msgid "Show tooltips"
-msgstr ""
+msgstr "Ukázat nástrojové rady"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:463
-#, fuzzy
 msgid "Show signal strength"
-msgstr "Síla signálu:"
+msgstr "Ukázat sílu signálu"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:464
-#, fuzzy
 msgid "Automatically scan on open"
-msgstr "Automaticky se připojit k této síti"
+msgstr "Prohledat automaticky při otevření"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:466
 msgid "DHCP client :"
@@ -516,12 +503,11 @@ msgstr "Vnější programy"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:470
 msgid "Miscellaneous"
-msgstr ""
+msgstr "Různé"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:471
-#, fuzzy
 msgid "WPA Supplicant driver :"
-msgstr "Žadatel WPA "
+msgstr "Ovladač žadatele WPA:"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:472
 msgid "Backend :"
@@ -592,7 +578,7 @@ msgstr "fripohled.blogspot.com"
 
 #: trayicon.cpp:61
 msgid "Connection infos"
-msgstr ""
+msgstr "Informace o spojení"
 
 #~ msgid "Maintainer"
 #~ msgstr "Správce"

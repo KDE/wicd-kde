@@ -5,6 +5,7 @@ Type=Application
 Terminal=false
 Icon=network-wireless
 GenericName=Wicd client
+GenericName[cs]=Klient Wicd
 GenericName[fr]=Client Wicd
 GenericName[es]=Cliente Wicd
 GenericName[zh_CN]=Wicd KDE 前端
