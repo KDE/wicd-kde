@@ -11,10 +11,12 @@ X-KDE-System-Settings-Parent-Category=network-settings
 
 Name=Wicd preferences
 Name[fr]=Préférences Wicd
+Name[it]=Preferenze Wicd
 Name[zh_CN]=设置 Wicd
 
 Comment=System-wide preferences for the Wicd daemon
 Comment[fr]=Préférences système pour le démon Wicd
+Comment[it]=Preferenze di sistema per il demone Wicd
 Comment[zh_CN]=Wicd 后端的系统全局设置
 
 X-KDE-Keywords=wicd,network,wireless,wired,connection
