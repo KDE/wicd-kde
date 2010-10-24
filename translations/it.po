@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the Wicd Client KDE package.
-# Anthony Vital <anthony.vital@gmail.com>, 2010.
 #
+# Anthony Vital <anthony.vital@gmail.com>, 2010.
+# Gianluca Boiano <morf3089@gmail.com>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-10-19 19:13+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2010-10-22 21:47+0200\n"
 "Last-Translator: Gianluca Boiano <morf3089@gmail.com>\n"
 "Language-Team: Italian <morf3089@gmail.com>\n"
 "Language: Italian\n"
@@ -16,6 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Language: it_IT\n"
+"X-Generator: Lokalize 1.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: dbushandler.cpp:144 mainwindow.cpp:194
 msgid "Wired network"
@@ -47,32 +49,29 @@ msgstr "Canale :"
 
 #: infosdialog.cpp:67 infosdialog.cpp:86
 msgid "State :"
-msgstr ""
+msgstr "Stato :"
 
 #: infosdialog.cpp:67
-#, fuzzy
 msgid "Connecting"
-msgstr "Connessione effettuata..."
+msgstr "Connessione"
 
 #: infosdialog.cpp:70 infosdialog.cpp:74
-#, fuzzy
 msgid "Connection type :"
-msgstr "Cifratura :"
+msgstr "Tipo di connessione :"
 
 #: infosdialog.cpp:70
 msgctxt "Connection type :"
 msgid "Wired"
-msgstr ""
+msgstr "Rete cablata"
 
 #: infosdialog.cpp:71 infosdialog.cpp:77 networkpropertiesdialog.cpp:40
 msgid "IP :"
 msgstr ""
 
 #: infosdialog.cpp:74
-#, fuzzy
 msgctxt "Connection type :"
 msgid "Wireless"
-msgstr "Interfaccia wireless"
+msgstr ""
 
 #: infosdialog.cpp:75
 msgid "ESSID :"
@@ -80,7 +79,7 @@ msgstr ""
 
 #: infosdialog.cpp:76
 msgid "Speed :"
-msgstr ""
+msgstr "Velocità :"
 
 #: infosdialog.cpp:86 mainwindow.cpp:162 mainwindow.cpp:198
 msgid "Disconnected"
@@ -108,16 +107,15 @@ msgstr ""
 
 #: kcm/wicdkcm.cpp:48
 msgid "Original author"
-msgstr ""
+msgstr "Autore Originale"
 
 #: kcm/wicdkcm.cpp:49 main.cpp:43
-#, fuzzy
 msgid "Anthony Vital"
-msgstr "(c) 2010 Anthony Vital"
+msgstr ""
 
 #: kcm/wicdkcm.cpp:49
 msgid "Developer"
-msgstr ""
+msgstr "Sviluppatore"
 
 #: kcm/wicdkcm.cpp:77 kcm/wicdkcm.cpp:105 kcm/wicdkcm.cpp:116
 #: kcm/wicdkcm.cpp:127
@@ -150,11 +148,11 @@ msgstr "(c) 2010 Anthony Vital"
 
 #: main.cpp:43
 msgid "Author"
-msgstr ""
+msgstr "Autore"
 
 #: main.cpp:44
 msgid "Contributor and original KCM author"
-msgstr ""
+msgstr "Sviluppatore e Autore Originale KCM"
 
 #: main.cpp:45
 msgid "Brieuc Roblin"
@@ -162,7 +160,7 @@ msgstr ""
 
 #: main.cpp:45 main.cpp:46
 msgid "Contributor"
-msgstr ""
+msgstr "Sviluppatore"
 
 #: main.cpp:46
 msgid "Yoann Laissus"
@@ -174,7 +172,7 @@ msgstr ""
 
 #: main.cpp:47 main.cpp:48 main.cpp:49 main.cpp:50 main.cpp:51 main.cpp:52
 msgid "Translator"
-msgstr ""
+msgstr "Traduttore"
 
 #: main.cpp:48
 msgid "Jekyll Wu"
@@ -315,25 +313,23 @@ msgstr "Usa cifratura (solo WEP)"
 
 #: mainwindow.cpp:277
 msgid "Key :"
-msgstr ""
+msgstr "Chiave :"
 
 #: mainwindow.cpp:309
 msgid "Hidden Network ESSID"
 msgstr "ESSID di rete nascosta"
 
 #: networkitemdelegate.cpp:175
-#, fuzzy
 msgid "Connect"
-msgstr "Disconnetti"
+msgstr "Connetti"
 
 #: networkitemdelegate.cpp:176
 msgid "Properties"
-msgstr ""
+msgstr "Proprietà"
 
 #: networkitemdelegate.cpp:177
-#, fuzzy
 msgid "Informations"
-msgstr "Dettagli rete"
+msgstr "Informazioni"
 
 #: networkitemdelegate.cpp:178 profilemanager.cpp:31
 msgid "Manage profiles"
@@ -348,14 +344,12 @@ msgid "Use Static IPs"
 msgstr "Usa IP statici"
 
 #: networkpropertiesdialog.cpp:41
-#, fuzzy
 msgid "Netmask :"
 msgstr "Maschera di rete"
 
 #: networkpropertiesdialog.cpp:42
-#, fuzzy
 msgid "Gateway :"
-msgstr "Gateway"
+msgstr "Gateway :"
 
 #: networkpropertiesdialog.cpp:43
 msgid "Use Static DNS"
@@ -386,9 +380,8 @@ msgid "DNS server 3 :"
 msgstr "Server DNS 3 :"
 
 #: networkpropertiesdialog.cpp:50
-#, fuzzy
 msgid "DHCP Hostname :"
-msgstr "DHCP Hostname"
+msgstr "DHCP Hostname :"
 
 #: networkpropertiesdialog.cpp:55
 msgid "Automatically connect to this network"
@@ -407,9 +400,8 @@ msgid "Scripts"
 msgstr "Script"
 
 #: networkpropertiesdialog.cpp:158
-#, fuzzy
 msgid "Invalid IP address entered."
-msgstr "Indirizzo non valido nella voce %1"
+msgstr "Indirizzo IP impostato non valido."
 
 #: networkpropertiesdialog.cpp:195
 msgid "Global DNS has not been enabled in general preferences."
@@ -477,23 +469,20 @@ msgid "General settings"
 msgstr "Impostazioni generali"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:461
-#, fuzzy
 msgid "Client settings"
-msgstr "Impostazioni generali"
+msgstr "Impostazioni client"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:462
 msgid "Show tooltips"
-msgstr ""
+msgstr "Mostra suggerimenti"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:463
-#, fuzzy
 msgid "Show signal strength"
-msgstr "Potenza Segnale :"
+msgstr "Mostra la potenza di segnale :"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:464
-#, fuzzy
 msgid "Automatically scan on open"
-msgstr "Connessione automatica a questa rete"
+msgstr "Rileva automaticamente all'avvio"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:466
 msgid "DHCP client :"
@@ -513,7 +502,7 @@ msgstr "Programmi esterni"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:470
 msgid "Miscellaneous"
-msgstr ""
+msgstr "Opzioni Varie"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:471
 msgid "WPA Supplicant driver :"
@@ -590,7 +579,7 @@ msgstr "morf3089@gmail.com"
 
 #: trayicon.cpp:61
 msgid "Connection infos"
-msgstr ""
+msgstr "Dettagli Connessione"
 
 #~ msgid "Channel"
 #~ msgstr "Canale"
