@@ -1,28 +1,32 @@
 [Global]
 IconName=network-wireless
 Comment=Wicd client for KDE
-Comment[fr]=Client Wicd pour KDE
 Comment[cs]=Klient Wicd pro KDE
+Comment[es]=Cliente Wicd para KDE
+Comment[fr]=Client Wicd pour KDE
 Comment[zh_CN]= Wicd KDE 前端
 Name=Wicd Client KDE
 
 [Event/connected]
 Name=Connected to the network
-Name[fr]=Connecté au réseau
 Name[cs]=Připojen k síti
+Name[es]=Conectado a la red
+Name[fr]=Connecté au réseau
 Name[zh_CN]=网络已连接
 Action=None
 
 [Event/disconnected]
 Name=Disconnected from the network
-Name[fr]=Déconnecté du réseau
 Name[cs]=Odpojen od sítě
+Name[es]=Desconectado de la red
+Name[fr]=Déconnecté du réseau
 Name[zh_CN]=网络已断开
 Action=None
 
 [Event/error]
 Name=Error
-Name[fr]=Erreur
 Name[cs]=Chyba
+Name[es]=Error
+Name[fr]=Erreur
 Name[zh_CN]=出现错误
 Action=Popup
