@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-10-19 19:13+0200\n"
-"PO-Revision-Date: 2010-09-25 10:08-0300\n"
+"PO-Revision-Date: 2010-10-19 23:30-0300\n"
 "Last-Translator: Márcio Moraes <marciopanto@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <Kde-i18n-pt_br@kde.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Language: pt_BR\n"
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Language: pt_BR\n"
 
 #: dbushandler.cpp:144 mainwindow.cpp:194
 msgid "Wired network"
@@ -48,40 +48,37 @@ msgstr "Canal :"
 
 #: infosdialog.cpp:67 infosdialog.cpp:86
 msgid "State :"
-msgstr ""
+msgstr "Estado :"
 
 #: infosdialog.cpp:67
-#, fuzzy
 msgid "Connecting"
-msgstr "Conectando..."
+msgstr "Conectando"
 
 #: infosdialog.cpp:70 infosdialog.cpp:74
-#, fuzzy
 msgid "Connection type :"
 msgstr "Tipo de criptografia :"
 
 #: infosdialog.cpp:70
 msgctxt "Connection type :"
 msgid "Wired"
-msgstr ""
+msgstr "Com fio"
 
 #: infosdialog.cpp:71 infosdialog.cpp:77 networkpropertiesdialog.cpp:40
 msgid "IP :"
-msgstr ""
+msgstr "IP :"
 
 #: infosdialog.cpp:74
-#, fuzzy
 msgctxt "Connection type :"
 msgid "Wireless"
-msgstr "Interface sem fio"
+msgstr "Sem fio"
 
 #: infosdialog.cpp:75
 msgid "ESSID :"
-msgstr ""
+msgstr "ESSID :"
 
 #: infosdialog.cpp:76
 msgid "Speed :"
-msgstr ""
+msgstr "Velocidade :"
 
 #: infosdialog.cpp:86 mainwindow.cpp:162 mainwindow.cpp:198
 msgid "Disconnected"
@@ -109,16 +106,15 @@ msgstr "Dario Freddi"
 
 #: kcm/wicdkcm.cpp:48
 msgid "Original author"
-msgstr ""
+msgstr "Autor original"
 
 #: kcm/wicdkcm.cpp:49 main.cpp:43
-#, fuzzy
 msgid "Anthony Vital"
-msgstr "(c) 2010 Anthony Vital"
+msgstr "Anthony Vital"
 
 #: kcm/wicdkcm.cpp:49
 msgid "Developer"
-msgstr ""
+msgstr "Desenvolvedor"
 
 #: kcm/wicdkcm.cpp:77 kcm/wicdkcm.cpp:105 kcm/wicdkcm.cpp:116
 #: kcm/wicdkcm.cpp:127
@@ -151,51 +147,51 @@ msgstr "(c) 2010 Anthony Vital"
 
 #: main.cpp:43
 msgid "Author"
-msgstr ""
+msgstr "Autor"
 
 #: main.cpp:44
 msgid "Contributor and original KCM author"
-msgstr ""
+msgstr "Contribuidor e autor KCM original"
 
 #: main.cpp:45
 msgid "Brieuc Roblin"
-msgstr ""
+msgstr "Brieuc Roblin"
 
 #: main.cpp:45 main.cpp:46
 msgid "Contributor"
-msgstr ""
+msgstr "Contribuidor"
 
 #: main.cpp:46
 msgid "Yoann Laissus"
-msgstr ""
+msgstr "Yoann Laissus"
 
 #: main.cpp:47
 msgid "Gianluca Boiano"
-msgstr ""
+msgstr "Gianluca Boiano"
 
 #: main.cpp:47 main.cpp:48 main.cpp:49 main.cpp:50 main.cpp:51 main.cpp:52
 msgid "Translator"
-msgstr ""
+msgstr "Tradutores"
 
 #: main.cpp:48
 msgid "Jekyll Wu"
-msgstr ""
+msgstr "Jekyll Wu"
 
 #: main.cpp:49
 msgid "Carlos López"
-msgstr ""
+msgstr "Carlos López"
 
 #: main.cpp:50
 msgid "Attila Szabo"
-msgstr ""
+msgstr "Attila Szabo"
 
 #: main.cpp:51
 msgid "Márcio Moraes"
-msgstr ""
+msgstr "Márcio Moraes"
 
 #: main.cpp:52
 msgid "Pavel Fric"
-msgstr ""
+msgstr "Pavel Fric"
 
 #: mainwindow.cpp:49
 msgid "Network"
@@ -315,25 +311,23 @@ msgstr "Usar Criptografia (somente WEP)"
 
 #: mainwindow.cpp:277
 msgid "Key :"
-msgstr ""
+msgstr "Chave :"
 
 #: mainwindow.cpp:309
 msgid "Hidden Network ESSID"
 msgstr "Ocultar Rede ESSID"
 
 #: networkitemdelegate.cpp:175
-#, fuzzy
 msgid "Connect"
-msgstr "Desconectar"
+msgstr "Conectar"
 
 #: networkitemdelegate.cpp:176
 msgid "Properties"
-msgstr ""
+msgstr "Propriedades"
 
 #: networkitemdelegate.cpp:177
-#, fuzzy
 msgid "Informations"
-msgstr "Informações da rede"
+msgstr "Informações"
 
 #: networkitemdelegate.cpp:178 profilemanager.cpp:31
 msgid "Manage profiles"
@@ -348,18 +342,16 @@ msgid "Use Static IPs"
 msgstr "Usar IPs Estáticos"
 
 #: networkpropertiesdialog.cpp:41
-#, fuzzy
 msgid "Netmask :"
-msgstr "Máscara"
+msgstr "Máscara :"
 
 #: networkpropertiesdialog.cpp:42
-#, fuzzy
 msgid "Gateway :"
-msgstr "Rota padrão"
+msgstr "Rota padrão :"
 
 #: networkpropertiesdialog.cpp:43
 msgid "Use Static DNS"
-msgstr "USar DNS Stático"
+msgstr "Usar DNS Stático"
 
 #: networkpropertiesdialog.cpp:44 qtcreator-build/kcm/ui_kcmwidget.h:451
 msgid "Use global DNS servers"
@@ -371,7 +363,7 @@ msgstr "Domínio do DNS :"
 
 #: networkpropertiesdialog.cpp:46 qtcreator-build/kcm/ui_kcmwidget.h:453
 msgid "Search domain :"
-msgstr "Persquisar domínio :"
+msgstr "Pesquisar domínio :"
 
 #: networkpropertiesdialog.cpp:47 qtcreator-build/kcm/ui_kcmwidget.h:454
 msgid "DNS server 1 :"
@@ -386,9 +378,8 @@ msgid "DNS server 3 :"
 msgstr "Servidor DNS 3 :"
 
 #: networkpropertiesdialog.cpp:50
-#, fuzzy
 msgid "DHCP Hostname :"
-msgstr "Nome da máquina DHCP"
+msgstr "Nome da Máquina DHCP :"
 
 #: networkpropertiesdialog.cpp:55
 msgid "Automatically connect to this network"
@@ -407,9 +398,8 @@ msgid "Scripts"
 msgstr "Scripts"
 
 #: networkpropertiesdialog.cpp:158
-#, fuzzy
 msgid "Invalid IP address entered."
-msgstr "Endereço inválido em %1"
+msgstr "Endereço IP inválido entrou."
 
 #: networkpropertiesdialog.cpp:195
 msgid "Global DNS has not been enabled in general preferences."
@@ -459,14 +449,13 @@ msgstr "Sempre mudar para uma conexão com fio quando estiver disponível"
 msgid "Global DNS servers"
 msgstr "Servidores DNS globais"
 
-#: qtcreator-build/kcm/ui_kcmwidget.h:457
-#: qtcreator-build/kcm/ui_kcmwidget.h:465
+#: qtcreator-build/kcm/ui_kcmwidget.h:457 qtcreator-build/kcm/ui_kcmwidget.h:465
 msgid "Other"
 msgstr "Outro"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:458
 msgid "Wired automatic connection :"
-msgstr "Conecção automática com fio :"
+msgstr "Conexão automática com fio :"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:459
 msgid "Automatically reconnect on network connection loss"
@@ -477,23 +466,20 @@ msgid "General settings"
 msgstr "Configurações gerais"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:461
-#, fuzzy
 msgid "Client settings"
-msgstr "Configurações gerais"
+msgstr "Configurações do cliente"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:462
 msgid "Show tooltips"
-msgstr ""
+msgstr "Mostrar dicas"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:463
-#, fuzzy
 msgid "Show signal strength"
-msgstr "Intensidade do sinal :"
+msgstr "Mostrar a intensidade do sinal"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:464
-#, fuzzy
 msgid "Automatically scan on open"
-msgstr "Conectar automaticamente a esta rede"
+msgstr "Varrer automaticamente em aberto"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:466
 msgid "DHCP client :"
@@ -513,12 +499,11 @@ msgstr "Programas externos"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:470
 msgid "Miscellaneous"
-msgstr ""
+msgstr "Diversos"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:471
-#, fuzzy
 msgid "WPA Supplicant driver :"
-msgstr "WPA Suplicante "
+msgstr "Driver WPA Suplicante :"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:472
 msgid "Backend :"
@@ -588,7 +573,7 @@ msgstr "marciopanto@gmail.com"
 
 #: trayicon.cpp:61
 msgid "Connection infos"
-msgstr ""
+msgstr "Informações da conexão"
 
 #~ msgid "Maintainer"
 #~ msgstr "Mantenedor"

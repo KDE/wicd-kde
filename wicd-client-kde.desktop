@@ -8,6 +8,7 @@ GenericName=Wicd client
 GenericName[cs]=Klient Wicd
 GenericName[es]=Cliente Wicd
 GenericName[fr]=Client Wicd
+GenericName[pt_BR]=Cliente Wicd
 GenericName[zh_CN]=Wicd KDE 前端
 Name=Wicd Client KDE
 X-KDE-StartupNotify=false
