@@ -1,3 +1,7 @@
+- Add cmake option to specify which python binary to use
+- Autocompletion when specifying static IP adress
+- Connection infos in systray menu
+- User interface options: signal strength label, tooltips and automatic scan on open
 - Add czech translation
 - Add brazilian portuguese translation
 - Add hungarian translation

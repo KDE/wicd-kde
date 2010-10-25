@@ -2,5 +2,7 @@ cd /path/to/wicd-client-kde/
 mkdir build
 cd build
 cmake -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix` ..
+#optional: you can specify which python binary to use (default is "python")
+#cmake -DPYTHONBIN=/path/to/python -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix` ..
 make
 make install
