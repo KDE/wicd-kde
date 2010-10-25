@@ -18,6 +18,7 @@
  ****************************************************************************/
 
 #include "global.h"
+#include "config-python.h"
 
 #include <QFile>
 #include <QProcess>
@@ -91,11 +92,11 @@ namespace Wicd {
     void locate()
     {
         QProcess wpath;
-        wpath.start("python", QStringList() << "-c" << "from wicd import wpath; print wpath.etc");
+        wpath.start(PYTHONBIN, QStringList() << "-c" << "from wicd import wpath; print wpath.etc");
         wpath.waitForFinished();
         wicdpath = QString(wpath.readAllStandardOutput());
         wicdpath.chop(1);
-        wpath.start("python", QStringList() << "-c" << "from wicd import wpath; print wpath.encryption");
+        wpath.start(PYTHONBIN, QStringList() << "-c" << "from wicd import wpath; print wpath.encryption");
         wpath.waitForFinished();
         wicdencryptionpath = QString(wpath.readAllStandardOutput());
         wicdencryptionpath.chop(1);

@@ -1,0 +1,1 @@
+#define PYTHONBIN "@PYTHONBIN@"

@@ -4,6 +4,10 @@ find_package( KDE4 REQUIRED )
 include_directories( ${KDE4_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR} )
 
 macro_ensure_version("4.3.80" ${KDE_VERSION} KSTATUSNOTIFIERITEM_FOUND)
+if (NOT PYTHONBIN)
+    set (PYTHONBIN "python" CACHE STRING "python command")
+endif (NOT PYTHONBIN)
+configure_file (config-python.h.cmake config-python.h)
 
 add_subdirectory( kcm )
 add_subdirectory( icons )
