@@ -20,6 +20,7 @@
 #include "mainwindow.h"
 #include "global.h"
 #include "labelentry.h"
+#include "profilemanager.h"
 
 #include <KToolBar>
 #include <QToolButton>
@@ -88,6 +89,7 @@ MainWindow::MainWindow()
     connect(m_trayicon, SIGNAL(activateRequested(bool, const QPoint)), this, SLOT(activated()));
     connect(DBusHandler::instance(), SIGNAL(statusChange(Status)), this, SLOT(updateStatus(Status)));
     connect(DBusHandler::instance(), SIGNAL(connectionResultSend(QString)), this, SLOT(handleConnectionResult(QString)));
+    connect(DBusHandler::instance(), SIGNAL(launchChooser()), this, SLOT(launchProfileManager()));
     connect(DBusHandler::instance(), SIGNAL(scanStarted()), this, SLOT(freeze()));
     connect(DBusHandler::instance(), SIGNAL(scanEnded()), this, SLOT(unfreeze()));
     connect(m_abortButton, SIGNAL(clicked()), this, SLOT(cancelConnect()));
@@ -221,6 +223,19 @@ void MainWindow::handleConnectionResult(const QString &result)
     if (!validMessages.contains(result)) {
         notify("error", m_messageTable.value(result));
     }
+}
+
+void MainWindow::launchProfileManager()
+{
+    ProfileManager manager;
+    int accepted = manager.exec();
+    if (accepted){
+        DBusHandler::instance()->callWired("ReadWiredNetworkProfile", Wicd::currentprofile);
+        DBusHandler::instance()->callWired("ConnectWired");
+    } else {
+        DBusHandler::instance()->callDaemon("SetForcedDisconnect", true);
+    }
+    DBusHandler::instance()->callDaemon("SetNeedWiredProfileChooser", false);
 }
 
 void MainWindow::notify(const QString &event, const QString &message)

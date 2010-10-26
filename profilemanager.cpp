@@ -21,7 +21,7 @@
 #include "dbushandler.h"
 #include "global.h"
 
-#include <QInputDialog>
+#include <KInputDialog>
 
 #include <KLocalizedString>
 
@@ -37,16 +37,16 @@ ProfileManager::ProfileManager( QWidget *parent )
     ui.removeButton->setIcon(KIcon("list-remove"));
 
     QStringList profileList = DBusHandler::instance()->callWired("GetWiredProfileList").toStringList();
-    QString defaultProfile = DBusHandler::instance()->callWired("GetDefaultWiredNetwork").toString();
     ui.comboBox->addItems(profileList);
-    int defaultIndex = profileList.indexOf(defaultProfile);
-    if (defaultIndex != -1)
-        ui.comboBox->setCurrentIndex(defaultIndex);
+    int currentProfileIndex = profileList.indexOf(Wicd::currentprofile);
+    ui.comboBox->setCurrentIndex(currentProfileIndex);
+    profileChanged(Wicd::currentprofile);
 
     connect(ui.defaultBox, SIGNAL(toggled(bool)),this, SLOT(toggleDefault(bool)));
     connect(ui.comboBox, SIGNAL(currentIndexChanged(QString)),this, SLOT(profileChanged(QString)));
     connect(ui.addButton, SIGNAL(clicked()),this, SLOT(addProfile()));
     connect(ui.removeButton, SIGNAL(clicked()),this, SLOT(removeProfile()));
+
     setMainWidget(widget);
     resize(0, 0);
 }
@@ -70,9 +70,9 @@ void ProfileManager::profileChanged(QString profile)
 void ProfileManager::addProfile()
 {
     bool ok;
-    QString newprofile = QInputDialog::getText(this, i18n("Add a profile"),
-                                               i18n("New profile name:"), QLineEdit::Normal,
-                                               "", &ok);
+    QString newprofile = KInputDialog::getText(i18n("Add a profile"),
+                                               i18n("New profile name:"),
+                                               QString(), &ok, this);
     if ((!ok) || newprofile.isEmpty())
         return;
 

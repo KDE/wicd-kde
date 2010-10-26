@@ -1,3 +1,4 @@
+- Various profile management fixes
 - Add cmake option to specify which python binary to use
 - Autocompletion when specifying static IP adress
 - Connection infos in systray menu

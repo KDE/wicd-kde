@@ -84,6 +84,7 @@ private slots:
 signals:
     void statusChange(Status status);
     void connectionResultSend(const QString& result);
+    void launchChooser();
     void scanStarted();
     void scanEnded();
 

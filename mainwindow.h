@@ -43,6 +43,7 @@ private slots:
     void activated();
     void updateStatus(Status status);
     void handleConnectionResult(const QString& result);
+    void launchProfileManager();
     void notify(const QString& event, const QString& message);
     void forceUpdateStatus();
     void freeze();
