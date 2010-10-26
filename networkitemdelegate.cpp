@@ -201,8 +201,15 @@ void NetworkItemDelegate::updateItemWidgets (const QList<QWidget*> widgets,
 
 void NetworkItemDelegate::toggleConnection()
 {
-    bool networkConnected = focusedIndex().model()->data(focusedIndex(), NetworkModel::IsConnectedRole).toBool();
+    QPersistentModelIndex index = focusedIndex();
+    if (!index.isValid()) {
+        //the focus was not on the list view, *here* the index is invalid
+        return;
+    }
+
+    bool networkConnected = index.model()->data(focusedIndex(), NetworkModel::IsConnectedRole).toBool();
     int networkId = focusedIndex().model()->data(focusedIndex(), NetworkModel::IdRole).toInt();
+
     if (networkConnected) {
         if (networkId == -1) {
             DBusHandler::instance()->callWired("DisconnectWired");

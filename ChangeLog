@@ -1,3 +1,4 @@
+- Fix potential crash when the connection is toggled with a double-click
 - Various profile management fixes
 - Add cmake option to specify which python binary to use
 - Autocompletion when specifying static IP adress
