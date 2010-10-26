@@ -476,7 +476,7 @@ msgstr "Montrer les info-bulles"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:463
 msgid "Show signal strength"
-msgstr "Montrer la force du signal :"
+msgstr "Montrer la force du signal"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:464
 msgid "Automatically scan on open"
