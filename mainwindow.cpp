@@ -57,6 +57,7 @@ MainWindow::MainWindow()
     moreButton->setMenu(moreMenu);
 
     KToolBar *toolbar = new KToolBar(this);
+    toolbar->setObjectName("mainToolBar");
     toolbar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
     toolbar->addWidget(moreButton);
     toolbar->addSeparator();
