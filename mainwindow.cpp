@@ -228,13 +228,12 @@ void MainWindow::handleConnectionResult(const QString &result)
 
 void MainWindow::launchProfileManager()
 {
+    DBusHandler::instance()->callDaemon("SetForcedDisconnect", true);
     ProfileManager manager;
     int accepted = manager.exec();
     if (accepted){
         DBusHandler::instance()->callWired("ReadWiredNetworkProfile", Wicd::currentprofile);
         DBusHandler::instance()->callWired("ConnectWired");
-    } else {
-        DBusHandler::instance()->callDaemon("SetForcedDisconnect", true);
     }
     DBusHandler::instance()->callDaemon("SetNeedWiredProfileChooser", false);
 }
