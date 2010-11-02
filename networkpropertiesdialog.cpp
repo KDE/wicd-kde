@@ -231,7 +231,7 @@ void NetworkPropertiesDialog::validate()
     foreach (LabelEntry* item, reqList) {
         item->setText(item->text().simplified());
         if (!Tools::isValidIP(item->text())) {
-            KMessageBox::sorry(this, QString(i18n("Invalid adress in %1", item->label())));
+            KMessageBox::sorry(this, QString(i18n("Invalid address in %1", item->label())));
             return;
         }
     }
@@ -239,7 +239,7 @@ void NetworkPropertiesDialog::validate()
     foreach (LabelEntry* item, optList) {
         item->setText(item->text().simplified());
         if ( (!item->text().isEmpty()) && (!Tools::isValidIP(item->text())) ) {
-            KMessageBox::sorry(this, QString(i18n("Invalid adress in %1", item->label())));
+            KMessageBox::sorry(this, QString(i18n("Invalid address in %1", item->label())));
             return;
         }
     }

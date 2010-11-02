@@ -87,7 +87,7 @@ msgid "Disconnected"
 msgstr "Leválasztva"
 
 #: infosdialog.cpp:92
-msgid "Network informations"
+msgid "Network information"
 msgstr "Hálózati információk"
 
 #: kcm/wicdkcm.cpp:44
@@ -330,7 +330,7 @@ msgstr ""
 
 #: networkitemdelegate.cpp:177
 #, fuzzy
-msgid "Informations"
+msgid "Information"
 msgstr "Hálózati információk"
 
 #: networkitemdelegate.cpp:178 profilemanager.cpp:31
@@ -415,7 +415,7 @@ msgid "Global DNS has not been enabled in general preferences."
 msgstr "Globális DNS nem került engedélyezésre az általános beállításokban."
 
 #: networkpropertiesdialog.cpp:234 networkpropertiesdialog.cpp:242
-msgid "Invalid adress in %1"
+msgid "Invalid address in %1"
 msgstr "Érvénytelen cím a %1-nél."
 
 #: networkpropertiesdialog.cpp:255

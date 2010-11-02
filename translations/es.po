@@ -69,7 +69,7 @@ msgstr "IP:"
 #: infosdialog.cpp:74
 msgctxt "Connection type :"
 msgid "Wireless"
-msgstr "Inalámbrico"
+msgstr "Inalámbrica"
 
 #: infosdialog.cpp:75
 msgid "ESSID :"
@@ -84,7 +84,7 @@ msgid "Disconnected"
 msgstr "Desconectado"
 
 #: infosdialog.cpp:92
-msgid "Network informations"
+msgid "Network information"
 msgstr "Información de red"
 
 #: kcm/wicdkcm.cpp:44
@@ -138,7 +138,7 @@ msgstr "Wicd Client KDE"
 
 #: main.cpp:40 mainwindow.cpp:42
 msgid "Wicd client for KDE"
-msgstr "Cliente Wicd parar KDE"
+msgstr "Cliente Wicd para KDE"
 
 #: main.cpp:42
 msgid "(c) 2010 Anthony Vital"
@@ -325,7 +325,7 @@ msgid "Properties"
 msgstr "Propiedades"
 
 #: networkitemdelegate.cpp:177
-msgid "Informations"
+msgid "Information"
 msgstr "Información"
 
 #: networkitemdelegate.cpp:178 profilemanager.cpp:31
@@ -406,7 +406,7 @@ msgid "Global DNS has not been enabled in general preferences."
 msgstr "El servidor DNS no ha sido activado en la opciones generales."
 
 #: networkpropertiesdialog.cpp:234 networkpropertiesdialog.cpp:242
-msgid "Invalid adress in %1"
+msgid "Invalid address in %1"
 msgstr "Dirección inválida en %1"
 
 #: networkpropertiesdialog.cpp:255
@@ -452,7 +452,7 @@ msgstr "Servidores DNS globales"
 #: qtcreator-build/kcm/ui_kcmwidget.h:457
 #: qtcreator-build/kcm/ui_kcmwidget.h:465
 msgid "Other"
-msgstr "Otro"
+msgstr "Otros"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:458
 msgid "Wired automatic connection :"
@@ -512,7 +512,7 @@ msgstr "Backend:"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:473
 msgid "Debugging"
-msgstr "Depurando"
+msgstr "Depuración"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:474
 msgid "Enable debug mode"

@@ -174,7 +174,7 @@ void NetworkItemDelegate::updateItemWidgets (const QList<QWidget*> widgets,
     if (m_useTooltips) {
         buttonconnect->setToolTip( isConnected ? i18n("Disconnect") : i18n("Connect"));
         propertiesbutton->setToolTip(i18n("Properties"));
-        informationsbutton->setToolTip(i18n("Informations"));
+        informationsbutton->setToolTip(i18n("Information"));
         profilemanagerbutton->setToolTip(i18n("Manage profiles"));
     } else {
         buttonconnect->setToolTip("");

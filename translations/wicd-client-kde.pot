@@ -84,7 +84,7 @@ msgid "Disconnected"
 msgstr ""
 
 #: infosdialog.cpp:92
-msgid "Network informations"
+msgid "Network information"
 msgstr ""
 
 #: kcm/wicdkcm.cpp:44
@@ -325,7 +325,7 @@ msgid "Properties"
 msgstr ""
 
 #: networkitemdelegate.cpp:177
-msgid "Informations"
+msgid "Information"
 msgstr ""
 
 #: networkitemdelegate.cpp:178 profilemanager.cpp:31
@@ -405,7 +405,7 @@ msgid "Global DNS has not been enabled in general preferences."
 msgstr ""
 
 #: networkpropertiesdialog.cpp:234 networkpropertiesdialog.cpp:242
-msgid "Invalid adress in %1"
+msgid "Invalid address in %1"
 msgstr ""
 
 #: networkpropertiesdialog.cpp:255

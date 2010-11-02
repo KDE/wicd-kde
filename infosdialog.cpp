@@ -89,7 +89,7 @@ InfosDialog::InfosDialog(QWidget *parent)
 
 void InfosDialog::init()
 {
-    setCaption(i18n("Network informations"));
+    setCaption(i18n("Network information"));
     setModal(true);
     setButtons(KDialog::Close);
 
