@@ -478,11 +478,11 @@ msgstr "Mostra suggerimenti"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:463
 msgid "Show signal strength"
-msgstr "Mostra la potenza di segnale :"
+msgstr "Mostra la potenza di segnale"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:464
 msgid "Automatically scan on open"
-msgstr "Rileva automaticamente all'avvio"
+msgstr "Rileva reti all'avvio"
 
 #: qtcreator-build/kcm/ui_kcmwidget.h:466
 msgid "DHCP client :"
