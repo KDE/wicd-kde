@@ -11,7 +11,6 @@ configure_file (config-python.h.cmake config-python.h)
 
 add_subdirectory( kcm )
 add_subdirectory( icons )
-add_subdirectory( translations )
 
 set(client_SRCS
     global.cpp
