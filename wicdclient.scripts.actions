@@ -1,35 +1,19 @@
 [org.kde.wicdclient.scripts.read]
 Name=Read scripts
-Name[cs]=Číst skripty
-Name[es]=Leer los scripts
-Name[fr]=Lire les scripts
-Name[it]=Leggi scripts
-Name[pt_BR]=Ler os scripts
-Name[zh_CN]=读取脚本
+Name[uk]=Читання скриптів
+Name[x-test]=xxRead scriptsxx
 Description=Requesting root privileges to read scripts
-Description[cs]=Čtení skriptů vyžaduje oprávnění superuživatele
-Description[es]=Solictando permisos de administrador para leer los scripts
-Description[fr]=Lire les scripts requiert les privilèges du superutilisateur
-Description[it]=Richiesti privilegi di amministratore per la lettura degli scripts
-Description[pt_BR]=Ler os scripts requer privilégios de superusuário
-Description[zh_CN]=请求 root 特权，以读取脚本
+Description[uk]=Запит щодо прав доступу root для читання скриптів
+Description[x-test]=xxRequesting root privileges to read scriptsxx
 Policy=auth_admin
 Persistence=session
 
 [org.kde.wicdclient.scripts.save]
 Name=Save scripts
-Name[cs]=Uložit skripty
-Name[es]=Guardar los scripts
-Name[fr]=Enregistrer les scripts
-Name[it]=Salva scripts
-Name[pt_BR]=Salvar os scripts
-Name[zh_CN]=保存脚本
+Name[uk]=Збереження скриптів
+Name[x-test]=xxSave scriptsxx
 Description=Requesting root privileges to save scripts
-Description[cs]=Uložení skriptů vyžaduje oprávnění superuživatele
-Description[es]=Solicitando permisos de administrador para guardar los scripts
-Description[fr]=Enregistrer les scripts requiert les privilèges du superutilisateur
-Description[it]=Richiesti privilegi di amministratore per la scrittura degli scripts
-Description[pt_BR]=Salvar os scripts requer privilégios de superusuário
-Description[zh_CN]=请求 root 特权，以保存脚本
+Description[uk]=Запит щодо прав доступу root для збереження скриптів
+Description[x-test]=xxRequesting root privileges to save scriptsxx
 Policy=auth_admin
 Persistence=session
