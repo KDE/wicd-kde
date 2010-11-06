@@ -173,7 +173,7 @@ void MainWindow::updateStatus(Status status)
     QString message;
     if (status.State == WicdState::WIRED) {
         m_trayicon->setIcon("network-wired-activated");
-        message = i18n("Connected to wired network (IP : %1)", status.Infos.at(0));//info(0) ip
+        message = i18n("Connected to wired network (IP: %1)", status.Infos.at(0));//info(0) ip
     } else if (status.State == WicdState::WIRELESS) {
         int quality = status.Infos.at(2).toInt();//info(2) quality
         QString unit = "%";
@@ -184,7 +184,7 @@ void MainWindow::updateStatus(Status status)
                                                             status.Infos.at(3).toInt(), "quality").toInt();//info(3) networkId
         }
         setWirelessIcon(quality);
-        message = i18n("Connected to %1 - %2%3 (IP : %4)",
+        message = i18n("Connected to %1 - %2%3 (IP: %4)",
                        status.Infos.at(1), status.Infos.at(2), unit, status.Infos.at(0));//info(1) essid
     } else if (status.State == WicdState::CONNECTING) {
         bool wired = (status.Infos.at(0)=="wired");
@@ -194,7 +194,7 @@ void MainWindow::updateStatus(Status status)
             message = DBusHandler::instance()->callWireless("CheckWirelessConnectingMessage").toString();
         }
         message = m_messageTable.value(message);
-        wired ? message.prepend(i18n("Wired network")+": ") : message.prepend(status.Infos.at(1)+": ");
+        wired ? message.prepend(i18n("Wired network: ")) : message.prepend(status.Infos.at(1)+": ");
         QTimer::singleShot(500, this, SLOT(forceUpdateStatus()));
     } else {
         m_trayicon->setIcon("network-wired");
@@ -280,16 +280,16 @@ void MainWindow::createAdhocDialog()
     QWidget *widget = new QWidget(&dialog);
     QVBoxLayout *vboxlayout = new QVBoxLayout();
 
-    LabelEntry *essidEdit = new LabelEntry("ESSID :");
+    LabelEntry *essidEdit = new LabelEntry(i18n("ESSID:"));
     essidEdit->setText("My_Adhoc_Network");
-    LabelEntry *ipEdit = new LabelEntry("IP :");
+    LabelEntry *ipEdit = new LabelEntry(i18n("IP:"));
     ipEdit->setText("169.254.12.10");
-    LabelEntry *channelEdit = new LabelEntry(i18n("Channel :"));
+    LabelEntry *channelEdit = new LabelEntry(i18n("Channel:"));
     channelEdit->setText("3");
     QCheckBox *icsBox = new QCheckBox(i18n("Activate Internet Connection Sharing"));//useless?
     icsBox->setEnabled(false);
     QCheckBox *wepBox = new QCheckBox(i18n("Use Encryption (WEP only)"));
-    LabelEntry *keyEdit = new LabelEntry(i18n("Key :"));
+    LabelEntry *keyEdit = new LabelEntry(i18n("Key:"));
     keyEdit->setEnabled(false);
     connect(wepBox, SIGNAL(toggled(bool)), keyEdit, SLOT(setEnabled(bool)));
 

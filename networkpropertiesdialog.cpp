@@ -37,24 +37,24 @@ NetworkPropertiesDialog::NetworkPropertiesDialog(int networkId, QWidget *parent,
     QVBoxLayout *vboxlayout = new QVBoxLayout();
 
     m_staticIpBox = new QCheckBox(i18n("Use Static IPs"));
-    m_ipEdit = new LabelEntry(i18n("IP :"));
-    m_netmaskEdit = new LabelEntry(i18n("Netmask :"));
-    m_gatewayEdit = new LabelEntry(i18n("Gateway :"));
+    m_ipEdit = new LabelEntry(i18n("IP:"));
+    m_netmaskEdit = new LabelEntry(i18n("Netmask:"));
+    m_gatewayEdit = new LabelEntry(i18n("Gateway:"));
     m_staticdnsBox = new QCheckBox(i18n("Use Static DNS"));
     m_globaldnsBox = new QCheckBox(i18n("Use global DNS servers"));
-    m_dnsdomainEdit = new LabelEntry(i18n("DNS domain :"));
-    m_searchdomainEdit = new LabelEntry(i18n("Search domain :"));
-    m_dns1Edit = new LabelEntry(i18n("DNS server 1 :"));
-    m_dns2Edit = new LabelEntry(i18n("DNS server 2 :"));
-    m_dns3Edit = new LabelEntry(i18n("DNS server 3 :"));
-    m_dhcphostnameBox = new QCheckBox(i18n("DHCP Hostname :"));
+    m_dnsdomainEdit = new LabelEntry(i18n("DNS domain:"));
+    m_searchdomainEdit = new LabelEntry(i18n("Search domain:"));
+    m_dns1Edit = new LabelEntry(i18n("DNS server 1:"));
+    m_dns2Edit = new LabelEntry(i18n("DNS server 2:"));
+    m_dns3Edit = new LabelEntry(i18n("DNS server 3:"));
+    m_dhcphostnameBox = new QCheckBox(i18n("DHCP Hostname:"));
     m_dhcphostnameBox->setMinimumWidth(m_dns3Edit->labelMinimumWidth());
     m_dhcphostnameEdit = new QLineEdit();
 
     //optionnal: wireless
     m_autoconnectBox = new QCheckBox(i18n("Automatically connect to this network"));
-    m_globalSettingsBox = new QCheckBox(i18n("Use these settings for all networks sharing this essid"));
-    m_useEncryptionBox = new QCheckBox(i18n("Use Encryption"));
+    m_globalSettingsBox = new QCheckBox(i18n("Use these settings for all networks sharing this ESSID"));
+    m_useEncryptionBox = new QCheckBox(i18n("Use encryption"));
     m_encryptionCombo = new QComboBox();
     m_encryptlayout = new QVBoxLayout();
 

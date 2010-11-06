@@ -58,5 +58,5 @@ void TrayIcon::connectionInfoRequested() const
 
 void TrayIcon::addActions()
 {
-    contextMenu()->addAction(KIcon("help-about"), i18n("Connection infos"), this, SLOT(connectionInfoRequested()));
+    contextMenu()->addAction(KIcon("help-about"), i18n("Connection information"), this, SLOT(connectionInfoRequested()));
 }

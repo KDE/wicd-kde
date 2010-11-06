@@ -35,7 +35,7 @@ ScriptsDialog::ScriptsDialog(int networkId, QWidget *parent, Qt::WFlags flags)
     , m_networkId(networkId)
 {
     setModal(true);
-    setCaption(i18n("Configure scripts"));
+    setCaption(i18n("Configure Scripts"));
 
     QWidget *widget = new QWidget(this);
     QFormLayout *formlayout = new QFormLayout();

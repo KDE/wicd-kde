@@ -28,7 +28,7 @@
 ProfileManager::ProfileManager( QWidget *parent )
     : KDialog( parent )
 {
-    setCaption(i18n("Manage profiles"));
+    setCaption(i18n("Manage Profiles"));
     setButtons(KDialog::Ok);
 
     QWidget *widget = new QWidget(this);
