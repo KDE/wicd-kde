@@ -1,8 +1,16 @@
 [org.kde.wicdclient.scripts.read]
 Name=Read scripts
+Name[de]=Skripte lesen
+Name[nds]=Skripten lesen
+Name[pt]=Ler os programas
+Name[sv]=Läs skript
 Name[uk]=Читання скриптів
 Name[x-test]=xxRead scriptsxx
 Description=Requesting root privileges to read scripts
+Description[de]=Rechte des Systemverwalters für das Einlesen der Skripte nachfragen
+Description[nds]=För't Lesen vun Skripten warrt Systeempleger-Verlöven affraagt.
+Description[pt]=A pedir permissões de 'root' para ler os programas
+Description[sv]=Begär administratörsprivilegier för att läsa skript
 Description[uk]=Запит щодо прав доступу root для читання скриптів
 Description[x-test]=xxRequesting root privileges to read scriptsxx
 Policy=auth_admin
@@ -10,9 +18,17 @@ Persistence=session
 
 [org.kde.wicdclient.scripts.save]
 Name=Save scripts
+Name[de]=Skripte speichern
+Name[nds]=Skripten sekern
+Name[pt]=Gravar os programas
+Name[sv]=Spara skript
 Name[uk]=Збереження скриптів
 Name[x-test]=xxSave scriptsxx
 Description=Requesting root privileges to save scripts
+Description[de]=Rechte des Systemverwalters für das Speichern der Skripte nachfragen
+Description[nds]=För't Sekern vun Skripten warrt Systeempleger-Verlöven affraagt.
+Description[pt]=A pedir permissões de 'root' para gravar os programas
+Description[sv]=Begär administratörsprivilegier för att spara skript
 Description[uk]=Запит щодо прав доступу root для збереження скриптів
 Description[x-test]=xxRequesting root privileges to save scriptsxx
 Policy=auth_admin
