@@ -37,6 +37,7 @@ Action=None
 
 [Event/error]
 Name=Error
+Name[cs]=Chyba
 Name[de]=Fehler
 Name[nds]=Fehler
 Name[pt]=Erro
