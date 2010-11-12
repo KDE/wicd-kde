@@ -1,9 +1,10 @@
 project(wicd-client-kde)
 
-find_package( KDE4 REQUIRED )
+set(KDE_MIN_VERSION "4.5.0")
+find_package(KDE4 ${KDE_MIN_VERSION} REQUIRED)
+
 include_directories( ${KDE4_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR} )
 
-macro_ensure_version("4.3.80" ${KDE_VERSION} KSTATUSNOTIFIERITEM_FOUND)
 if (NOT PYTHONBIN)
     set (PYTHONBIN "python" CACHE STRING "python command")
 endif (NOT PYTHONBIN)
