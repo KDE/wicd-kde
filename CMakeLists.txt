@@ -1,4 +1,4 @@
-project(wicd-client-kde)
+project(wicd-kde)
 
 set(KDE_MIN_VERSION "4.5.0")
 find_package(KDE4 ${KDE_MIN_VERSION} REQUIRED)
@@ -30,9 +30,9 @@ set(client_SRCS
 
 kde4_add_ui_files(client_SRCS profilemanager.ui)
 
-kde4_add_executable( wicd-client-kde ${client_SRCS} )
-target_link_libraries( wicd-client-kde ${KDE4_KDEUI_LIBS} )
-install( TARGETS wicd-client-kde  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+kde4_add_executable( wicd-kde ${client_SRCS} )
+target_link_libraries( wicd-kde ${KDE4_KDEUI_LIBS} )
+install( TARGETS wicd-kde  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 kde4_add_executable(wicdclient_scripts_helper  scriptshelper.cpp)
 target_link_libraries(wicdclient_scripts_helper ${KDE4_KDECORE_LIBS})
@@ -41,6 +41,6 @@ install(TARGETS wicdclient_scripts_helper DESTINATION ${LIBEXEC_INSTALL_DIR})
 kde4_install_auth_actions(org.kde.wicdclient.scripts wicdclient.scripts.actions)
 kde4_install_auth_helper_files(wicdclient_scripts_helper org.kde.wicdclient.scripts root)
 
-install( FILES wicd-client-kde.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR} )
-install( FILES wicd-client-kde.desktop  DESTINATION ${AUTOSTART_INSTALL_DIR} )
-install( FILES wicd-client-kde.notifyrc DESTINATION ${DATA_INSTALL_DIR}/wicd-client-kde )
+install( FILES wicd-kde.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR} )
+install( FILES wicd-kde.desktop  DESTINATION ${AUTOSTART_INSTALL_DIR} )
+install( FILES wicd-kde.notifyrc DESTINATION ${DATA_INSTALL_DIR}/wicd-kde )

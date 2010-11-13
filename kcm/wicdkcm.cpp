@@ -37,9 +37,9 @@ K_EXPORT_PLUGIN(WicdKCMModuleFactory("kcmwicd"))
 
 WicdKCM::WicdKCM(QWidget* parent, const QVariantList& )
     : KCModule(WicdKCMModuleFactory::componentData(), parent)
-    , m_clientConfig(KSharedConfig::openConfig("wicd-client-kderc", KConfig::NoGlobals))
+    , m_clientConfig(KSharedConfig::openConfig("wicd-kderc", KConfig::NoGlobals))
 {
-    KGlobal::locale()->insertCatalog("wicd-client-kde");
+    KGlobal::locale()->insertCatalog("wicd-kde");
 
     KAboutData *about = new KAboutData(I18N_NOOP("kcmwicd"), 0, ki18n("Wicd Configuration"),
                                        0, KLocalizedString(), KAboutData::License_GPL,
@@ -252,7 +252,7 @@ void WicdKCM::save()
     config.writeEntry("Autoscan", m_ui->autoscanBox->isChecked());
     m_clientConfig->sync();
 
-    QDBusInterface client("org.kde.wicd-client-kde", "/Client");
+    QDBusInterface client("org.kde.wicd-kde", "/Client");
     if (client.isValid()) {
         client.call("reloadConfig");
     }

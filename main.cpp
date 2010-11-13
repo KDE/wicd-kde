@@ -35,7 +35,7 @@ public:
 int main(int argc, char *argv[])
 {
 
-    KAboutData aboutData( "wicd-client-kde", 0, ki18n("Wicd Client KDE"),
+    KAboutData aboutData( "wicd-kde", 0, ki18n("Wicd Client KDE"),
                           QByteArray("0.2.1"),
                           ki18n("Wicd client for KDE"),
                           KAboutData::License_GPL_V3,

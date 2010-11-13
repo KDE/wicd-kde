@@ -135,7 +135,7 @@ void MainWindow::activated()
 
 void MainWindow::reloadConfig()
 {
-    KSharedConfigPtr m_clientConfig = KSharedConfig::openConfig("wicd-client-kderc", KConfig::NoGlobals);
+    KSharedConfigPtr m_clientConfig = KSharedConfig::openConfig("wicd-kderc", KConfig::NoGlobals);
     KConfigGroup configGroup(m_clientConfig, "Client");
     m_networkPanel->showTooltips(configGroup.readEntry("Show tooltips", false));
     m_networkPanel->showSignalStrength(configGroup.readEntry("Show signal strength", false));
