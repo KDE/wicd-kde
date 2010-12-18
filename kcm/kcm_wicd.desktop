@@ -11,6 +11,7 @@ X-KDE-System-Settings-Parent-Category=network-settings
 
 Name=Wicd preferences
 Name[de]=Wicd-Einstellungen
+Name[km]=ចំណូល​ចិត្ត Wicd
 Name[nds]=WICD-Instellen
 Name[nl]=Voorkeuren van wicd
 Name[pt]=Preferências do Wicd
@@ -22,6 +23,7 @@ Name[x-test]=xxWicd preferencesxx
 
 Comment=System-wide preferences for the Wicd daemon
 Comment[de]=Systemweite Einstellungen für den Wicd-Dienst
+Comment[km]=ចំណូល​ចិត្ត​ទូទាំង​ប្រព័ន្ធ​សម្រាប់​ដេមិន​ Wicd
 Comment[pt]=Preferências do sistema para o servidor Wicd
 Comment[pt_BR]=Preferência para todo o sistema para o servidor Wicd
 Comment[ru]=Общесистемная настройка службы Wicd
