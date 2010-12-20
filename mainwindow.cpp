@@ -22,9 +22,12 @@
 #include "labelentry.h"
 #include "profilemanager.h"
 
-#include <KToolBar>
-#include <QToolButton>
+#include <KMenuBar>
+#include <KAction>
+#include <KActionMenu>
+#include <KActionCollection>
 #include <KMenu>
+#include <KApplication>
 
 #include <QVBoxLayout>
 #include <QCheckBox>
@@ -37,38 +40,12 @@
 #include <KToolInvocation>
 
 MainWindow::MainWindow()
-    : KMainWindow()
+    : KXmlGuiWindow()
 {
     QDBusConnection::sessionBus().registerObject("/Client", this, QDBusConnection::ExportScriptableSlots);
     setPlainCaption(i18n("Wicd client for KDE"));
     setAttribute(Qt::WA_DeleteOnClose, false);
     Wicd::locate();
-
-    //Toolbar
-    QToolButton *moreButton = new QToolButton();
-    moreButton->setIcon(KIcon("network-wireless"));
-    moreButton->setText(i18n("Network"));
-    moreButton->setPopupMode(QToolButton::InstantPopup);
-    moreButton->setToolButtonStyle(Qt::ToolButtonFollowStyle);
-
-    KMenu *moreMenu = new KMenu();
-    moreMenu->addAction(KIcon("list-add"), i18n("Create an ad-hoc network"), this, SLOT(createAdhocDialog()));
-    moreMenu->addAction(KIcon("edit-find"), i18n("Find a hidden network"), this, SLOT(findHiddenDialog()));
-    moreButton->setMenu(moreMenu);
-
-    KToolBar *toolbar = new KToolBar(this);
-    toolbar->setObjectName("mainToolBar");
-    toolbar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
-    toolbar->addWidget(moreButton);
-    toolbar->addSeparator();
-    toolbar->addAction(KIcon("preferences-system-network"), i18n("Preferences"), this, SLOT(showPreferences()));
-    toolbar->addSeparator();
-    toolbar->addAction(KIcon("view-refresh"), i18n("Reload"), DBusHandler::instance(), SLOT(scan()));
-    toolbar->addAction(KIcon("network-disconnect"), i18n("Disconnect"), DBusHandler::instance(), SLOT(disconnect()));
-    connect(toolbar, SIGNAL(toolButtonStyleChanged(Qt::ToolButtonStyle)),
-            moreButton, SLOT(setToolButtonStyle(Qt::ToolButtonStyle)));
-
-    addToolBar(toolbar);
 
     //Main panel
     m_networkPanel = new NetworkPanel(this);
@@ -82,10 +59,14 @@ MainWindow::MainWindow()
     m_trayicon = new TrayIcon(this);
     m_trayicon->setAssociatedWidget(this);
 
+    setupActions();
+
     //autosave window size
     setAutoSaveSettings();
     //load ui prefs
     reloadConfig();
+
+    menuBar()->hide();
 
     connect(m_trayicon, SIGNAL(activateRequested(bool, const QPoint)), this, SLOT(activated()));
     connect(DBusHandler::instance(), SIGNAL(statusChange(Status)), this, SLOT(updateStatus(Status)));
@@ -121,6 +102,39 @@ MainWindow::MainWindow()
 MainWindow::~MainWindow()
 {
     DBusHandler::destroy();
+}
+
+void MainWindow::setupActions()
+{
+    KAction* createadhocAction = new KAction(KIcon("list-add"), i18n("Create an ad-hoc network"), this);
+    actionCollection()->addAction("createadhoc", createadhocAction);
+    connect(createadhocAction, SIGNAL(triggered(bool)), this, SLOT(createAdhocDialog()));
+    KAction* findnetworkAction = new KAction(KIcon("edit-find"), i18n("Find a hidden network"), this);
+    actionCollection()->addAction("findnetwork", findnetworkAction);
+    connect(findnetworkAction, SIGNAL(triggered(bool)), this, SLOT(findHiddenDialog()));
+
+    KMenu *moreMenu = new KMenu();
+    moreMenu->addAction(createadhocAction);
+    moreMenu->addAction(findnetworkAction);
+
+    KActionMenu* networkMenuAction = new KActionMenu(KIcon("network-wireless"), i18n("Network"), this);
+    networkMenuAction->setMenu(moreMenu);
+    networkMenuAction->setDelayed(false);
+    actionCollection()->addAction("networkmenu", networkMenuAction);
+
+    KAction* preferencesAction = new KAction(KIcon("preferences-system-network"), i18n("Preferences"), this);
+    actionCollection()->addAction("preferences", preferencesAction);
+    connect(preferencesAction, SIGNAL(triggered(bool)), this, SLOT(showPreferences()));
+    KAction* reloadAction = new KAction(KIcon("view-refresh"), i18n("Reload"), this);
+    actionCollection()->addAction("reload", reloadAction);
+    connect(reloadAction, SIGNAL(triggered(bool)), DBusHandler::instance(), SLOT(scan()));
+    KAction* disconnectAction = new KAction(KIcon("network-disconnect"), i18n("Disconnect"), this);
+    actionCollection()->addAction("disconnect", disconnectAction);
+    connect(disconnectAction, SIGNAL(triggered(bool)), DBusHandler::instance(), SLOT(disconnect()));
+
+    KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
+
+    setupGUI(Default, "wicd-kdeui.rc");
 }
 
 void MainWindow::activated()

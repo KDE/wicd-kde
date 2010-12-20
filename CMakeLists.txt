@@ -43,4 +43,4 @@ kde4_install_auth_helper_files(wicdclient_scripts_helper org.kde.wicdclient.scri
 
 install( PROGRAMS wicd-kde.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR} )
 install( FILES wicd-kde.desktop  DESTINATION ${AUTOSTART_INSTALL_DIR} )
-install( FILES wicd-kde.notifyrc DESTINATION ${DATA_INSTALL_DIR}/wicd-kde )
+install( FILES wicd-kde.notifyrc wicd-kdeui.rc DESTINATION ${DATA_INSTALL_DIR}/wicd-kde )

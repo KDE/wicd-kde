@@ -24,10 +24,10 @@
 #include "networkpanel.h"
 #include "dbushandler.h"
 
-#include <KMainWindow>
+#include <KXmlGuiWindow>
 #include <KPushButton>
 
-class MainWindow : public KMainWindow
+class MainWindow : public KXmlGuiWindow
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "org.kde.wicd-kde")
@@ -54,6 +54,7 @@ private slots:
     void findHiddenDialog();
 
 private:
+    void setupActions();
     void setWirelessIcon(int quality);
 
     TrayIcon *m_trayicon;
