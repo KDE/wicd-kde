@@ -49,6 +49,7 @@ private slots:
     void freeze();
     void unfreeze();
     void cancelConnect() const;
+    void toggleMenuBar();
     void showPreferences();
     void createAdhocDialog();
     void findHiddenDialog();

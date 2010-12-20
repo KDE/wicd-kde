@@ -26,6 +26,7 @@
 #include <KAction>
 #include <KActionMenu>
 #include <KActionCollection>
+#include <KToggleAction>
 #include <KMenu>
 #include <KApplication>
 
@@ -132,6 +133,8 @@ void MainWindow::setupActions()
     actionCollection()->addAction("disconnect", disconnectAction);
     connect(disconnectAction, SIGNAL(triggered(bool)), DBusHandler::instance(), SLOT(disconnect()));
 
+    KToggleAction* togglemenubarAction = KStandardAction::showMenubar(this, SLOT(toggleMenuBar()), this);
+    actionCollection()->addAction( KStandardAction::name(KStandardAction::ShowMenubar), togglemenubarAction);
     KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
 
     setupGUI(Default, "wicd-kdeui.rc");
@@ -278,6 +281,11 @@ void MainWindow::cancelConnect() const
 {
     DBusHandler::instance()->callDaemon("CancelConnect");
     DBusHandler::instance()->callDaemon("SetForcedDisconnect", true);
+}
+
+void MainWindow::toggleMenuBar()
+{
+    menuBar()->setVisible(!menuBar()->isVisible());
 }
 
 void MainWindow::showPreferences()
