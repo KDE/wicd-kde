@@ -30,7 +30,7 @@ set(client_SRCS
 
 kde4_add_ui_files(client_SRCS profilemanager.ui)
 kde4_add_kcfg_files(client_SRCS settings.kcfgc)
-install(FILES settings.kcfg DESTINATION ${KCFG_INSTALL_DIR})
+install(FILES settings.kcfgc DESTINATION ${KCFG_INSTALL_DIR})
 
 kde4_add_executable( wicd-kde ${client_SRCS} )
 target_link_libraries( wicd-kde ${KDE4_KDEUI_LIBS} ${QT_QTNETWORK_LIBRARY} ${KDE4_KNOTIFYCONFIG_LIBS})
