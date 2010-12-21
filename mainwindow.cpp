@@ -21,6 +21,7 @@
 #include "global.h"
 #include "labelentry.h"
 #include "profilemanager.h"
+#include "settings.h"
 
 #include <KMenuBar>
 #include <KAction>
@@ -67,7 +68,7 @@ MainWindow::MainWindow()
     //load ui prefs
     reloadConfig();
 
-    menuBar()->hide();
+    menuBar()->setVisible(Settings::showMenubar());
 
     connect(m_trayicon, SIGNAL(activateRequested(bool, const QPoint)), this, SLOT(activated()));
     connect(DBusHandler::instance(), SIGNAL(statusChange(Status)), this, SLOT(updateStatus(Status)));
@@ -293,6 +294,8 @@ void MainWindow::cancelConnect() const
 void MainWindow::toggleMenuBar()
 {
     menuBar()->setVisible(!menuBar()->isVisible());
+    Settings::setShowMenubar(menuBar()->isVisible());
+    Settings::self()->writeConfig();
 }
 
 void MainWindow::configureNotifications()
