@@ -31,7 +31,7 @@ set(client_SRCS
 kde4_add_ui_files(client_SRCS profilemanager.ui)
 
 kde4_add_executable( wicd-kde ${client_SRCS} )
-target_link_libraries( wicd-kde ${KDE4_KDEUI_LIBS} ${QT_QTNETWORK_LIBRARY} )
+target_link_libraries( wicd-kde ${KDE4_KDEUI_LIBS} ${QT_QTNETWORK_LIBRARY} ${KDE4_KNOTIFYCONFIG_LIBS})
 install( TARGETS wicd-kde  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 kde4_add_executable(wicdclient_scripts_helper  scriptshelper.cpp)

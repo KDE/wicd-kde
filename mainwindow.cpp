@@ -26,9 +26,9 @@
 #include <KAction>
 #include <KActionMenu>
 #include <KActionCollection>
-#include <KToggleAction>
 #include <KMenu>
 #include <KApplication>
+#include <KNotifyConfigWidget>
 
 #include <QVBoxLayout>
 #include <QCheckBox>
@@ -108,11 +108,13 @@ MainWindow::~MainWindow()
 void MainWindow::setupActions()
 {
     KAction* createadhocAction = new KAction(KIcon("list-add"), i18n("Create an ad-hoc network"), this);
+    createadhocAction->setShortcuts(KShortcut("Ctrl+A"));
     actionCollection()->addAction("createadhoc", createadhocAction);
-    connect(createadhocAction, SIGNAL(triggered(bool)), this, SLOT(createAdhocDialog()));
+    connect(createadhocAction, SIGNAL(triggered()), this, SLOT(createAdhocDialog()));
     KAction* findnetworkAction = new KAction(KIcon("edit-find"), i18n("Find a hidden network"), this);
+    findnetworkAction->setShortcuts(KShortcut("Ctrl+F"));
     actionCollection()->addAction("findnetwork", findnetworkAction);
-    connect(findnetworkAction, SIGNAL(triggered(bool)), this, SLOT(findHiddenDialog()));
+    connect(findnetworkAction, SIGNAL(triggered()), this, SLOT(findHiddenDialog()));
 
     KMenu *moreMenu = new KMenu();
     moreMenu->addAction(createadhocAction);
@@ -124,17 +126,22 @@ void MainWindow::setupActions()
     actionCollection()->addAction("networkmenu", networkMenuAction);
 
     KAction* preferencesAction = new KAction(KIcon("preferences-system-network"), i18n("Preferences"), this);
+    preferencesAction->setShortcuts(KShortcut("Ctrl+P"));
     actionCollection()->addAction("preferences", preferencesAction);
-    connect(preferencesAction, SIGNAL(triggered(bool)), this, SLOT(showPreferences()));
+    connect(preferencesAction, SIGNAL(triggered()), this, SLOT(showPreferences()));
     KAction* reloadAction = new KAction(KIcon("view-refresh"), i18n("Reload"), this);
+    reloadAction->setShortcuts(KShortcut("Ctrl+R"));
     actionCollection()->addAction("reload", reloadAction);
-    connect(reloadAction, SIGNAL(triggered(bool)), DBusHandler::instance(), SLOT(scan()));
+    connect(reloadAction, SIGNAL(triggered()), DBusHandler::instance(), SLOT(scan()));
     KAction* disconnectAction = new KAction(KIcon("network-disconnect"), i18n("Disconnect"), this);
+    disconnectAction->setShortcuts(KShortcut("Ctrl+D"));
     actionCollection()->addAction("disconnect", disconnectAction);
-    connect(disconnectAction, SIGNAL(triggered(bool)), DBusHandler::instance(), SLOT(disconnect()));
+    connect(disconnectAction, SIGNAL(triggered()), DBusHandler::instance(), SLOT(disconnect()));
 
-    KToggleAction* togglemenubarAction = KStandardAction::showMenubar(this, SLOT(toggleMenuBar()), this);
-    actionCollection()->addAction( KStandardAction::name(KStandardAction::ShowMenubar), togglemenubarAction);
+    //standard actions
+    KStandardAction::showMenubar(this, SLOT(toggleMenuBar()), actionCollection());
+    KStandardAction::configureNotifications(this, SLOT(configureNotifications()), actionCollection());
+    KStandardAction::close(this, SLOT(close()), actionCollection());
     KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
 
     setupGUI(Default, "wicd-kdeui.rc");
@@ -286,6 +293,11 @@ void MainWindow::cancelConnect() const
 void MainWindow::toggleMenuBar()
 {
     menuBar()->setVisible(!menuBar()->isVisible());
+}
+
+void MainWindow::configureNotifications()
+{
+    KNotifyConfigWidget::configure(this);
 }
 
 void MainWindow::showPreferences()
