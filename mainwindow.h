@@ -42,6 +42,7 @@ public slots:
 private slots:
     void activated();
     void updateStatus(Status status);
+    void checkMessage(QString message);
     void handleConnectionResult(const QString& result);
     void launchProfileManager();
     void notify(const QString& event, const QString& message);
@@ -63,6 +64,7 @@ private:
     NetworkPanel *m_networkPanel;
     KPushButton *m_abortButton;
     Status m_status;
+    QString m_message;
     bool m_autoscan;
     QHash<QString, QString> m_messageTable;
 

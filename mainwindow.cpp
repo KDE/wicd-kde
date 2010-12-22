@@ -77,6 +77,7 @@ MainWindow::MainWindow()
     connect(DBusHandler::instance(), SIGNAL(scanStarted()), this, SLOT(freeze()));
     connect(DBusHandler::instance(), SIGNAL(scanEnded()), this, SLOT(unfreeze()));
     connect(m_abortButton, SIGNAL(clicked()), this, SLOT(cancelConnect()));
+    connect(statusBar(), SIGNAL(messageChanged(QString)), this, SLOT(checkMessage(QString)));
 
     //to ease translations
     m_messageTable.insert("interface_down", i18n("Putting interface down..."));
@@ -227,6 +228,12 @@ void MainWindow::updateStatus(Status status)
     }
     m_trayicon->setToolTipSubTitle(message);
     statusBar()->showMessage(message);
+    m_message = message;
+}
+
+void MainWindow::checkMessage(QString message)
+{    if (message.isEmpty())
+        statusBar()->showMessage(m_message);
 }
 
 void MainWindow::setWirelessIcon(int quality)
