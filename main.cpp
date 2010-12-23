@@ -23,13 +23,25 @@
 
 #include "mainwindow.h"
 
-class MyApp : public KUniqueApplication
+class WicdClient : public KUniqueApplication
 {
 public:
-    MyApp() : KUniqueApplication() { KGlobal::ref(); }
-    ~MyApp() {}
+    WicdClient() : KUniqueApplication()
+    {
+        KGlobal::ref();
+        window = new MainWindow();
+        window->setObjectName("wicdclientkde");
+    }
+
+    ~WicdClient()
+    {
+        delete window;
+    }
 
     int newInstance() { return 0; }
+
+private:
+    MainWindow * window;
 };
 
 int main(int argc, char *argv[])
@@ -53,10 +65,7 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    MyApp app;
-
-    MainWindow *window = new MainWindow();
-    window->setObjectName("wicdclientkde");
+    WicdClient app;
 
     return app.exec();
 }
