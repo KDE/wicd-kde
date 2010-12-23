@@ -27,6 +27,7 @@
 #include <KAction>
 #include <KActionMenu>
 #include <KActionCollection>
+#include <KToggleAction>
 #include <KMenu>
 #include <KApplication>
 #include <KNotifyConfigWidget>
@@ -141,7 +142,8 @@ void MainWindow::setupActions()
     connect(disconnectAction, SIGNAL(triggered()), DBusHandler::instance(), SLOT(disconnect()));
 
     //standard actions
-    KStandardAction::showMenubar(this, SLOT(toggleMenuBar()), actionCollection());
+    KToggleAction *toggleMenuAction = KStandardAction::showMenubar(this, SLOT(toggleMenuBar()), actionCollection());
+    toggleMenuAction->setChecked(Settings::showMenubar());
     KStandardAction::configureNotifications(this, SLOT(configureNotifications()), actionCollection());
     KStandardAction::close(this, SLOT(close()), actionCollection());
     KStandardAction::quit(kapp, SLOT(quit()), actionCollection());
