@@ -56,7 +56,6 @@ int main(int argc, char *argv[])
     aboutData.addCredit(ki18n("Dario Freddi"), ki18n("Contributor and original KCM author"), "drf@kde.org", "http://drfav.wordpress.com");
     aboutData.addCredit(ki18n("Brieuc Roblin"), ki18n("Contributor"), "brieuc.roblin@gmail.com");
     aboutData.addCredit(ki18n("Yoann Laissus"), ki18n("Contributor"), "yoann.laissus@gmail.com");
-    aboutData.setBugAddress("anthony.vital@gmail.com");
     aboutData.setProgramIconName("network-wireless");
 
     KCmdLineArgs::init(argc, argv, &aboutData);
