@@ -1,3 +1,7 @@
+- Use KXmlGuiWindow (customizable toolbar and optional menubar)
+- The application now depends on KDE 4.5
+- The icons do not conflict with knetworkmanager anymore
+- Rename binary to wicd-kde
 v0.2.1
 ------------------------------------------------
 - Fix potential crash when the connection is toggled with a double-click
