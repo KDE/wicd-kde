@@ -20,13 +20,10 @@
 #include "trayicon.h"
 #include "infosdialog.h"
 
-#include <KMenu>
 #include <KHelpMenu>
 #include <KIcon>
-#include <KAboutApplicationDialog>
 #include <KCmdLineArgs>
-#include <KLocalizedString>
-
+#include <KMenu>
 
 TrayIcon::TrayIcon( QObject *parent )
     : KStatusNotifierItem( parent )

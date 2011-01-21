@@ -31,7 +31,6 @@
 
 #include <KIcon>
 #include <KPushButton>
-#include <KLocalizedString>
 
 bool NetworkItemDelegate::m_useTooltips(false);
 bool NetworkItemDelegate::m_showStrength(false);

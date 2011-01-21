@@ -23,7 +23,6 @@
 
 #include <KInputDialog>
 
-#include <KLocalizedString>
 
 ProfileManager::ProfileManager( QWidget *parent )
     : KDialog( parent )

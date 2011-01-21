@@ -23,7 +23,6 @@
 #include "profilemanager.h"
 #include "settings.h"
 
-#include <KMenuBar>
 #include <KAction>
 #include <KActionMenu>
 #include <KActionCollection>
@@ -31,14 +30,14 @@
 #include <KMenu>
 #include <KApplication>
 #include <KNotifyConfigWidget>
+#include <KMenuBar>
+#include <KStatusBar>
 
 #include <QVBoxLayout>
 #include <QCheckBox>
 
 #include <KDialog>
-#include <KStatusBar>
 #include <KNotification>
-#include <KLocalizedString>
 #include <KInputDialog>
 #include <KToolInvocation>
 
