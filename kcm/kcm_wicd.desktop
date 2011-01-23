@@ -10,6 +10,7 @@ X-KDE-ParentApp=kcontrol
 X-KDE-System-Settings-Parent-Category=network-settings
 
 Name=Wicd preferences
+Name[da]=Indstillinger for Wicd
 Name[de]=Wicd-Einstellungen
 Name[en_GB]=Wicd preferences
 Name[es]=Preferencias de Wicd
@@ -26,6 +27,7 @@ Name[uk]=Налаштування Wicd
 Name[x-test]=xxWicd preferencesxx
 
 Comment=System-wide preferences for the Wicd daemon
+Comment[da]=Systemomfattende indstillinger for Wicd-dæmonen
 Comment[de]=Systemweite Einstellungen für den Wicd-Dienst
 Comment[en_GB]=System-wide preferences for the Wicd dæmon
 Comment[es]=Preferencias del sistema para el servicio de Wicd

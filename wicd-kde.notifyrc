@@ -1,6 +1,7 @@
 [Global]
 IconName=network-wireless
 Comment=Wicd client for KDE
+Comment[da]=Wicd-klient til KDE
 Comment[de]=Wicd-Oberfläche für KDE
 Comment[en_GB]=Wicd client for KDE
 Comment[es]=Cliente de Wicd para KDE
@@ -16,6 +17,7 @@ Comment[sv]=WICD-klient för KDE
 Comment[uk]=Клієнт Wicd для KDE
 Comment[x-test]=xxWicd client for KDExx
 Name=Wicd Client KDE
+Name[da]=Wicd Client KDE
 Name[de]=Wicd-Oberfläche (KDE)
 Name[en_GB]=Wicd Client KDE
 Name[es]=Cliente de Wicd para KDE
@@ -33,6 +35,7 @@ Name[x-test]=xxWicd Client KDExx
 
 [Event/connected]
 Name=Connected to the network
+Name[da]=Forbundet til netværket
 Name[de]=Verbunden mit dem Netzwerk
 Name[en_GB]=Connected to the network
 Name[es]=Conectado a la red
@@ -51,6 +54,7 @@ Action=None
 
 [Event/disconnected]
 Name=Disconnected from the network
+Name[da]=Forbindelse til netværket afbrudt
 Name[de]=Nicht verbunden mit dem Netzwerk
 Name[en_GB]=Disconnected from the network
 Name[es]=Desconectado de la red
@@ -70,6 +74,7 @@ Action=None
 [Event/error]
 Name=Error
 Name[cs]=Chyba
+Name[da]=Fejl
 Name[de]=Fehler
 Name[en_GB]=Error
 Name[es]=Error
