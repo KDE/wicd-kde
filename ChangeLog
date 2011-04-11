@@ -1,3 +1,5 @@
+v0.2.2
+------------------------------------------------
 - Use KXmlGuiWindow (customizable toolbar and optional menubar)
 - The application now depends on KDE 4.5
 - The icons do not conflict with knetworkmanager anymore
