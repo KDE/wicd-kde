@@ -22,6 +22,7 @@ Comment[ru]=Клиент Wicd для KDE
 Comment[sv]=WICD-klient för KDE
 Comment[uk]=Клієнт Wicd для KDE
 Comment[x-test]=xxWicd client for KDExx
+Comment[zh_CN]=Wicd KDE 前端
 Comment[zh_TW]=Wicd KDE 客戶端程式
 Name=Wicd Client KDE
 Name[bs]=Wicd klijent za KDE
@@ -45,6 +46,7 @@ Name[ru]=Клиент Wicd для KDE
 Name[sv]=WICD-klient KDE
 Name[uk]=Клієнтська програма Wicd для KDE
 Name[x-test]=xxWicd Client KDExx
+Name[zh_CN]=Wicd KDE 前端
 Name[zh_TW]=Wicd KDE 客戶端程式
 
 [Event/connected]
@@ -70,6 +72,7 @@ Name[ru]=Выполнено подключение к сети
 Name[sv]=Ansluten till nätverket
 Name[uk]=З’єднано з мережею
 Name[x-test]=xxConnected to the networkxx
+Name[zh_CN]=连接至网络
 Name[zh_TW]=連接到網路
 Action=None
 
@@ -96,6 +99,7 @@ Name[ru]=Выполнено отключение от сети
 Name[sv]=Nerkopplad från nätverket
 Name[uk]=Від’єднано від мережі
 Name[x-test]=xxDisconnected from the networkxx
+Name[zh_CN]=与网络断开
 Name[zh_TW]=從網路斷線
 Action=None
 
@@ -123,5 +127,6 @@ Name[sv]=Fel
 Name[ug]=خاتالىق
 Name[uk]=Помилка
 Name[x-test]=xxErrorxx
+Name[zh_CN]=错误
 Name[zh_TW]=錯誤
 Action=Popup

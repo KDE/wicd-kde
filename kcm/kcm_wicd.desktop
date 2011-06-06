@@ -32,6 +32,7 @@ Name[sv]=Inställningar av WICD
 Name[tr]=Wicd tercihleri
 Name[uk]=Налаштування Wicd
 Name[x-test]=xxWicd preferencesxx
+Name[zh_CN]=Wicd 首选项
 Name[zh_TW]=Wicd 喜好設定
 
 Comment=System-wide preferences for the Wicd daemon
@@ -55,6 +56,7 @@ Comment[ru]=Общесистемная настройка службы Wicd
 Comment[sv]=Systemomfattande inställningar för WICD-demonen
 Comment[uk]=Загальносистемні налаштування фонової служби Wicd
 Comment[x-test]=xxSystem-wide preferences for the Wicd daemonxx
+Comment[zh_CN]=Wicd 进程的系统级首选项
 Comment[zh_TW]=Wicd 伺服程式的系統喜好設定
 
 X-KDE-Keywords=wicd,network,wireless,wired,connection
