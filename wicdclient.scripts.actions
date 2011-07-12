@@ -1,6 +1,7 @@
 [org.kde.wicdclient.scripts.read]
 Name=Read scripts
 Name[bs]=Čitaj skripte
+Name[cs]=Číst skripty
 Name[da]=Læs scripts
 Name[de]=Skripte lesen
 Name[el]=Ανάγνωση σεναρίων
@@ -25,6 +26,7 @@ Name[zh_CN]=读取脚本
 Name[zh_TW]=讀取文稿
 Description=Requesting root privileges to read scripts
 Description[bs]=Zahtijevam root privilegije za čitanje skripti
+Description[cs]=Vyžaduji oprávnění administrátora systému pro přečtení skriptů
 Description[da]=Anmodning om root-rettigheder for at læse scripts
 Description[de]=Rechte des Systemverwalters für das Einlesen der Skripte nachfragen
 Description[el]=Αίτημα παραχώρησης δικαιωμάτων διαχειριστή για την ανάγνωση σεναρίων
@@ -53,6 +55,7 @@ Persistence=session
 [org.kde.wicdclient.scripts.save]
 Name=Save scripts
 Name[bs]=Snimi skripte
+Name[cs]=Uložit skripty
 Name[da]=Gem scripts
 Name[de]=Skripte speichern
 Name[el]=Αποθήκευση σεναρίων
@@ -77,6 +80,7 @@ Name[zh_CN]=保存脚本
 Name[zh_TW]=儲存文稿
 Description=Requesting root privileges to save scripts
 Description[bs]=Zahtijevam root privilegije za snimanje skripti
+Description[cs]=Vyžaduji oprávnění administrátora systému pro uložení skriptů
 Description[da]=Anmoder om root-rettigheder for at gemme scripts
 Description[de]=Rechte des Systemverwalters für das Speichern der Skripte nachfragen
 Description[el]=Αίτημα παραχώρησης δικαιωμάτων διαχειριστή για την αποθήκευση σεναρίων
