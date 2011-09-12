@@ -1,3 +1,6 @@
+v0.2.3
+------------------------------------------------
+- Fix wicd-kde.kcfg
 v0.2.2
 ------------------------------------------------
 - Use KXmlGuiWindow (customizable toolbar and optional menubar)
