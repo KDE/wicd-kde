@@ -12,6 +12,7 @@ configure_file (config-python.h.cmake config-python.h)
 
 add_subdirectory( kcm )
 add_subdirectory( icons )
+add_subdirectory( applet )
 
 set(client_SRCS
     global.cpp
@@ -44,5 +45,5 @@ kde4_install_auth_actions(org.kde.wicdclient.scripts wicdclient.scripts.actions)
 kde4_install_auth_helper_files(wicdclient_scripts_helper org.kde.wicdclient.scripts root)
 
 install( PROGRAMS wicd-kde.desktop  DESTINATION ${XDG_APPS_INSTALL_DIR} )
-install( FILES wicd-kde.desktop  DESTINATION ${AUTOSTART_INSTALL_DIR} )
+#install( FILES wicd-kde.desktop  DESTINATION ${AUTOSTART_INSTALL_DIR} )
 install( FILES wicd-kde.notifyrc wicd-kdeui.rc DESTINATION ${DATA_INSTALL_DIR}/wicd-kde )
