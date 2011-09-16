@@ -24,10 +24,7 @@
 #include "networkpropertiesdialog.h"
 #include "profilemanager.h"
 
-#include <QGraphicsLinearLayout>
-#include <QApplication>
-#include <QDesktopWidget>
-#include <QGraphicsView>
+#include <QFormLayout>
 
 #include <KIcon>
 
@@ -40,12 +37,15 @@ static const int buttonSize = 16;
 
 NetworkItem::NetworkItem(NetworkInfos info, QGraphicsWidget *parent)
     : QGraphicsWidget(parent),
-      m_dialog(0)
+      m_infoWidget(0),
+      m_isExpanded(false)
 {
     m_infos = info;
     //allow item highlighting
     setAcceptHoverEvents(true);
     setCacheMode(DeviceCoordinateCache);
+    //force parent layout to shrink vertically
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     
     NetworkIcon *networkIcon = new NetworkIcon(this);
     
@@ -104,7 +104,9 @@ NetworkItem::NetworkItem(NetworkInfos info, QGraphicsWidget *parent)
         }
     }
     
-    QGraphicsLinearLayout *lay = new QGraphicsLinearLayout(this);
+    m_vLayout = new QGraphicsLinearLayout(Qt::Vertical, this);
+    QGraphicsLinearLayout *lay = new QGraphicsLinearLayout(Qt::Horizontal);
+    m_vLayout->addItem(lay);
     lay->addItem(networkIcon);
     lay->setAlignment(networkIcon, Qt::AlignVCenter);
     lay->addStretch();
@@ -116,12 +118,22 @@ NetworkItem::NetworkItem(NetworkInfos info, QGraphicsWidget *parent)
     lay->setAlignment(configButton, Qt::AlignVCenter);
     lay->addItem(variantButton);
     lay->setAlignment(variantButton, Qt::AlignVCenter);
+
+    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(updateColors()));
+    updateColors();
 }
 
 NetworkItem::~NetworkItem()
 {
-    if (m_dialog)
-        m_dialog->deleteLater();
+    if (m_infoWidget)
+        m_infoWidget->deleteLater();
+}
+
+void NetworkItem::updateColors()
+{
+    QPalette pal = palette();
+    pal.setColor(QPalette::WindowText, Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
+    setPalette(pal);
 }
 
 void NetworkItem::toggleConnection()
@@ -145,6 +157,14 @@ void NetworkItem::toggleConnection()
     }
 }
 
+void NetworkItem::animationFinished()
+{
+    m_isExpanded = !m_isExpanded;
+    if (!m_isExpanded) {
+        m_vLayout->removeItem(infoWidget());
+    }
+}
+
 void NetworkItem::askProperties()
 {
     NetworkPropertiesDialog dialog(m_infos.value("networkId").toInt());
@@ -154,38 +174,16 @@ void NetworkItem::askProperties()
 
 void NetworkItem::askInfos()
 {
-    //move the dialog on the networkitem
-    QGraphicsView *gv(0);
-    // We position the popup relative to the view under the mouse cursor
-    foreach (QGraphicsView *view, scene()->views()) {
-        QPoint mousepos = view->mapFromGlobal(QCursor::pos());
-        if (view->geometry().contains(mousepos)) {
-            gv = view;
-            break;
-        }
+    if (m_isExpanded) {
+        m_infoFade->setProperty("startOpacity", 1.0);
+        m_infoFade->setProperty("targetOpacity", 0.0);
+        m_infoFade->start();
+    } else {
+        m_vLayout->addItem(infoWidget());
+        m_infoFade->setProperty("startOpacity", 0.0);
+        m_infoFade->setProperty("targetOpacity", 1.0);
+        m_infoFade->start();
     }
-    const QPoint position = gv ? gv->mapToGlobal(gv->mapFromScene(scenePos())) : QPoint();
-
-    const QRect available = QApplication::desktop()->availableGeometry(position);
-    dialog()->adjustSize();
-    QPoint pt = position;
-
-    if (pt.x() + dialog()->width() > available.right()) {
-        pt.rx() = available.right() - dialog()->width();
-    }
-    if (pt.x() < available.left()) {
-        pt.rx() = available.left();
-    }
-
-    if (pt.y() + dialog()->height() > available.bottom()) {
-        pt.ry() = available.bottom() - dialog()->height();
-    }
-    if (pt.y() < available.top()) {
-        pt.ry() = available.top();
-    }
-
-    dialog()->move(pt);
-    dialog()->animatedShow(Plasma::Down);
 }
 
 void NetworkItem::askProfileManager()
@@ -194,9 +192,45 @@ void NetworkItem::askProfileManager()
     manager.exec();
 }
 
-InfosDialog* NetworkItem::dialog()
+QGraphicsProxyWidget* NetworkItem::infoWidget()
 {
-    if (!m_dialog)
-        m_dialog = new InfosDialog(m_infos.value("networkId").toInt());
-    return m_dialog;
+    if (!m_infoWidget) {
+        m_infoWidget = new QGraphicsProxyWidget(this);
+
+        m_infoFade = Plasma::Animator::create(Plasma::Animator::FadeAnimation);
+        connect(m_infoFade, SIGNAL(finished()), this, SLOT(animationFinished()));
+        m_infoFade->setTargetWidget(m_infoWidget);
+
+        QWidget *widget = new QWidget();
+        widget->setAttribute(Qt::WA_NoSystemBackground);
+        QFormLayout *formLayout = new QFormLayout(widget);
+        formLayout->setLabelAlignment(Qt::AlignLeft);
+        widget->setLayout(formLayout);
+        m_infoWidget->setWidget(widget);
+
+        int networkId = m_infos.value("networkId").toInt();
+        QString signal;
+        if (DBusHandler::instance()->callDaemon("GetSignalDisplayType").toInt())
+            signal = DBusHandler::instance()->callWireless("GetWirelessProperty", networkId, "strength").toString()+" dBm";
+        else
+            signal = DBusHandler::instance()->callWireless("GetWirelessProperty", networkId, "quality").toString()+"%";
+        formLayout->addRow(new QLabel(i18n("Signal strength:")), new QLabel(signal));
+
+        QString encryption;
+        if (DBusHandler::instance()->callWireless("GetWirelessProperty", networkId, "encryption").toBool())
+            encryption = DBusHandler::instance()->callWireless("GetWirelessProperty", networkId, "encryption_method").toString();
+        else
+            encryption = i18n("Unsecured");
+        formLayout->addRow(new QLabel(i18n("Encryption type:")), new QLabel(encryption));
+
+        QString accessPoint = DBusHandler::instance()->callWireless("GetWirelessProperty", networkId, "bssid").toString();
+        formLayout->addRow(new QLabel(i18n("Access point address:")), new QLabel(accessPoint));
+
+        QString mode = DBusHandler::instance()->callWireless("GetWirelessProperty", networkId, "mode").toString();
+        formLayout->addRow(new QLabel(i18n("Mode:")), new QLabel(mode));
+
+        QString channel = DBusHandler::instance()->callWireless("GetWirelessProperty", networkId, "channel").toString();
+        formLayout->addRow(new QLabel(i18n("Channel:")), new QLabel(channel));
+    }
+    return m_infoWidget;
 }

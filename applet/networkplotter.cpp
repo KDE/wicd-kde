@@ -34,7 +34,6 @@ NetworkPlotter::NetworkPlotter(QGraphicsItem *parent = 0)
     setShowVerticalLines(false);
     setShowHorizontalLines(false);
     setUseAutoRange(true);
-    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     
     addPlot(QColor("#0099ff"));
     addPlot(QColor("#91ff00"));

@@ -32,6 +32,8 @@
 #include <Plasma/Svg>
 #include <Plasma/Label>
 #include <Plasma/ToolButton>
+#include <Plasma/BusyWidget>
+#include <Plasma/ScrollWidget>
 
 class QSizeF;
 
@@ -95,13 +97,17 @@ private:
     QString m_icon;
     Status m_status;
     QString m_message;
-    QGraphicsWidget *m_appletDialog;
-    QGraphicsLinearLayout * m_dialoglayout;
-    NetworkPlotter *m_plotter;
-    NetworkView *m_networkView;
     QHash<QString, QString> m_messageTable;
+
+    //Popup elements
+    QGraphicsLinearLayout * m_dialoglayout;
+    Plasma::ScrollWidget *m_scrollWidget;
+    NetworkView *m_networkView;
+    Plasma::BusyWidget *m_busyWidget;
+    NetworkPlotter *m_plotter;
     Plasma::Label *m_messageBox;
     Plasma::ToolButton *m_abortButton;
+
     InfosDialog* m_infosDialog;
 };
 

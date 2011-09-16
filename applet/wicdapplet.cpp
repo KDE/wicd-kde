@@ -33,6 +33,7 @@
 #include <KConfigDialog>
 
 #include <Plasma/Svg>
+#include <Plasma/ScrollWidget>
 #include <Plasma/Separator>
 #include <Plasma/ToolTipContent>
 #include <Plasma/ToolTipManager>
@@ -103,12 +104,21 @@ void WicdApplet::init()
     setupActions();
     
     //build the popup dialog
-    m_appletDialog = new QGraphicsWidget(this);
+    QGraphicsWidget *appletDialog = new QGraphicsWidget(this);
     m_dialoglayout = new QGraphicsLinearLayout(Qt::Vertical);
     
     //Network list
-    m_networkView = new NetworkView(this);
-    m_dialoglayout->addItem(m_networkView);
+    m_scrollWidget = new Plasma::ScrollWidget(this);
+    m_scrollWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    m_scrollWidget->setMaximumHeight(400);
+
+    m_networkView = new NetworkView(m_scrollWidget);
+    m_scrollWidget->setWidget(m_networkView);
+
+    m_busyWidget = new Plasma::BusyWidget(m_scrollWidget);
+    m_busyWidget->hide();
+
+    m_dialoglayout->addItem(m_scrollWidget);
     
     //Separator
     m_dialoglayout->addItem(new Plasma::Separator(this));
@@ -135,8 +145,8 @@ void WicdApplet::init()
     
     m_dialoglayout->addItem(bottombarLayout);
     
-    m_appletDialog->setLayout(m_dialoglayout);
-    setGraphicsWidget(m_appletDialog);
+    appletDialog->setLayout(m_dialoglayout);
+    setGraphicsWidget(appletDialog);
 
     setHasConfigurationInterface(true);
     
@@ -286,7 +296,7 @@ void WicdApplet::launchProfileManager()
 void WicdApplet::loadNetworks()
 {
     m_networkView->loadList(DBusHandler::instance()->networksList());
-    m_appletDialog->adjustSize();
+    graphicsWidget()->adjustSize();
 }
 
 void WicdApplet::showPlotter(bool show)
@@ -307,7 +317,7 @@ void WicdApplet::showPlotter(bool show)
             delete separator;
         }
     }
-    m_appletDialog->adjustSize();
+    graphicsWidget()->adjustSize();
 }
 
 void WicdApplet::notify(const QString &event, const QString &message)
@@ -327,13 +337,16 @@ void WicdApplet::forceUpdateStatus()
 
 void WicdApplet::freeze()
 {
-    m_networkView->setBusy(true);
+    m_scrollWidget->widget()->hide();
+    m_busyWidget->resize(m_scrollWidget->viewportGeometry().size());
+    m_busyWidget->show();
     setBusy(true);
 }
 
 void WicdApplet::unfreeze()
 {
-    m_networkView->setBusy(false);
+    m_busyWidget->hide();
+    m_scrollWidget->widget()->show();
     setBusy(false);
     loadNetworks();
 }

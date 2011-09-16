@@ -21,9 +21,12 @@
 #define NETWORKITEM_H 
 
 #include "types.h"
-#include "infosdialog.h"
 
 #include <QGraphicsWidget>
+#include <QGraphicsLinearLayout>
+#include <QGraphicsProxyWidget>
+
+#include <Plasma/Animation>
 
 class NetworkItem : public QGraphicsWidget
 {
@@ -34,16 +37,21 @@ public:
     static void showStrength(bool show) { m_showStrength = show; }
     
 private slots:
+    void updateColors();
     void toggleConnection();
+    void animationFinished();
     void askProperties();
     void askInfos();
     void askProfileManager();
     
 private:
-    InfosDialog *dialog();
+    QGraphicsProxyWidget *infoWidget();
 
     NetworkInfos m_infos;
-    InfosDialog *m_dialog;
+    QGraphicsLinearLayout *m_vLayout;
+    QGraphicsProxyWidget *m_infoWidget;
+    Plasma::Animation *m_infoFade;
+    bool m_isExpanded;
 
     static bool m_showStrength;
 };

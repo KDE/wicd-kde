@@ -23,23 +23,18 @@
 #include "types.h"
 #include "networkitem.h"
 
-#include <QGraphicsWidget>
 #include <QGraphicsLinearLayout>
 
-
-#include <Plasma/ScrollWidget>
 #include <Plasma/ItemBackground>
-#include <Plasma/BusyWidget>
 
 
-class NetworkView : public Plasma::ScrollWidget
+class NetworkView : public QGraphicsWidget
 {
     Q_OBJECT
 
 public:
-    NetworkView(QGraphicsWidget *parent);
+    NetworkView(QGraphicsItem *parent = 0);
     ~NetworkView();
-    void setBusy(bool busy);
     void loadList(const QMap<int, NetworkInfos> &list);
     void showSignalStrength(bool show);
     
@@ -51,10 +46,8 @@ private slots:
 
 private:
     QList<NetworkItem*> m_networkItemList;
-    QGraphicsWidget* m_listview;
-    QGraphicsLinearLayout* m_listviewLayout;
+    QGraphicsLinearLayout* m_layout;
     Plasma::ItemBackground *m_itemBackground;
-    Plasma::BusyWidget *m_busyWidget;
 };
 
 #endif
