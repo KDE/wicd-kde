@@ -1,14 +1,22 @@
 [Desktop Entry]
 Name=Wicd client
+Name[es]=Cliente de Wicd
+Name[nl]=Wicd-client
 Name[pt]=Cliente do Wicd
+Name[pt_BR]=Cliente Wicd
 Name[sv]=WICD-klient
 Name[uk]=Клієнт Wicd
 Name[x-test]=xxWicd clientxx
+Name[zh_TW]=Wicd 客戶端程式
 Comment=Wicd Client KDE
+Comment[es]=Cliente de Wicd para KDE
+Comment[nl]=KDE Wicd-client
 Comment[pt]=Cliente do Wicd para o KDE
+Comment[pt_BR]=Cliente Wicd para o KDE
 Comment[sv]=WICD-klient KDE
 Comment[uk]=Клієнтська програма Wicd для KDE
 Comment[x-test]=xxWicd Client KDExx
+Comment[zh_TW]=Wicd KDE 客戶端程式
 Type=Service
 Icon=network-wireless
 
