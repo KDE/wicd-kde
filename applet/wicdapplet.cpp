@@ -110,6 +110,7 @@ void WicdApplet::init()
     //Network list
     m_scrollWidget = new Plasma::ScrollWidget(this);
     m_scrollWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    m_scrollWidget->setFlag(QGraphicsItem::ItemClipsChildrenToShape);
     m_scrollWidget->setMaximumHeight(400);
 
     m_networkView = new NetworkView(m_scrollWidget);
