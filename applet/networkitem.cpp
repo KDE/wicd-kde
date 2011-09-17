@@ -57,12 +57,12 @@ NetworkItem::NetworkItem(NetworkInfos info, QGraphicsWidget *parent)
     //config button for all
     Plasma::IconWidget *configButton = new Plasma::IconWidget(this);
     configButton->setMaximumSize(configButton->sizeFromIconSize(buttonSize));
-    configButton->setIcon(KIcon("configure"));
+    configButton->setSvg("widgets/configuration-icons", "configure");
     connect(configButton, SIGNAL(clicked()), this, SLOT(askProperties()));
     
-    //variantButton opens either an infodialog or the profilemanager
-    Plasma::IconWidget *variantButton = new Plasma::IconWidget(this);
-    variantButton->setMaximumSize(variantButton->sizeFromIconSize(buttonSize));
+    //m_variantButton opens either an infodialog or the profilemanager
+    m_variantButton = new Plasma::IconWidget(this);
+    m_variantButton->setMaximumSize(m_variantButton->sizeFromIconSize(buttonSize));
     
     Plasma::Meter *qualityBar(0); //for wireless connection
     
@@ -70,8 +70,8 @@ NetworkItem::NetworkItem(NetworkInfos info, QGraphicsWidget *parent)
         //wired
         networkIcon->setText(Wicd::currentprofile);
         networkIcon->setIcon("network-wired");
-        variantButton->setIcon(KIcon("user-identity"));
-        connect(variantButton, SIGNAL(clicked()), this, SLOT(askProfileManager()));
+        m_variantButton->setIcon(KIcon("user-identity"));
+        connect(m_variantButton, SIGNAL(clicked()), this, SLOT(askProfileManager()));
     } else {
         //wireless
         networkIcon->setText(m_infos.value("essid").toString());
@@ -79,8 +79,8 @@ NetworkItem::NetworkItem(NetworkInfos info, QGraphicsWidget *parent)
         if (m_infos.value("encryption").toBool()) {
             networkIcon->setEncrypted(true);
         }
-        variantButton->setIcon(KIcon("dialog-information"));
-        connect(variantButton, SIGNAL(clicked()), this, SLOT(askInfos()));
+        m_variantButton->setSvg("widgets/action-overlays", "add-normal");
+        connect(m_variantButton, SIGNAL(clicked()), this, SLOT(askInfos()));
         //add signal quality
         qualityBar = new Plasma::Meter(this);
         qualityBar->setMeterType(Plasma::Meter::BarMeterHorizontal);
@@ -116,8 +116,8 @@ NetworkItem::NetworkItem(NetworkInfos info, QGraphicsWidget *parent)
     }
     lay->addItem(configButton);
     lay->setAlignment(configButton, Qt::AlignVCenter);
-    lay->addItem(variantButton);
-    lay->setAlignment(variantButton, Qt::AlignVCenter);
+    lay->addItem(m_variantButton);
+    lay->setAlignment(m_variantButton, Qt::AlignVCenter);
 
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(updateColors()));
     updateColors();
@@ -175,10 +175,12 @@ void NetworkItem::askProperties()
 void NetworkItem::askInfos()
 {
     if (m_isExpanded) {
+        m_variantButton->setSvg("widgets/action-overlays", "add-normal");
         m_infoFade->setProperty("startOpacity", 1.0);
         m_infoFade->setProperty("targetOpacity", 0.0);
         m_infoFade->start();
     } else {
+        m_variantButton->setSvg("widgets/action-overlays", "remove-normal");
         m_vLayout->addItem(infoWidget());
         m_infoFade->setProperty("startOpacity", 0.0);
         m_infoFade->setProperty("targetOpacity", 1.0);
@@ -206,7 +208,6 @@ QGraphicsProxyWidget* NetworkItem::infoWidget()
         QFormLayout *formLayout = new QFormLayout(widget);
         formLayout->setLabelAlignment(Qt::AlignLeft);
         widget->setLayout(formLayout);
-        m_infoWidget->setWidget(widget);
 
         int networkId = m_infos.value("networkId").toInt();
         QString signal;
@@ -231,6 +232,8 @@ QGraphicsProxyWidget* NetworkItem::infoWidget()
 
         QString channel = DBusHandler::instance()->callWireless("GetWirelessProperty", networkId, "channel").toString();
         formLayout->addRow(new QLabel(i18n("Channel:")), new QLabel(channel));
+
+        m_infoWidget->setWidget(widget);
     }
     return m_infoWidget;
 }

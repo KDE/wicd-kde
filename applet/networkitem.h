@@ -26,6 +26,7 @@
 #include <QGraphicsLinearLayout>
 #include <QGraphicsProxyWidget>
 
+#include <Plasma/IconWidget>
 #include <Plasma/Animation>
 
 class NetworkItem : public QGraphicsWidget
@@ -49,6 +50,7 @@ private:
 
     NetworkInfos m_infos;
     QGraphicsLinearLayout *m_vLayout;
+    Plasma::IconWidget *m_variantButton;
     QGraphicsProxyWidget *m_infoWidget;
     Plasma::Animation *m_infoFade;
     bool m_isExpanded;
