@@ -13,6 +13,7 @@ configure_file (config-python.h.cmake config-python.h)
 add_subdirectory( kcm )
 add_subdirectory( icons )
 add_subdirectory( applet )
+add_subdirectory( dataengine )
 
 # set(client_SRCS
 #     global.cpp

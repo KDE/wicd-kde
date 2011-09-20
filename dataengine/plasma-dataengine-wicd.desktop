@@ -1,0 +1,18 @@
+[Desktop Entry]
+Name=Wicd
+
+Comment=A Wicd data engine
+
+X-KDE-ServiceTypes=Plasma/DataEngine
+Type=Service
+Icon=network-wireless
+X-KDE-Library=plasma_engine_wicd
+X-KDE-PluginInfo-Author=Anthony Vital
+X-KDE-PluginInfo-Email=anthony.vital@gmail.com
+X-KDE-PluginInfo-Name=wicd
+X-KDE-PluginInfo-Version=
+X-KDE-PluginInfo-Website=
+X-KDE-PluginInfo-Category=
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=
+
