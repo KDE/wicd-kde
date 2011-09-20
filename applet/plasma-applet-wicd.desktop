@@ -2,6 +2,7 @@
 Name=Wicd client
 Name[da]=Wicd client
 Name[es]=Cliente de Wicd
+Name[it]=Client Wicd
 Name[nl]=Wicd-client
 Name[pt]=Cliente do Wicd
 Name[pt_BR]=Cliente Wicd
@@ -12,6 +13,7 @@ Name[zh_TW]=Wicd 客戶端程式
 Comment=Wicd Client KDE
 Comment[da]=Wicd Client KDE
 Comment[es]=Cliente de Wicd para KDE
+Comment[it]=Client Wicd per KDE
 Comment[nl]=KDE Wicd-client
 Comment[pt]=Cliente do Wicd para o KDE
 Comment[pt_BR]=Cliente Wicd para o KDE
