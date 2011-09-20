@@ -138,23 +138,7 @@ void NetworkItem::updateColors()
 
 void NetworkItem::toggleConnection()
 {
-    bool networkConnected = m_infos.value("connected").toBool();
-    int networkId = m_infos.value("networkId").toInt();
-
-    if (networkConnected) {
-        if (networkId == -1) {
-            DBusHandler::instance()->callWired("DisconnectWired");
-        } else {
-            DBusHandler::instance()->callWireless("DisconnectWireless");
-        }
-        DBusHandler::instance()->callDaemon("SetForcedDisconnect", true);
-    } else {
-        if (networkId == -1) {
-            DBusHandler::instance()->callWired("ConnectWired");
-        } else {
-            DBusHandler::instance()->callWireless("ConnectWireless", networkId);
-        }
-    }
+    emit toggled(m_infos.value("networkId").toInt());
 }
 
 void NetworkItem::animationFinished()

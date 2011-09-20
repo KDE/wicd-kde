@@ -45,6 +45,9 @@ private slots:
     void askInfos();
     void askProfileManager();
     
+signals:
+    void toggled(int id);
+
 private:
     QGraphicsProxyWidget *infoWidget();
 

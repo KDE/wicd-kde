@@ -25,6 +25,7 @@
 
 #include <QGraphicsLinearLayout>
 
+#include <Plasma/DataEngine>
 #include <Plasma/ItemBackground>
 
 
@@ -35,19 +36,23 @@ class NetworkView : public QGraphicsWidget
 public:
     NetworkView(QGraphicsItem *parent = 0);
     ~NetworkView();
-    void loadList(const QMap<int, NetworkInfos> &list);
+    void loadNetworks();
     void showSignalStrength(bool show);
     
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
 
 private slots:
+    void toggleConnection(int networkId);
     void highlightItem(QGraphicsItem* item);
 
 private:
+    Plasma::DataEngine* engine();
+
     QList<NetworkItem*> m_networkItemList;
     QGraphicsLinearLayout* m_layout;
     Plasma::ItemBackground *m_itemBackground;
+    Plasma::Service *m_controller;
 };
 
 #endif

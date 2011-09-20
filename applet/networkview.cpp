@@ -19,6 +19,8 @@
 
 #include "networkview.h"
 
+#include <Plasma/DataEngineManager>
+
 NetworkView::NetworkView( QGraphicsItem *parent )
     : QGraphicsWidget( parent )
 {
@@ -28,13 +30,17 @@ NetworkView::NetworkView( QGraphicsItem *parent )
     
     m_itemBackground = new Plasma::ItemBackground(this);
     m_itemBackground->setTargetItem(0);
+
+    Plasma::DataEngineManager::self()->loadEngine("wicd");
+    m_controller = engine()->serviceForSource("");
 }
 
 NetworkView::~NetworkView()
 {
+    Plasma::DataEngineManager::self()->unloadEngine("wicd");
 }
 
-void NetworkView::loadList(const QMap<int, NetworkInfos> &list)
+void NetworkView::loadNetworks()
 {
     //delete old list
     while (m_networkItemList.count() > 0) {
@@ -44,10 +50,21 @@ void NetworkView::loadList(const QMap<int, NetworkInfos> &list)
         oldItem->deleteLater();
     }
 
+    //get new data
+    Plasma::DataEngine::Data list = engine()->query("networks");
+    //Store the data in a QMap with int key
+    QMap<int, NetworkInfos> networkMap;
+    Plasma::DataEngine::Data::const_iterator i = list.constBegin();
+    while (i != list.constEnd()) {
+        networkMap.insert(i.key().toInt(), i.value().toHash());
+        ++i;
+    }
+
     //populate new list
-    QMap<int, NetworkInfos>::const_iterator it = list.constBegin();
-    while (it != list.constEnd()) {
+    QMap<int, NetworkInfos>::const_iterator it = networkMap.constBegin();
+    while (it != networkMap.constEnd()) {
         NetworkItem* item = new NetworkItem(it.value(), this);
+        connect(item, SIGNAL(toggled(int)), this, SLOT(toggleConnection(int)));
         item->installEventFilter(this);
         m_networkItemList.append(item);
         m_layout->addItem(item);
@@ -81,8 +98,27 @@ void NetworkView::showSignalStrength(bool show)
     NetworkItem::showStrength(show);
 }
 
+void NetworkView::toggleConnection(int networkId)
+{
+    if (m_controller) {
+        KConfigGroup op = m_controller->operationDescription("toggleConnection");
+        op.writeEntry("networkId", networkId);
+        m_controller->startOperationCall(op);
+    }
+}
+
 void NetworkView::highlightItem(QGraphicsItem* item)
 {
     m_itemBackground->setTargetItem(item);
+}
+
+Plasma::DataEngine* NetworkView::engine()
+{
+    Plasma::DataEngine *e = Plasma::DataEngineManager::self()->engine("wicd");
+    if (e->isValid()) {
+        return e;
+    } else {
+        return 0;
+    }
 }
 

@@ -296,7 +296,7 @@ void WicdApplet::launchProfileManager()
 
 void WicdApplet::loadNetworks()
 {
-    m_networkView->loadList(DBusHandler::instance()->networksList());
+    m_networkView->loadNetworks();
     graphicsWidget()->adjustSize();
 }
 
