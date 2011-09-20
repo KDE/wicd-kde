@@ -167,6 +167,11 @@ NetworkInfos DBusHandler::wirelessProperties(const int &networkId) const
     properties.insert("quality", call(m_wireless, "GetWirelessProperty", networkId, "quality").toInt());
     properties.insert("encryption", call(m_wireless, "GetWirelessProperty", networkId, "encryption").toBool());
     properties.insert("connected", false);
+    if (properties.value("encryption").toBool())
+        properties.insert("encryptionType", call(m_wireless, "GetWirelessProperty", networkId, "encryption_method").toString());
+    properties.insert("bssid", call(m_wireless, "GetWirelessProperty", networkId, "bssid").toString());
+    properties.insert("mode", call(m_wireless, "GetWirelessProperty", networkId, "mode").toString());
+    properties.insert("channel", call(m_wireless, "GetWirelessProperty", networkId, "channel").toString());
     return properties;
 }
 

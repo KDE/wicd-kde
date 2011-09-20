@@ -19,7 +19,6 @@
 
 #include "networkitem.h" 
 #include "networkicon.h"
-#include "dbushandler.h"
 #include "global.h"
 #include "networkpropertiesdialog.h"
 #include "profilemanager.h"
@@ -191,28 +190,27 @@ QGraphicsProxyWidget* NetworkItem::infoWidget()
         formLayout->setLabelAlignment(Qt::AlignLeft);
         widget->setLayout(formLayout);
 
-        int networkId = m_infos.value("networkId").toInt();
         QString signal;
-        if (DBusHandler::instance()->callDaemon("GetSignalDisplayType").toInt())
-            signal = DBusHandler::instance()->callWireless("GetWirelessProperty", networkId, "strength").toString()+" dBm";
+        if (m_infos.value("usedbm").toBool())
+            signal = m_infos.value("strength").toString()+" dBm";
         else
-            signal = DBusHandler::instance()->callWireless("GetWirelessProperty", networkId, "quality").toString()+"%";
+            signal = m_infos.value("quality").toString()+"%";
         formLayout->addRow(new QLabel(i18n("Signal strength:")), new QLabel(signal));
 
         QString encryption;
-        if (DBusHandler::instance()->callWireless("GetWirelessProperty", networkId, "encryption").toBool())
-            encryption = DBusHandler::instance()->callWireless("GetWirelessProperty", networkId, "encryption_method").toString();
+        if (m_infos.value("encryption").toBool())
+            encryption = m_infos.value("encryptionType").toString();
         else
             encryption = i18n("Unsecured");
         formLayout->addRow(new QLabel(i18n("Encryption type:")), new QLabel(encryption));
 
-        QString accessPoint = DBusHandler::instance()->callWireless("GetWirelessProperty", networkId, "bssid").toString();
+        QString accessPoint = m_infos.value("bssid").toString();
         formLayout->addRow(new QLabel(i18n("Access point address:")), new QLabel(accessPoint));
 
-        QString mode = DBusHandler::instance()->callWireless("GetWirelessProperty", networkId, "mode").toString();
+        QString mode = m_infos.value("mode").toString();
         formLayout->addRow(new QLabel(i18n("Mode:")), new QLabel(mode));
 
-        QString channel = DBusHandler::instance()->callWireless("GetWirelessProperty", networkId, "channel").toString();
+        QString channel = m_infos.value("channel").toString();
         formLayout->addRow(new QLabel(i18n("Channel:")), new QLabel(channel));
 
         m_infoWidget->setWidget(widget);
