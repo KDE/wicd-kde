@@ -125,8 +125,6 @@ NetworkItem::NetworkItem(NetworkInfos info, QGraphicsWidget *parent)
 
 NetworkItem::~NetworkItem()
 {
-    if (m_infoWidget)
-        m_infoWidget->deleteLater();
 }
 
 void NetworkItem::updateColors()
