@@ -81,7 +81,6 @@ private:
     void loadNetworks();
     void showPlotter(bool show);
     void notify(const QString& event, const QString& message);
-    InfosDialog* infosDialog();
 
     // Configuration dialog
     Ui::WicdAppletConfig ui;

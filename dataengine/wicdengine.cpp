@@ -33,7 +33,6 @@ WicdEngine::WicdEngine(QObject* parent, const QVariantList& args)
 void WicdEngine::init()
 {
     //force first status update
-    m_state = 10;
     updateStatus(DBusHandler::instance()->status());
 }
 

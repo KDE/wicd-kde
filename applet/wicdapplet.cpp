@@ -41,8 +41,7 @@
 WicdApplet::WicdApplet(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args),
       m_theme(0),
-      m_plotter(0),
-      m_infosDialog(0)
+      m_plotter(0)
 {
     KGlobal::locale()->insertCatalog("wicd-kde");
     
@@ -80,18 +79,14 @@ WicdApplet::WicdApplet(QObject *parent, const QVariantList &args)
     m_messageTable.insert("setting_static_ip", i18n("Setting static IP addresses..."));
     m_messageTable.insert("aborted", i18n("Aborted"));
     m_messageTable.insert("Failed", i18n("Failed"));
+
+    //prevent notification on startup
+    m_status.State = 10;
 }
 
 
 WicdApplet::~WicdApplet()
 {
-    if (m_infosDialog)
-        m_infosDialog->deleteLater();
-    //     if (hasFailedToLaunch()) {
-    //         // Do some cleanup here
-    //     } else {
-    //         // Save settings
-    //     }
 }
 
 void WicdApplet::init()
@@ -205,7 +200,6 @@ void WicdApplet::dataUpdated(const QString& source, const Plasma::DataEngine::Da
             m_plotter->setInterface(m_interface);
         }
         if (m_status.State != status.State) {
-            m_status = status;
             if (status.State == WicdState::CONNECTING) {
                 freeze();
                 m_abortButton->setVisible(true);
@@ -227,6 +221,7 @@ void WicdApplet::dataUpdated(const QString& source, const Plasma::DataEngine::Da
                 }
             }
         }
+        m_status = status;
         QString message;
         if (status.State == WicdState::WIRED) {
             m_icon = "network-wired-activated";
@@ -432,17 +427,11 @@ void WicdApplet::findHiddenDialog()
     }
 }
 
-InfosDialog* WicdApplet::infosDialog()
-{
-    if (!m_infosDialog)
-        m_infosDialog = new InfosDialog();
-    return m_infosDialog;
-}
-
 void WicdApplet::connectionInfoRequested()
 {
-    infosDialog()->move(popupPosition(infosDialog()->sizeHint(), Qt::AlignRight));
-    infosDialog()->animatedShow(locationToDirection(location()));
+    m_infosDialog = new InfosDialog(m_status);
+    m_infosDialog->move(popupPosition(m_infosDialog->sizeHint(), Qt::AlignRight));
+    m_infosDialog->animatedShow(locationToDirection(location()));
 }
 
 void WicdApplet::configChanged()

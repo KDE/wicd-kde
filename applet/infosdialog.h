@@ -20,6 +20,8 @@
 #ifndef INFOSDIALOG_H
 #define INFOSDIALOG_H
 
+#include "dbushandler.h"
+
 #include <QFormLayout>
 
 #include <Plasma/Dialog>
@@ -29,8 +31,7 @@ class InfosDialog : public Plasma::Dialog
     Q_OBJECT
 
 public:
-    InfosDialog(int networkId, QWidget *parent = 0);
-    InfosDialog(QWidget *parent = 0);
+    InfosDialog(Status status, QWidget *parent = 0);
     ~InfosDialog();
     
 private slots:
