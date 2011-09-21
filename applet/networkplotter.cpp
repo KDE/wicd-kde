@@ -63,8 +63,9 @@ NetworkPlotter::~NetworkPlotter()
 
 void NetworkPlotter::setInterface(const QString interface)
 {
-    if (interface.isEmpty())
+    if (interface.isEmpty() || (!interface.isEmpty() && interface == m_interface)) {
         return;
+    }
 
     Plasma::DataEngine *e = engine();
     if (!e)

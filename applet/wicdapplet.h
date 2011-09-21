@@ -26,8 +26,6 @@
 #include "infosdialog.h"
 #include "ui_wicdappletConfig.h"
 
-#include <KIcon>
-
 #include <Plasma/PopupApplet>
 #include <Plasma/Svg>
 #include <Plasma/Label>
@@ -51,10 +49,10 @@ public:
                         const QStyleOptionGraphicsItem *option,
                         const QRect& contentsRect);
     void init();
-
     QList<QAction*> contextualActions();
 
 public slots:
+    void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
     void configChanged();
     void toolTipAboutToShow();
     void toolTipHidden();
@@ -67,10 +65,8 @@ protected slots:
     void configAccepted();
 
 private slots:
-    void updateStatus(Status status);
     void handleConnectionResult(const QString& result);
     void launchProfileManager();
-    void forceUpdateStatus();
     void freeze();
     void unfreeze();
     void cancelConnect() const;
@@ -81,7 +77,7 @@ private slots:
 
 private:
     void setupActions();
-    void setWirelessIcon(int quality);
+    QString qualityToIcon(int quality) const;
     void loadNetworks();
     void showPlotter(bool show);
     void notify(const QString& event, const QString& message);
@@ -94,9 +90,11 @@ private:
     bool m_showPlotter;
 
     Plasma::Svg *m_theme;
+
     QString m_icon;
     Status m_status;
     QString m_message;
+    QString m_interface;
     QHash<QString, QString> m_messageTable;
 
     //Popup elements

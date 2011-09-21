@@ -57,8 +57,7 @@ WicdApplet::WicdApplet(QObject *parent, const QVariantList &args)
     
     // this will get us the standard applet background, for free!
     setBackgroundHints(DefaultBackground);
-    
-    connect(DBusHandler::instance(), SIGNAL(statusChange(Status)), this, SLOT(updateStatus(Status)));
+
     connect(DBusHandler::instance(), SIGNAL(connectionResultSend(QString)), this, SLOT(handleConnectionResult(QString)));
     connect(DBusHandler::instance(), SIGNAL(launchChooser()), this, SLOT(launchProfileManager()));
     connect(DBusHandler::instance(), SIGNAL(scanStarted()), this, SLOT(freeze()));
@@ -96,7 +95,7 @@ WicdApplet::~WicdApplet()
 }
 
 void WicdApplet::init()
-{    
+{
     m_theme->resize(contentsRect().size());
     
     Plasma::ToolTipManager::self()->registerWidget(this);
@@ -153,10 +152,8 @@ void WicdApplet::init()
     
     // read config
     configChanged();
-    
-    //force first status update
-    m_status.State = 10;
-    updateStatus(DBusHandler::instance()->status());
+
+    dataEngine("wicd")->connectSource("status", this);
 }
 
 void WicdApplet::setupActions()
@@ -186,6 +183,102 @@ void WicdApplet::setupActions()
 
 }
 
+QList<QAction*> WicdApplet::contextualActions()
+{
+    QList<QAction *> rv;
+    QAction *actinfo = action("connection_info");
+    QAction *actcrea = action("createadhoc");
+    QAction *actfind = action("findnetwork");
+    QAction *actconf = action("configure_wicd");
+    rv << actinfo << actcrea << actfind << actconf;
+    return rv;
+}
+
+void WicdApplet::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
+{
+    if (source == "status") {
+        Status status;
+        status.State = data["state"].toUInt();
+        status.Infos = data["info"].toStringList();
+        m_interface = data["interface"].toString();
+        if (m_plotter) {
+            m_plotter->setInterface(m_interface);
+        }
+        if (m_status.State != status.State) {
+            m_status = status;
+            if (status.State == WicdState::CONNECTING) {
+                freeze();
+                m_abortButton->setVisible(true);
+            } else {
+                unfreeze();
+                m_abortButton->setVisible(false);
+                switch (status.State) {
+                case WicdState::WIRED:
+                    notify("connected", i18n("Connected to wired network"));
+                    break;
+                case WicdState::WIRELESS:
+                    notify("connected", i18n("Connected to wireless network"));
+                    break;
+                case WicdState::NOT_CONNECTED:
+                    notify("disconnected", i18n("Disconnected"));
+                    break;
+                default:
+                    break;
+                }
+            }
+        }
+        QString message;
+        if (status.State == WicdState::WIRED) {
+            m_icon = "network-wired-activated";
+            message = i18n("Connected to wired network (IP: %1)", status.Infos.at(0));//info(0) ip
+        } else if (status.State == WicdState::WIRELESS) {
+            int quality = status.Infos.at(2).toInt();//info(2) quality
+            QString unit = "%";
+            if (quality <= -10) {
+                unit = " dBm";
+            }
+            m_icon = qualityToIcon(quality);
+            message = i18n("Connected to %1 - %2%3 (IP: %4)",
+                           status.Infos.at(1), status.Infos.at(2), unit, status.Infos.at(0));//info(1) essid
+        } else if (status.State == WicdState::CONNECTING) {
+            bool wired = (status.Infos.at(0)=="wired");
+            message = data["message"].toString();
+            message = m_messageTable.value(message);
+            wired ? message.prepend(i18n("Wired network: ")) : message.prepend(status.Infos.at(1)+": ");
+        } else {
+            m_icon = "network-wired";
+            message = i18n("Disconnected");
+        }
+        m_message = message;
+        m_messageBox->setText(m_message);
+        update();
+    }
+}
+
+QString WicdApplet::qualityToIcon(int quality) const
+{
+    if (quality <= -10) {
+        //we use dbm
+        if (quality >= -60) {
+            return "network-wireless-100";
+        } else if (quality >= -70) {
+            return "network-wireless-75";
+        } else if (quality >= -80) {
+            return "network-wireless-50";
+        } else {
+            return "network-wireless-25";
+        }
+    } else if (quality <= 25) {
+        return "network-wireless-25";
+    } else if (quality <= 50) {
+        return "network-wireless-50";
+    } else if (quality <= 75) {
+        return "network-wireless-75";
+    } else {
+        return "network-wireless-100";
+    }
+}
+
 
 void WicdApplet::paintInterface(QPainter *p,
                                 const QStyleOptionGraphicsItem *option, const QRect &contentsRect)
@@ -195,82 +288,6 @@ void WicdApplet::paintInterface(QPainter *p,
     p->setRenderHint(QPainter::Antialiasing);
 
     m_theme->paint(p, contentsRect, m_icon);
-}
-
-void WicdApplet::updateStatus(Status status)
-{
-    if (m_status.State != status.State) {
-        if (status.State == WicdState::CONNECTING) {
-            freeze();
-            m_abortButton->setVisible(true);
-        } else {
-            unfreeze();
-            m_abortButton->setVisible(false);
-            if (m_plotter) {
-                m_plotter->setInterface(DBusHandler::instance()->callDaemon("GetCurrentInterface").toString());
-            }
-            switch (status.State) {
-            case WicdState::WIRED:
-                notify("connected", i18n("Connected to wired network"));
-                break;
-            case WicdState::WIRELESS:
-                notify("connected", i18n("Connected to wireless network"));
-                break;
-            case WicdState::NOT_CONNECTED:
-                notify("disconnected", i18n("Disconnected"));
-                break;
-            default:
-                break;
-            }
-        }
-        m_status = status;
-    }
-    QString message;
-    if (status.State == WicdState::WIRED) {
-        m_icon = "network-wired-activated";
-        message = i18n("Connected to wired network (IP: %1)", status.Infos.at(0));//info(0) ip
-    } else if (status.State == WicdState::WIRELESS) {
-        int quality = status.Infos.at(2).toInt();//info(2) quality
-        QString unit = "%";
-        if (quality <= -10) {
-            unit = " dBm";
-            //we use dBm, so we need the "classic" quality to display an accurate icon
-            quality = DBusHandler::instance()->callWireless("GetWirelessProperty",
-                                                            status.Infos.at(3).toInt(), "quality").toInt();//info(3) networkId
-        }
-        setWirelessIcon(quality);
-        message = i18n("Connected to %1 - %2%3 (IP: %4)",
-                       status.Infos.at(1), status.Infos.at(2), unit, status.Infos.at(0));//info(1) essid
-    } else if (status.State == WicdState::CONNECTING) {
-        bool wired = (status.Infos.at(0)=="wired");
-        if (wired) {
-            message = DBusHandler::instance()->callWired("CheckWiredConnectingMessage").toString();
-        } else {
-            message = DBusHandler::instance()->callWireless("CheckWirelessConnectingMessage").toString();
-        }
-        message = m_messageTable.value(message);
-        wired ? message.prepend(i18n("Wired network: ")) : message.prepend(status.Infos.at(1)+": ");
-        QTimer::singleShot(500, this, SLOT(forceUpdateStatus()));
-    } else {
-        m_icon = "network-wired";
-        message = i18n("Disconnected");
-    }
-    m_messageBox->setText(message);
-    m_message = message;
-    update();
-}
-
-void WicdApplet::setWirelessIcon(int quality)
-{
-    if (quality <= 25) {
-        m_icon = "network-wireless-25";
-    } else if (quality <= 50) {
-        m_icon = "network-wireless-50";
-    } else if (quality <= 75) {
-        m_icon = "network-wireless-75";
-    } else {
-        m_icon = "network-wireless-100";
-    }
 }
 
 void WicdApplet::handleConnectionResult(const QString &result)
@@ -306,7 +323,7 @@ void WicdApplet::showPlotter(bool show)
     if (show && !m_plotter) {
         m_dialoglayout->insertItem(1, new Plasma::Separator(this));
         m_plotter = new NetworkPlotter(this);
-        m_plotter->setInterface(DBusHandler::instance()->callDaemon("GetCurrentInterface").toString());
+        m_plotter->setInterface(m_interface);
         m_dialoglayout->insertItem(2, m_plotter);
     } else if (!show && m_plotter) {
         m_dialoglayout->removeAt(2);
@@ -329,11 +346,6 @@ void WicdApplet::notify(const QString &event, const QString &message)
         notify->setComponentData(KComponentData("wicd-kde"));
         notify->sendEvent();
     }
-}
-
-void WicdApplet::forceUpdateStatus()
-{
-    updateStatus(DBusHandler::instance()->status());
 }
 
 void WicdApplet::freeze()
@@ -496,17 +508,6 @@ void WicdApplet::configAccepted()
     }
 
     emit configNeedsSaving();
-}
-
-QList<QAction*> WicdApplet::contextualActions()
-{
-    QList<QAction *> rv;
-    QAction *actinfo = action("connection_info");
-    QAction *actcrea = action("createadhoc");
-    QAction *actfind = action("findnetwork");
-    QAction *actconf = action("configure_wicd");
-    rv << actinfo << actcrea << actfind << actconf;
-    return rv;
 }
 
 #include "wicdapplet.moc"

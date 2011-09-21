@@ -18,7 +18,6 @@
  ****************************************************************************/
 
 #include "wicdengine.h"
-#include "dbushandler.h"
 #include "wicdservice.h"
 
 WicdEngine::WicdEngine(QObject* parent, const QVariantList& args)
@@ -27,6 +26,15 @@ WicdEngine::WicdEngine(QObject* parent, const QVariantList& args)
     Q_UNUSED(args)
 
     setMinimumPollingInterval(1000);
+
+    connect(DBusHandler::instance(), SIGNAL(statusChange(Status)), this, SLOT(updateStatus(Status)));
+}
+
+void WicdEngine::init()
+{
+    //force first status update
+    m_state = 10;
+    updateStatus(DBusHandler::instance()->status());
 }
 
 Plasma::Service *WicdEngine::serviceForSource(const QString &source)
@@ -39,6 +47,7 @@ QStringList WicdEngine::sources() const
 {
     QStringList sources;
     sources<<"networks";
+    sources<<"status";
     return sources;
 }
 
@@ -48,21 +57,57 @@ bool WicdEngine::sourceRequestEvent(const QString &source)
         updateSourceEvent(source);
         return true;
     }
+    if (source == "status") {
+        updateSourceEvent(source);
+        return true;
+    }
     return false;
 }
 
 bool WicdEngine::updateSourceEvent(const QString &source)
 {
-    //reset
-    setData(source, DataEngine::Data());
-    //populate new data
-    QMap<int, NetworkInfos> list = DBusHandler::instance()->networksList();
-    QMap<int, NetworkInfos>::const_iterator it = list.constBegin();
-    while (it != list.constEnd()) {
-        setData(source, QString::number(it.key()), it.value());
-        ++it;
+    if (source == "networks") {
+        //reset
+        setData(source, DataEngine::Data());
+        //populate new data
+        QMap<int, NetworkInfos> list = DBusHandler::instance()->networksList();
+        QMap<int, NetworkInfos>::const_iterator it = list.constBegin();
+        while (it != list.constEnd()) {
+            setData(source, QString::number(it.key()), it.value());
+            ++it;
+        }
+        return true;
     }
-    return true;
+    if (source == "status") {
+        setData(source, "state", m_state);
+        setData(source, "info", m_info);
+        setData(source, "message", m_message);
+        setData(source, "interface", m_interface);
+        return true;
+    }
+    return false;
+}
+
+void WicdEngine::updateStatus(Status status)
+{
+    m_state = status.State;
+    m_info = status.Infos;
+    m_interface = DBusHandler::instance()->callDaemon("GetCurrentInterface").toString();
+    if (status.State == WicdState::CONNECTING) {
+        bool wired = (status.Infos.at(0)=="wired");
+        if (wired) {
+            m_message = DBusHandler::instance()->callWired("CheckWiredConnectingMessage").toString();
+        } else {
+            m_message = DBusHandler::instance()->callWireless("CheckWirelessConnectingMessage").toString();
+        }
+        QTimer::singleShot(500, this, SLOT(forceUpdateStatus()));
+    }
+    updateSourceEvent("status");
+}
+
+void WicdEngine::forceUpdateStatus()
+{
+    updateStatus(DBusHandler::instance()->status());
 }
 
 #include "wicdengine.moc"

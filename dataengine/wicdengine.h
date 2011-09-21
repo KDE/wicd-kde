@@ -20,6 +20,8 @@
 #ifndef WICDENGINE_H
 #define WICDENGINE_H
 
+#include "dbushandler.h"
+
 #include <Plasma/DataEngine>
 
 class WicdEngine : public Plasma::DataEngine
@@ -30,11 +32,22 @@ public:
     WicdEngine(QObject* parent, const QVariantList& args);
 
     Plasma::Service *serviceForSource(const QString &source);
+    void init();
     QStringList sources() const;
 
 protected:
     bool sourceRequestEvent(const QString &source);
     bool updateSourceEvent(const QString& source);
+
+private slots:
+    void updateStatus(Status status);
+    void forceUpdateStatus();
+
+private:
+    uint m_state;
+    QStringList m_info;
+    QString m_message;
+    QString m_interface;
 };
 
 K_EXPORT_PLASMA_DATAENGINE(wicd, WicdEngine)
