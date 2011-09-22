@@ -67,7 +67,7 @@ NetworkItem::NetworkItem(NetworkInfos info, QGraphicsWidget *parent)
     
     if (m_infos.value("networkId").toInt() == -1) {
         //wired
-        networkIcon->setText(Wicd::currentprofile);
+        networkIcon->setText(m_infos.value("essid").toString()+": "+Wicd::currentprofile);
         networkIcon->setIcon("network-wired");
         Wicd::currentprofile = m_infos.value("profile").toString();
         m_variantButton->setIcon(KIcon("user-identity"));
