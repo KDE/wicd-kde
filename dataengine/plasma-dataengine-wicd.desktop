@@ -1,7 +1,15 @@
 [Desktop Entry]
 Name=Wicd
+Name[pt]=Wicd
+Name[sv]=WICD
+Name[uk]=Wicd
+Name[x-test]=xxWicdxx
 
 Comment=A Wicd data engine
+Comment[pt]=Um motor de dados do Wicd
+Comment[sv]=Ett WICD-datagränssnitt
+Comment[uk]=Рушій даних Wicd
+Comment[x-test]=xxA Wicd data enginexx
 
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service
