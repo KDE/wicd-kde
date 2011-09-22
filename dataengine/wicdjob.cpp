@@ -58,5 +58,20 @@ void WicdJob::start()
                 m_dbus->callWireless("ConnectWireless", networkId);
             }
         }
+    } else if (operation == "cancelConnect") {
+        DBusHandler::instance()->callDaemon("CancelConnect");
+        DBusHandler::instance()->callDaemon("SetForcedDisconnect", true);
+    } else if (operation == "createAdHocNetwork") {
+        DBusHandler::instance()->callWireless("CreateAdHocNetwork",
+                                              parameters()["essid"].toString(),
+                                              parameters()["channel"].toString(),
+                                              parameters()["ip"].toString(),
+                                              "WEP",
+                                              parameters()["key"].toString(),
+                                              parameters()["wep"].toBool(),
+                                              false /*parameters()["ics"].toBool()*/);
+    } else if (operation == "findHiddenNetwork") {
+        DBusHandler::instance()->callWireless("SetHiddenNetworkESSID", parameters()["essid"].toString());
+        DBusHandler::instance()->scan();
     }
 }

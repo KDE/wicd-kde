@@ -148,7 +148,9 @@ void WicdApplet::init()
     // read config
     configChanged();
 
-    dataEngine("wicd")->connectSource("status", this);
+    Plasma::DataEngine *engine = dataEngine("wicd");
+    engine->connectSource("status", this);
+    m_wicdService = engine->serviceForSource("");
 }
 
 void WicdApplet::setupActions()
@@ -361,8 +363,10 @@ void WicdApplet::unfreeze()
 
 void WicdApplet::cancelConnect() const
 {
-    DBusHandler::instance()->callDaemon("CancelConnect");
-    DBusHandler::instance()->callDaemon("SetForcedDisconnect", true);
+    if (m_wicdService) {
+        KConfigGroup op = m_wicdService->operationDescription("cancelConnect");
+        m_wicdService->startOperationCall(op);
+    }
 }
 
 void WicdApplet::showPreferences()
@@ -404,15 +408,14 @@ void WicdApplet::createAdhocDialog()
     dialog.setMainWidget( widget );
 
     int accepted = dialog.exec();
-    if (accepted) {
-        DBusHandler::instance()->callWireless("CreateAdHocNetwork",
-                                              essidEdit->text(),
-                                              channelEdit->text(),
-                                              ipEdit->text(),
-                                              "WEP",
-                                              keyEdit->text(),
-                                              wepBox->isChecked(),
-                                              false /*icsBox->isChecked()*/);
+    if (accepted && m_wicdService) {
+        KConfigGroup op = m_wicdService->operationDescription("createAdHocNetwork");
+        op.writeEntry("essid", essidEdit->text());
+        op.writeEntry("channel", channelEdit->text());
+        op.writeEntry("ip", ipEdit->text());
+        op.writeEntry("key", keyEdit->text());
+        op.writeEntry("wep", wepBox->isChecked());
+        m_wicdService->startOperationCall(op);
     }
 }
 
@@ -421,9 +424,10 @@ void WicdApplet::findHiddenDialog()
     bool ok;
     QString text = KInputDialog::getText(i18n("Find a hidden network"),
                                          i18n("Hidden Network ESSID"), QString(), &ok, 0);
-    if (ok && !text.isEmpty()) {
-        DBusHandler::instance()->callWireless("SetHiddenNetworkESSID", text);
-        DBusHandler::instance()->scan();
+    if (ok && !text.isEmpty() && m_wicdService) {
+        KConfigGroup op = m_wicdService->operationDescription("findHiddenNetwork");
+        op.writeEntry("essid", text);
+        m_wicdService->startOperationCall(op);
     }
 }
 

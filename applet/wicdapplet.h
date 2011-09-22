@@ -89,12 +89,15 @@ private:
     bool m_showPlotter;
 
     Plasma::Svg *m_theme;
+    //for translations
+    QHash<QString, QString> m_messageTable;
 
+    //dataengine management
     QString m_icon;
     Status m_status;
     QString m_message;
     QString m_interface;
-    QHash<QString, QString> m_messageTable;
+    Plasma::Service *m_wicdService;
 
     //Popup elements
     QGraphicsLinearLayout * m_dialoglayout;

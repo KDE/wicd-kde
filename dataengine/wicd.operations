@@ -3,8 +3,31 @@
     "http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
 <kcfg>
   <group name="toggleConnection">
-    <entry name="networkId" type="int">
+    <entry name="networkId" type="Int">
       <label>The id of the network to connect or disconnect.</label>
+    </entry>
+  </group>
+  <group name="cancelConnect"/>
+  <group name="createAdHocNetwork">
+    <entry name="essid" type="String">
+      <label>Network's essid</label>
+    </entry>
+    <entry name="ip" type="String">
+      <label>Network's ip</label>
+    </entry>
+    <entry name="channel" type="String">
+      <label>Network's channel</label>
+    </entry>
+    <entry name="encryption" type="Bool">
+      <label>Use encryption (WEP only).</label>
+    </entry>
+    <entry name="key" type="String">
+      <label>The key to use if the encryption is enabled</label>
+    </entry>
+  </group>
+  <group name="findHiddenNetwork">
+    <entry name="essid" type="String">
+      <label>Hidden network's essid.</label>
     </entry>
   </group>
 </kcfg>
