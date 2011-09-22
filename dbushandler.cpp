@@ -127,7 +127,6 @@ QMap<int, NetworkInfos> DBusHandler::networksList() const
         } else {
             wirednetwork.insert("connected", false);
         }
-        list.insert(-1, wirednetwork);
         //we need a current profile
         //TODO: Move to init and prevent empty profile name in profile manager?
         if (Wicd::currentprofile.isEmpty()) {
@@ -137,6 +136,8 @@ QMap<int, NetworkInfos> DBusHandler::networksList() const
             Wicd::currentprofile = profile;
             call(m_wired, "ReadWiredNetworkProfile", profile);
         }
+        wirednetwork.insert("profile", Wicd::currentprofile);
+        list.insert(-1, wirednetwork);
     }
     //wireless
     int nbNetworks = call(m_wireless, "GetNumberOfNetworks").toInt();

@@ -69,6 +69,7 @@ NetworkItem::NetworkItem(NetworkInfos info, QGraphicsWidget *parent)
         //wired
         networkIcon->setText(Wicd::currentprofile);
         networkIcon->setIcon("network-wired");
+        Wicd::currentprofile = m_infos.value("profile").toString();
         m_variantButton->setIcon(KIcon("user-identity"));
         connect(m_variantButton, SIGNAL(clicked()), this, SLOT(askProfileManager()));
     } else {
