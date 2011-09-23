@@ -17,49 +17,27 @@
  *  along with Wicd Client KDE.  If not, see <http://www.gnu.org/licenses/>.*
  ****************************************************************************/
 
-#ifndef NETWORKITEM_H
-#define NETWORKITEM_H 
+#ifndef WIREDNETWORKITEM_H
+#define WIREDNETWORKITEM_H
 
-#include "types.h"
-#include "networkicon.h"
+#include "profilewidget.h"
+#include "networkitem.h"
 
-#include <QGraphicsWidget>
-#include <QGraphicsLinearLayout>
-
-#include <Plasma/IconWidget>
-#include <Plasma/Animation>
-
-class NetworkItem : public QGraphicsWidget
+class WiredNetworkItem : public NetworkItem
 {
     Q_OBJECT
+
 public:
-    NetworkItem(NetworkInfos info, QGraphicsWidget *parent);
-    ~NetworkItem();
+    WiredNetworkItem(NetworkInfos info, QGraphicsWidget *parent);
 
 protected:
-    virtual QGraphicsWidget *moreWidget() = 0;
-    
+    QGraphicsWidget *moreWidget();
+
 private slots:
-    void toggleConnection();
-    void animationFinished();
-    void askProperties();
-    void askMore();
-    
-signals:
-    void toggled(int id);
-
-protected:
-    NetworkInfos m_infos;
-    NetworkIcon *m_networkIcon;
-    QGraphicsLinearLayout *m_hLayout;
-    Plasma::Animation *m_infoFade;
+    void profileUpdated(QString profile);
 
 private:
-    Plasma::IconWidget *m_configButton;
-    Plasma::IconWidget *m_moreButton;
-    QGraphicsLinearLayout *m_vLayout;
-    bool m_isExpanded;
-
+    ProfileWidget *m_profileWidget;
 };
 
-#endif
+#endif // WIREDNETWORKITEM_H

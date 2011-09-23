@@ -17,49 +17,48 @@
  *  along with Wicd Client KDE.  If not, see <http://www.gnu.org/licenses/>.*
  ****************************************************************************/
 
-#ifndef NETWORKITEM_H
-#define NETWORKITEM_H 
-
-#include "types.h"
-#include "networkicon.h"
+#ifndef PROFILEWIDGET_H
+#define PROFILEWIDGET_H
 
 #include <QGraphicsWidget>
-#include <QGraphicsLinearLayout>
 
-#include <Plasma/IconWidget>
-#include <Plasma/Animation>
+#include <Plasma/CheckBox>
+#include <Plasma/ComboBox>
+#include <Plasma/Dialog>
 
-class NetworkItem : public QGraphicsWidget
+class ProfileWidget : public QGraphicsWidget
 {
     Q_OBJECT
 public:
-    NetworkItem(NetworkInfos info, QGraphicsWidget *parent);
-    ~NetworkItem();
+    ProfileWidget(QGraphicsItem * parent = 0, Qt::WindowFlags wFlags = 0);
 
-protected:
-    virtual QGraphicsWidget *moreWidget() = 0;
-    
-private slots:
-    void toggleConnection();
-    void animationFinished();
-    void askProperties();
-    void askMore();
-    
 signals:
-    void toggled(int id);
+    void profileSelected(QString profile);
 
-protected:
-    NetworkInfos m_infos;
-    NetworkIcon *m_networkIcon;
-    QGraphicsLinearLayout *m_hLayout;
-    Plasma::Animation *m_infoFade;
+private slots:
+    void toggleDefault(bool toggle);
+    void profileChanged(QString profile);
+    void addProfile();
+    void removeProfile();
 
 private:
-    Plasma::IconWidget *m_configButton;
-    Plasma::IconWidget *m_moreButton;
-    QGraphicsLinearLayout *m_vLayout;
-    bool m_isExpanded;
+    Plasma::CheckBox *m_defaultBox;
+    Plasma::ComboBox *m_comboBox;
 
 };
 
-#endif
+class ProfileDialog : public Plasma::Dialog
+{
+    Q_OBJECT
+
+public:
+    ProfileDialog(QGraphicsWidget *parent);
+
+protected:
+    void closeEvent(QCloseEvent *event);
+
+private slots:
+    void accepted();
+};
+
+#endif // PROFILEWIDGET_H

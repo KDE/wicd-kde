@@ -24,6 +24,7 @@
 #include "networkplotter.h"
 #include "networkview.h"
 #include "infosdialog.h"
+#include "profilewidget.h"
 #include "ui_wicdappletConfig.h"
 
 #include <Plasma/PopupApplet>
@@ -109,6 +110,7 @@ private:
     Plasma::ToolButton *m_abortButton;
 
     InfosDialog* m_infosDialog;
+    ProfileDialog* m_profileDialog;
 };
 
 // This is the command that links your applet to the .desktop file

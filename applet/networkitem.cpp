@@ -17,26 +17,15 @@
  *  along with Wicd Client KDE.  If not, see <http://www.gnu.org/licenses/>.*
  ****************************************************************************/
 
-#include "networkitem.h" 
-#include "networkicon.h"
-#include "global.h"
+#include "networkitem.h"
 #include "networkpropertiesdialog.h"
-#include "profilemanager.h"
-
-#include <QFormLayout>
-
-#include <KIcon>
 
 #include <Plasma/ToolButton>
-#include <Plasma/Meter>
-#include <Plasma/Theme>
 
-bool NetworkItem::m_showStrength(false);
 static const int buttonSize = 16;
 
 NetworkItem::NetworkItem(NetworkInfos info, QGraphicsWidget *parent)
     : QGraphicsWidget(parent),
-      m_infoWidget(0),
       m_isExpanded(false)
 {
     m_infos = info;
@@ -46,92 +35,42 @@ NetworkItem::NetworkItem(NetworkInfos info, QGraphicsWidget *parent)
     //force parent layout to shrink vertically
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     
-    NetworkIcon *networkIcon = new NetworkIcon(this);
+    m_networkIcon = new NetworkIcon(this);
     
     if (m_infos.value("connected").toBool()) {
-        networkIcon->setConnected(true);
+        m_networkIcon->setConnected(true);
     }
-    connect(networkIcon, SIGNAL(clicked()), this, SLOT(toggleConnection()));
+    connect(m_networkIcon, SIGNAL(clicked()), this, SLOT(toggleConnection()));
     
     //config button for all
-    Plasma::IconWidget *configButton = new Plasma::IconWidget(this);
-    configButton->setMaximumSize(configButton->sizeFromIconSize(buttonSize));
-    configButton->setSvg("widgets/configuration-icons", "configure");
-    connect(configButton, SIGNAL(clicked()), this, SLOT(askProperties()));
+    m_configButton = new Plasma::IconWidget(this);
+    m_configButton->setMaximumSize(m_configButton->sizeFromIconSize(buttonSize));
+    m_configButton->setSvg("widgets/configuration-icons", "configure");
+    connect(m_configButton, SIGNAL(clicked()), this, SLOT(askProperties()));
     
     //m_variantButton opens either an infodialog or the profilemanager
-    m_variantButton = new Plasma::IconWidget(this);
-    m_variantButton->setMaximumSize(m_variantButton->sizeFromIconSize(buttonSize));
-    
-    Plasma::Meter *qualityBar(0); //for wireless connection
-    
-    if (m_infos.value("networkId").toInt() == -1) {
-        //wired
-        networkIcon->setText(m_infos.value("essid").toString()+": "+Wicd::currentprofile);
-        networkIcon->setIcon("network-wired");
-        Wicd::currentprofile = m_infos.value("profile").toString();
-        m_variantButton->setIcon(KIcon("user-identity"));
-        connect(m_variantButton, SIGNAL(clicked()), this, SLOT(askProfileManager()));
-    } else {
-        //wireless
-        networkIcon->setText(m_infos.value("essid").toString());
-        networkIcon->setIcon("network-wireless");
-        if (m_infos.value("encryption").toBool()) {
-            networkIcon->setEncrypted(true);
-        }
-        m_variantButton->setSvg("widgets/action-overlays", "add-normal");
-        connect(m_variantButton, SIGNAL(clicked()), this, SLOT(askInfos()));
-        //add signal quality
-        qualityBar = new Plasma::Meter(this);
-        qualityBar->setMeterType(Plasma::Meter::BarMeterHorizontal);
-        qualityBar->setPreferredWidth(100);
-        qualityBar->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        qualityBar->setMinimum(0);
-        qualityBar->setMaximum(100);
-        qualityBar->setValue(m_infos.value("quality").toInt());
+    m_moreButton = new Plasma::IconWidget(this);
+    m_moreButton->setMaximumSize(m_moreButton->sizeFromIconSize(buttonSize));
+    m_moreButton->setSvg("widgets/action-overlays", "add-normal");
+    connect(m_moreButton, SIGNAL(clicked()), this, SLOT(askMore()));
 
-        if (m_showStrength) {
-            Plasma::Theme* theme = Plasma::Theme::defaultTheme();
-            QFont font = theme->font(Plasma::Theme::DefaultFont);
-            font.setPointSize(7.5);
-            qualityBar->setLabelFont(0, font);
-            qualityBar->setLabelAlignment(0, Qt::AlignVCenter | Qt::AlignLeft);
-            bool usedbm = m_infos.value("usedbm").toBool();
-            QString signal = usedbm ? m_infos.value("strength").toString()+" dBm" : m_infos.value("quality").toString()+"%";
-            qualityBar->setLabel(0, signal);
-        } else {
-            qualityBar->setMaximumHeight(12);
-        }
-    }
-    
     m_vLayout = new QGraphicsLinearLayout(Qt::Vertical, this);
-    QGraphicsLinearLayout *lay = new QGraphicsLinearLayout(Qt::Horizontal);
-    m_vLayout->addItem(lay);
-    lay->addItem(networkIcon);
-    lay->setAlignment(networkIcon, Qt::AlignVCenter);
-    lay->addStretch();
-    if (qualityBar) {
-        lay->addItem(qualityBar);
-        lay->setAlignment(qualityBar, Qt::AlignVCenter);
-    }
-    lay->addItem(configButton);
-    lay->setAlignment(configButton, Qt::AlignVCenter);
-    lay->addItem(m_variantButton);
-    lay->setAlignment(m_variantButton, Qt::AlignVCenter);
+    m_hLayout = new QGraphicsLinearLayout(Qt::Horizontal);
+    m_vLayout->addItem(m_hLayout);
+    m_hLayout->addItem(m_networkIcon);
+    m_hLayout->setAlignment(m_networkIcon, Qt::AlignVCenter);
+    m_hLayout->addStretch();
+    m_hLayout->addItem(m_configButton);
+    m_hLayout->setAlignment(m_configButton, Qt::AlignVCenter);
+    m_hLayout->addItem(m_moreButton);
+    m_hLayout->setAlignment(m_moreButton, Qt::AlignVCenter);
 
-    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(updateColors()));
-    updateColors();
+    m_infoFade = Plasma::Animator::create(Plasma::Animator::FadeAnimation);
+    connect(m_infoFade, SIGNAL(finished()), this, SLOT(animationFinished()));
 }
 
 NetworkItem::~NetworkItem()
 {
-}
-
-void NetworkItem::updateColors()
-{
-    QPalette pal = palette();
-    pal.setColor(QPalette::WindowText, Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
-    setPalette(pal);
 }
 
 void NetworkItem::toggleConnection()
@@ -143,7 +82,7 @@ void NetworkItem::animationFinished()
 {
     m_isExpanded = !m_isExpanded;
     if (!m_isExpanded) {
-        m_vLayout->removeItem(infoWidget());
+        m_vLayout->removeItem(moreWidget());
     }
 }
 
@@ -154,67 +93,18 @@ void NetworkItem::askProperties()
     dialog.exec();
 }
 
-void NetworkItem::askInfos()
+void NetworkItem::askMore()
 {
     if (m_isExpanded) {
-        m_variantButton->setSvg("widgets/action-overlays", "add-normal");
+        m_moreButton->setSvg("widgets/action-overlays", "add-normal");
         m_infoFade->setProperty("startOpacity", 1.0);
         m_infoFade->setProperty("targetOpacity", 0.0);
         m_infoFade->start();
     } else {
-        m_variantButton->setSvg("widgets/action-overlays", "remove-normal");
-        m_vLayout->addItem(infoWidget());
+        m_moreButton->setSvg("widgets/action-overlays", "remove-normal");
+        m_vLayout->addItem(moreWidget());
         m_infoFade->setProperty("startOpacity", 0.0);
         m_infoFade->setProperty("targetOpacity", 1.0);
         m_infoFade->start();
     }
-}
-
-void NetworkItem::askProfileManager()
-{
-    ProfileManager manager;
-    manager.exec();
-}
-
-QGraphicsProxyWidget* NetworkItem::infoWidget()
-{
-    if (!m_infoWidget) {
-        m_infoWidget = new QGraphicsProxyWidget(this);
-
-        m_infoFade = Plasma::Animator::create(Plasma::Animator::FadeAnimation);
-        connect(m_infoFade, SIGNAL(finished()), this, SLOT(animationFinished()));
-        m_infoFade->setTargetWidget(m_infoWidget);
-
-        QWidget *widget = new QWidget();
-        widget->setAttribute(Qt::WA_NoSystemBackground);
-        QFormLayout *formLayout = new QFormLayout(widget);
-        formLayout->setLabelAlignment(Qt::AlignLeft);
-        widget->setLayout(formLayout);
-
-        QString signal;
-        if (m_infos.value("usedbm").toBool())
-            signal = m_infos.value("strength").toString()+" dBm";
-        else
-            signal = m_infos.value("quality").toString()+"%";
-        formLayout->addRow(new QLabel(i18n("Signal strength:")), new QLabel(signal));
-
-        QString encryption;
-        if (m_infos.value("encryption").toBool())
-            encryption = m_infos.value("encryptionType").toString();
-        else
-            encryption = i18n("Unsecured");
-        formLayout->addRow(new QLabel(i18n("Encryption type:")), new QLabel(encryption));
-
-        QString accessPoint = m_infos.value("bssid").toString();
-        formLayout->addRow(new QLabel(i18n("Access point address:")), new QLabel(accessPoint));
-
-        QString mode = m_infos.value("mode").toString();
-        formLayout->addRow(new QLabel(i18n("Mode:")), new QLabel(mode));
-
-        QString channel = m_infos.value("channel").toString();
-        formLayout->addRow(new QLabel(i18n("Channel:")), new QLabel(channel));
-
-        m_infoWidget->setWidget(widget);
-    }
-    return m_infoWidget;
 }

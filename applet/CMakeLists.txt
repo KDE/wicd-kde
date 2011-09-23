@@ -13,16 +13,18 @@ set(wicdapplet_SRCS
     ../labelentry.cpp
     ../scriptsdialog.cpp
     ../networkpropertiesdialog.cpp
-    ../profilemanager.cpp
     ../dbushandler.cpp
+    profilewidget.cpp
     infosdialog.cpp
     networkicon.cpp
     networkitem.cpp
+    wirednetworkitem.cpp
+    wirelessnetworkitem.cpp
     networkview.cpp
     networkplotter.cpp
     wicdapplet.cpp
 )
-kde4_add_ui_files(wicdapplet_SRCS wicdappletConfig.ui ../profilemanager.ui)
+kde4_add_ui_files(wicdapplet_SRCS wicdappletConfig.ui)
 
 # Now make sure all files get to the right place
 kde4_add_plugin(plasma_applet_wicd ${wicdapplet_SRCS})

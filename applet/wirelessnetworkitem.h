@@ -17,49 +17,31 @@
  *  along with Wicd Client KDE.  If not, see <http://www.gnu.org/licenses/>.*
  ****************************************************************************/
 
-#ifndef NETWORKITEM_H
-#define NETWORKITEM_H 
+#ifndef WIRELESSNETWORKITEM_H
+#define WIRELESSNETWORKITEM_H
 
-#include "types.h"
-#include "networkicon.h"
+#include "networkitem.h"
 
-#include <QGraphicsWidget>
-#include <QGraphicsLinearLayout>
+#include <QGraphicsProxyWidget>
 
-#include <Plasma/IconWidget>
-#include <Plasma/Animation>
-
-class NetworkItem : public QGraphicsWidget
+class WirelessNetworkItem : public NetworkItem
 {
     Q_OBJECT
+
 public:
-    NetworkItem(NetworkInfos info, QGraphicsWidget *parent);
-    ~NetworkItem();
+    WirelessNetworkItem(NetworkInfos info, QGraphicsWidget *parent);
+    static void showStrength(bool show) { m_showStrength = show; }
 
 protected:
-    virtual QGraphicsWidget *moreWidget() = 0;
-    
+    QGraphicsWidget *moreWidget();
+
 private slots:
-    void toggleConnection();
-    void animationFinished();
-    void askProperties();
-    void askMore();
-    
-signals:
-    void toggled(int id);
-
-protected:
-    NetworkInfos m_infos;
-    NetworkIcon *m_networkIcon;
-    QGraphicsLinearLayout *m_hLayout;
-    Plasma::Animation *m_infoFade;
+    void updateColors();
 
 private:
-    Plasma::IconWidget *m_configButton;
-    Plasma::IconWidget *m_moreButton;
-    QGraphicsLinearLayout *m_vLayout;
-    bool m_isExpanded;
+    QGraphicsProxyWidget *m_infoWidget;
 
+    static bool m_showStrength;
 };
 
-#endif
+#endif // WIRELESSNETWORKITEM_H

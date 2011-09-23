@@ -298,14 +298,9 @@ void WicdApplet::handleConnectionResult(const QString &result)
 
 void WicdApplet::launchProfileManager()
 {
-    DBusHandler::instance()->callDaemon("SetForcedDisconnect", true);
-    ProfileManager manager;
-    int accepted = manager.exec();
-    if (accepted){
-        DBusHandler::instance()->callWired("ReadWiredNetworkProfile", Wicd::currentprofile);
-        DBusHandler::instance()->callWired("ConnectWired");
-    }
-    DBusHandler::instance()->callDaemon("SetNeedWiredProfileChooser", false);
+    m_profileDialog = new ProfileDialog(this);
+    m_profileDialog->move(popupPosition(m_profileDialog->sizeHint()));
+    m_profileDialog->animatedShow(locationToDirection(location()));
 }
 
 void WicdApplet::loadNetworks()

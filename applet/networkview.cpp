@@ -18,6 +18,8 @@
  ****************************************************************************/
 
 #include "networkview.h"
+#include "wirednetworkitem.h"
+#include "wirelessnetworkitem.h"
 
 #include <Plasma/DataEngineManager>
 
@@ -63,7 +65,16 @@ void NetworkView::loadNetworks()
     //populate new list
     QMap<int, NetworkInfos>::const_iterator it = networkMap.constBegin();
     while (it != networkMap.constEnd()) {
-        NetworkItem* item = new NetworkItem(it.value(), this);
+        NetworkItem* item;
+        NetworkInfos info = it.value();
+        bool isWired = (info.value("networkId").toInt() == -1);
+        if (isWired) {
+            WiredNetworkItem* wireditem = new WiredNetworkItem(it.value(), this);
+            item = wireditem;
+        } else {
+            WirelessNetworkItem* wirelessitem = new WirelessNetworkItem(it.value(), this);
+            item = wirelessitem;
+        }
         connect(item, SIGNAL(toggled(int)), this, SLOT(toggleConnection(int)));
         item->installEventFilter(this);
         m_networkItemList.append(item);
@@ -95,7 +106,7 @@ bool NetworkView::eventFilter(QObject* obj, QEvent *event)
 
 void NetworkView::showSignalStrength(bool show)
 {
-    NetworkItem::showStrength(show);
+    WirelessNetworkItem::showStrength(show);
 }
 
 void NetworkView::toggleConnection(int networkId)

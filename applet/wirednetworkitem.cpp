@@ -17,49 +17,32 @@
  *  along with Wicd Client KDE.  If not, see <http://www.gnu.org/licenses/>.*
  ****************************************************************************/
 
-#ifndef NETWORKITEM_H
-#define NETWORKITEM_H 
+#include "wirednetworkitem.h"
+#include "global.h"
 
-#include "types.h"
-#include "networkicon.h"
-
-#include <QGraphicsWidget>
-#include <QGraphicsLinearLayout>
-
-#include <Plasma/IconWidget>
-#include <Plasma/Animation>
-
-class NetworkItem : public QGraphicsWidget
+WiredNetworkItem::WiredNetworkItem(NetworkInfos info, QGraphicsWidget *parent)
+    : NetworkItem(info, parent),
+      m_profileWidget(0)
 {
-    Q_OBJECT
-public:
-    NetworkItem(NetworkInfos info, QGraphicsWidget *parent);
-    ~NetworkItem();
+    //make the combobox pop down over the next networkitem in the list
+    setZValue(110);
 
-protected:
-    virtual QGraphicsWidget *moreWidget() = 0;
-    
-private slots:
-    void toggleConnection();
-    void animationFinished();
-    void askProperties();
-    void askMore();
-    
-signals:
-    void toggled(int id);
+    m_networkIcon->setText(m_infos.value("essid").toString()+": "+Wicd::currentprofile);
+    m_networkIcon->setIcon("network-wired");
+    Wicd::currentprofile = m_infos.value("profile").toString();
+}
 
-protected:
-    NetworkInfos m_infos;
-    NetworkIcon *m_networkIcon;
-    QGraphicsLinearLayout *m_hLayout;
-    Plasma::Animation *m_infoFade;
+QGraphicsWidget* WiredNetworkItem::moreWidget()
+{
+    if (!m_profileWidget) {
+        m_profileWidget = new ProfileWidget(this);
+        connect(m_profileWidget, SIGNAL(profileSelected(QString)), this, SLOT(profileUpdated(QString)));
+        m_infoFade->setTargetWidget(m_profileWidget);
+    }
+    return m_profileWidget;
+}
 
-private:
-    Plasma::IconWidget *m_configButton;
-    Plasma::IconWidget *m_moreButton;
-    QGraphicsLinearLayout *m_vLayout;
-    bool m_isExpanded;
-
-};
-
-#endif
+void WiredNetworkItem::profileUpdated(QString profile)
+{
+    m_networkIcon->setText(m_infos.value("essid").toString()+": "+profile);
+}
