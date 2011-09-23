@@ -75,5 +75,3 @@ void InfosDialog::updateColors()
     pal.setColor(QPalette::WindowText, Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
     setPalette(pal);
 }
-
-#include "infosdialog.moc"
