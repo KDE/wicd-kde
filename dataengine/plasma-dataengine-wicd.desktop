@@ -1,11 +1,13 @@
 [Desktop Entry]
 Name=Wicd
+Name[nl]=Wicd
 Name[pt]=Wicd
 Name[sv]=WICD
 Name[uk]=Wicd
 Name[x-test]=xxWicdxx
 
 Comment=A Wicd data engine
+Comment[nl]=Een Wicd-gegevensengine
 Comment[pt]=Um motor de dados do Wicd
 Comment[sv]=Ett WICD-datagränssnitt
 Comment[uk]=Рушій даних Wicd
