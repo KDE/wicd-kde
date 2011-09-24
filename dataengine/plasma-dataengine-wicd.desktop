@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Wicd
+Name[it]=Wicd
 Name[nl]=Wicd
 Name[pt]=Wicd
 Name[sv]=WICD
@@ -7,6 +8,7 @@ Name[uk]=Wicd
 Name[x-test]=xxWicdxx
 
 Comment=A Wicd data engine
+Comment[it]=Un motore dati Wicd
 Comment[nl]=Een Wicd-gegevensengine
 Comment[pt]=Um motor de dados do Wicd
 Comment[sv]=Ett WICD-datagränssnitt
