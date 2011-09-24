@@ -29,7 +29,6 @@ WiredNetworkItem::WiredNetworkItem(NetworkInfos info, QGraphicsWidget *parent)
 
     m_networkIcon->setText(m_infos.value("essid").toString()+": "+Wicd::currentprofile);
     m_networkIcon->setIcon("network-wired");
-    Wicd::currentprofile = m_infos.value("profile").toString();
 }
 
 QGraphicsWidget* WiredNetworkItem::moreWidget()

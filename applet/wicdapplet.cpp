@@ -151,6 +151,18 @@ void WicdApplet::init()
     Plasma::DataEngine *engine = dataEngine("wicd");
     engine->connectSource("status", this);
     m_wicdService = engine->serviceForSource("");
+
+    //we need a current profile
+    QString profile = DBusHandler::instance()->callWired("GetDefaultWiredNetwork").toString();
+    if (profile.isEmpty())
+        profile = DBusHandler::instance()->callWired("GetWiredProfileList").toStringList().at(0);
+    Wicd::currentprofile = profile;
+    DBusHandler::instance()->callWired("ReadWiredNetworkProfile", profile);
+
+    //check if the profile manager is needed
+    if (DBusHandler::instance()->callDaemon("GetNeedWiredProfileChooser").toBool()) {
+        launchProfileManager();
+    }
 }
 
 void WicdApplet::setupActions()
@@ -298,6 +310,7 @@ void WicdApplet::handleConnectionResult(const QString &result)
 
 void WicdApplet::launchProfileManager()
 {
+    DBusHandler::instance()->callDaemon("SetNeedWiredProfileChooser", false);
     m_profileDialog = new ProfileDialog(this);
     m_profileDialog->move(popupPosition(m_profileDialog->sizeHint()));
     m_profileDialog->animatedShow(locationToDirection(location()));

@@ -54,9 +54,6 @@ class ProfileDialog : public Plasma::Dialog
 public:
     ProfileDialog(QGraphicsWidget *parent);
 
-protected:
-    void closeEvent(QCloseEvent *event);
-
 private slots:
     void accepted();
 };

@@ -55,14 +55,14 @@ ProfileWidget::ProfileWidget(QGraphicsItem * parent, Qt::WindowFlags wFlags)
 
     QStringList profileList = DBusHandler::instance()->callWired("GetWiredProfileList").toStringList();
     m_comboBox->nativeWidget()->addItems(profileList);
-    int currentProfileIndex = profileList.indexOf(Wicd::currentprofile);
-    m_comboBox->setCurrentIndex(currentProfileIndex);
-    profileChanged(Wicd::currentprofile);
 
     connect(m_defaultBox, SIGNAL(toggled(bool)),this, SLOT(toggleDefault(bool)));
     connect(m_comboBox, SIGNAL(textChanged(QString)),this, SLOT(profileChanged(QString)));
     connect(addButton, SIGNAL(clicked()),this, SLOT(addProfile()));
     connect(removeButton, SIGNAL(clicked()),this, SLOT(removeProfile()));
+
+    int currentProfileIndex = profileList.indexOf(Wicd::currentprofile);
+    m_comboBox->setCurrentIndex(currentProfileIndex);
 }
 
 void ProfileWidget::toggleDefault(bool toggle)
@@ -77,9 +77,9 @@ void ProfileWidget::toggleDefault(bool toggle)
 void ProfileWidget::profileChanged(QString profile)
 {
     DBusHandler::instance()->callWired("ReadWiredNetworkProfile", profile);
-    Wicd::currentprofile = profile;
     m_defaultBox->setChecked(DBusHandler::instance()->callWired("GetWiredProperty", "default").toBool());
     emit profileSelected(profile);
+    Wicd::currentprofile = profile;
 }
 
 void ProfileWidget::addProfile()
@@ -98,7 +98,6 @@ void ProfileWidget::addProfile()
     DBusHandler::instance()->callWired("CreateWiredNetworkProfile", newprofile, false);
     m_comboBox->nativeWidget()->insertItem(0, newprofile);
     m_comboBox->setCurrentIndex(0);
-    Wicd::currentprofile = newprofile;
 }
 
 void ProfileWidget::removeProfile()
@@ -107,7 +106,6 @@ void ProfileWidget::removeProfile()
     DBusHandler::instance()->callWired("DeleteWiredNetworkProfile", profile);
     m_comboBox->nativeWidget()->removeItem(m_comboBox->currentIndex());
     m_comboBox->setCurrentIndex(0);
-    Wicd::currentprofile = m_comboBox->text();
 }
 
 ProfileDialog::ProfileDialog(QGraphicsWidget *parent)
@@ -128,7 +126,6 @@ ProfileDialog::ProfileDialog(QGraphicsWidget *parent)
     bottomLayout->addItem(okButton);
     mainLayout->addItem(bottomLayout);
     setGraphicsWidget(mainWidget);
-    DBusHandler::instance()->callDaemon("SetForcedDisconnect", true);
     connect(okButton, SIGNAL(clicked()), this, SLOT(accepted()));
 }
 
@@ -136,10 +133,4 @@ void ProfileDialog::accepted()
 {
     DBusHandler::instance()->callWired("ReadWiredNetworkProfile", Wicd::currentprofile);
     DBusHandler::instance()->callWired("ConnectWired");
-}
-
-void ProfileDialog::closeEvent(QCloseEvent *event)
-{
-    DBusHandler::instance()->callDaemon("SetNeedWiredProfileChooser", false);
-    Plasma::Dialog::closeEvent(event);
 }

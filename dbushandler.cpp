@@ -18,7 +18,6 @@
  ****************************************************************************/
 
 #include "dbushandler.h"
-#include "global.h"
 #include <KLocalizedString>
 
 DBusHandler* DBusHandler::s_instance = 0;
@@ -127,16 +126,6 @@ QMap<int, NetworkInfos> DBusHandler::networksList() const
         } else {
             wirednetwork.insert("connected", false);
         }
-        //we need a current profile
-        //TODO: Move to init and prevent empty profile name in profile manager?
-        if (Wicd::currentprofile.isEmpty()) {
-            QString profile = call(m_wired, "GetDefaultWiredNetwork").toString();
-            if (profile.isEmpty())
-                profile = call(m_wired, "GetWiredProfileList").toStringList().at(0);
-            Wicd::currentprofile = profile;
-            call(m_wired, "ReadWiredNetworkProfile", profile);
-        }
-        wirednetwork.insert("profile", Wicd::currentprofile);
         list.insert(-1, wirednetwork);
     }
     //wireless
