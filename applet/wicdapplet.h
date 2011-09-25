@@ -71,9 +71,9 @@ private slots:
     void freeze();
     void unfreeze();
     void cancelConnect() const;
-    void showPreferences();
-    void createAdhocDialog();
-    void findHiddenDialog();
+    void showPreferences() const;
+    void createAdhocDialog() const;
+    void findHiddenDialog() const;
     void scan() const;
     void connectionInfoRequested();
 
@@ -82,7 +82,7 @@ private:
     QString qualityToIcon(int quality) const;
     void loadNetworks();
     void showPlotter(bool show);
-    void notify(const QString& event, const QString& message);
+    void notify(const QString& event, const QString& message) const;
 
     // Configuration dialog
     Ui::WicdAppletConfig ui;

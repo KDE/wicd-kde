@@ -343,7 +343,7 @@ void WicdApplet::showPlotter(bool show)
     graphicsWidget()->adjustSize();
 }
 
-void WicdApplet::notify(const QString &event, const QString &message)
+void WicdApplet::notify(const QString &event, const QString &message) const
 {
     if (m_status.State != 10) { //don't notify on startup
         KNotification *notify = new KNotification(event);
@@ -377,12 +377,12 @@ void WicdApplet::cancelConnect() const
     }
 }
 
-void WicdApplet::showPreferences()
+void WicdApplet::showPreferences() const
 {
     KToolInvocation::startServiceByDesktopName("kcm_wicd");
 }
 
-void WicdApplet::createAdhocDialog()
+void WicdApplet::createAdhocDialog() const
 {
     KDialog dialog;
     dialog.setCaption(i18n("Create an ad-hoc network"));
@@ -427,7 +427,7 @@ void WicdApplet::createAdhocDialog()
     }
 }
 
-void WicdApplet::findHiddenDialog()
+void WicdApplet::findHiddenDialog() const
 {
     bool ok;
     QString text = KInputDialog::getText(i18n("Find a hidden network"),
