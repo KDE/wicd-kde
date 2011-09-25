@@ -20,7 +20,6 @@
 #include "wicdapplet.h"
 #include "global.h"
 #include "labelentry.h"
-#include "profilemanager.h"
 
 #include <QPainter>
 #include <QToolButton>
