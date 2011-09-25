@@ -441,7 +441,8 @@ void WicdApplet::findHiddenDialog() const
 
 void WicdApplet::scan() const
 {
-    DBusHandler::instance()->scan();
+    KConfigGroup op = m_wicdService->operationDescription("scan");
+    m_wicdService->startOperationCall(op);
 }
 
 void WicdApplet::connectionInfoRequested()

@@ -73,5 +73,7 @@ void WicdJob::start()
     } else if (operation == "findHiddenNetwork") {
         DBusHandler::instance()->callWireless("SetHiddenNetworkESSID", parameters()["essid"].toString());
         DBusHandler::instance()->scan();
+    } else if (operation == "scan") {
+        DBusHandler::instance()->scan();
     }
 }

@@ -30,4 +30,5 @@
       <label>Hidden network's essid.</label>
     </entry>
   </group>
+  <group name="scan"/>
 </kcfg>
