@@ -33,13 +33,11 @@ NetworkView::NetworkView( QGraphicsItem *parent )
     m_itemBackground = new Plasma::ItemBackground(this);
     m_itemBackground->setTargetItem(0);
 
-    Plasma::DataEngineManager::self()->loadEngine("wicd");
     m_controller = engine()->serviceForSource("");
 }
 
 NetworkView::~NetworkView()
 {
-    Plasma::DataEngineManager::self()->unloadEngine("wicd");
 }
 
 void NetworkView::loadNetworks()

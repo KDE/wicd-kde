@@ -94,6 +94,9 @@ void WicdApplet::init()
     m_theme->resize(contentsRect().size());
     
     Plasma::ToolTipManager::self()->registerWidget(this);
+
+    //load dataengine
+    Plasma::DataEngine *engine = dataEngine("wicd");
     
     setupActions();
     
@@ -148,7 +151,7 @@ void WicdApplet::init()
     // read config
     configChanged();
 
-    Plasma::DataEngine *engine = dataEngine("wicd");
+    //connect dataengine
     engine->connectSource("status", this);
     m_wicdService = engine->serviceForSource("");
 
