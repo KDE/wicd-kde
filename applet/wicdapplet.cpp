@@ -188,7 +188,7 @@ void WicdApplet::setupActions()
     KAction* reloadAction = new KAction(KIcon("view-refresh"), i18n("Reload"), this);
     reloadAction->setShortcuts(KShortcut("Ctrl+R"));
     addAction("reload", reloadAction);
-    connect(reloadAction, SIGNAL(triggered()), DBusHandler::instance(), SLOT(scan()));
+    connect(reloadAction, SIGNAL(triggered()), this, SLOT(scan()));
 
 }
 
@@ -439,6 +439,11 @@ void WicdApplet::findHiddenDialog()
     }
 }
 
+void WicdApplet::scan() const
+{
+    DBusHandler::instance()->scan();
+}
+
 void WicdApplet::connectionInfoRequested()
 {
     m_infosDialog = new InfosDialog(m_status);
@@ -472,7 +477,7 @@ void WicdApplet::popupEvent(bool show)
     if (!show)
         return;
     if (m_autoScan) {
-        DBusHandler::instance()->scan();
+        scan();
     } else {
         loadNetworks();
     }

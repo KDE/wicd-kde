@@ -74,6 +74,7 @@ private slots:
     void showPreferences();
     void createAdhocDialog();
     void findHiddenDialog();
+    void scan() const;
     void connectionInfoRequested();
 
 private:
