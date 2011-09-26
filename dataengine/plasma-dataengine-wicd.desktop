@@ -2,6 +2,7 @@
 Name=Wicd
 Name[da]=Wicd
 Name[it]=Wicd
+Name[nb]=Wicd
 Name[nl]=Wicd
 Name[pt]=Wicd
 Name[pt_BR]=Wicd
@@ -12,6 +13,7 @@ Name[x-test]=xxWicdxx
 Comment=A Wicd data engine
 Comment[da]=En datamotor til Wicd
 Comment[it]=Un motore dati Wicd
+Comment[nb]=En Wicd datamotor
 Comment[nl]=Een Wicd-gegevensengine
 Comment[pt]=Um motor de dados do Wicd
 Comment[pt_BR]=Um motor de dados do Wicd
