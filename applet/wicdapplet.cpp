@@ -20,6 +20,7 @@
 #include "wicdapplet.h"
 #include "global.h"
 #include "labelentry.h"
+#include "profilewidget.h"
 
 #include <QPainter>
 #include <QToolButton>
@@ -57,7 +58,6 @@ WicdApplet::WicdApplet(QObject *parent, const QVariantList &args)
     setBackgroundHints(DefaultBackground);
 
     connect(DBusHandler::instance(), SIGNAL(connectionResultSend(QString)), this, SLOT(handleConnectionResult(QString)));
-    connect(DBusHandler::instance(), SIGNAL(launchChooser()), this, SLOT(launchProfileManager()));
     connect(DBusHandler::instance(), SIGNAL(scanStarted()), this, SLOT(freeze()));
     connect(DBusHandler::instance(), SIGNAL(scanEnded()), this, SLOT(unfreeze()));
     
@@ -151,8 +151,9 @@ void WicdApplet::init()
     configChanged();
 
     //connect dataengine
-    engine->connectSource("status", this);
     m_wicdService = engine->serviceForSource("");
+    engine->connectSource("status", this);
+    engine->connectSource("daemon", this);
 
     //we need a current profile
     QString profile = DBusHandler::instance()->callWired("GetDefaultWiredNetwork").toString();
@@ -160,11 +161,6 @@ void WicdApplet::init()
         profile = DBusHandler::instance()->callWired("GetWiredProfileList").toStringList().at(0);
     Wicd::currentprofile = profile;
     DBusHandler::instance()->callWired("ReadWiredNetworkProfile", profile);
-
-    //check if the profile manager is needed
-    if (DBusHandler::instance()->callDaemon("GetNeedWiredProfileChooser").toBool()) {
-        launchProfileManager();
-    }
 }
 
 void WicdApplet::setupActions()
@@ -263,6 +259,11 @@ void WicdApplet::dataUpdated(const QString& source, const Plasma::DataEngine::Da
         m_message = message;
         m_messageBox->setText(m_message);
         update();
+    } else if (source == "daemon") {
+        if (data["profileNeeded"].toBool()) {
+            //QTimer::singleShot ensures the applet is done with init()
+            QTimer::singleShot(0, this, SLOT(launchProfileManager()));
+        }
     }
 }
 
@@ -312,10 +313,9 @@ void WicdApplet::handleConnectionResult(const QString &result)
 
 void WicdApplet::launchProfileManager()
 {
-    DBusHandler::instance()->callDaemon("SetNeedWiredProfileChooser", false);
-    m_profileDialog = new ProfileDialog(this);
-    m_profileDialog->move(popupPosition(m_profileDialog->sizeHint()));
-    m_profileDialog->animatedShow(locationToDirection(location()));
+    ProfileDialog *profileDialog = new ProfileDialog(this);
+    profileDialog->move(popupPosition(profileDialog->sizeHint()));
+    profileDialog->animatedShow(locationToDirection(location()));
 }
 
 void WicdApplet::loadNetworks()

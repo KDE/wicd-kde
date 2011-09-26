@@ -42,12 +42,15 @@ protected:
 private slots:
     void updateStatus(Status status);
     void forceUpdateStatus();
+    void profileNeeded();
+    void profileNotNeeded();
 
 private:
     uint m_state;
     QStringList m_info;
     QString m_message;
     QString m_interface;
+    bool m_needed;
 };
 
 K_EXPORT_PLASMA_DATAENGINE(wicd, WicdEngine)

@@ -56,4 +56,5 @@
     </entry>
   </group>
   <group name="connectWired"/>
+  <group name="setProfileNotNeeded"/>
 </kcfg>

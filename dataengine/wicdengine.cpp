@@ -28,12 +28,20 @@ WicdEngine::WicdEngine(QObject* parent, const QVariantList& args)
     setMinimumPollingInterval(1000);
 
     connect(DBusHandler::instance(), SIGNAL(statusChange(Status)), this, SLOT(updateStatus(Status)));
+    connect(DBusHandler::instance(), SIGNAL(launchChooser()), this, SLOT(profileNeeded()));
+    connect(DBusHandler::instance(), SIGNAL(chooserLaunched()), this, SLOT(profileNotNeeded()));
 }
 
 void WicdEngine::init()
 {
     //force first status update
     updateStatus(DBusHandler::instance()->status());
+
+    m_needed = false;
+    //check if the profile manager is needed
+    if (DBusHandler::instance()->callDaemon("GetNeedWiredProfileChooser").toBool()) {
+        profileNeeded();
+    }
 }
 
 Plasma::Service *WicdEngine::serviceForSource(const QString &source)
@@ -47,6 +55,7 @@ QStringList WicdEngine::sources() const
     QStringList sources;
     sources<<"networks";
     sources<<"status";
+    sources<<"daemon";
     return sources;
 }
 
@@ -57,6 +66,10 @@ bool WicdEngine::sourceRequestEvent(const QString &source)
         return true;
     }
     if (source == "status") {
+        updateSourceEvent(source);
+        return true;
+    }
+    if (source == "daemon") {
         updateSourceEvent(source);
         return true;
     }
@@ -84,6 +97,10 @@ bool WicdEngine::updateSourceEvent(const QString &source)
         setData(source, "interface", m_interface);
         return true;
     }
+    if (source == "daemon") {
+        setData(source, "profileNeeded", m_needed);
+        return true;
+    }
     return false;
 }
 
@@ -107,6 +124,18 @@ void WicdEngine::updateStatus(Status status)
 void WicdEngine::forceUpdateStatus()
 {
     updateStatus(DBusHandler::instance()->status());
+}
+
+void WicdEngine::profileNeeded()
+{
+    m_needed = true;
+    updateSourceEvent("daemon");
+}
+
+void WicdEngine::profileNotNeeded()
+{
+    m_needed = false;
+    updateSourceEvent("daemon");
 }
 
 #include "wicdengine.moc"

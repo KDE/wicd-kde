@@ -95,5 +95,9 @@ void WicdJob::start()
         m_dbus->callWired("DeleteWiredNetworkProfile", parameters()["profile"].toString());
     } else if (operation == "connectWired") {
         m_dbus->callWired("ConnectWired");
+    } else if (operation == "setProfileNotNeeded") {
+        m_dbus->callDaemon("SetNeedWiredProfileChooser", false);
+        //update the dataengine "manually"
+        m_dbus->emitChooserLaunched();
     }
 }

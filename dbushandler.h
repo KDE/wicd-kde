@@ -43,6 +43,7 @@ public:
 
     QMap<int, NetworkInfos> networksList() const;
     Status status() const;
+    void emitChooserLaunched();
 
     QVariant callDaemon(const QString &query,
                         const QVariant &arg1 = QVariant(),
@@ -85,6 +86,7 @@ signals:
     void statusChange(Status status);
     void connectionResultSend(const QString& result);
     void launchChooser();
+    void chooserLaunched();
     void scanStarted();
     void scanEnded();
 

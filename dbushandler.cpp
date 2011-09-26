@@ -44,11 +44,6 @@ DBusHandler::DBusHandler()
     m_wired = new QDBusInterface("org.wicd.daemon", "/org/wicd/daemon/wired", "org.wicd.daemon.wired", QDBusConnection::systemBus());
     m_wireless = new QDBusInterface("org.wicd.daemon", "/org/wicd/daemon/wireless", "org.wicd.daemon.wireless", QDBusConnection::systemBus());
 
-    if (callDaemon("GetNeedWiredProfileChooser").toBool()) {
-        callDaemon("SetNeedWiredProfileChooser", false);
-        emit launchChooser();
-    }
-
     QDBusConnection::systemBus().connect("org.wicd.daemon",
                                          "/org/wicd/daemon",
                                          "org.wicd.daemon",
@@ -99,6 +94,11 @@ Status DBusHandler::status() const
 {
     QDBusReply<Status> reply = m_daemon->call("GetConnectionStatus");
     return reply;
+}
+
+void DBusHandler::emitChooserLaunched()
+{
+    emit chooserLaunched();
 }
 
 void DBusHandler::scan() const

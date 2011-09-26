@@ -132,7 +132,7 @@ void ProfileWidget::removeProfile()
 }
 
 ProfileDialog::ProfileDialog(QGraphicsWidget *parent)
-    : Plasma::Dialog(0, Qt::Popup)
+    : Plasma::Dialog(0)
 {
     setAttribute(Qt::WA_DeleteOnClose);
 
@@ -151,6 +151,15 @@ ProfileDialog::ProfileDialog(QGraphicsWidget *parent)
     setGraphicsWidget(mainWidget);
     connect(okButton, SIGNAL(clicked()), this, SLOT(accepted()));
 }
+
+void ProfileDialog::closeEvent(QCloseEvent *event)
+ {
+    Plasma::Service *service = m_profileWidget->engine()->serviceForSource("");
+    service->setParent(this);
+    KConfigGroup op = service->operationDescription("setProfileNotNeeded");
+    service->startOperationCall(op);
+    Plasma::Dialog::closeEvent(event);
+ }
 
 void ProfileDialog::accepted()
 {
