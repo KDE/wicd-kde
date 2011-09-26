@@ -249,6 +249,7 @@ void WicdApplet::dataUpdated(const QString& source, const Plasma::DataEngine::Da
             message = i18n("Connected to %1 - %2%3 (IP: %4)",
                            status.Infos.at(1), status.Infos.at(2), unit, status.Infos.at(0));//info(1) essid
         } else if (status.State == WicdState::CONNECTING) {
+            m_icon = "network-wired";
             bool wired = (status.Infos.at(0)=="wired");
             message = data["message"].toString();
             message = m_messageTable.value(message);
