@@ -22,8 +22,6 @@
 
 #include "dbushandler.h"
 
-#include <QFormLayout>
-
 #include <Plasma/Dialog>
 
 class InfosDialog : public Plasma::Dialog
@@ -36,11 +34,6 @@ public:
     
 private slots:
     void updateColors();
-    
-private:
-    void init();
-
-    QFormLayout *m_layout;
 };
 
 #endif // INFOSDIALOG_H
