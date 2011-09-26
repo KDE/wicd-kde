@@ -18,7 +18,6 @@
  ****************************************************************************/
 
 #include "profilewidget.h"
-#include "dbushandler.h"
 #include "global.h"
 
 #include <QGraphicsLinearLayout>
@@ -27,6 +26,8 @@
 #include <KInputDialog>
 #include <KLocalizedString>
 
+#include <Plasma/DataEngineManager>
+#include <Plasma/ServiceJob>
 #include <Plasma/PushButton>
 
 ProfileWidget::ProfileWidget(QGraphicsItem * parent, Qt::WindowFlags wFlags)
@@ -53,7 +54,13 @@ ProfileWidget::ProfileWidget(QGraphicsItem * parent, Qt::WindowFlags wFlags)
 
     setLayout(vLayout);
 
-    QStringList profileList = DBusHandler::instance()->callWired("GetWiredProfileList").toStringList();
+    m_wicdService = engine()->serviceForSource("");
+    m_wicdService->setParent(this);
+    KConfigGroup op = m_wicdService->operationDescription("getWiredProfileList");
+    Plasma::ServiceJob *job = m_wicdService->startOperationCall(op);
+    //don't wait for the event loop, we need the result right now
+    job->start();
+    QStringList profileList = job->result().toStringList();
     m_comboBox->nativeWidget()->addItems(profileList);
 
     connect(m_defaultBox, SIGNAL(toggled(bool)),this, SLOT(toggleDefault(bool)));
@@ -65,19 +72,32 @@ ProfileWidget::ProfileWidget(QGraphicsItem * parent, Qt::WindowFlags wFlags)
     m_comboBox->setCurrentIndex(currentProfileIndex);
 }
 
+Plasma::DataEngine* ProfileWidget::engine()
+{
+    Plasma::DataEngine *e = Plasma::DataEngineManager::self()->engine("wicd");
+    if (e->isValid()) {
+        return e;
+    } else {
+        return 0;
+    }
+}
+
 void ProfileWidget::toggleDefault(bool toggle)
 {
-    if (toggle) {
-        DBusHandler::instance()->callWired("UnsetWiredDefault");
-    }
-    DBusHandler::instance()->callWired("SetWiredProperty", "default", toggle);
-    DBusHandler::instance()->callWired("SaveWiredNetworkProfile", m_comboBox->text());
+    KConfigGroup op = m_wicdService->operationDescription("setProfileDefaultProperty");
+    op.writeEntry("profile", m_comboBox->text());
+    op.writeEntry("default", toggle);
+    m_wicdService->startOperationCall(op);
 }
 
 void ProfileWidget::profileChanged(QString profile)
 {
-    DBusHandler::instance()->callWired("ReadWiredNetworkProfile", profile);
-    m_defaultBox->setChecked(DBusHandler::instance()->callWired("GetWiredProperty", "default").toBool());
+    KConfigGroup op = m_wicdService->operationDescription("readWiredNetworkProfile");
+    op.writeEntry("profile", profile);
+    Plasma::ServiceJob *job = m_wicdService->startOperationCall(op);
+    //don't wait for the event loop, we need the result right now
+    job->start();
+    m_defaultBox->setChecked(job->result().toBool());
     emit profileSelected(profile);
     Wicd::currentprofile = profile;
 }
@@ -91,11 +111,12 @@ void ProfileWidget::addProfile()
     if ((!ok) || newprofile.isEmpty())
         return;
 
-    QStringList profileList = DBusHandler::instance()->callWired("GetWiredProfileList").toStringList();
-    if (profileList.contains(newprofile))//the profile already exists
+    if (m_comboBox->nativeWidget()->contains(newprofile))//the profile already exists
         return;
 
-    DBusHandler::instance()->callWired("CreateWiredNetworkProfile", newprofile, false);
+    KConfigGroup op = m_wicdService->operationDescription("createWiredNetworkProfile");
+    op.writeEntry("profile", newprofile);
+    m_wicdService->startOperationCall(op);
     m_comboBox->nativeWidget()->insertItem(0, newprofile);
     m_comboBox->setCurrentIndex(0);
 }
@@ -103,7 +124,9 @@ void ProfileWidget::addProfile()
 void ProfileWidget::removeProfile()
 {
     QString profile = m_comboBox->text();
-    DBusHandler::instance()->callWired("DeleteWiredNetworkProfile", profile);
+    KConfigGroup op = m_wicdService->operationDescription("deleteWiredNetworkProfile");
+    op.writeEntry("profile", profile);
+    m_wicdService->startOperationCall(op);
     m_comboBox->nativeWidget()->removeItem(m_comboBox->currentIndex());
     m_comboBox->setCurrentIndex(0);
 }
@@ -116,8 +139,8 @@ ProfileDialog::ProfileDialog(QGraphicsWidget *parent)
     QGraphicsWidget *mainWidget = new QGraphicsWidget(parent);
     QGraphicsLinearLayout *mainLayout = new QGraphicsLinearLayout(Qt::Vertical);
     mainWidget->setLayout(mainLayout);
-    ProfileWidget *profileWidget = new ProfileWidget(mainWidget);
-    mainLayout->addItem(profileWidget);
+    m_profileWidget = new ProfileWidget(mainWidget);
+    mainLayout->addItem(m_profileWidget);
     Plasma::PushButton *okButton = new Plasma::PushButton(mainWidget);
     okButton->setIcon(KIcon("dialog-ok"));
     okButton->setText(i18n("Ok"));
@@ -131,6 +154,9 @@ ProfileDialog::ProfileDialog(QGraphicsWidget *parent)
 
 void ProfileDialog::accepted()
 {
-    DBusHandler::instance()->callWired("ReadWiredNetworkProfile", Wicd::currentprofile);
-    DBusHandler::instance()->callWired("ConnectWired");
+    Plasma::Service *service = m_profileWidget->engine()->serviceForSource("");
+    service->setParent(this);
+    KConfigGroup op = service->operationDescription("connectWired");
+    service->startOperationCall(op);
+    close();
 }

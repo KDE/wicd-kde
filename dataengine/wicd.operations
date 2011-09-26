@@ -31,4 +31,29 @@
     </entry>
   </group>
   <group name="scan"/>
+  <group name="getWiredProfileList"/>
+  <group name="setProfileDefaultProperty">
+    <entry name="profile" type="String">
+      <label>Profile's name.</label>
+    </entry>
+    <entry name="default" type="Bool">
+      <label>Whether the profile has its "default" property set to true or false.</label>
+    </entry>
+  </group>
+  <group name="readWiredNetworkProfile">
+    <entry name="profile" type="String">
+      <label>Name of the profile to read.</label>
+    </entry>
+  </group>
+  <group name="createWiredNetworkProfile">
+    <entry name="profile" type="String">
+      <label>Name of the profile to create.</label>
+    </entry>
+  </group>
+  <group name="deleteWiredNetworkProfile">
+    <entry name="profile" type="String">
+      <label>Name of the profile to delete.</label>
+    </entry>
+  </group>
+  <group name="connectWired"/>
 </kcfg>

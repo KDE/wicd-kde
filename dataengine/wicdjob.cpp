@@ -59,10 +59,10 @@ void WicdJob::start()
             }
         }
     } else if (operation == "cancelConnect") {
-        DBusHandler::instance()->callDaemon("CancelConnect");
-        DBusHandler::instance()->callDaemon("SetForcedDisconnect", true);
+        m_dbus->callDaemon("CancelConnect");
+        m_dbus->callDaemon("SetForcedDisconnect", true);
     } else if (operation == "createAdHocNetwork") {
-        DBusHandler::instance()->callWireless("CreateAdHocNetwork",
+        m_dbus->callWireless("CreateAdHocNetwork",
                                               parameters()["essid"].toString(),
                                               parameters()["channel"].toString(),
                                               parameters()["ip"].toString(),
@@ -71,9 +71,29 @@ void WicdJob::start()
                                               parameters()["wep"].toBool(),
                                               false /*parameters()["ics"].toBool()*/);
     } else if (operation == "findHiddenNetwork") {
-        DBusHandler::instance()->callWireless("SetHiddenNetworkESSID", parameters()["essid"].toString());
-        DBusHandler::instance()->scan();
+        m_dbus->callWireless("SetHiddenNetworkESSID", parameters()["essid"].toString());
+        m_dbus->scan();
     } else if (operation == "scan") {
-        DBusHandler::instance()->scan();
+        m_dbus->scan();
+    } else if (operation == "getWiredProfileList") {
+        setResult(m_dbus->callWired("GetWiredProfileList"));
+    } else if (operation == "setProfileDefaultProperty") {
+        if (parameters()["default"].toBool()) {
+            //We are about to set a new default profile
+            //so we unset the default option in the current default wired profile.
+            m_dbus->callWired("UnsetWiredDefault");
+        }
+        m_dbus->callWired("SetWiredProperty", "default", parameters()["default"].toBool());
+        m_dbus->callWired("SaveWiredNetworkProfile", parameters()["profile"].toString());
+    } else if (operation == "readWiredNetworkProfile") {
+        m_dbus->callWired("ReadWiredNetworkProfile", parameters()["profile"].toString());
+        //returns true if the profile is the default profile
+        setResult(m_dbus->callWired("GetWiredProperty", "default").toBool());
+    } else if (operation == "createWiredNetworkProfile") {
+        m_dbus->callWired("CreateWiredNetworkProfile", parameters()["profile"].toString(), false);
+    } else if (operation == "deleteWiredNetworkProfile") {
+        m_dbus->callWired("DeleteWiredNetworkProfile", parameters()["profile"].toString());
+    } else if (operation == "connectWired") {
+        m_dbus->callWired("ConnectWired");
     }
 }
