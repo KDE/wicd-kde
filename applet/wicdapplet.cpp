@@ -21,6 +21,7 @@
 #include "global.h"
 #include "labelentry.h"
 #include "profilewidget.h"
+#include "infosdialog.h"
 
 #include <QPainter>
 #include <QToolButton>
@@ -449,9 +450,9 @@ void WicdApplet::scan() const
 
 void WicdApplet::connectionInfoRequested()
 {
-    m_infosDialog = new InfosDialog(m_status);
-    m_infosDialog->move(popupPosition(m_infosDialog->sizeHint(), Qt::AlignRight));
-    m_infosDialog->animatedShow(locationToDirection(location()));
+    InfosDialog *infosDialog = new InfosDialog(m_status);
+    infosDialog->move(popupPosition(infosDialog->sizeHint(), Qt::AlignRight));
+    infosDialog->animatedShow(locationToDirection(location()));
 }
 
 void WicdApplet::configChanged()

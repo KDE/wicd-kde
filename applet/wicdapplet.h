@@ -23,7 +23,6 @@
 #include "dbushandler.h"
 #include "networkplotter.h"
 #include "networkview.h"
-#include "infosdialog.h"
 #include "ui_wicdappletConfig.h"
 
 #include <Plasma/PopupApplet>
@@ -108,8 +107,6 @@ private:
     NetworkPlotter *m_plotter;
     Plasma::Label *m_messageBox;
     Plasma::ToolButton *m_abortButton;
-
-    InfosDialog* m_infosDialog;
 };
 
 // This is the command that links your applet to the .desktop file
