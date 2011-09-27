@@ -59,8 +59,6 @@ WicdApplet::WicdApplet(QObject *parent, const QVariantList &args)
     setBackgroundHints(DefaultBackground);
 
     connect(DBusHandler::instance(), SIGNAL(connectionResultSend(QString)), this, SLOT(handleConnectionResult(QString)));
-    connect(DBusHandler::instance(), SIGNAL(scanStarted()), this, SLOT(freeze()));
-    connect(DBusHandler::instance(), SIGNAL(scanEnded()), this, SLOT(unfreeze()));
     
     //to ease translations
     m_messageTable.insert("interface_down", i18n("Putting interface down..."));
@@ -214,10 +212,10 @@ void WicdApplet::dataUpdated(const QString& source, const Plasma::DataEngine::Da
         }
         if (m_status.State != status.State) {
             if (status.State == WicdState::CONNECTING) {
-                freeze();
+                setScanning(true);
                 m_abortButton->setVisible(true);
             } else {
-                unfreeze();
+                setScanning(false);
                 m_abortButton->setVisible(false);
                 switch (status.State) {
                 case WicdState::WIRED:
@@ -266,6 +264,7 @@ void WicdApplet::dataUpdated(const QString& source, const Plasma::DataEngine::Da
             //QTimer::singleShot ensures the applet is done with init()
             QTimer::singleShot(0, this, SLOT(launchProfileManager()));
         }
+        setScanning(data["isScanning"].toBool());
     }
 }
 
@@ -357,20 +356,19 @@ void WicdApplet::notify(const QString &event, const QString &message) const
     }
 }
 
-void WicdApplet::freeze()
+void WicdApplet::setScanning(bool isScanning)
 {
-    m_scrollWidget->widget()->hide();
-    m_busyWidget->resize(m_scrollWidget->viewportGeometry().size());
-    m_busyWidget->show();
-    setBusy(true);
-}
-
-void WicdApplet::unfreeze()
-{
-    m_busyWidget->hide();
-    m_scrollWidget->widget()->show();
-    setBusy(false);
-    loadNetworks();
+    if (isScanning) {
+        m_scrollWidget->widget()->hide();
+        m_busyWidget->resize(m_scrollWidget->viewportGeometry().size());
+        m_busyWidget->show();
+        setBusy(true);
+    } else {
+        m_busyWidget->hide();
+        m_scrollWidget->widget()->show();
+        setBusy(false);
+        loadNetworks();
+    }
 }
 
 void WicdApplet::cancelConnect() const

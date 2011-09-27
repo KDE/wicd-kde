@@ -28,6 +28,8 @@ WicdEngine::WicdEngine(QObject* parent, const QVariantList& args)
     setMinimumPollingInterval(1000);
 
     connect(DBusHandler::instance(), SIGNAL(statusChange(Status)), this, SLOT(updateStatus(Status)));
+    connect(DBusHandler::instance(), SIGNAL(scanStarted()), this, SLOT(scanStarted()));
+    connect(DBusHandler::instance(), SIGNAL(scanEnded()), this, SLOT(scanEnded()));
     connect(DBusHandler::instance(), SIGNAL(launchChooser()), this, SLOT(profileNeeded()));
     connect(DBusHandler::instance(), SIGNAL(chooserLaunched()), this, SLOT(profileNotNeeded()));
 }
@@ -42,6 +44,8 @@ void WicdEngine::init()
     if (DBusHandler::instance()->callDaemon("GetNeedWiredProfileChooser").toBool()) {
         profileNeeded();
     }
+
+    m_isScanning = false;
 }
 
 Plasma::Service *WicdEngine::serviceForSource(const QString &source)
@@ -99,6 +103,7 @@ bool WicdEngine::updateSourceEvent(const QString &source)
     }
     if (source == "daemon") {
         setData(source, "profileNeeded", m_needed);
+        setData(source, "isScanning", m_isScanning);
         return true;
     }
     return false;
@@ -135,6 +140,18 @@ void WicdEngine::profileNeeded()
 void WicdEngine::profileNotNeeded()
 {
     m_needed = false;
+    updateSourceEvent("daemon");
+}
+
+void WicdEngine::scanStarted()
+{
+    m_isScanning = true;
+    updateSourceEvent("daemon");
+}
+
+void WicdEngine::scanEnded()
+{
+    m_isScanning = false;
     updateSourceEvent("daemon");
 }
 

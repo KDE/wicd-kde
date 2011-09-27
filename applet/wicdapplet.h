@@ -66,8 +66,6 @@ protected slots:
 private slots:
     void handleConnectionResult(const QString& result);
     void launchProfileManager();
-    void freeze();
-    void unfreeze();
     void cancelConnect() const;
     void showPreferences() const;
     void createAdhocDialog() const;
@@ -79,6 +77,7 @@ private:
     void setupActions();
     QString qualityToIcon(int quality) const;
     void loadNetworks();
+    void setScanning(bool isScanning);
     void showPlotter(bool show);
     void notify(const QString& event, const QString& message) const;
 
