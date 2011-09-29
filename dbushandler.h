@@ -27,12 +27,6 @@ namespace WicdState {
     enum State { NOT_CONNECTED, CONNECTING, WIRELESS, WIRED, SUSPENDED };
 };
 
-struct Status {
-    uint State;
-    QStringList Infos;
-};
-Q_DECLARE_METATYPE(Status)
-
 class DBusHandler : public QObject
 {
     Q_OBJECT

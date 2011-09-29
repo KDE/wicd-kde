@@ -23,9 +23,17 @@
 #include <QString>
 #include <QHash>
 #include <QVariant>
+#include <QStringList>
 
 typedef QHash<QString, QVariant> NetworkInfos;
 typedef QVariantMap Encryption;
+
+
+struct Status {
+    uint State;
+    QStringList Infos;
+};
+Q_DECLARE_METATYPE(Status)
 
 #endif
 

@@ -20,7 +20,7 @@
 #ifndef INFOSDIALOG_H
 #define INFOSDIALOG_H
 
-#include "dbushandler.h"
+#include "types.h"
 
 #include <Plasma/Dialog>
 
