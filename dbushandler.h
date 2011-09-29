@@ -23,10 +23,6 @@
 #include <QtDBus>
 #include "types.h"
 
-namespace WicdState {
-    enum State { NOT_CONNECTED, CONNECTING, WIRELESS, WIRED, SUSPENDED };
-};
-
 class DBusHandler : public QObject
 {
     Q_OBJECT

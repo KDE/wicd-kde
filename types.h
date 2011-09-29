@@ -28,6 +28,9 @@
 typedef QHash<QString, QVariant> NetworkInfos;
 typedef QVariantMap Encryption;
 
+namespace WicdState {
+    enum State { NOT_CONNECTED, CONNECTING, WIRELESS, WIRED, SUSPENDED };
+}
 
 struct Status {
     uint State;
