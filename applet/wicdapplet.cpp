@@ -58,8 +58,6 @@ WicdApplet::WicdApplet(QObject *parent, const QVariantList &args)
     // this will get us the standard applet background, for free!
     setBackgroundHints(DefaultBackground);
 
-    connect(DBusHandler::instance(), SIGNAL(connectionResultSend(QString)), this, SLOT(handleConnectionResult(QString)));
-    
     //to ease translations
     m_messageTable.insert("interface_down", i18n("Putting interface down..."));
     m_messageTable.insert("resetting_ip_address", i18n("Resetting IP address..."));
@@ -265,6 +263,7 @@ void WicdApplet::dataUpdated(const QString& source, const Plasma::DataEngine::Da
             QTimer::singleShot(0, this, SLOT(launchProfileManager()));
         }
         setScanning(data["isScanning"].toBool());
+        checkConnectionResult(data["connectionResult"].toString());
     }
 }
 
@@ -303,10 +302,10 @@ void WicdApplet::paintInterface(QPainter *p,
     m_theme->paint(p, contentsRect, m_icon);
 }
 
-void WicdApplet::handleConnectionResult(const QString &result)
+void WicdApplet::checkConnectionResult(const QString &result)
 {
     QStringList validMessages;
-    validMessages << "Success" << "aborted";
+    validMessages << "Success" << "aborted" << QString();
     if (!validMessages.contains(result)) {
         notify("error", m_messageTable.value(result));
     }

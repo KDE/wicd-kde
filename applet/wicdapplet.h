@@ -64,7 +64,6 @@ protected slots:
     void configAccepted();
 
 private slots:
-    void handleConnectionResult(const QString& result);
     void launchProfileManager();
     void cancelConnect() const;
     void showPreferences() const;
@@ -80,6 +79,7 @@ private:
     void setScanning(bool isScanning);
     void showPlotter(bool show);
     void notify(const QString& event, const QString& message) const;
+    void checkConnectionResult(const QString& result);
 
     // Configuration dialog
     Ui::WicdAppletConfig ui;

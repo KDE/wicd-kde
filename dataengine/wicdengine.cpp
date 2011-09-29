@@ -32,6 +32,7 @@ WicdEngine::WicdEngine(QObject* parent, const QVariantList& args)
     connect(DBusHandler::instance(), SIGNAL(scanEnded()), this, SLOT(scanEnded()));
     connect(DBusHandler::instance(), SIGNAL(launchChooser()), this, SLOT(profileNeeded()));
     connect(DBusHandler::instance(), SIGNAL(chooserLaunched()), this, SLOT(profileNotNeeded()));
+    connect(DBusHandler::instance(), SIGNAL(connectionResultSend(QString)), this, SLOT(resultReceived(QString)));
 }
 
 void WicdEngine::init()
@@ -104,6 +105,9 @@ bool WicdEngine::updateSourceEvent(const QString &source)
     if (source == "daemon") {
         setData(source, "profileNeeded", m_needed);
         setData(source, "isScanning", m_isScanning);
+        setData(source, "connectionResult", m_connectionResult);
+        //to simulate a "signal-like" behaviour
+        m_connectionResult = QString();
         return true;
     }
     return false;
@@ -152,6 +156,12 @@ void WicdEngine::scanStarted()
 void WicdEngine::scanEnded()
 {
     m_isScanning = false;
+    updateSourceEvent("daemon");
+}
+
+void WicdEngine::resultReceived(const QString& result)
+{
+    m_connectionResult = result;
     updateSourceEvent("daemon");
 }
 
