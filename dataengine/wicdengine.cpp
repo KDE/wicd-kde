@@ -46,7 +46,7 @@ void WicdEngine::init()
         profileNeeded();
     }
 
-    m_isScanning = false;
+    m_scanning = false;
 }
 
 Plasma::Service *WicdEngine::serviceForSource(const QString &source)
@@ -104,7 +104,7 @@ bool WicdEngine::updateSourceEvent(const QString &source)
     }
     if (source == "daemon") {
         setData(source, "profileNeeded", m_needed);
-        setData(source, "isScanning", m_isScanning);
+        setData(source, "scanning", m_scanning);
         setData(source, "connectionResult", m_connectionResult);
         //to simulate a "signal-like" behaviour
         m_connectionResult = QString();
@@ -149,13 +149,13 @@ void WicdEngine::profileNotNeeded()
 
 void WicdEngine::scanStarted()
 {
-    m_isScanning = true;
+    m_scanning = true;
     updateSourceEvent("daemon");
 }
 
 void WicdEngine::scanEnded()
 {
-    m_isScanning = false;
+    m_scanning = false;
     updateSourceEvent("daemon");
 }
 

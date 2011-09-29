@@ -262,7 +262,7 @@ void WicdApplet::dataUpdated(const QString& source, const Plasma::DataEngine::Da
             //QTimer::singleShot ensures the applet is done with init()
             QTimer::singleShot(0, this, SLOT(launchProfileManager()));
         }
-        setScanning(data["isScanning"].toBool());
+        setScanning(data["scanning"].toBool());
         checkConnectionResult(data["connectionResult"].toString());
     }
 }

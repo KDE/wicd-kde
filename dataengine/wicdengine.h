@@ -54,7 +54,7 @@ private:
     QString m_message;
     QString m_interface;
     bool m_needed;
-    bool m_isScanning;
+    bool m_scanning;
     QString m_connectionResult;
 };
 
