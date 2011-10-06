@@ -89,7 +89,7 @@ void NetworkPlotter::dataUpdated(const QString& source, const Plasma::DataEngine
     //are we getting received or transmitted data?
     int index = (splitted[3] == "receiver") ? 0 : 1;
     //fill m_data accordingly
-    m_data[index] = qMax(0.0, data["value"].toDouble());
+    m_data[index] = qMax(qreal(0.0), data["value"].toDouble());
     //update plotter only when the 2 values are filled
     if (!m_data.contains(-1)) {
         addSample(m_data);
