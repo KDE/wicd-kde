@@ -25,7 +25,7 @@
 #include <QVariant>
 #include <QStringList>
 
-typedef QHash<QString, QVariant> NetworkInfos;
+typedef QHash<QString, QVariant> NetworkInfo;
 typedef QVariantMap Encryption;
 
 namespace WicdState {
@@ -34,7 +34,7 @@ namespace WicdState {
 
 struct Status {
     uint State;
-    QStringList Infos;
+    QStringList Info;
 };
 Q_DECLARE_METATYPE(Status)
 

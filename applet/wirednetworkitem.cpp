@@ -20,14 +20,14 @@
 #include "wirednetworkitem.h"
 #include "global.h"
 
-WiredNetworkItem::WiredNetworkItem(NetworkInfos info, QGraphicsWidget *parent)
+WiredNetworkItem::WiredNetworkItem(NetworkInfo info, QGraphicsWidget *parent)
     : NetworkItem(info, parent),
       m_profileWidget(0)
 {
     //make the combobox pop down over the next networkitem in the list
     setZValue(110);
 
-    m_networkIcon->setText(m_infos.value("essid").toString()+": "+Wicd::currentprofile);
+    m_networkIcon->setText(m_info.value("essid").toString()+": "+Wicd::currentprofile);
     m_networkIcon->setIcon("network-wired");
 }
 
@@ -43,5 +43,5 @@ QGraphicsWidget* WiredNetworkItem::moreWidget()
 
 void WiredNetworkItem::profileUpdated(QString profile)
 {
-    m_networkIcon->setText(m_infos.value("essid").toString()+": "+profile);
+    m_networkIcon->setText(m_info.value("essid").toString()+": "+profile);
 }

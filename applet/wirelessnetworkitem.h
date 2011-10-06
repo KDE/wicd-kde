@@ -29,7 +29,7 @@ class WirelessNetworkItem : public NetworkItem
     Q_OBJECT
 
 public:
-    WirelessNetworkItem(NetworkInfos info, QGraphicsWidget *parent);
+    WirelessNetworkItem(NetworkInfo info, QGraphicsWidget *parent);
     static void showStrength(bool show) { m_showStrength = show; }
 
 protected:

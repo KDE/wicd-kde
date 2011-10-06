@@ -17,23 +17,23 @@
  *  along with Wicd Client KDE.  If not, see <http://www.gnu.org/licenses/>.*
  ****************************************************************************/
 
-#ifndef INFOSDIALOG_H
-#define INFOSDIALOG_H
+#ifndef INFODIALOG_H
+#define INFODIALOG_H
 
 #include "types.h"
 
 #include <Plasma/Dialog>
 
-class InfosDialog : public Plasma::Dialog
+class InfoDialog : public Plasma::Dialog
 {
     Q_OBJECT
 
 public:
-    InfosDialog(Status status, QWidget *parent = 0);
-    ~InfosDialog();
+    InfoDialog(Status status, QWidget *parent = 0);
+    ~InfoDialog();
     
 private slots:
     void updateColors();
 };
 
-#endif // INFOSDIALOG_H
+#endif // INFODIALOG_H

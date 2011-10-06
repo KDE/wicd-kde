@@ -113,14 +113,14 @@ void DBusHandler::disconnect() const
     m_daemon->call("SetForcedDisconnect", true);
 }
 
-QMap<int, NetworkInfos> DBusHandler::networksList() const
+QMap<int, NetworkInfo> DBusHandler::networksList() const
 {
-    QMap<int, NetworkInfos> list;
+    QMap<int, NetworkInfo> list;
     Status p_status = status();
     //look for wired connection
     if (call(m_daemon, "GetAlwaysShowWiredInterface").toBool() || call(m_wired, "CheckPluggedIn").toBool()) {
         //a cable is plugged in
-        NetworkInfos wirednetwork = wiredProperties();
+        NetworkInfo wirednetwork = wiredProperties();
         if (p_status.State == WicdState::WIRED) {
             wirednetwork.insert("connected", true);
         } else {
@@ -139,17 +139,17 @@ QMap<int, NetworkInfos> DBusHandler::networksList() const
     return list;
 }
 
-NetworkInfos DBusHandler::wiredProperties() const
+NetworkInfo DBusHandler::wiredProperties() const
 {
-    NetworkInfos properties;
+    NetworkInfo properties;
     properties.insert("networkId", -1);
     properties.insert("essid", i18n("Wired network"));
     return properties;
 }
 
-NetworkInfos DBusHandler::wirelessProperties(const int &networkId) const
+NetworkInfo DBusHandler::wirelessProperties(const int &networkId) const
 {
-    NetworkInfos properties;
+    NetworkInfo properties;
     properties.insert("networkId", networkId);
     properties.insert("essid", call(m_wireless, "GetWirelessProperty", networkId, "essid").toString());
     properties.insert("usedbm", call(m_daemon, "GetSignalDisplayType").toBool());
@@ -165,31 +165,31 @@ NetworkInfos DBusHandler::wirelessProperties(const int &networkId) const
     return properties;
 }
 
-void DBusHandler::statusChanged(uint state, QVariantList infos)
+void DBusHandler::statusChanged(uint state, QVariantList info)
 {
     Status status;
     status.State = state;
     switch (state) {
     case WicdState::NOT_CONNECTED:
-        status.Infos.append("");
+        status.Info.append("");
         break;
     case WicdState::CONNECTING:
-        status.Infos.append(infos.at(0).toString());//"wired" or "wireless"
-        if (infos.at(0).toString() == "wireless")
-            status.Infos.append(infos.at(1).toString());//None if wired, essid if wireless
+        status.Info.append(info.at(0).toString());//"wired" or "wireless"
+        if (info.at(0).toString() == "wireless")
+            status.Info.append(info.at(1).toString());//None if wired, essid if wireless
         break;
     case WicdState::WIRED:
-        status.Infos.append(infos.at(0).toString());//IP Adresss
+        status.Info.append(info.at(0).toString());//IP Adresss
         break;
     case WicdState::WIRELESS:
-        status.Infos.append(infos.at(0).toString());//IP Adresss
-        status.Infos.append(infos.at(1).toString());//essid
-        status.Infos.append(infos.at(2).toString());//signal strength
-        status.Infos.append(infos.at(3).toString());//internal networkid
-        status.Infos.append(infos.at(4).toString());//bitrate
+        status.Info.append(info.at(0).toString());//IP Adresss
+        status.Info.append(info.at(1).toString());//essid
+        status.Info.append(info.at(2).toString());//signal strength
+        status.Info.append(info.at(3).toString());//internal networkid
+        status.Info.append(info.at(4).toString());//bitrate
         break;
     case WicdState::SUSPENDED:
-        status.Infos.append("");
+        status.Info.append("");
         break;
     default:
         break;
@@ -259,14 +259,14 @@ QVariant DBusHandler::call(QDBusInterface *interface,
 
 const QDBusArgument & operator<<(QDBusArgument &arg, const Status &status) {
     arg.beginStructure();
-    arg << status.State << status.Infos;
+    arg << status.State << status.Info;
     arg.endStructure();
     return arg;
 }
 
 const QDBusArgument & operator>>(const QDBusArgument &arg, Status &status) {
     arg.beginStructure();
-    arg >> status.State >> status.Infos;
+    arg >> status.State >> status.Info;
     arg.endStructure();
     return arg;
 }

@@ -33,7 +33,7 @@ class NetworkItem : public QGraphicsWidget
 {
     Q_OBJECT
 public:
-    NetworkItem(NetworkInfos info, QGraphicsWidget *parent);
+    NetworkItem(NetworkInfo info, QGraphicsWidget *parent);
     ~NetworkItem();
 
 protected:
@@ -49,7 +49,7 @@ signals:
     void toggled(int id);
 
 protected:
-    NetworkInfos m_infos;
+    NetworkInfo m_info;
     NetworkIcon *m_networkIcon;
     QGraphicsLinearLayout *m_hLayout;
     Plasma::Animation *m_infoFade;

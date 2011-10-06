@@ -87,8 +87,8 @@ bool WicdEngine::updateSourceEvent(const QString &source)
         //reset
         setData(source, DataEngine::Data());
         //populate new data
-        QMap<int, NetworkInfos> list = DBusHandler::instance()->networksList();
-        QMap<int, NetworkInfos>::const_iterator it = list.constBegin();
+        QMap<int, NetworkInfo> list = DBusHandler::instance()->networksList();
+        QMap<int, NetworkInfo>::const_iterator it = list.constBegin();
         while (it != list.constEnd()) {
             setData(source, QString::number(it.key()), it.value());
             ++it;
@@ -116,10 +116,10 @@ bool WicdEngine::updateSourceEvent(const QString &source)
 void WicdEngine::updateStatus(Status status)
 {
     m_state = status.State;
-    m_info = status.Infos;
+    m_info = status.Info;
     m_interface = DBusHandler::instance()->callDaemon("GetCurrentInterface").toString();
     if (status.State == WicdState::CONNECTING) {
-        bool wired = (status.Infos.at(0)=="wired");
+        bool wired = (status.Info.at(0)=="wired");
         if (wired) {
             m_message = DBusHandler::instance()->callWired("CheckWiredConnectingMessage").toString();
         } else {

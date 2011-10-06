@@ -28,7 +28,7 @@ class WiredNetworkItem : public NetworkItem
     Q_OBJECT
 
 public:
-    WiredNetworkItem(NetworkInfos info, QGraphicsWidget *parent);
+    WiredNetworkItem(NetworkInfo info, QGraphicsWidget *parent);
 
 protected:
     QGraphicsWidget *moreWidget();

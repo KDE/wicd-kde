@@ -15,7 +15,7 @@ set(wicdapplet_SRCS
     ../networkpropertiesdialog.cpp
     ../dbushandler.cpp
     profilewidget.cpp
-    infosdialog.cpp
+    infodialog.cpp
     networkicon.cpp
     networkitem.cpp
     wirednetworkitem.cpp

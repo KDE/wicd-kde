@@ -28,13 +28,13 @@
 
 bool WirelessNetworkItem::m_showStrength(false);
 
-WirelessNetworkItem::WirelessNetworkItem(NetworkInfos info, QGraphicsWidget *parent)
+WirelessNetworkItem::WirelessNetworkItem(NetworkInfo info, QGraphicsWidget *parent)
     : NetworkItem(info, parent),
       m_infoWidget(0)
 {
-    m_networkIcon->setText(m_infos.value("essid").toString());
+    m_networkIcon->setText(m_info.value("essid").toString());
     m_networkIcon->setIcon("network-wireless");
-    if (m_infos.value("encryption").toBool()) {
+    if (m_info.value("encryption").toBool()) {
         m_networkIcon->setEncrypted(true);
     }
 
@@ -45,7 +45,7 @@ WirelessNetworkItem::WirelessNetworkItem(NetworkInfos info, QGraphicsWidget *par
     qualityBar->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     qualityBar->setMinimum(0);
     qualityBar->setMaximum(100);
-    qualityBar->setValue(m_infos.value("quality").toInt());
+    qualityBar->setValue(m_info.value("quality").toInt());
 
     if (m_showStrength) {
         Plasma::Theme* theme = Plasma::Theme::defaultTheme();
@@ -53,8 +53,8 @@ WirelessNetworkItem::WirelessNetworkItem(NetworkInfos info, QGraphicsWidget *par
         font.setPointSize(7.5);
         qualityBar->setLabelFont(0, font);
         qualityBar->setLabelAlignment(0, Qt::AlignVCenter | Qt::AlignLeft);
-        bool usedbm = m_infos.value("usedbm").toBool();
-        QString signal = usedbm ? m_infos.value("strength").toString()+" dBm" : m_infos.value("quality").toString()+'%';
+        bool usedbm = m_info.value("usedbm").toBool();
+        QString signal = usedbm ? m_info.value("strength").toString()+" dBm" : m_info.value("quality").toString()+'%';
         qualityBar->setLabel(0, signal);
     } else {
         qualityBar->setMaximumHeight(12);
@@ -87,26 +87,26 @@ QGraphicsWidget* WirelessNetworkItem::moreWidget()
         widget->setLayout(formLayout);
 
         QString signal;
-        if (m_infos.value("usedbm").toBool())
-            signal = m_infos.value("strength").toString()+" dBm";
+        if (m_info.value("usedbm").toBool())
+            signal = m_info.value("strength").toString()+" dBm";
         else
-            signal = m_infos.value("quality").toString()+'%';
+            signal = m_info.value("quality").toString()+'%';
         formLayout->addRow(new QLabel(i18n("Signal strength:")), new QLabel(signal));
 
         QString encryption;
-        if (m_infos.value("encryption").toBool())
-            encryption = m_infos.value("encryptionType").toString();
+        if (m_info.value("encryption").toBool())
+            encryption = m_info.value("encryptionType").toString();
         else
             encryption = i18n("Unsecured");
         formLayout->addRow(new QLabel(i18n("Encryption type:")), new QLabel(encryption));
 
-        QString accessPoint = m_infos.value("bssid").toString();
+        QString accessPoint = m_info.value("bssid").toString();
         formLayout->addRow(new QLabel(i18n("Access point address:")), new QLabel(accessPoint));
 
-        QString mode = m_infos.value("mode").toString();
+        QString mode = m_info.value("mode").toString();
         formLayout->addRow(new QLabel(i18n("Mode:")), new QLabel(mode));
 
-        QString channel = m_infos.value("channel").toString();
+        QString channel = m_info.value("channel").toString();
         formLayout->addRow(new QLabel(i18n("Channel:")), new QLabel(channel));
 
         m_infoWidget->setWidget(widget);

@@ -17,7 +17,7 @@
  *  along with Wicd Client KDE.  If not, see <http://www.gnu.org/licenses/>.*
  ****************************************************************************/
 
-#include "infosdialog.h"
+#include "infodialog.h"
 
 #include <QLabel>
 #include <QFormLayout>
@@ -26,7 +26,7 @@
 
 #include <Plasma/Theme>
 
-InfosDialog::InfosDialog(Status status, QWidget *parent)
+InfoDialog::InfoDialog(Status status, QWidget *parent)
     : Plasma::Dialog(parent, Qt::Popup)
 {
     setAttribute(Qt::WA_DeleteOnClose);
@@ -39,15 +39,15 @@ InfosDialog::InfosDialog(Status status, QWidget *parent)
     }
     else if (status.State == WicdState::WIRED) {
         layout->addRow(i18n("Connection type:"), new QLabel(i18nc("Connection type", "Wired")));
-        layout->addRow(i18n("IP:"), new QLabel(status.Infos.at(0)));
+        layout->addRow(i18n("IP:"), new QLabel(status.Info.at(0)));
     }
     else if (status.State == WicdState::WIRELESS) {
         layout->addRow(i18n("Connection type:"), new QLabel(i18nc("Connection type", "Wireless")));
-        layout->addRow(i18n("ESSID:"), new QLabel(status.Infos.at(1)));
-        layout->addRow(i18n("Speed:"), new QLabel(status.Infos.at(4)));
-        layout->addRow(i18n("IP:"), new QLabel(status.Infos.at(0)));
+        layout->addRow(i18n("ESSID:"), new QLabel(status.Info.at(1)));
+        layout->addRow(i18n("Speed:"), new QLabel(status.Info.at(4)));
+        layout->addRow(i18n("IP:"), new QLabel(status.Info.at(0)));
 
-        QString quality = status.Infos.at(2);
+        QString quality = status.Info.at(2);
         QString unit = "%";
         if (quality.toInt() <= -10)
             unit = " dBm";
@@ -61,11 +61,11 @@ InfosDialog::InfosDialog(Status status, QWidget *parent)
     updateColors();
 }
 
-InfosDialog::~InfosDialog()
+InfoDialog::~InfoDialog()
 {
 }
 
-void InfosDialog::updateColors()
+void InfoDialog::updateColors()
 {
     QPalette pal = palette();
     pal.setColor(QPalette::WindowText, Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));

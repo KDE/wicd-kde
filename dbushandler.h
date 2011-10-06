@@ -31,7 +31,7 @@ public:
     static DBusHandler* instance();
     static void destroy();
 
-    QMap<int, NetworkInfos> networksList() const;
+    QMap<int, NetworkInfo> networksList() const;
     Status status() const;
     void emitChooserLaunched();
 
@@ -70,7 +70,7 @@ public slots:
     void disconnect() const;
 
 private slots:
-    void statusChanged(uint state, QVariantList infos);
+    void statusChanged(uint state, QVariantList info);
 
 signals:
     void statusChange(Status status);
@@ -84,8 +84,8 @@ private:
     DBusHandler();
     ~DBusHandler();
 
-    NetworkInfos wiredProperties() const;
-    NetworkInfos wirelessProperties(const int &networkId) const;
+    NetworkInfo wiredProperties() const;
+    NetworkInfo wirelessProperties(const int &networkId) const;
     QVariant call(QDBusInterface *interface,
                   const QString &query,
                   const QVariant &arg1 = QVariant(),

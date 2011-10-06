@@ -24,11 +24,11 @@
 
 static const int buttonSize = 16;
 
-NetworkItem::NetworkItem(NetworkInfos info, QGraphicsWidget *parent)
+NetworkItem::NetworkItem(NetworkInfo info, QGraphicsWidget *parent)
     : QGraphicsWidget(parent),
       m_isExpanded(false)
 {
-    m_infos = info;
+    m_info = info;
     //allow item highlighting
     setAcceptHoverEvents(true);
     setCacheMode(DeviceCoordinateCache);
@@ -37,7 +37,7 @@ NetworkItem::NetworkItem(NetworkInfos info, QGraphicsWidget *parent)
     
     m_networkIcon = new NetworkIcon(this);
     
-    if (m_infos.value("connected").toBool()) {
+    if (m_info.value("connected").toBool()) {
         m_networkIcon->setConnected(true);
     }
     connect(m_networkIcon, SIGNAL(clicked()), this, SLOT(toggleConnection()));
@@ -75,7 +75,7 @@ NetworkItem::~NetworkItem()
 
 void NetworkItem::toggleConnection()
 {
-    emit toggled(m_infos.value("networkId").toInt());
+    emit toggled(m_info.value("networkId").toInt());
 }
 
 void NetworkItem::animationFinished()
@@ -88,8 +88,8 @@ void NetworkItem::animationFinished()
 
 void NetworkItem::askProperties()
 {
-    NetworkPropertiesDialog dialog(m_infos.value("networkId").toInt());
-    dialog.setCaption(m_infos.value("essid").toString());
+    NetworkPropertiesDialog dialog(m_info.value("networkId").toInt());
+    dialog.setCaption(m_info.value("essid").toString());
     dialog.exec();
 }
 

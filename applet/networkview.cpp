@@ -53,7 +53,7 @@ void NetworkView::loadNetworks()
     //get new data
     Plasma::DataEngine::Data list = engine()->query("networks");
     //Store the data in a QMap with int key
-    QMap<int, NetworkInfos> networkMap;
+    QMap<int, NetworkInfo> networkMap;
     Plasma::DataEngine::Data::const_iterator i = list.constBegin();
     while (i != list.constEnd()) {
         networkMap.insert(i.key().toInt(), i.value().toHash());
@@ -61,10 +61,10 @@ void NetworkView::loadNetworks()
     }
 
     //populate new list
-    QMap<int, NetworkInfos>::const_iterator it = networkMap.constBegin();
+    QMap<int, NetworkInfo>::const_iterator it = networkMap.constBegin();
     while (it != networkMap.constEnd()) {
         NetworkItem* item;
-        NetworkInfos info = it.value();
+        NetworkInfo info = it.value();
         bool isWired = (info.value("networkId").toInt() == -1);
         if (isWired) {
             WiredNetworkItem* wireditem = new WiredNetworkItem(it.value(), this);

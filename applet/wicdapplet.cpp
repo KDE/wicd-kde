@@ -21,7 +21,7 @@
 #include "global.h"
 #include "labelentry.h"
 #include "profilewidget.h"
-#include "infosdialog.h"
+#include "infodialog.h"
 
 #include <QPainter>
 #include <QToolButton>
@@ -203,7 +203,7 @@ void WicdApplet::dataUpdated(const QString& source, const Plasma::DataEngine::Da
     if (source == "status") {
         Status status;
         status.State = data["state"].toUInt();
-        status.Infos = data["info"].toStringList();
+        status.Info = data["info"].toStringList();
         m_interface = data["interface"].toString();
         if (m_plotter) {
             m_plotter->setInterface(m_interface);
@@ -234,22 +234,22 @@ void WicdApplet::dataUpdated(const QString& source, const Plasma::DataEngine::Da
         QString message;
         if (status.State == WicdState::WIRED) {
             m_icon = "network-wired-activated";
-            message = i18n("Connected to wired network (IP: %1)", status.Infos.at(0));//info(0) ip
+            message = i18n("Connected to wired network (IP: %1)", status.Info.at(0));//info(0) ip
         } else if (status.State == WicdState::WIRELESS) {
-            int quality = status.Infos.at(2).toInt();//info(2) quality
+            int quality = status.Info.at(2).toInt();//info(2) quality
             QString unit = "%";
             if (quality <= -10) {
                 unit = " dBm";
             }
             m_icon = qualityToIcon(quality);
             message = i18n("Connected to %1 - %2%3 (IP: %4)",
-                           status.Infos.at(1), status.Infos.at(2), unit, status.Infos.at(0));//info(1) essid
+                           status.Info.at(1), status.Info.at(2), unit, status.Info.at(0));//info(1) essid
         } else if (status.State == WicdState::CONNECTING) {
             m_icon = "network-wired";
-            bool wired = (status.Infos.at(0)=="wired");
+            bool wired = (status.Info.at(0)=="wired");
             message = data["message"].toString();
             message = m_messageTable.value(message);
-            wired ? message.prepend(i18n("Wired network: ")) : message.prepend(status.Infos.at(1)+": ");
+            wired ? message.prepend(i18n("Wired network: ")) : message.prepend(status.Info.at(1)+": ");
         } else {
             m_icon = "network-wired";
             message = i18n("Disconnected");
@@ -448,9 +448,9 @@ void WicdApplet::scan() const
 
 void WicdApplet::connectionInfoRequested()
 {
-    InfosDialog *infosDialog = new InfosDialog(m_status);
-    infosDialog->move(popupPosition(infosDialog->sizeHint(), Qt::AlignRight));
-    infosDialog->animatedShow(locationToDirection(location()));
+    InfoDialog *infoDialog = new InfoDialog(m_status);
+    infoDialog->move(popupPosition(infoDialog->sizeHint(), Qt::AlignRight));
+    infoDialog->animatedShow(locationToDirection(location()));
 }
 
 void WicdApplet::configChanged()
