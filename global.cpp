@@ -18,7 +18,7 @@
  ****************************************************************************/
 
 #include "global.h"
-#include "config-python.h"
+#include <config-python.h>
 
 #include <QFile>
 #include <QProcess>

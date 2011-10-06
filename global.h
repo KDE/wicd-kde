@@ -17,8 +17,8 @@
  *  along with Wicd Client KDE.  If not, see <http://www.gnu.org/licenses/>.*
  ****************************************************************************/
 
-#ifndef TOOLS_H
-#define TOOLS_H
+#ifndef GLOBAL_H
+#define GLOBAL_H
 
 #include "types.h"
 #include <QList>

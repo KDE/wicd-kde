@@ -17,8 +17,8 @@
  *  along with Wicd Client KDE.  If not, see <http://www.gnu.org/licenses/>.*
  ****************************************************************************/
 
-#ifndef NETWORKPANEL_H
-#define NETWORKPANEL_H
+#ifndef NETWORKVIEW_H
+#define NETWORKVIEW_H
 
 #include "types.h"
 #include "networkitem.h"
