@@ -107,7 +107,7 @@ bool WicdEngine::updateSourceEvent(const QString &source)
         setData(source, "scanning", m_scanning);
         setData(source, "connectionResult", m_connectionResult);
         //to simulate a "signal-like" behaviour
-        m_connectionResult = QString();
+        m_connectionResult = "";
         return true;
     }
     return false;
