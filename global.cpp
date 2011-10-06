@@ -34,7 +34,7 @@ namespace Wicd {
 
     QString parseLine(QString field, const QString& key)
     {
-        QString result =  field.remove(key).remove("=");
+        QString result =  field.remove(key).remove('=');
         //remove new line
         result.chop(1);
         return result;
@@ -61,7 +61,7 @@ namespace Wicd {
             //look for "require"
             else if (QString(line).startsWith("require")) {
                 QString requireLine = parseLine(QString(line), "require");
-                QStringList requiredList = requireLine.split(" ", QString::SkipEmptyParts);
+                QStringList requiredList = requireLine.split(' ', QString::SkipEmptyParts);
                 //requiredList contains a sequence of pairs(value, display value)
                 if ((requiredList.length()%2) == 0) {
                     for (int i = 0; i<requiredList.length()/2; ++i) {
@@ -74,7 +74,7 @@ namespace Wicd {
             //look for "optional"
             else if (QString(line).startsWith("optional")) {
                 QString optionalLine = parseLine(QString(line), "optional");
-                QStringList optionalList = optionalLine.split(" ", QString::SkipEmptyParts);
+                QStringList optionalList = optionalLine.split(' ', QString::SkipEmptyParts);
                 //optionalList contains a sequence of pairs(value, display value)
                 if ((optionalList.length()%2) == 0) {
                     for (int i = 0; i<optionalList.length()/2; ++i) {

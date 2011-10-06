@@ -148,7 +148,7 @@ void NetworkPropertiesDialog::autoComplete()
     bool valid = Tools::isValidIP(m_ipEdit->text());
     if (valid) {
         if (m_gatewayEdit->text().isEmpty()) {
-            QStringList ipNumbers = m_ipEdit->text().split(".");
+            QStringList ipNumbers = m_ipEdit->text().split('.');
             ipNumbers.replace(3, "1");
             m_gatewayEdit->setText(ipNumbers.join("."));
         }
@@ -252,7 +252,7 @@ void NetworkPropertiesDialog::validate()
             foreach (QVariant field, required) {
                 QString key = field.toStringList().value(0);
                 if (m_encryptLabelEntries.value(key)->text().isEmpty()) {
-                    KMessageBox::sorry(this, i18n("%1 is required.", field.toStringList().value(1).replace("_", " ").remove("*")));
+                    KMessageBox::sorry(this, i18n("%1 is required.", field.toStringList().value(1).replace('_', ' ').remove('*')));
                     return;
                 }
             }
@@ -292,7 +292,7 @@ void NetworkPropertiesDialog::encryptMethodChanged()
             QString key = field.toStringList().value(0);
             QString value = field.toStringList().value(1);
             //new field implies new label entry
-            LabelEntry* entry = new LabelEntry(value.replace("_", " ").remove("*")+" :");
+            LabelEntry* entry = new LabelEntry(value.replace('_', ' ').remove('*')+" :");
             entry->setEchoMode(QLineEdit::PasswordEchoOnEdit);
             entry->setText(DBusHandler::instance()->callWireless("GetWirelessProperty", m_networkId, key).toString());
             m_encryptlayout->addWidget(entry);

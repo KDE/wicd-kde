@@ -60,7 +60,7 @@ ActionReply ScriptsHelper::save(QVariantMap args)
         return ActionReply::HelperErrorReply;
 
     QTextStream in(&file);
-    QStringList lines = in.readAll().split("\n");
+    QStringList lines = in.readAll().split('\n');
     file.close();
 
     if (!file.open(QIODevice::WriteOnly))

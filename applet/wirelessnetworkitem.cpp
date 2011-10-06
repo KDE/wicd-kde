@@ -54,7 +54,7 @@ WirelessNetworkItem::WirelessNetworkItem(NetworkInfos info, QGraphicsWidget *par
         qualityBar->setLabelFont(0, font);
         qualityBar->setLabelAlignment(0, Qt::AlignVCenter | Qt::AlignLeft);
         bool usedbm = m_infos.value("usedbm").toBool();
-        QString signal = usedbm ? m_infos.value("strength").toString()+" dBm" : m_infos.value("quality").toString()+"%";
+        QString signal = usedbm ? m_infos.value("strength").toString()+" dBm" : m_infos.value("quality").toString()+'%';
         qualityBar->setLabel(0, signal);
     } else {
         qualityBar->setMaximumHeight(12);
@@ -90,7 +90,7 @@ QGraphicsWidget* WirelessNetworkItem::moreWidget()
         if (m_infos.value("usedbm").toBool())
             signal = m_infos.value("strength").toString()+" dBm";
         else
-            signal = m_infos.value("quality").toString()+"%";
+            signal = m_infos.value("quality").toString()+'%';
         formLayout->addRow(new QLabel(i18n("Signal strength:")), new QLabel(signal));
 
         QString encryption;
