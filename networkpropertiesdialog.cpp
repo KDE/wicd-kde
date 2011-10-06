@@ -51,7 +51,7 @@ NetworkPropertiesDialog::NetworkPropertiesDialog(int networkId, QWidget *parent,
     m_dhcphostnameBox->setMinimumWidth(m_dns3Edit->labelMinimumWidth());
     m_dhcphostnameEdit = new KLineEdit();
 
-    //optionnal: wireless
+    //optional: wireless
     m_autoconnectBox = new QCheckBox(i18n("Automatically connect to this network"));
     m_globalSettingsBox = new QCheckBox(i18n("Use these settings for all networks sharing this ESSID"));
     m_useEncryptionBox = new QCheckBox(i18n("Use encryption"));
@@ -235,7 +235,7 @@ void NetworkPropertiesDialog::validate()
             return;
         }
     }
-    //check optionnal fields
+    //check optional fields
     foreach (LabelEntry* item, optList) {
         item->setText(item->text().simplified());
         if ( (!item->text().isEmpty()) && (!Tools::isValidIP(item->text())) ) {

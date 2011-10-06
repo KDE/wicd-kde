@@ -82,12 +82,12 @@ void NetworkPlotter::setInterface(const QString interface)
 
 void NetworkPlotter::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
-    QStringList splitted = source.split('/');
-    if (splitted.length() < 4) {
+    QStringList split = source.split('/');
+    if (split.length() < 4) {
         return;
     }
     //are we getting received or transmitted data?
-    int index = (splitted[3] == "receiver") ? 0 : 1;
+    int index = (split[3] == "receiver") ? 0 : 1;
     //fill m_data accordingly
     m_data[index] = qMax(qreal(0.0), data["value"].toDouble());
     //update plotter only when the 2 values are filled
