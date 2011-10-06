@@ -1,4 +1,0 @@
-File=wicd-kde.kcfg
-ClassName=Settings
-Singleton=true
-Mutators=true
