@@ -37,7 +37,6 @@ K_EXPORT_PLUGIN(WicdKCMModuleFactory("kcmwicd"))
 
 WicdKCM::WicdKCM(QWidget* parent, const QVariantList& )
     : KCModule(WicdKCMModuleFactory::componentData(), parent)
-    , m_clientConfig(KSharedConfig::openConfig("wicd-kderc", KConfig::NoGlobals))
 {
     KGlobal::locale()->insertCatalog("wicd-kde");
 
@@ -164,10 +163,6 @@ void WicdKCM::init()
     connect(m_ui->searchDomainEdit, SIGNAL(textChanged(QString)), this, SLOT(changed()));
 
     connect(m_ui->backendBox, SIGNAL(currentIndexChanged(int)), this, SLOT(changed()));
-
-    connect(m_ui->tooltipsBox, SIGNAL(stateChanged(int)), this, SLOT(changed()));
-    connect(m_ui->displayqualityBox, SIGNAL(stateChanged(int)), this, SLOT(changed()));
-    connect(m_ui->autoscanBox, SIGNAL(stateChanged(int)), this, SLOT(changed()));
 }
 
 void WicdKCM::load()
@@ -211,11 +206,6 @@ void WicdKCM::load()
     }
 
     m_ui->backendBox->setCurrentItem(WicdDbusInterface::instance()->daemon().call("GetSavedBackend").arguments().at(0).toString());
-
-    KConfigGroup config(m_clientConfig, "Client");
-    m_ui->tooltipsBox->setChecked(config.readEntry("Show tooltips", false));
-    m_ui->displayqualityBox->setChecked(config.readEntry("Show signal strength", false));
-    m_ui->autoscanBox->setChecked(config.readEntry("Autoscan", false));
 }
 
 void WicdKCM::save()
@@ -245,17 +235,6 @@ void WicdKCM::save()
     }
 
     WicdDbusInterface::instance()->daemon().call("SetBackend", m_ui->backendBox->currentText());
-
-    KConfigGroup config(m_clientConfig, "Client");
-    config.writeEntry("Show tooltips", m_ui->tooltipsBox->isChecked());
-    config.writeEntry("Show signal strength", m_ui->displayqualityBox->isChecked());
-    config.writeEntry("Autoscan", m_ui->autoscanBox->isChecked());
-    m_clientConfig->sync();
-
-    QDBusInterface client("org.kde.wicd-kde", "/Client");
-    if (client.isValid()) {
-        client.call("reloadConfig");
-    }
 }
 
 void WicdKCM::defaults()

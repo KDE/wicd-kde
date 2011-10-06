@@ -261,91 +261,39 @@
       <attribute name="title">
        <string>External programs</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
-       <item>
-        <widget class="QGroupBox" name="groupBox_4">
-         <property name="title">
-          <string>Client settings</string>
+      <layout class="QFormLayout" name="formLayout_3">
+       <property name="fieldGrowthPolicy">
+        <enum>QFormLayout::ExpandingFieldsGrow</enum>
+       </property>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_11">
+         <property name="text">
+          <string>Route table flushing:</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_13">
-          <item>
-           <widget class="QCheckBox" name="tooltipsBox">
-            <property name="text">
-             <string>Show tooltips</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="displayqualityBox">
-            <property name="text">
-             <string>Show signal strength</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="autoscanBox">
-            <property name="text">
-             <string>Automatically scan on open</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
         </widget>
        </item>
-       <item>
-        <widget class="QGroupBox" name="groupBox_6">
-         <property name="title">
-          <string>Other</string>
+       <item row="1" column="1">
+        <widget class="KComboBox" name="routeBox"/>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_10">
+         <property name="text">
+          <string>Wired link detection:</string>
          </property>
-         <layout class="QFormLayout" name="formLayout_3">
-          <property name="labelAlignment">
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-          </property>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_9">
-            <property name="text">
-             <string>DHCP client:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="KComboBox" name="dhcpBox"/>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_10">
-            <property name="text">
-             <string>Wired link detection:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="KComboBox" name="wiredLinkBox"/>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_11">
-            <property name="text">
-             <string>Route table flushing:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="KComboBox" name="routeBox"/>
-          </item>
-         </layout>
         </widget>
        </item>
-       <item>
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
+       <item row="3" column="1">
+        <widget class="KComboBox" name="wiredLinkBox"/>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="label_9">
+         <property name="text">
+          <string>DHCP client:</string>
          </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="KComboBox" name="dhcpBox"/>
        </item>
       </layout>
      </widget>
@@ -481,14 +429,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
-  </customwidget>
-  <customwidget>
    <class>KComboBox</class>
    <extends>QComboBox</extends>
    <header>kcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
   </customwidget>
   <customwidget>
    <class>KTabWidget</class>

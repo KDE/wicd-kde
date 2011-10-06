@@ -21,7 +21,6 @@
 #define WICDKCM_H
 
 #include <kcmodule.h>
-#include <ksharedconfig.h>
 
 namespace Ui {
     class WicdKcmWidget;
@@ -42,7 +41,6 @@ class WicdKCM : public KCModule
 
         Ui::WicdKcmWidget *m_ui;
         QHash<QString, int> m_wicdMisc;
-        KSharedConfigPtr m_clientConfig;
 };
 
 #endif // WICDKCM_H
