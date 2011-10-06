@@ -23,11 +23,12 @@
 #include "labelentry.h"
 #include "global.h"
 
-#include <KDialog>
 #include <QVBoxLayout>
 #include <QCheckBox>
-#include <QComboBox>
+
+#include <KDialog>
 #include <KPushButton>
+#include <KComboBox>
 
 class NetworkPropertiesDialog : public KDialog
 {
@@ -69,10 +70,10 @@ private:
     LabelEntry *m_dns2Edit;
     LabelEntry *m_dns3Edit;
     QCheckBox *m_dhcphostnameBox;
-    QLineEdit *m_dhcphostnameEdit;
+    KLineEdit *m_dhcphostnameEdit;
     QCheckBox* m_globalSettingsBox;
     QCheckBox* m_useEncryptionBox;
-    QComboBox* m_encryptionCombo;
+    KComboBox* m_encryptionCombo;
     QMap<QString, LabelEntry*> m_encryptLabelEntries;
     QVBoxLayout *m_encryptlayout;
     KPushButton *m_scriptsButton;

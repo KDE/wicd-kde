@@ -49,13 +49,13 @@ NetworkPropertiesDialog::NetworkPropertiesDialog(int networkId, QWidget *parent,
     m_dns3Edit = new LabelEntry(i18n("DNS server 3:"));
     m_dhcphostnameBox = new QCheckBox(i18n("DHCP Hostname:"));
     m_dhcphostnameBox->setMinimumWidth(m_dns3Edit->labelMinimumWidth());
-    m_dhcphostnameEdit = new QLineEdit();
+    m_dhcphostnameEdit = new KLineEdit();
 
     //optionnal: wireless
     m_autoconnectBox = new QCheckBox(i18n("Automatically connect to this network"));
     m_globalSettingsBox = new QCheckBox(i18n("Use these settings for all networks sharing this ESSID"));
     m_useEncryptionBox = new QCheckBox(i18n("Use encryption"));
-    m_encryptionCombo = new QComboBox();
+    m_encryptionCombo = new KComboBox();
     m_encryptlayout = new QVBoxLayout();
 
     m_scriptsButton = new KPushButton(KIcon("system-run"), i18n("Scripts"), this);

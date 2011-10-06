@@ -22,7 +22,7 @@
 
 #include <QWidget>
 #include <QLabel>
-#include <QLineEdit>
+#include <KLineEdit>
 
 class LabelEntry : public QWidget
 {
@@ -30,7 +30,7 @@ class LabelEntry : public QWidget
 
 private:
     QLabel *m_label;
-    QLineEdit *m_value;
+    KLineEdit *m_value;
 
 public:
     LabelEntry( QString label, QWidget *parent  = 0 );

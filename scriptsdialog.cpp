@@ -41,10 +41,10 @@ ScriptsDialog::ScriptsDialog(int networkId, QWidget *parent, Qt::WFlags flags)
     QFormLayout *formlayout = new QFormLayout();
     formlayout->setLabelAlignment(Qt::AlignLeft);
 
-    m_precon = new QLineEdit();
-    m_postcon = new QLineEdit();
-    m_predis = new QLineEdit();
-    m_postdis = new QLineEdit();
+    m_precon = new KLineEdit();
+    m_postcon = new KLineEdit();
+    m_predis = new KLineEdit();
+    m_postdis = new KLineEdit();
 
     //arguments for the helper
     QVariantMap args;

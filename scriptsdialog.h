@@ -22,7 +22,7 @@
 
 #include <KDialog>
 #include <KAuth/Action>
-#include <QLineEdit>
+#include <KLineEdit>
 
 class ScriptsDialog : public KDialog
 {
@@ -36,10 +36,10 @@ private slots:
     void save(KAuth::Action* action);
 
 private:
-    QLineEdit* m_precon;
-    QLineEdit* m_postcon;
-    QLineEdit* m_predis;
-    QLineEdit* m_postdis;
+    KLineEdit* m_precon;
+    KLineEdit* m_postcon;
+    KLineEdit* m_predis;
+    KLineEdit* m_postdis;
     int m_networkId;
     QString m_key;
 

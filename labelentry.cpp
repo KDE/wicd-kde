@@ -28,7 +28,7 @@ LabelEntry::LabelEntry( QString label, QWidget *parent)
     setLayout(boxlayout);
     m_label = new QLabel(label);
     m_label->setMinimumWidth(170);
-    m_value = new QLineEdit();
+    m_value = new KLineEdit();
     m_value->setMinimumWidth(200);
     boxlayout->addWidget(m_label);
     boxlayout->addWidget(m_value);
