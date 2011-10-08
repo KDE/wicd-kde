@@ -2,6 +2,7 @@
 Name=Wicd
 Name[cs]=Wicd
 Name[da]=Wicd
+Name[de]=Wicd
 Name[fr]=Wicd
 Name[it]=Wicd
 Name[nb]=Wicd
@@ -16,6 +17,7 @@ Name[zh_TW]=Wicd
 Comment=A Wicd data engine
 Comment[cs]=Datový nástroj Wicd
 Comment[da]=En datamotor til Wicd
+Comment[de]=Ein Datenmodul für Wicd
 Comment[fr]=Un moteur de données pour Wicd
 Comment[it]=Un motore dati Wicd
 Comment[nb]=En Wicd datamotor
