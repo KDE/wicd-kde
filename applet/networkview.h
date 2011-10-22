@@ -38,7 +38,8 @@ public:
     ~NetworkView();
     void loadNetworks();
     void showSignalStrength(bool show);
-    
+    NetworkItem* currentNetworkItem() const;
+
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
 
@@ -50,6 +51,7 @@ private:
     Plasma::DataEngine* engine();
 
     QList<NetworkItem*> m_networkItemList;
+    NetworkItem* m_currentNetworkItem;
     QGraphicsLinearLayout* m_layout;
     Plasma::ItemBackground *m_itemBackground;
     Plasma::Service *m_controller;

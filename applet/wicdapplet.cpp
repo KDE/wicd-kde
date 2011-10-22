@@ -321,6 +321,7 @@ void WicdApplet::launchProfileManager()
 void WicdApplet::loadNetworks()
 {
     m_networkView->loadNetworks();
+    m_scrollWidget->ensureItemVisible(m_networkView->currentNetworkItem());
     graphicsWidget()->adjustSize();
 }
 

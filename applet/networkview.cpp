@@ -24,7 +24,8 @@
 #include <Plasma/DataEngineManager>
 
 NetworkView::NetworkView( QGraphicsItem *parent )
-    : QGraphicsWidget( parent )
+    : QGraphicsWidget( parent ),
+      m_currentNetworkItem(0)
 {
     setAcceptHoverEvents(true);
     installEventFilter(this);
@@ -62,6 +63,7 @@ void NetworkView::loadNetworks()
 
     //populate new list
     QMap<int, NetworkInfo>::const_iterator it = networkMap.constBegin();
+    m_currentNetworkItem = 0;
     while (it != networkMap.constEnd()) {
         NetworkItem* item;
         NetworkInfo info = it.value();
@@ -74,6 +76,9 @@ void NetworkView::loadNetworks()
             item = wirelessitem;
         }
         connect(item, SIGNAL(toggled(int)), this, SLOT(toggleConnection(int)));
+        if (info.value("connected").toBool()) {
+            m_currentNetworkItem = item;
+        }
         item->installEventFilter(this);
         m_networkItemList.append(item);
         m_layout->addItem(item);
@@ -105,6 +110,11 @@ bool NetworkView::eventFilter(QObject* obj, QEvent *event)
 void NetworkView::showSignalStrength(bool show)
 {
     WirelessNetworkItem::showStrength(show);
+}
+
+NetworkItem* NetworkView::currentNetworkItem() const
+{
+    return m_currentNetworkItem;
 }
 
 void NetworkView::toggleConnection(int networkId)
