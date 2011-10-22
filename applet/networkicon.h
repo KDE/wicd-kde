@@ -20,6 +20,8 @@
 #ifndef NETWORKICON_H
 #define NETWORKICON_H 
 
+#include <KIcon>
+
 #include <Plasma/IconWidget>
 
 class NetworkIcon : public Plasma::IconWidget
@@ -28,14 +30,14 @@ public:
     NetworkIcon(QGraphicsItem *parent = 0);
     ~NetworkIcon();
     void setText(const QString &text);
-    void setEncrypted(bool encryped);
+    void setOverlayIcon(KIcon icon);
     void setConnected(bool connected);
     
 protected:
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
     
 private:
-    bool m_encrypted;
+    KIcon m_overlayIcon;
     bool m_connected;
 };
 

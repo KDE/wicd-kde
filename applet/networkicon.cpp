@@ -27,7 +27,6 @@ static const int iconsize = 30;
 
 NetworkIcon::NetworkIcon(QGraphicsItem *parent)
     : Plasma::IconWidget(parent),
-      m_encrypted(false),
       m_connected(false)
 {
     setOrientation(Qt::Horizontal);
@@ -46,20 +45,29 @@ void NetworkIcon::setText(const QString &text)
 
 void NetworkIcon::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-    Plasma::IconWidget::paint(painter, option, widget);
-    if (m_encrypted) {
-        painter->drawPixmap(QRect(0,1.5*iconsize/2.5,iconsize/2.5, iconsize/2.5),
-                            KIcon("emblem-locked").pixmap(iconsize/2.5, iconsize/2.5));
-    }
     if (m_connected) {
-        painter->drawPixmap(QRect(iconsize/2,iconsize/2,iconsize/2, iconsize/2),
-                            KIcon("dialog-ok-apply").pixmap(iconsize/2, iconsize/2));
+        QFont cFont = font();
+        cFont.setBold(true);
+        setFont(cFont);
+    }
+
+    Plasma::IconWidget::paint(painter, option, widget);
+
+    if (m_connected) {
+        painter->drawPixmap(QRect(iconsize/2, size().height()-iconsize/2, iconsize/2, iconsize/2),
+                            KIcon("network-workgroup").pixmap(iconsize/2, iconsize/2));
+    }
+
+    if (!m_overlayIcon.isNull()) {
+        int emblemsize = 16;
+        painter->drawPixmap(0, size().height()-emblemsize, emblemsize, emblemsize,
+                            m_overlayIcon.pixmap(emblemsize, emblemsize));
     }
 }
 
-void NetworkIcon::setEncrypted(bool encrypted)
+void NetworkIcon::setOverlayIcon(KIcon icon)
 {
-    m_encrypted = encrypted;
+    m_overlayIcon = icon;
 }
 
 void NetworkIcon::setConnected(bool connected)

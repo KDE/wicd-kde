@@ -34,8 +34,11 @@ WirelessNetworkItem::WirelessNetworkItem(NetworkInfo info, QGraphicsWidget *pare
 {
     m_networkIcon->setText(m_info.value("essid").toString());
     m_networkIcon->setIcon("network-wireless");
+
     if (m_info.value("encryption").toBool()) {
-        m_networkIcon->setEncrypted(true);
+        m_networkIcon->setOverlayIcon(KIcon("security-high"));
+    } else {
+        m_networkIcon->setOverlayIcon(KIcon("security-low"));
     }
 
     //add signal quality
