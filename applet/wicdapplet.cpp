@@ -237,7 +237,7 @@ void WicdApplet::dataUpdated(const QString& source, const Plasma::DataEngine::Da
             message = i18n("Connected to wired network (IP: %1)", status.Info.at(0));//info(0) ip
         } else if (status.State == WicdState::WIRELESS) {
             int quality = status.Info.at(2).toInt();//info(2) quality
-            QString unit = "%";
+            QString unit('%');
             if (quality <= -10) {
                 unit = " dBm";
             }

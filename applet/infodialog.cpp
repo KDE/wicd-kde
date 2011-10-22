@@ -48,7 +48,7 @@ InfoDialog::InfoDialog(Status status, QWidget *parent)
         layout->addRow(i18n("IP:"), new QLabel(status.Info.at(0)));
 
         QString quality = status.Info.at(2);
-        QString unit = "%";
+        QString unit('%');
         if (quality.toInt() <= -10)
             unit = " dBm";
         layout->addRow(i18n("Signal strength:"), new QLabel(quality + unit));
