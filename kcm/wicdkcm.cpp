@@ -77,9 +77,9 @@ void WicdKCM::init()
 
     // Feature++: show the interfaces in a combobox thanks to solid
     QList<Solid::Device> list = Solid::Device::listFromType(Solid::DeviceInterface::NetworkInterface, QString());
-    foreach (Solid::Device device, list)
+    foreach (const Solid::Device &device, list)
     {
-        Solid::NetworkInterface *netiface = device.as<Solid::NetworkInterface>();
+        const Solid::NetworkInterface *netiface = device.as<Solid::NetworkInterface>();
         if (netiface->isWireless()) {
             m_ui->wirelessBox->addItem(netiface->ifaceName());
         } else {

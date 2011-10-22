@@ -249,7 +249,7 @@ void NetworkPropertiesDialog::validate()
             Encryption currentEncryption = m_encryptions.value(m_encryptionCombo->currentIndex());
             //ensure all required fields are filled
             QList<QVariant> required = currentEncryption.values("require");
-            foreach (QVariant field, required) {
+            foreach (const QVariant &field, required) {
                 QString key = field.toStringList().value(0);
                 if (m_encryptLabelEntries.value(key)->text().isEmpty()) {
                     KMessageBox::sorry(this, i18n("%1 is required.", field.toStringList().value(1).replace('_', ' ').remove('*')));
@@ -287,7 +287,7 @@ void NetworkPropertiesDialog::encryptMethodChanged()
     for (int i = 0; i < types.length(); ++i) {
         //inspect the fields of the current type
         QList<QVariant> fields = m_encryptions.value(index).values(types.value(i));
-        foreach (QVariant field, fields) {
+        foreach (const QVariant &field, fields) {
             //a field is a pair of strings
             QString key = field.toStringList().value(0);
             QString value = field.toStringList().value(1);
@@ -366,7 +366,7 @@ void NetworkPropertiesDialog::save()
             Encryption currentEncryption = m_encryptions.value(m_encryptionCombo->currentIndex());
             setNetworkProperty(m_networkId, "enctype", currentEncryption.value("type"));
             //save values
-            foreach (QString key, m_encryptLabelEntries.keys()) {
+            foreach (const QString &key, m_encryptLabelEntries.keys()) {
                 setNetworkProperty(m_networkId, key, m_encryptLabelEntries.value(key)->text());
             }
         } else {
