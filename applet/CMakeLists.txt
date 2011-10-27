@@ -1,18 +1,13 @@
-include(KDE4Defaults)
+if (NOT PYTHONBIN)
+    set (PYTHONBIN "python" CACHE STRING "python command")
+endif (NOT PYTHONBIN)
+configure_file (config-python.h.cmake config-python.h)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../
-		    ${CMAKE_SOURCE_DIR}
-		    ${CMAKE_BINARY_DIR}
-		    ${CMAKE_CURRENT_BINARY_DIR}/../
-		    ${KDE4_INCLUDES}
-)
- 
-# We add our source code here
 set(wicdapplet_SRCS 
-    ../global.cpp
-    ../labelentry.cpp
-    ../scriptsdialog.cpp
-    ../networkpropertiesdialog.cpp
+    global.cpp
+    labelentry.cpp
+    properties/scriptsdialog.cpp
+    properties/networkpropertiesdialog.cpp
     ../dbushandler.cpp
     profilewidget.cpp
     infodialog.cpp
@@ -37,4 +32,11 @@ install(TARGETS plasma_applet_wicd
 install(FILES plasma-applet-wicd.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})
 
-install( FILES ../wicd-kde.notifyrc DESTINATION ${DATA_INSTALL_DIR}/wicd-kde )
+install( FILES wicd-kde.notifyrc DESTINATION ${DATA_INSTALL_DIR}/wicd-kde )
+
+kde4_add_executable(wicdclient_scripts_helper  properties/scriptshelper.cpp)
+target_link_libraries(wicdclient_scripts_helper ${KDE4_KDECORE_LIBS})
+install(TARGETS wicdclient_scripts_helper DESTINATION ${LIBEXEC_INSTALL_DIR})
+
+kde4_install_auth_actions(org.kde.wicdclient.scripts properties/wicdclient.scripts.actions)
+kde4_install_auth_helper_files(wicdclient_scripts_helper org.kde.wicdclient.scripts root)

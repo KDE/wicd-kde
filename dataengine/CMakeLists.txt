@@ -1,15 +1,4 @@
-include(KDE4Defaults)
-
-include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}/../
-    ${CMAKE_CURRENT_BINARY_DIR}/../
-    ${CMAKE_SOURCE_DIR}
-    ${CMAKE_BINARY_DIR}
-    ${KDE4_INCLUDES}
-)
-
 set(wicd_engine_SRCS
-    ../global.cpp
     ../dbushandler.cpp
     wicdjob.cpp
     wicdservice.cpp

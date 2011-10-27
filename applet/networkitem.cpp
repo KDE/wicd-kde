@@ -18,7 +18,7 @@
  ****************************************************************************/
 
 #include "networkitem.h"
-#include "networkpropertiesdialog.h"
+#include "properties/networkpropertiesdialog.h"
 
 #include <Plasma/ToolButton>
 
