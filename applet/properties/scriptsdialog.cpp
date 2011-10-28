@@ -26,7 +26,6 @@
 
 #include <KPushButton>
 #include <KMessageBox>
-#include <KAuth/Action>
 #include <KLocalizedString>
 
 
