@@ -256,7 +256,7 @@ void NetworkPropertiesDialog::validate()
                     return;
                 }
             }
-        } else if (DBusHandler::instance()->callWireless("GetWirelessProperty", m_networkId, "encryption").toBool()) {
+        } else if (networkProperty(m_networkId, "encryption").toBool()) {
             KMessageBox::sorry(this, i18n("This network needs an encryption."));
             return;
         }
@@ -294,7 +294,7 @@ void NetworkPropertiesDialog::encryptMethodChanged()
             //new field implies new label entry
             LabelEntry* entry = new LabelEntry(value.replace('_', ' ').remove('*')+" :");
             entry->setEchoMode(QLineEdit::PasswordEchoOnEdit);
-            entry->setText(DBusHandler::instance()->callWireless("GetWirelessProperty", m_networkId, key).toString());
+            entry->setText(networkProperty(m_networkId, key).toString());
             m_encryptlayout->addWidget(entry);
             //keep trace of this LabelEntry
             m_encryptLabelEntries.insert(key, entry);
