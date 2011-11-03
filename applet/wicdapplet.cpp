@@ -25,6 +25,7 @@
 
 #include <QPainter>
 #include <QToolButton>
+#include <QTimer>
 
 #include <KLocale>
 #include <KNotification>
@@ -36,6 +37,7 @@
 #include <Plasma/Svg>
 #include <Plasma/ScrollWidget>
 #include <Plasma/Separator>
+#include <Plasma/ServiceJob>
 #include <Plasma/ToolTipContent>
 #include <Plasma/ToolTipManager>
 
@@ -153,11 +155,11 @@ void WicdApplet::init()
     engine->connectSource("daemon", this);
 
     //we need a current profile
-    QString profile = DBusHandler::instance()->callWired("GetDefaultWiredNetwork").toString();
-    if (profile.isEmpty())
-        profile = DBusHandler::instance()->callWired("GetWiredProfileList").toStringList().at(0);
-    Wicd::currentprofile = profile;
-    DBusHandler::instance()->callWired("ReadWiredNetworkProfile", profile);
+    KConfigGroup op = m_wicdService->operationDescription("getDefaultWiredNetwork");
+    Plasma::ServiceJob *job = m_wicdService->startOperationCall(op);
+    //don't wait for the event loop, we need the result right now
+    job->start();
+    Wicd::currentprofile = job->result().toString();
 }
 
 void WicdApplet::setupActions()

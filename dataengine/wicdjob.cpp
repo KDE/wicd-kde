@@ -77,6 +77,11 @@ void WicdJob::start()
         m_dbus->scan();
     } else if (operation == "getWiredProfileList") {
         setResult(m_dbus->callWired("GetWiredProfileList"));
+    } else if (operation == "getDefaultWiredNetwork") {
+        QString profile = DBusHandler::instance()->callWired("GetDefaultWiredNetwork").toString();
+        if (profile.isEmpty())
+            profile = DBusHandler::instance()->callWired("GetWiredProfileList").toStringList().at(0);
+        setResult(profile);
     } else if (operation == "setProfileDefaultProperty") {
         if (parameters()["default"].toBool()) {
             //We are about to set a new default profile

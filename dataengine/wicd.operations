@@ -32,6 +32,7 @@
   </group>
   <group name="scan"/>
   <group name="getWiredProfileList"/>
+  <group name="getDefaultWiredNetwork"/>
   <group name="setProfileDefaultProperty">
     <entry name="profile" type="String">
       <label>Profile's name.</label>

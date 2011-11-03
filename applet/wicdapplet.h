@@ -20,7 +20,6 @@
 #ifndef WICDAPPLET_HEADER
 #define WICDAPPLET_HEADER
 
-#include "dbushandler.h"
 #include "networkplotter.h"
 #include "networkview.h"
 #include "ui_wicdappletConfig.h"
