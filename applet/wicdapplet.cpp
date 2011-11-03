@@ -466,7 +466,7 @@ void WicdApplet::configChanged()
 
 void WicdApplet::toolTipAboutToShow()
 {
-    Plasma::ToolTipContent c("Wicd", m_message, KIcon(m_icon));
+    Plasma::ToolTipContent c(name(), m_message, KIcon(icon()));
     Plasma::ToolTipManager::self()->setContent(this, c);
 }
 
