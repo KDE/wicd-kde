@@ -12,6 +12,7 @@ Name[pt_BR]=Wicd
 Name[sv]=WICD
 Name[uk]=Wicd
 Name[x-test]=xxWicdxx
+Name[zh_CN]=Wicd
 Name[zh_TW]=Wicd
 
 Comment=A Wicd data engine
@@ -27,6 +28,7 @@ Comment[pt_BR]=Um motor de dados do Wicd
 Comment[sv]=Ett WICD-datagränssnitt
 Comment[uk]=Рушій даних Wicd
 Comment[x-test]=xxA Wicd data enginexx
+Comment[zh_CN]=Wicd 数据引擎
 Comment[zh_TW]=Wicd 資料引擎
 
 X-KDE-ServiceTypes=Plasma/DataEngine
