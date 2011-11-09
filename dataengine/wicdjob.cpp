@@ -90,8 +90,8 @@ void WicdJob::start()
         }
         m_dbus->callWired("SetWiredProperty", "default", parameters()["default"].toBool());
         m_dbus->callWired("SaveWiredNetworkProfile", parameters()["profile"].toString());
-    } else if (operation == "readWiredNetworkProfile") {
-        m_dbus->callWired("ReadWiredNetworkProfile", parameters()["profile"].toString());
+    } else if (operation == "setCurrentProfile") {
+        m_dbus->setCurrentProfile(parameters()["profile"].toString());
         //returns true if the profile is the default profile
         setResult(m_dbus->callWired("GetWiredProperty", "default").toBool());
     } else if (operation == "createWiredNetworkProfile") {

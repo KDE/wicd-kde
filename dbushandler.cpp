@@ -101,6 +101,12 @@ void DBusHandler::emitChooserLaunched()
     emit chooserLaunched();
 }
 
+void DBusHandler::setCurrentProfile(const QString &profile)
+{
+    m_currentProfile = profile;
+    m_wired->call("ReadWiredNetworkProfile", profile);
+}
+
 void DBusHandler::scan() const
 {
     if (status().State!=WicdState::CONNECTING)
@@ -144,6 +150,7 @@ NetworkInfo DBusHandler::wiredProperties() const
     NetworkInfo properties;
     properties.insert("networkId", -1);
     properties.insert("essid", i18n("Wired network"));
+    properties.insert("currentprofile", m_currentProfile);
     return properties;
 }
 

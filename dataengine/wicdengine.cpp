@@ -46,6 +46,12 @@ void WicdEngine::init()
         profileNeeded();
     }
 
+    //we need a current profile
+    QString profile = DBusHandler::instance()->callWired("GetDefaultWiredNetwork").toString();
+    if (profile.isEmpty())
+        profile = DBusHandler::instance()->callWired("GetWiredProfileList").toStringList().at(0);
+    DBusHandler::instance()->setCurrentProfile(profile);
+
     m_scanning = false;
 }
 

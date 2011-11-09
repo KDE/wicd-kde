@@ -27,6 +27,7 @@ WiredNetworkItem::WiredNetworkItem(NetworkInfo info, QGraphicsWidget *parent)
     //make the combobox pop down over the next networkitem in the list
     setZValue(110);
 
+    Wicd::currentprofile = m_info.value("currentprofile").toString();
     m_networkIcon->setText(m_info.value("essid").toString()+": "+Wicd::currentprofile);
     m_networkIcon->setIcon("network-wired");
 }

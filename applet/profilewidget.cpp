@@ -69,6 +69,9 @@ ProfileWidget::ProfileWidget(QGraphicsItem * parent, Qt::WindowFlags wFlags)
     connect(removeButton, SIGNAL(clicked()),this, SLOT(removeProfile()));
 
     int currentProfileIndex = profileList.indexOf(Wicd::currentprofile);
+    //for the profile dialog
+    if (currentProfileIndex < 0)
+        currentProfileIndex = 0;
     m_comboBox->setCurrentIndex(currentProfileIndex);
 }
 
@@ -92,7 +95,7 @@ void ProfileWidget::toggleDefault(bool toggle)
 
 void ProfileWidget::profileChanged(QString profile)
 {
-    KConfigGroup op = m_wicdService->operationDescription("readWiredNetworkProfile");
+    KConfigGroup op = m_wicdService->operationDescription("setCurrentProfile");
     op.writeEntry("profile", profile);
     Plasma::ServiceJob *job = m_wicdService->startOperationCall(op);
     //don't wait for the event loop, we need the result right now

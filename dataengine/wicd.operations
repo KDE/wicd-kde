@@ -41,9 +41,9 @@
       <label>Whether the profile has its "default" property set to true or false.</label>
     </entry>
   </group>
-  <group name="readWiredNetworkProfile">
+  <group name="setCurrentProfile">
     <entry name="profile" type="String">
-      <label>Name of the profile to read.</label>
+      <label>Name of the new current profile.</label>
     </entry>
   </group>
   <group name="createWiredNetworkProfile">

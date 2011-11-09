@@ -34,6 +34,7 @@ public:
     QMap<int, NetworkInfo> networksList() const;
     Status status() const;
     void emitChooserLaunched();
+    void setCurrentProfile(const QString &profile);
 
     QVariant callDaemon(const QString &query,
                         const QVariant &arg1 = QVariant(),
@@ -100,6 +101,8 @@ private:
     QDBusInterface *m_daemon;
     QDBusInterface *m_wired;
     QDBusInterface *m_wireless;
+
+    QString m_currentProfile;
 
     static DBusHandler* s_instance;
 
