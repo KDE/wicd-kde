@@ -101,6 +101,11 @@ void DBusHandler::emitChooserLaunched()
     emit chooserLaunched();
 }
 
+void DBusHandler::emitCurrentProfileChanged(const QString &profile)
+{
+    emit currentProfileChanged(profile);
+}
+
 void DBusHandler::scan() const
 {
     if (status().State!=WicdState::CONNECTING)

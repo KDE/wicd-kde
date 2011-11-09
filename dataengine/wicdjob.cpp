@@ -77,11 +77,6 @@ void WicdJob::start()
         m_dbus->scan();
     } else if (operation == "getWiredProfileList") {
         setResult(m_dbus->callWired("GetWiredProfileList"));
-    } else if (operation == "getDefaultWiredNetwork") {
-        QString profile = m_dbus->callWired("GetDefaultWiredNetwork").toString();
-        if (profile.isEmpty())
-            profile = m_dbus->callWired("GetWiredProfileList").toStringList().at(0);
-        setResult(profile);
     } else if (operation == "setProfileDefaultProperty") {
         if (parameters()["default"].toBool()) {
             //We are about to set a new default profile
@@ -90,10 +85,6 @@ void WicdJob::start()
         }
         m_dbus->callWired("SetWiredProperty", "default", parameters()["default"].toBool());
         m_dbus->callWired("SaveWiredNetworkProfile", parameters()["profile"].toString());
-    } else if (operation == "readWiredNetworkProfile") {
-        m_dbus->callWired("ReadWiredNetworkProfile", parameters()["profile"].toString());
-        //returns true if the profile is the default profile
-        setResult(m_dbus->callWired("GetWiredProperty", "default").toBool());
     } else if (operation == "createWiredNetworkProfile") {
         m_dbus->callWired("CreateWiredNetworkProfile", parameters()["profile"].toString(), false);
     } else if (operation == "deleteWiredNetworkProfile") {
@@ -104,5 +95,11 @@ void WicdJob::start()
         m_dbus->callDaemon("SetNeedWiredProfileChooser", false);
         //update the dataengine "manually"
         m_dbus->emitChooserLaunched();
+    } else if (operation == "setCurrentProfile") {
+        m_dbus->callWired("ReadWiredNetworkProfile", parameters()["profile"].toString());
+        //update the dataengine "manually"
+        m_dbus->emitCurrentProfileChanged(parameters()["profile"].toString());
+        //returns true if the profile is the default profile
+        setResult(m_dbus->callWired("GetWiredProperty", "default").toBool());
     }
 }

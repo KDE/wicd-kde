@@ -34,6 +34,7 @@ public:
     QMap<int, NetworkInfo> networksList() const;
     Status status() const;
     void emitChooserLaunched();
+    void emitCurrentProfileChanged(const QString &profile);
 
     QVariant callDaemon(const QString &query,
                         const QVariant &arg1 = QVariant(),
@@ -79,6 +80,7 @@ signals:
     void chooserLaunched();
     void scanStarted();
     void scanEnded();
+    void currentProfileChanged(const QString &profile);
 
 private:
     DBusHandler();

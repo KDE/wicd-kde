@@ -47,6 +47,7 @@ private slots:
     void scanStarted();
     void scanEnded();
     void resultReceived(const QString& result);
+    void updateCurrentProfile(const QString& profile);
 
 private:
     uint m_state;
@@ -56,6 +57,7 @@ private:
     bool m_needed;
     bool m_scanning;
     QString m_connectionResult;
+    QString m_currentProfile;
 };
 
 K_EXPORT_PLASMA_DATAENGINE(wicd, WicdEngine)

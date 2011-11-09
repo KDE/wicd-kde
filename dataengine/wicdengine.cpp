@@ -33,6 +33,7 @@ WicdEngine::WicdEngine(QObject* parent, const QVariantList& args)
     connect(DBusHandler::instance(), SIGNAL(launchChooser()), this, SLOT(profileNeeded()));
     connect(DBusHandler::instance(), SIGNAL(chooserLaunched()), this, SLOT(profileNotNeeded()));
     connect(DBusHandler::instance(), SIGNAL(connectionResultSend(QString)), this, SLOT(resultReceived(QString)));
+    connect(DBusHandler::instance(), SIGNAL(currentProfileChanged(QString)), this, SLOT(updateCurrentProfile(QString)));
 }
 
 void WicdEngine::init()
@@ -45,6 +46,12 @@ void WicdEngine::init()
     if (DBusHandler::instance()->callDaemon("GetNeedWiredProfileChooser").toBool()) {
         profileNeeded();
     }
+
+    //we need a current profile
+    m_currentProfile = DBusHandler::instance()->callWired("GetDefaultWiredNetwork").toString();
+    if (m_currentProfile.isEmpty())
+        m_currentProfile = DBusHandler::instance()->callWired("GetWiredProfileList").toStringList().at(0);
+    DBusHandler::instance()->callWired("ReadWiredNetworkProfile", m_currentProfile);
 
     m_scanning = false;
 }
@@ -78,6 +85,10 @@ bool WicdEngine::sourceRequestEvent(const QString &source)
         updateSourceEvent(source);
         return true;
     }
+    if (source == "wired") {
+        updateSourceEvent(source);
+        return true;
+    }
     return false;
 }
 
@@ -108,6 +119,10 @@ bool WicdEngine::updateSourceEvent(const QString &source)
         setData(source, "connectionResult", m_connectionResult);
         //to simulate a "signal-like" behaviour
         m_connectionResult = "";
+        return true;
+    }
+    if (source == "wired") {
+        setData(source, "currentProfile", m_currentProfile);
         return true;
     }
     return false;
@@ -163,6 +178,12 @@ void WicdEngine::resultReceived(const QString& result)
 {
     m_connectionResult = result;
     updateSourceEvent("daemon");
+}
+
+void WicdEngine::updateCurrentProfile(const QString& profile)
+{
+    m_currentProfile = profile;
+    updateSourceEvent("wired");
 }
 
 #include "wicdengine.moc"

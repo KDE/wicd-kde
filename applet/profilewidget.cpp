@@ -92,14 +92,13 @@ void ProfileWidget::toggleDefault(bool toggle)
 
 void ProfileWidget::profileChanged(QString profile)
 {
-    KConfigGroup op = m_wicdService->operationDescription("readWiredNetworkProfile");
+    KConfigGroup op = m_wicdService->operationDescription("setCurrentProfile");
     op.writeEntry("profile", profile);
     Plasma::ServiceJob *job = m_wicdService->startOperationCall(op);
     //don't wait for the event loop, we need the result right now
     job->start();
     m_defaultBox->setChecked(job->result().toBool());
     emit profileSelected(profile);
-    Wicd::currentprofile = profile;
 }
 
 void ProfileWidget::addProfile()
