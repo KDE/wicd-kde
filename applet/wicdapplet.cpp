@@ -154,12 +154,16 @@ void WicdApplet::init()
     engine->connectSource("status", this);
     engine->connectSource("daemon", this);
 
+    //FIXME: Move all of this in the dataengine
     //we need a current profile
     KConfigGroup op = m_wicdService->operationDescription("getDefaultWiredNetwork");
     Plasma::ServiceJob *job = m_wicdService->startOperationCall(op);
     //don't wait for the event loop, we need the result right now
     job->start();
     Wicd::currentprofile = job->result().toString();
+    KConfigGroup opr = m_wicdService->operationDescription("readWiredNetworkProfile");
+    opr.writeEntry("profile", Wicd::currentprofile);
+    m_wicdService->startOperationCall(opr);
 }
 
 void WicdApplet::setupActions()
