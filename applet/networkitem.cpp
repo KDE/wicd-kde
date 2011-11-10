@@ -20,9 +20,9 @@
 #include "networkitem.h"
 #include "properties/networkpropertiesdialog.h"
 
-#include <Plasma/ToolButton>
+#include <KIconLoader>
 
-static const int buttonSize = 16;
+#include <Plasma/ToolButton>
 
 NetworkItem::NetworkItem(NetworkInfo info, QGraphicsWidget *parent)
     : QGraphicsWidget(parent),
@@ -41,14 +41,15 @@ NetworkItem::NetworkItem(NetworkInfo info, QGraphicsWidget *parent)
         m_networkIcon->setConnected(true);
     }
     connect(m_networkIcon, SIGNAL(clicked()), this, SLOT(toggleConnection()));
-    
+
+    const int buttonSize = KIconLoader::SizeSmall;
     //config button for all
     m_configButton = new Plasma::IconWidget(this);
     m_configButton->setMaximumSize(m_configButton->sizeFromIconSize(buttonSize));
     m_configButton->setSvg("widgets/configuration-icons", "configure");
     connect(m_configButton, SIGNAL(clicked()), this, SLOT(askProperties()));
     
-    //m_variantButton opens either an infodialog or the profilemanager
+    //m_moreButton opens either an infodialog or the profilemanager
     m_moreButton = new Plasma::IconWidget(this);
     m_moreButton->setMaximumSize(m_moreButton->sizeFromIconSize(buttonSize));
     m_moreButton->setSvg("widgets/action-overlays", "add-normal");

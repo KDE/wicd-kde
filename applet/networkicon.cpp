@@ -22,8 +22,7 @@
 #include <QPainter>
 
 #include <KIcon>
-
-static const int iconsize = 30;
+#include <KIconLoader>
 
 NetworkIcon::NetworkIcon(QGraphicsItem *parent)
     : Plasma::IconWidget(parent),
@@ -39,8 +38,8 @@ NetworkIcon::~NetworkIcon()
 void NetworkIcon::setText(const QString &text) 
 {
     Plasma::IconWidget::setText(text);
-    setMinimumSize(sizeFromIconSize(iconsize));
-    setMaximumSize(sizeFromIconSize(iconsize));
+    setMinimumSize(sizeFromIconSize(KIconLoader::SizeMedium));
+    setMaximumSize(sizeFromIconSize(KIconLoader::SizeMedium));
 }
 
 void NetworkIcon::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
@@ -53,13 +52,13 @@ void NetworkIcon::paint(QPainter* painter, const QStyleOptionGraphicsItem* optio
 
     Plasma::IconWidget::paint(painter, option, widget);
 
+    const int emblemsize = KIconLoader::SizeSmall;
     if (m_connected) {
-        painter->drawPixmap(QRect(iconsize/2, size().height()-iconsize/2, iconsize/2, iconsize/2),
-                            KIcon("network-workgroup").pixmap(iconsize/2, iconsize/2));
+        painter->drawPixmap(QRect(emblemsize, size().height()-emblemsize, emblemsize, emblemsize),
+                            KIcon("network-workgroup").pixmap(emblemsize, emblemsize));
     }
 
     if (!m_overlayIcon.isNull()) {
-        int emblemsize = 16;
         painter->drawPixmap(0, size().height()-emblemsize, emblemsize, emblemsize,
                             m_overlayIcon.pixmap(emblemsize, emblemsize));
     }
