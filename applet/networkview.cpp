@@ -30,6 +30,7 @@ NetworkView::NetworkView( QGraphicsItem *parent )
     setAcceptHoverEvents(true);
     installEventFilter(this);
     m_layout = new QGraphicsLinearLayout(Qt::Vertical, this);
+    m_layout->setContentsMargins(0, 0, 0, 0);
     
     m_itemBackground = new Plasma::ItemBackground(this);
     m_itemBackground->setTargetItem(0);
