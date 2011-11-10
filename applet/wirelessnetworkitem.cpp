@@ -84,6 +84,7 @@ QGraphicsWidget* WirelessNetworkItem::moreWidget()
         m_infoFade->setTargetWidget(m_infoWidget);
 
         QWidget *widget = new QWidget();
+        widget->setPalette(palette());
         widget->setAttribute(Qt::WA_NoSystemBackground);
         QFormLayout *formLayout = new QFormLayout(widget);
         formLayout->setLabelAlignment(Qt::AlignLeft);

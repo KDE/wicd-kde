@@ -40,6 +40,7 @@
 #include <Plasma/ServiceJob>
 #include <Plasma/ToolTipContent>
 #include <Plasma/ToolTipManager>
+#include <Plasma/Theme>
 
 WicdApplet::WicdApplet(QObject *parent, const QVariantList &args)
     : Plasma::PopupApplet(parent, args),
@@ -103,7 +104,7 @@ void WicdApplet::init()
     m_dialoglayout = new QGraphicsLinearLayout(Qt::Vertical);
     
     //Network list
-    m_scrollWidget = new Plasma::ScrollWidget(this);
+    m_scrollWidget = new Plasma::ScrollWidget(appletDialog);
     m_scrollWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_scrollWidget->setFlag(QGraphicsItem::ItemClipsChildrenToShape);
     m_scrollWidget->setMaximumHeight(400);
@@ -117,24 +118,24 @@ void WicdApplet::init()
     m_dialoglayout->addItem(m_scrollWidget);
     
     //Separator
-    m_dialoglayout->addItem(new Plasma::Separator(this));
+    m_dialoglayout->addItem(new Plasma::Separator(appletDialog));
     
     //Bottom bar
     QGraphicsLinearLayout* bottombarLayout = new QGraphicsLinearLayout(Qt::Horizontal);
     
-    m_messageBox = new Plasma::Label(this);
+    m_messageBox = new Plasma::Label(appletDialog);
     m_messageBox->setWordWrap(false);
     bottombarLayout->addItem(m_messageBox);
     
     bottombarLayout->addStretch();
     
-    m_abortButton = new Plasma::ToolButton(this);
+    m_abortButton = new Plasma::ToolButton(appletDialog);
     m_abortButton->setIcon(KIcon("dialog-cancel"));
     m_abortButton->nativeWidget()->setToolTip(i18n("Abort"));
     connect(m_abortButton, SIGNAL(clicked()), this, SLOT(cancelConnect()));
     bottombarLayout->addItem(m_abortButton);
     
-    Plasma::ToolButton *reloadButton = new Plasma::ToolButton(this);
+    Plasma::ToolButton *reloadButton = new Plasma::ToolButton(appletDialog);
     reloadButton->nativeWidget()->setToolTip(i18n("Reload"));
     reloadButton->setAction(action("reload"));
     bottombarLayout->addItem(reloadButton);
@@ -148,6 +149,8 @@ void WicdApplet::init()
     
     // read config
     configChanged();
+
+    connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(updateColors()));
 
     //connect dataengine
     m_wicdService = engine->serviceForSource("");
@@ -512,6 +515,15 @@ void WicdApplet::configAccepted()
     }
 
     emit configNeedsSaving();
+}
+
+void WicdApplet::updateColors()
+{
+    QPalette pal = palette();
+    pal.setColor(QPalette::WindowText, Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor));
+    setPalette(pal);
+    //Plasma::Label doesn't use the plasma theme color scheme by default, so we force it.
+    m_messageBox->setPalette(pal);
 }
 
 #include "wicdapplet.moc"
