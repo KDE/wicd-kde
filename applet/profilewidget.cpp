@@ -44,9 +44,11 @@ ProfileWidget::ProfileWidget(QGraphicsItem * parent, Qt::WindowFlags wFlags)
     m_comboBox->nativeWidget()->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     hLayout->addItem(m_comboBox);
     Plasma::PushButton *addButton = new Plasma::PushButton(this);
+    addButton->setToolTip(i18n("Add a profile..."));
     addButton->setIcon(KIcon("list-add"));
     hLayout->addItem(addButton);
     Plasma::PushButton *removeButton = new Plasma::PushButton(this);
+    removeButton->setToolTip(i18n("Remove the profile"));
     removeButton->setIcon(KIcon("list-remove"));
     hLayout->addItem(removeButton);
     hLayout->addStretch();
