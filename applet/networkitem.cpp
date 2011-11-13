@@ -26,9 +26,9 @@
 
 NetworkItem::NetworkItem(NetworkInfo info, QGraphicsWidget *parent)
     : QGraphicsWidget(parent),
+      m_info(info),
       m_isExpanded(false)
 {
-    m_info = info;
     //allow item highlighting
     setAcceptHoverEvents(true);
     setCacheMode(DeviceCoordinateCache);
@@ -36,10 +36,7 @@ NetworkItem::NetworkItem(NetworkInfo info, QGraphicsWidget *parent)
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     
     m_networkIcon = new NetworkIcon(this);
-    
-    if (m_info.value("connected").toBool()) {
-        m_networkIcon->setConnected(true);
-    }
+    m_networkIcon->setConnected(m_info.value("connected").toBool());
     connect(m_networkIcon, SIGNAL(clicked()), this, SLOT(toggleConnection()));
 
     const int buttonSize = KIconLoader::SizeSmall;
