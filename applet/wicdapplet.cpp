@@ -77,7 +77,7 @@ WicdApplet::WicdApplet(QObject *parent, const QVariantList &args)
     m_messageTable.insert("association_failed", i18n("Connection failed: Could not contact the wireless access point."));
     m_messageTable.insert("setting_static_ip", i18n("Setting static IP addresses..."));
     m_messageTable.insert("aborted", i18n("Aborted"));
-    m_messageTable.insert("Failed", i18n("Failed"));
+    m_messageTable.insert("failed", i18n("Failed"));
 
     //prevent notification on startup
     m_status.State = 10;
@@ -246,7 +246,7 @@ void WicdApplet::dataUpdated(const QString& source, const Plasma::DataEngine::Da
             m_icon = "network-wired";
             bool wired = (status.Info.at(0)=="wired");
             message = data["message"].toString();
-            message = m_messageTable.value(message);
+            message = m_messageTable.value(message, message);
             wired ? message.prepend(i18n("Wired network: ")) : message.prepend(status.Info.at(1)+": ");
         } else {
             m_icon = "network-wired";
@@ -303,9 +303,9 @@ void WicdApplet::paintInterface(QPainter *p,
 void WicdApplet::checkConnectionResult(const QString &result)
 {
     QStringList validMessages;
-    validMessages << "Success" << "aborted" << QString();
-    if (!validMessages.contains(result)) {
-        notify("error", m_messageTable.value(result));
+    validMessages << "success" << "aborted" << QString();
+    if (!validMessages.contains(result.toLower())) {
+        notify("error", m_messageTable.value(result.toLower()));
     }
 }
 
