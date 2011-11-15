@@ -29,8 +29,9 @@ class ScriptsDialog : public KDialog
     Q_OBJECT
 
 public:
-    ScriptsDialog(int networkId, QWidget *parent = 0, Qt::WFlags flags = 0);
+    ScriptsDialog(const QString &key, const QString &path ,QWidget *parent = 0, Qt::WFlags flags = 0);
     ~ScriptsDialog();
+    int authorized() const;
 
 private slots:
     void save(KAuth::Action* action);
@@ -40,8 +41,8 @@ private:
     KLineEdit* m_postcon;
     KLineEdit* m_predis;
     KLineEdit* m_postdis;
-    int m_networkId;
-    QString m_key;
+
+    int m_authorized;
 
 };
 

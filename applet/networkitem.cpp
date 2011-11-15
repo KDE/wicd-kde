@@ -86,7 +86,7 @@ void NetworkItem::animationFinished()
 
 void NetworkItem::askProperties()
 {
-    NetworkPropertiesDialog dialog(m_info.value("networkId").toInt());
+    NetworkPropertiesDialog dialog(m_info);
     dialog.setCaption(m_info.value("essid").toString());
     dialog.exec();
 }

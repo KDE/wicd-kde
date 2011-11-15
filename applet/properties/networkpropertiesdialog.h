@@ -22,6 +22,7 @@
 
 #include "labelentry.h"
 #include "global.h"
+#include "types.h"
 
 #include <QVBoxLayout>
 #include <QCheckBox>
@@ -35,7 +36,7 @@ class NetworkPropertiesDialog : public KDialog
     Q_OBJECT
 
 public:
-    NetworkPropertiesDialog(int networkId, QWidget *parent = 0, Qt::WFlags flags = 0);
+    NetworkPropertiesDialog(NetworkInfo info, QWidget *parent = 0, Qt::WFlags flags = 0);
     ~NetworkPropertiesDialog();
 
 private slots:
@@ -51,11 +52,11 @@ private slots:
 private:
     void load();
     void save();
-    QVariant networkProperty(int networkId, const QString& property) const;
-    void setNetworkProperty(int networkId, const QString& property, const QVariant& value) const;
+    QVariant networkProperty(const QString& property) const;
+    void setNetworkProperty(const QString& property, const QVariant& value) const;
 
     int m_networkId;
-    QString wiredProfile;
+    NetworkInfo m_info;
 
     QCheckBox *m_autoconnectBox;
     QCheckBox *m_staticIpBox;

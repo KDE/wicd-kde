@@ -24,9 +24,9 @@
 #include <KMessageBox>
 #include <KLocalizedString>
 
-NetworkPropertiesDialog::NetworkPropertiesDialog(int networkId, QWidget *parent, Qt::WFlags flags)
+NetworkPropertiesDialog::NetworkPropertiesDialog(NetworkInfo info, QWidget *parent, Qt::WFlags flags)
     : KDialog(parent, flags)
-    , m_networkId(networkId)
+    , m_info(info)
 {
     setModal(true);
     setButtons( KDialog::User1 | KDialog::Cancel );
@@ -104,8 +104,12 @@ NetworkPropertiesDialog::NetworkPropertiesDialog(int networkId, QWidget *parent,
     m_staticdnsBox->setChecked(false);
     toggleStaticDnsCheckbox(false);
 
+    //load properties
+    load();
+
+    m_networkId = m_info.value("networkId").toInt();
     if (m_networkId != -1) {
-        m_autoconnectBox->setChecked(networkProperty(m_networkId, "automatic").toBool());
+        m_autoconnectBox->setChecked(networkProperty("automatic").toBool());
         //insert autoconnect checkbox on top
         vboxlayout->insertWidget(0, m_autoconnectBox);
 
@@ -115,7 +119,7 @@ NetworkPropertiesDialog::NetworkPropertiesDialog(int networkId, QWidget *parent,
         for (int i = 0; i < m_encryptions.length(); ++i) {
             m_encryptionCombo->addItem(m_encryptions.value(i).value("name").toString());
             //look for the current encryption type
-            if (networkProperty(m_networkId, "enctype").toString() == m_encryptions.value(i).value("type").toString()) {
+            if (networkProperty("enctype").toString() == m_encryptions.value(i).value("type").toString()) {
                 typeIndex = i;
             }
         }
@@ -135,8 +139,6 @@ NetworkPropertiesDialog::NetworkPropertiesDialog(int networkId, QWidget *parent,
             toggleUseEncryptionBox(false);
         }
     }
-
-    load();
 }
 
 NetworkPropertiesDialog::~NetworkPropertiesDialog()
@@ -256,7 +258,7 @@ void NetworkPropertiesDialog::validate()
                     return;
                 }
             }
-        } else if (networkProperty(m_networkId, "encryption").toBool()) {
+        } else if (networkProperty("encryption").toBool()) {
             KMessageBox::sorry(this, i18n("This network needs an encryption."));
             return;
         }
@@ -289,12 +291,12 @@ void NetworkPropertiesDialog::encryptMethodChanged()
         QList<QVariant> fields = m_encryptions.value(index).values(types.value(i));
         foreach (const QVariant &field, fields) {
             //a field is a pair of strings
+            QString name = field.toStringList().value(1);
             QString key = field.toStringList().value(0);
-            QString value = field.toStringList().value(1);
             //new field implies new label entry
-            LabelEntry* entry = new LabelEntry(value.replace('_', ' ').remove('*')+" :");
+            LabelEntry* entry = new LabelEntry(name.replace('_', ' ').remove('*')+" :");
             entry->setEchoMode(QLineEdit::PasswordEchoOnEdit);
-            entry->setText(networkProperty(m_networkId, key).toString());
+            entry->setText(networkProperty(key).toString());
             m_encryptlayout->addWidget(entry);
             //keep trace of this LabelEntry
             m_encryptLabelEntries.insert(key, entry);
@@ -304,79 +306,102 @@ void NetworkPropertiesDialog::encryptMethodChanged()
 
 void NetworkPropertiesDialog::editScripts()
 {
-    ScriptsDialog dialog(m_networkId, this);
+    QString key;//key: bssid if wireless, profilename if wired
+    QString path;//path: settings configuration file
+    QString type;
+    if (m_networkId == -1) {
+        key = Wicd::currentprofile;
+        type = "wired";
+    } else {
+        key = networkProperty("bssid").toString();
+        type = "wireless";
+    }
+    path = Wicd::wicdpath+type+"-settings.conf";
+
+    ScriptsDialog dialog(key, path, this);
     dialog.exec();
+    if (dialog.authorized()) {
+        if (m_networkId == -1) {
+            DBusHandler::instance()->callWired("ReloadConfig");
+            DBusHandler::instance()->callWired("ReadWiredNetworkProfile", key);
+            DBusHandler::instance()->callWired("SaveWiredNetworkProfile", key);
+        } else {
+            DBusHandler::instance()->callWireless("ReloadConfig");
+            DBusHandler::instance()->callWireless("ReadWirelessNetworkProfile", m_networkId);
+            DBusHandler::instance()->callWireless("SaveWirelessNetworkProfile", m_networkId);
+        }
+    }
 }
 
 void NetworkPropertiesDialog::load()
 {
-    m_ipEdit->setText(networkProperty(m_networkId, "ip").toString());
+    m_ipEdit->setText(networkProperty("ip").toString());
     m_staticIpBox->setChecked(!m_ipEdit->text().isEmpty());
-    m_netmaskEdit->setText(networkProperty(m_networkId, "netmask").toString());
-    m_gatewayEdit->setText(networkProperty(m_networkId, "gateway").toString());
-    m_staticdnsBox->setChecked(networkProperty(m_networkId, "use_static_dns").toBool());
-    m_globaldnsBox->setChecked(networkProperty(m_networkId, "use_global_dns").toBool());
-    m_dnsdomainEdit->setText(networkProperty(m_networkId, "dns_domain").toString());
-    m_searchdomainEdit->setText(networkProperty(m_networkId, "search_domain").toString());
-    m_dns1Edit->setText(networkProperty(m_networkId, "dns1").toString());
-    m_dns2Edit->setText(networkProperty(m_networkId, "dns2").toString());
-    m_dns3Edit->setText(networkProperty(m_networkId, "dns3").toString());
-    m_dhcphostnameBox->setChecked(networkProperty(m_networkId, "use_dhcphostname").toBool());
-    m_dhcphostnameEdit->setText(networkProperty(m_networkId, "dhcphostname").toString());
+    m_netmaskEdit->setText(networkProperty("netmask").toString());
+    m_gatewayEdit->setText(networkProperty("gateway").toString());
+    m_staticdnsBox->setChecked(networkProperty("use_static_dns").toBool());
+    m_globaldnsBox->setChecked(networkProperty("use_global_dns").toBool());
+    m_dnsdomainEdit->setText(networkProperty("dns_domain").toString());
+    m_searchdomainEdit->setText(networkProperty("search_domain").toString());
+    m_dns1Edit->setText(networkProperty("dns1").toString());
+    m_dns2Edit->setText(networkProperty("dns2").toString());
+    m_dns3Edit->setText(networkProperty("dns3").toString());
+    m_dhcphostnameBox->setChecked(networkProperty("use_dhcphostname").toBool());
+    m_dhcphostnameEdit->setText(networkProperty("dhcphostname").toString());
 }
 
 void NetworkPropertiesDialog::save()
 {
     if (m_staticIpBox->isChecked()) {
-        setNetworkProperty(m_networkId, "ip", Tools::blankToNone(m_ipEdit->text()));
-        setNetworkProperty(m_networkId, "netmask", Tools::blankToNone(m_netmaskEdit->text()));
-        setNetworkProperty(m_networkId, "gateway", Tools::blankToNone(m_gatewayEdit->text()));
+        setNetworkProperty("ip", Tools::blankToNone(m_ipEdit->text()));
+        setNetworkProperty("netmask", Tools::blankToNone(m_netmaskEdit->text()));
+        setNetworkProperty("gateway", Tools::blankToNone(m_gatewayEdit->text()));
     } else {
-        setNetworkProperty(m_networkId, "ip", "");
-        setNetworkProperty(m_networkId, "netmask", "");
-        setNetworkProperty(m_networkId, "gateway", "");
+        setNetworkProperty("ip", "");
+        setNetworkProperty("netmask", "");
+        setNetworkProperty("gateway", "");
     }
 
     if (m_staticdnsBox->isChecked() && (!m_globaldnsBox->isChecked())) {
-        setNetworkProperty(m_networkId, "use_static_dns", true);
-        setNetworkProperty(m_networkId, "use_global_dns", false);
-        setNetworkProperty(m_networkId, "dns_domain", Tools::blankToNone(m_dnsdomainEdit->text()));
-        setNetworkProperty(m_networkId, "search_domain", Tools::blankToNone(m_searchdomainEdit->text()));
-        setNetworkProperty(m_networkId, "dns1", Tools::blankToNone(m_dns1Edit->text()));
-        setNetworkProperty(m_networkId, "dns2", Tools::blankToNone(m_dns2Edit->text()));
-        setNetworkProperty(m_networkId, "dns3", Tools::blankToNone(m_dns3Edit->text()));
+        setNetworkProperty("use_static_dns", true);
+        setNetworkProperty("use_global_dns", false);
+        setNetworkProperty("dns_domain", Tools::blankToNone(m_dnsdomainEdit->text()));
+        setNetworkProperty("search_domain", Tools::blankToNone(m_searchdomainEdit->text()));
+        setNetworkProperty("dns1", Tools::blankToNone(m_dns1Edit->text()));
+        setNetworkProperty("dns2", Tools::blankToNone(m_dns2Edit->text()));
+        setNetworkProperty("dns3", Tools::blankToNone(m_dns3Edit->text()));
     } else if (m_staticdnsBox->isChecked() && m_globaldnsBox->isChecked()) {
-        setNetworkProperty(m_networkId, "use_static_dns", true);
-        setNetworkProperty(m_networkId, "use_global_dns", true);
+        setNetworkProperty("use_static_dns", true);
+        setNetworkProperty("use_global_dns", true);
     } else {
-        setNetworkProperty(m_networkId, "use_static_dns", false);
-        setNetworkProperty(m_networkId, "use_global_dns", false);
-        setNetworkProperty(m_networkId, "dns_domain", "");
-        setNetworkProperty(m_networkId, "search_domain", "");
-        setNetworkProperty(m_networkId, "dns1", "");
-        setNetworkProperty(m_networkId, "dns2", "");
-        setNetworkProperty(m_networkId, "dns3", "");
+        setNetworkProperty("use_static_dns", false);
+        setNetworkProperty("use_global_dns", false);
+        setNetworkProperty("dns_domain", "");
+        setNetworkProperty("search_domain", "");
+        setNetworkProperty("dns1", "");
+        setNetworkProperty("dns2", "");
+        setNetworkProperty("dns3", "");
     }
-    setNetworkProperty(m_networkId, "use_dhcphostname", m_dhcphostnameBox->isChecked());
-    setNetworkProperty(m_networkId, "dhcphostname", Tools::blankToNone(m_dhcphostnameEdit->text()));
+    setNetworkProperty("use_dhcphostname", m_dhcphostnameBox->isChecked());
+    setNetworkProperty("dhcphostname", Tools::blankToNone(m_dhcphostnameEdit->text()));
 
     if (m_networkId != -1) {
-        setNetworkProperty(m_networkId, "automatic", m_autoconnectBox->isChecked() ? "True" : "False");
+        setNetworkProperty("automatic", m_autoconnectBox->isChecked() ? "True" : "False");
         if (m_useEncryptionBox->isChecked()) {
             Encryption currentEncryption = m_encryptions.value(m_encryptionCombo->currentIndex());
-            setNetworkProperty(m_networkId, "enctype", currentEncryption.value("type"));
+            setNetworkProperty("enctype", currentEncryption.value("type"));
             //save values
             foreach (const QString &key, m_encryptLabelEntries.keys()) {
-                setNetworkProperty(m_networkId, key, m_encryptLabelEntries.value(key)->text());
+                setNetworkProperty(key, m_encryptLabelEntries.value(key)->text());
             }
         } else {
-            setNetworkProperty(m_networkId, "enctype", "None");
+            setNetworkProperty("enctype", "None");
         }
 
         if (m_globalSettingsBox->isChecked()) {
-            setNetworkProperty(m_networkId, "use_settings_globally", true);
+            setNetworkProperty("use_settings_globally", true);
         } else {
-            setNetworkProperty(m_networkId, "use_settings_globally", false);
+            setNetworkProperty("use_settings_globally", false);
             DBusHandler::instance()->callWireless("RemoveGlobalEssidEntry", m_networkId);
         }
         DBusHandler::instance()->callWireless("SaveWirelessNetworkProfile", m_networkId);
@@ -385,20 +410,20 @@ void NetworkPropertiesDialog::save()
     }
 }
 
-QVariant NetworkPropertiesDialog::networkProperty(int networkId, const QString &property) const
+QVariant NetworkPropertiesDialog::networkProperty(const QString &property) const
 {
-    if (networkId == -1) {
+    if (m_networkId == -1) {
         return DBusHandler::instance()->callWired("GetWiredProperty", property);
     } else {
-        return DBusHandler::instance()->callWireless("GetWirelessProperty", networkId, property);
+        return DBusHandler::instance()->callWireless("GetWirelessProperty", m_networkId, property);
     }
 }
 
-void NetworkPropertiesDialog::setNetworkProperty(int networkId, const QString &property, const QVariant &value) const
+void NetworkPropertiesDialog::setNetworkProperty(const QString &property, const QVariant &value) const
 {
-    if (networkId == -1) {
+    if (m_networkId == -1) {
         DBusHandler::instance()->callWired("SetWiredProperty", property, value);
     } else {
-        DBusHandler::instance()->callWireless("SetWirelessProperty", networkId, property, value);
+        DBusHandler::instance()->callWireless("SetWirelessProperty", m_networkId, property, value);
     }
 }
