@@ -158,17 +158,17 @@ NetworkInfo DBusHandler::wirelessProperties(const int &networkId) const
 {
     NetworkInfo properties;
     properties.insert("networkId", networkId);
-    properties.insert("essid", call(m_wireless, "GetWirelessProperty", networkId, "essid").toString());
-    properties.insert("usedbm", call(m_daemon, "GetSignalDisplayType").toBool());
-    properties.insert("strength", call(m_wireless, "GetWirelessProperty", networkId, "strength").toInt());
-    properties.insert("quality", call(m_wireless, "GetWirelessProperty", networkId, "quality").toInt());
-    properties.insert("encryption", call(m_wireless, "GetWirelessProperty", networkId, "encryption").toBool());
+    properties.insert("essid", call(m_wireless, "GetWirelessProperty", networkId, "essid"));
+    properties.insert("usedbm", call(m_daemon, "GetSignalDisplayType"));
+    properties.insert("strength", call(m_wireless, "GetWirelessProperty", networkId, "strength"));
+    properties.insert("quality", call(m_wireless, "GetWirelessProperty", networkId, "quality"));
+    properties.insert("encryption", call(m_wireless, "GetWirelessProperty", networkId, "encryption"));
     properties.insert("connected", false);
     if (properties.value("encryption").toBool())
-        properties.insert("encryptionType", call(m_wireless, "GetWirelessProperty", networkId, "encryption_method").toString());
-    properties.insert("bssid", call(m_wireless, "GetWirelessProperty", networkId, "bssid").toString());
-    properties.insert("mode", call(m_wireless, "GetWirelessProperty", networkId, "mode").toString());
-    properties.insert("channel", call(m_wireless, "GetWirelessProperty", networkId, "channel").toString());
+        properties.insert("encryptionType", call(m_wireless, "GetWirelessProperty", networkId, "encryption_method"));
+    properties.insert("bssid", call(m_wireless, "GetWirelessProperty", networkId, "bssid"));
+    properties.insert("mode", call(m_wireless, "GetWirelessProperty", networkId, "mode"));
+    properties.insert("channel", call(m_wireless, "GetWirelessProperty", networkId, "channel"));
     return properties;
 }
 
