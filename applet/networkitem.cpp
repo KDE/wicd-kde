@@ -71,6 +71,12 @@ NetworkItem::~NetworkItem()
 {
 }
 
+void NetworkItem::collapse()
+{
+    if (m_isExpanded)
+        askMore();
+}
+
 void NetworkItem::toggleConnection()
 {
     emit toggled(m_info.value("networkId").toInt());

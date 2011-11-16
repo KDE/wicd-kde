@@ -37,14 +37,17 @@ NetworkView::NetworkView( QGraphicsItem *parent )
     m_itemBackground->setTargetItem(0);
 
     m_controller = engine()->serviceForSource("");
+    engine()->connectSource("networks", this);
 }
 
 NetworkView::~NetworkView()
 {
 }
 
-void NetworkView::loadNetworks()
+void NetworkView::dataUpdated(const QString& source, const Plasma::DataEngine::Data &data)
 {
+    Q_UNUSED(source)
+
     //delete old list
     while (m_networkItemList.count() > 0) {
         NetworkItem *oldItem = m_networkItemList.at(0);
@@ -53,12 +56,10 @@ void NetworkView::loadNetworks()
         oldItem->deleteLater();
     }
 
-    //get new data
-    Plasma::DataEngine::Data list = engine()->query("networks");
     //Store the data in a QMap with int key
     QMap<int, NetworkInfo> networkMap;
-    Plasma::DataEngine::Data::const_iterator i = list.constBegin();
-    while (i != list.constEnd()) {
+    Plasma::DataEngine::Data::const_iterator i = data.constBegin();
+    while (i != data.constEnd()) {
         networkMap.insert(i.key().toInt(), i.value().toHash());
         ++i;
     }
@@ -131,6 +132,13 @@ void NetworkView::toggleConnection(int networkId)
 void NetworkView::highlightItem(QGraphicsItem* item)
 {
     m_itemBackground->setTargetItem(item);
+}
+
+void NetworkView::collapseAll()
+{
+    foreach(NetworkItem* item, m_networkItemList) {
+        item->collapse();
+    }
 }
 
 Plasma::DataEngine* NetworkView::engine()

@@ -163,6 +163,7 @@ void WicdEngine::scanEnded()
 {
     m_scanning = false;
     updateSourceEvent("daemon");
+    updateSourceEvent("networks");
 }
 
 void WicdEngine::resultReceived(const QString& result)

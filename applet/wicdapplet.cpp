@@ -316,13 +316,6 @@ void WicdApplet::launchProfileManager()
     profileDialog->animatedShow(locationToDirection(location()));
 }
 
-void WicdApplet::loadNetworks()
-{
-    m_networkView->loadNetworks();
-    m_scrollWidget->ensureItemVisible(m_networkView->currentNetworkItem());
-    graphicsWidget()->adjustSize();
-}
-
 void WicdApplet::showPlotter(bool show)
 {
     //there's probably a better way to do this...
@@ -365,7 +358,8 @@ void WicdApplet::setScanning(bool isScanning)
         m_busyWidget->hide();
         m_scrollWidget->widget()->show();
         setBusy(false);
-        loadNetworks();
+        m_scrollWidget->ensureItemVisible(m_networkView->currentNetworkItem());
+        graphicsWidget()->adjustSize();
     }
 }
 
@@ -475,12 +469,13 @@ void WicdApplet::toolTipHidden()
 
 void WicdApplet::popupEvent(bool show)
 {
-    if (!show)
-        return;
-    if (m_autoScan) {
+    if (!show) {
+        m_networkView->collapseAll();
+    } else if (m_autoScan) {
         scan();
     } else {
-        loadNetworks();
+        m_scrollWidget->ensureItemVisible(m_networkView->currentNetworkItem());
+        graphicsWidget()->adjustSize();
     }
 }
 

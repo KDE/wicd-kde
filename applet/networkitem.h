@@ -35,6 +35,7 @@ class NetworkItem : public QGraphicsWidget
 public:
     NetworkItem(NetworkInfo info, QGraphicsWidget *parent);
     ~NetworkItem();
+    void collapse();
 
 protected:
     virtual QGraphicsWidget *moreWidget() = 0;

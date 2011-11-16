@@ -36,9 +36,12 @@ class NetworkView : public QGraphicsWidget
 public:
     NetworkView(QGraphicsItem *parent = 0);
     ~NetworkView();
-    void loadNetworks();
     void showSignalStrength(bool show);
     NetworkItem* currentNetworkItem() const;
+    void collapseAll();
+
+public slots:
+    void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
