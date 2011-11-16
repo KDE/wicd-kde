@@ -106,10 +106,10 @@ NetworkPropertiesDialog::NetworkPropertiesDialog(NetworkInfo info, QWidget *pare
     m_staticdnsBox->setChecked(false);
     toggleStaticDnsCheckbox(false);
 
+    m_networkId = m_info.value("networkId").toInt();
     //load properties
     load();
 
-    m_networkId = m_info.value("networkId").toInt();
     if (m_networkId != -1) {
         m_autoconnectBox->setChecked(networkProperty("automatic").toBool());
         //insert autoconnect checkbox on top
