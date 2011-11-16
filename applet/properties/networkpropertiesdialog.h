@@ -21,7 +21,6 @@
 #define NETWORKPROPERTIESDIALOG_H
 
 #include "labelentry.h"
-#include "global.h"
 #include "types.h"
 
 #include <QVBoxLayout>

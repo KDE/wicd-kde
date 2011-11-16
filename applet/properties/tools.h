@@ -1,5 +1,5 @@
 /****************************************************************************
- *  Copyright (c) 2010-2011 Anthony Vital <anthony.vital@gmail.com>         *
+ *  Copyright (c) 2011 Anthony Vital <anthony.vital@gmail.com>              *
  *                                                                          *
  *  This file is part of Wicd Client KDE.                                   *
  *                                                                          *
@@ -17,20 +17,17 @@
  *  along with Wicd Client KDE.  If not, see <http://www.gnu.org/licenses/>.*
  ****************************************************************************/
 
-#ifndef GLOBAL_H
-#define GLOBAL_H
+#ifndef TOOLS_H
+#define TOOLS_H
 
-#include "types.h"
-#include <QList>
+#include <QString>
 
-namespace Wicd {
+namespace Tools {
 
-    extern QString wicdpath;
-    extern QString wicdencryptionpath;
-    extern QList<Encryption> encryptionlist;
-    extern QString currentprofile;
-    extern void locate();
+    extern bool isValidIP(const QString& ip);
+    extern QString blankToNone(const QString &text);
+    extern QString noneToBlank(const QString &text);
 
 }
 
-#endif
+#endif // TOOLS_H

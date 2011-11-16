@@ -18,6 +18,8 @@
  ****************************************************************************/
 
 #include "networkpropertiesdialog.h"
+#include "global.h"
+#include "tools.h"
 #include "scriptsdialog.h"
 #include "dbushandler.h"
 

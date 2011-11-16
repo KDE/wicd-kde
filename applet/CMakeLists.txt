@@ -6,6 +6,7 @@ configure_file (config-python.h.cmake config-python.h)
 set(wicdapplet_SRCS 
     global.cpp
     labelentry.cpp
+    properties/tools.cpp
     properties/scriptsdialog.cpp
     properties/networkpropertiesdialog.cpp
     ../dbushandler.cpp

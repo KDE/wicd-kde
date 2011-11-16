@@ -18,7 +18,7 @@
  ****************************************************************************/
 
 #include "scriptsdialog.h"
-#include "global.h"
+#include "tools.h"
 
 #include <QFormLayout>
 #include <QTimer>

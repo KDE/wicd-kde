@@ -1,5 +1,5 @@
 /****************************************************************************
- *  Copyright (c) 2010 Anthony Vital <anthony.vital@gmail.com>              *
+ *  Copyright (c) 2010-2011 Anthony Vital <anthony.vital@gmail.com>         *
  *                                                                          *
  *  This file is part of Wicd Client KDE.                                   *
  *                                                                          *
@@ -23,7 +23,6 @@
 #include <QFile>
 #include <QProcess>
 #include <QDebug>
-#include <QHostAddress>
 
 namespace Wicd {
 
@@ -118,23 +117,3 @@ namespace Wicd {
         file.close();
     }
 }
-
-namespace Tools {
-
-    bool isValidIP(const QString& ip)
-    {
-        QHostAddress address(ip);
-        return address.protocol() != QAbstractSocket::UnknownNetworkLayerProtocol;
-    }
-
-    QString blankToNone(const QString &text)
-    {
-        return (text.isEmpty()) ? QString("None") : text;
-    }
-
-    QString noneToBlank(const QString &text)
-    {
-        return (text == "None") ? QString() : text;
-    }
-}
-
