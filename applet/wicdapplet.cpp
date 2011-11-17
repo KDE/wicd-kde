@@ -208,10 +208,10 @@ void WicdApplet::dataUpdated(const QString& source, const Plasma::DataEngine::Da
         }
         if (m_status.State != status.State) {
             if (status.State == WicdState::CONNECTING) {
-                setScanning(true);
+                setBusy(true);
                 m_abortButton->setVisible(true);
             } else {
-                setScanning(false);
+                setBusy(false);
                 m_abortButton->setVisible(false);
                 switch (status.State) {
                 case WicdState::WIRED:
@@ -260,7 +260,7 @@ void WicdApplet::dataUpdated(const QString& source, const Plasma::DataEngine::Da
             //QTimer::singleShot ensures the applet is done with init()
             QTimer::singleShot(0, this, SLOT(launchProfileManager()));
         }
-        setScanning(data["scanning"].toBool());
+        setBusy(data["scanning"].toBool());
         checkConnectionResult(data["connectionResult"].toString());
     }
 }
@@ -347,20 +347,19 @@ void WicdApplet::notify(const QString &event, const QString &message) const
     }
 }
 
-void WicdApplet::setScanning(bool isScanning)
+void WicdApplet::setBusy(bool busy)
 {
-    if (isScanning) {
+    if (busy) {
         m_scrollWidget->widget()->hide();
         m_busyWidget->resize(m_scrollWidget->viewportGeometry().size());
         m_busyWidget->show();
-        setBusy(true);
     } else {
         m_busyWidget->hide();
         m_scrollWidget->widget()->show();
-        setBusy(false);
         m_scrollWidget->ensureItemVisible(m_networkView->currentNetworkItem());
         graphicsWidget()->adjustSize();
     }
+    Plasma::PopupApplet::setBusy(busy);
 }
 
 void WicdApplet::cancelConnect() const
