@@ -49,8 +49,7 @@ private slots:
     void resultReceived(const QString& result);
 
 private:
-    uint m_state;
-    QStringList m_info;
+    Status m_status;
     QString m_message;
     QString m_interface;
     bool m_needed;
