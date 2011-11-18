@@ -102,8 +102,8 @@ bool WicdEngine::updateSourceEvent(const QString &source)
         return true;
     }
     if (source == "status") {
-        setData(source, "state", m_status.State);
-        setData(source, "info", m_status.Info);
+        setData(source, "state", m_state);
+        setData(source, "info", m_info);
         setData(source, "message", m_message);
         setData(source, "interface", m_interface);
         return true;
@@ -121,6 +121,8 @@ bool WicdEngine::updateSourceEvent(const QString &source)
 
 void WicdEngine::updateStatus(Status status)
 {
+    m_state = status.State;
+    m_info = status.Info;
     m_interface = DBusHandler::instance()->callDaemon("GetCurrentInterface").toString();
     if (status.State == WicdState::CONNECTING) {
         bool wired = (status.Info.at(0)=="wired");
@@ -130,10 +132,7 @@ void WicdEngine::updateStatus(Status status)
             m_message = DBusHandler::instance()->callWireless("CheckWirelessConnectingMessage").toString();
         }
         QTimer::singleShot(500, this, SLOT(forceUpdateStatus()));
-    } else if (m_status.State != status.State) {
-        updateSourceEvent("networks");
     }
-    m_status = status;
     updateSourceEvent("status");
 }
 
@@ -164,7 +163,6 @@ void WicdEngine::scanEnded()
 {
     m_scanning = false;
     updateSourceEvent("daemon");
-    updateSourceEvent("networks");
 }
 
 void WicdEngine::resultReceived(const QString& result)

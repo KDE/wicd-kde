@@ -75,6 +75,7 @@ private slots:
 private:
     void setupActions();
     QString qualityToIcon(int quality) const;
+    void loadNetworks();
     void setBusy(bool busy);
     void showPlotter(bool show);
     void notify(const QString& event, const QString& message) const;
