@@ -37,14 +37,8 @@ WicdEngine::WicdEngine(QObject* parent, const QVariantList& args)
 
 void WicdEngine::init()
 {
-    //force first status update
-    updateStatus(DBusHandler::instance()->status());
-
-    m_needed = false;
-    //check if the profile manager is needed
-    if (DBusHandler::instance()->callDaemon("GetNeedWiredProfileChooser").toBool()) {
-        profileNeeded();
-    }
+    m_scanning = false;
+    m_profileNeeded = false;
 
     //we need a current profile
     QString profile = DBusHandler::instance()->callWired("GetDefaultWiredNetwork").toString();
@@ -52,7 +46,13 @@ void WicdEngine::init()
         profile = DBusHandler::instance()->callWired("GetWiredProfileList").toStringList().at(0);
     DBusHandler::instance()->setCurrentProfile(profile);
 
-    m_scanning = false;
+    //check if the profile manager is needed
+    if (DBusHandler::instance()->callDaemon("GetNeedWiredProfileChooser").toBool()) {
+        profileNeeded();
+    }
+
+    //force first status update
+    forceUpdateStatus();
 }
 
 Plasma::Service *WicdEngine::serviceForSource(const QString &source)
@@ -91,7 +91,7 @@ bool WicdEngine::updateSourceEvent(const QString &source)
 {
     if (source == "networks") {
         //reset
-        setData(source, DataEngine::Data());
+        removeAllData(source);
         //populate new data
         QMap<int, NetworkInfo> list = DBusHandler::instance()->networksList();
         QMap<int, NetworkInfo>::const_iterator it = list.constBegin();
@@ -102,14 +102,14 @@ bool WicdEngine::updateSourceEvent(const QString &source)
         return true;
     }
     if (source == "status") {
-        setData(source, "state", m_state);
-        setData(source, "info", m_info);
+        setData(source, "state", m_status.State);
+        setData(source, "info", m_status.Info);
         setData(source, "message", m_message);
         setData(source, "interface", m_interface);
         return true;
     }
     if (source == "daemon") {
-        setData(source, "profileNeeded", m_needed);
+        setData(source, "profileNeeded", m_profileNeeded);
         setData(source, "scanning", m_scanning);
         setData(source, "connectionResult", m_connectionResult);
         //to simulate a "signal-like" behaviour
@@ -121,8 +121,6 @@ bool WicdEngine::updateSourceEvent(const QString &source)
 
 void WicdEngine::updateStatus(Status status)
 {
-    m_state = status.State;
-    m_info = status.Info;
     m_interface = DBusHandler::instance()->callDaemon("GetCurrentInterface").toString();
     if (status.State == WicdState::CONNECTING) {
         bool wired = (status.Info.at(0)=="wired");
@@ -133,6 +131,7 @@ void WicdEngine::updateStatus(Status status)
         }
         QTimer::singleShot(500, this, SLOT(forceUpdateStatus()));
     }
+    m_status = status;
     updateSourceEvent("status");
 }
 
@@ -143,13 +142,13 @@ void WicdEngine::forceUpdateStatus()
 
 void WicdEngine::profileNeeded()
 {
-    m_needed = true;
+    m_profileNeeded = true;
     updateSourceEvent("daemon");
 }
 
 void WicdEngine::profileNotNeeded()
 {
-    m_needed = false;
+    m_profileNeeded = false;
     updateSourceEvent("daemon");
 }
 
