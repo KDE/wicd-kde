@@ -49,7 +49,7 @@ DBusHandler::DBusHandler()
                                          "org.wicd.daemon",
                                          "StatusChanged",
                                          this,
-                                         SLOT(statusChanged(uint, QVariantList))
+                                         SLOT(statusChanged(uint,QVariantList))
                                          );
     QDBusConnection::systemBus().connect("org.wicd.daemon",
                                          "/org/wicd/daemon",
