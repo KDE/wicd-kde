@@ -18,6 +18,7 @@ set(wicdapplet_SRCS
     wirelessnetworkitem.cpp
     networkview.cpp
     networkplotter.cpp
+    adhocdialog.cpp
     wicdapplet.cpp
 )
 kde4_add_ui_files(wicdapplet_SRCS wicdappletConfig.ui)

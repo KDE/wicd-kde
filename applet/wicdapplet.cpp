@@ -19,9 +19,9 @@
 
 #include "wicdapplet.h"
 #include "global.h"
-#include "labelentry.h"
 #include "profilewidget.h"
 #include "infodialog.h"
+#include "adhocdialog.h"
 
 #include <QPainter>
 #include <QToolButton>
@@ -383,44 +383,14 @@ void WicdApplet::showPreferences() const
 
 void WicdApplet::createAdhocDialog() const
 {
-    QPointer<KDialog> dialog = new KDialog();
-    dialog->setCaption(i18n("Create an ad-hoc network"));
-    dialog->setModal(true);
-
-    QWidget *widget = new QWidget(dialog);
-    QVBoxLayout *vboxlayout = new QVBoxLayout();
-
-    LabelEntry *essidEdit = new LabelEntry(i18n("ESSID:"));
-    essidEdit->setText("My_Adhoc_Network");
-    LabelEntry *ipEdit = new LabelEntry(i18n("IP:"));
-    ipEdit->setText("169.254.12.10");
-    LabelEntry *channelEdit = new LabelEntry(i18n("Channel:"));
-    channelEdit->setText("3");
-    QCheckBox *icsBox = new QCheckBox(i18n("Activate Internet Connection Sharing"));//useless?
-    icsBox->setEnabled(false);
-    QCheckBox *wepBox = new QCheckBox(i18n("Use Encryption (WEP only)"));
-    LabelEntry *keyEdit = new LabelEntry(i18n("Key:"));
-    keyEdit->setEnabled(false);
-    connect(wepBox, SIGNAL(toggled(bool)), keyEdit, SLOT(setEnabled(bool)));
-
-    vboxlayout->addWidget(essidEdit);
-    vboxlayout->addWidget(ipEdit);
-    vboxlayout->addWidget(channelEdit);
-    vboxlayout->addWidget(icsBox);
-    vboxlayout->addWidget(wepBox);
-    vboxlayout->addWidget(keyEdit);
-    vboxlayout->addStretch();
-
-    widget->setLayout(vboxlayout);
-    dialog->setMainWidget( widget );
-
+    QPointer<AdhocDialog> dialog = new AdhocDialog();
     if (dialog->exec() == QDialog::Accepted) {
         KConfigGroup op = m_wicdService->operationDescription("createAdHocNetwork");
-        op.writeEntry("essid", essidEdit->text());
-        op.writeEntry("channel", channelEdit->text());
-        op.writeEntry("ip", ipEdit->text());
-        op.writeEntry("key", keyEdit->text());
-        op.writeEntry("wep", wepBox->isChecked());
+        op.writeEntry("essid", dialog->essid());
+        op.writeEntry("channel", dialog->channel());
+        op.writeEntry("ip", dialog->ip());
+        op.writeEntry("key", dialog->key());
+        op.writeEntry("wep", dialog->wep());
         m_wicdService->startOperationCall(op);
     }
     delete dialog;
