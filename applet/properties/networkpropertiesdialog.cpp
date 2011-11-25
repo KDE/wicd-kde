@@ -395,7 +395,8 @@ void NetworkPropertiesDialog::save()
             Encryption currentEncryption = m_encryptions.value(m_encryptionCombo->currentIndex());
             setNetworkProperty("enctype", currentEncryption.value("type"));
             //save values
-            foreach (const QString &key, m_encryptLabelEntries.keys()) {
+            const QList<QString> keys = m_encryptLabelEntries.keys();
+            foreach (const QString &key, keys) {
                 setNetworkProperty(key, m_encryptLabelEntries.value(key)->text());
             }
         } else {
