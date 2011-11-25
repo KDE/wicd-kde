@@ -383,11 +383,11 @@ void WicdApplet::showPreferences() const
 
 void WicdApplet::createAdhocDialog() const
 {
-    KDialog dialog;
-    dialog.setCaption(i18n("Create an ad-hoc network"));
-    dialog.setModal(true);
+    QPointer<KDialog> dialog = new KDialog();
+    dialog->setCaption(i18n("Create an ad-hoc network"));
+    dialog->setModal(true);
 
-    QWidget *widget = new QWidget(&dialog);
+    QWidget *widget = new QWidget(dialog);
     QVBoxLayout *vboxlayout = new QVBoxLayout();
 
     LabelEntry *essidEdit = new LabelEntry(i18n("ESSID:"));
@@ -412,10 +412,9 @@ void WicdApplet::createAdhocDialog() const
     vboxlayout->addStretch();
 
     widget->setLayout(vboxlayout);
-    dialog.setMainWidget( widget );
+    dialog->setMainWidget( widget );
 
-    int accepted = dialog.exec();
-    if (accepted && m_wicdService) {
+    if (dialog->exec() == QDialog::Accepted) {
         KConfigGroup op = m_wicdService->operationDescription("createAdHocNetwork");
         op.writeEntry("essid", essidEdit->text());
         op.writeEntry("channel", channelEdit->text());
@@ -424,6 +423,7 @@ void WicdApplet::createAdhocDialog() const
         op.writeEntry("wep", wepBox->isChecked());
         m_wicdService->startOperationCall(op);
     }
+    delete dialog;
 }
 
 void WicdApplet::findHiddenDialog() const

@@ -86,9 +86,10 @@ void NetworkItem::animationFinished()
 
 void NetworkItem::askProperties()
 {
-    NetworkPropertiesDialog dialog(m_info);
-    dialog.setCaption(m_info.value("essid").toString());
-    dialog.exec();
+    //FIXME: Still crashes if the network list is updated while the properties dialog is open (i.e. after scan)
+    QPointer<NetworkPropertiesDialog> dialog = new NetworkPropertiesDialog(m_info);
+    dialog->exec();
+    delete dialog;
 }
 
 void NetworkItem::askMore()

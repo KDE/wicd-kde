@@ -320,9 +320,9 @@ void NetworkPropertiesDialog::editScripts()
     }
     path = Wicd::wicdpath+type+"-settings.conf";
 
-    ScriptsDialog dialog(key, path, this);
-    dialog.exec();
-    if (dialog.authorized()) {
+    QPointer<ScriptsDialog> dialog = new ScriptsDialog(key, path, this);
+    dialog->exec();
+    if (dialog && dialog->authorized()) {
         if (m_networkId == -1) {
             DBusHandler::instance()->callWired("ReloadConfig");
             DBusHandler::instance()->callWired("ReadWiredNetworkProfile", key);
@@ -333,6 +333,7 @@ void NetworkPropertiesDialog::editScripts()
             DBusHandler::instance()->callWireless("SaveWirelessNetworkProfile", m_networkId);
         }
     }
+    delete dialog;
 }
 
 void NetworkPropertiesDialog::load()
