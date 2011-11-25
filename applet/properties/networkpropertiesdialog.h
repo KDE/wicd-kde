@@ -35,7 +35,7 @@ class NetworkPropertiesDialog : public KDialog
     Q_OBJECT
 
 public:
-    NetworkPropertiesDialog(NetworkInfo info, QWidget *parent = 0, Qt::WFlags flags = 0);
+    explicit NetworkPropertiesDialog(NetworkInfo info, QWidget *parent = 0, Qt::WFlags flags = 0);
     ~NetworkPropertiesDialog();
 
 private slots:

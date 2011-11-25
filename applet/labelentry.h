@@ -33,7 +33,7 @@ private:
     KLineEdit *m_value;
 
 public:
-    LabelEntry( QString label, QWidget *parent  = 0 );
+    explicit LabelEntry( QString label, QWidget *parent  = 0 );
     ~LabelEntry();
     QString label() const;
     QString text() const;

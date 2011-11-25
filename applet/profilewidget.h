@@ -31,7 +31,7 @@ class ProfileWidget : public QGraphicsWidget
 {
     Q_OBJECT
 public:
-    ProfileWidget(QGraphicsItem * parent = 0, Qt::WindowFlags wFlags = 0);
+    explicit ProfileWidget(QGraphicsItem * parent = 0, Qt::WindowFlags wFlags = 0);
     Plasma::DataEngine* engine();
 
 signals:

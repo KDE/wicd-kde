@@ -29,7 +29,7 @@ class InfoDialog : public Plasma::Dialog
     Q_OBJECT
 
 public:
-    InfoDialog(Status status, QWidget *parent = 0);
+    explicit InfoDialog(Status status, QWidget *parent = 0);
     ~InfoDialog();
     
 private slots:
