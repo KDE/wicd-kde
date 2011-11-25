@@ -31,6 +31,7 @@ NetworkPropertiesDialog::NetworkPropertiesDialog(NetworkInfo info, QWidget *pare
     , m_info(info)
 {
     setModal(true);
+    setCaption(m_info.value("essid").toString());
     setButtons( KDialog::User1 | KDialog::Cancel );
     button(KDialog::User1)->setIcon(KIcon("dialog-ok"));
     button(KDialog::User1)->setText(i18n("OK"));
