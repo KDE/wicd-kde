@@ -38,8 +38,6 @@ public slots:
     void dataUpdated(const QString &name, const Plasma::DataEngine::Data &data);
     
 private:
-    Plasma::DataEngine* engine();
-
     Plasma::Frame* m_overlayFrame;
     QString m_interface;
     uint m_interval;

@@ -38,16 +38,16 @@ NetworkPlotter::NetworkPlotter(QGraphicsItem *parent = 0)
     addPlot(QColor("#0099ff"));
     addPlot(QColor("#91ff00"));
     
-    QGraphicsLinearLayout* layout = new QGraphicsLinearLayout(Qt::Vertical, this);
-    setLayout(layout);
+    QGraphicsLinearLayout* vLayout = new QGraphicsLinearLayout(Qt::Vertical, this);
+    setLayout(vLayout);
     m_overlayFrame = new Plasma::Frame(this);
     m_overlayFrame->setFont(KGlobalSettings::smallestReadableFont());
-    layout->addStretch();
-    QGraphicsLinearLayout* layout2 = new QGraphicsLinearLayout(Qt::Horizontal, layout);
-    layout2->addStretch();
-    layout2->addItem(m_overlayFrame);
-    layout2->addStretch();
-    layout->addItem(layout2);
+    vLayout->addStretch();
+    QGraphicsLinearLayout* hLayout = new QGraphicsLinearLayout(Qt::Horizontal, vLayout);
+    hLayout->addStretch();
+    hLayout->addItem(m_overlayFrame);
+    hLayout->addStretch();
+    vLayout->addItem(hLayout);
     
     setMinimumHeight(60);
     
@@ -67,8 +67,8 @@ void NetworkPlotter::setInterface(const QString interface)
         return;
     }
 
-    Plasma::DataEngine *e = engine();
-    if (!e)
+    Plasma::DataEngine *e = Plasma::DataEngineManager::self()->engine("systemmonitor");
+    if (!e->isValid())
         return;
     
     e->disconnectSource("network/interfaces/"+m_interface+"/receiver/data", this);
@@ -100,15 +100,3 @@ void NetworkPlotter::dataUpdated(const QString& source, const Plasma::DataEngine
         m_data = QList<double>() << -1 << -1;
     }
 }
-
-Plasma::DataEngine* NetworkPlotter::engine()
-{
-    Plasma::DataEngine *e = Plasma::DataEngineManager::self()->engine("systemmonitor");
-    if (e->isValid()) {
-        return e;
-    } else {
-        return 0;
-    }
-}
-
-
