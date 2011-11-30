@@ -121,11 +121,9 @@ NetworkItem* NetworkView::currentNetworkItem() const
 
 void NetworkView::toggleConnection(int networkId)
 {
-    if (m_controller) {
-        KConfigGroup op = m_controller->operationDescription("toggleConnection");
-        op.writeEntry("networkId", networkId);
-        m_controller->startOperationCall(op);
-    }
+    KConfigGroup op = m_controller->operationDescription("toggleConnection");
+    op.writeEntry("networkId", networkId);
+    m_controller->startOperationCall(op);
 }
 
 void NetworkView::highlightItem(QGraphicsItem* item)

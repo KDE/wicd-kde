@@ -96,6 +96,10 @@ void WicdApplet::init()
 
     //load dataengine
     Plasma::DataEngine *engine = dataEngine("wicd");
+    if (!engine->isValid()) {
+        setFailedToLaunch(true, i18n("Unable to load the Wicd data engine."));
+        return;
+    }
     
     setupActions();
     
@@ -370,10 +374,8 @@ void WicdApplet::setBusy(bool busy)
 
 void WicdApplet::cancelConnect() const
 {
-    if (m_wicdService) {
-        KConfigGroup op = m_wicdService->operationDescription("cancelConnect");
-        m_wicdService->startOperationCall(op);
-    }
+    KConfigGroup op = m_wicdService->operationDescription("cancelConnect");
+    m_wicdService->startOperationCall(op);
 }
 
 void WicdApplet::showPreferences() const
@@ -401,7 +403,7 @@ void WicdApplet::findHiddenDialog() const
     bool ok;
     QString text = KInputDialog::getText(i18n("Find a hidden network"),
                                          i18n("Hidden Network ESSID"), QString(), &ok, 0);
-    if (ok && !text.isEmpty() && m_wicdService) {
+    if (ok && !text.isEmpty()) {
         KConfigGroup op = m_wicdService->operationDescription("findHiddenNetwork");
         op.writeEntry("essid", text);
         m_wicdService->startOperationCall(op);
@@ -428,7 +430,8 @@ void WicdApplet::configChanged()
     m_networkView->showSignalStrength(m_showSignalStrength);
     m_autoScan = cg.readEntry("Autoscan", false);
     m_showPlotter = cg.readEntry("Show plotter", false);
-    showPlotter(m_showPlotter);
+    if (!hasFailedToLaunch())
+        showPlotter(m_showPlotter);
 }
 
 void WicdApplet::toolTipAboutToShow()
