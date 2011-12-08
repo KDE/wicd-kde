@@ -367,7 +367,11 @@ void WicdApplet::setBusy(bool busy)
     } else {
         m_busyWidget->hide();
         m_scrollWidget->widget()->show();
-        loadNetworks();
+        //FIXME: workaround: if a properties dialog is opened, the applet popup is hidden
+        //we don't load the new networks list here to prevent a crash. The list will be updated
+        //when the popup is opened anyway.
+        if (isPopupShowing())
+            loadNetworks();
     }
     Plasma::PopupApplet::setBusy(busy);
 }
