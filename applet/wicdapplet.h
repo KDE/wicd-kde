@@ -94,6 +94,7 @@ private:
     //dataengine management
     QString m_icon;
     Status m_status;
+    bool m_isScanning;
     QString m_message;
     QString m_interface;
     Plasma::Service *m_wicdService;

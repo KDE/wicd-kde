@@ -78,9 +78,6 @@ WicdApplet::WicdApplet(QObject *parent, const QVariantList &args)
     m_messageTable.insert("setting_static_ip", i18n("Setting static IP addresses..."));
     m_messageTable.insert("aborted", i18n("Aborted"));
     m_messageTable.insert("failed", i18n("Failed"));
-
-    //prevent notification on startup
-    m_status.State = 10;
 }
 
 
@@ -156,6 +153,10 @@ void WicdApplet::init()
 
     connect(Plasma::Theme::defaultTheme(), SIGNAL(themeChanged()), SLOT(updateColors()));
 
+
+    //prevent notification on startup
+    m_status.State = 10;
+    m_isScanning = false;
     //connect dataengine
     m_wicdService = engine->serviceForSource("");
     engine->connectSource("status", this);
@@ -264,7 +265,10 @@ void WicdApplet::dataUpdated(const QString& source, const Plasma::DataEngine::Da
             //QTimer::singleShot ensures the applet is done with init()
             QTimer::singleShot(0, this, SLOT(launchProfileManager()));
         }
-        setBusy(data["scanning"].toBool());
+        if (m_isScanning != data["scanning"].toBool()) {
+            m_isScanning = data["scanning"].toBool();
+            setBusy(m_isScanning);
+        }
         checkConnectionResult(data["connectionResult"].toString());
     }
 }
