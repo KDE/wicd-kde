@@ -327,8 +327,14 @@ void WicdApplet::launchProfileManager()
 void WicdApplet::loadNetworks()
 {
     m_networkView->loadNetworks();
-    m_scrollWidget->ensureItemVisible(m_networkView->currentNetworkItem());
     graphicsWidget()->adjustSize();
+    //we need to defer the scrolling to let adjustSize() do its work to prevent a graphical glitch
+    QTimer::singleShot(0, this, SLOT(autoScroll()));
+}
+
+void WicdApplet::autoScroll()
+{
+    m_scrollWidget->ensureItemVisible(m_networkView->currentNetworkItem());
 }
 
 void WicdApplet::showPlotter(bool show)
@@ -369,13 +375,13 @@ void WicdApplet::setBusy(bool busy)
         m_busyWidget->resize(m_scrollWidget->viewportGeometry().size());
         m_busyWidget->show();
     } else {
-        m_busyWidget->hide();
-        m_scrollWidget->widget()->show();
         //FIXME: workaround: if a properties dialog is opened, the applet popup is hidden
         //we don't load the new networks list here to prevent a crash. The list will be updated
         //when the popup is opened anyway.
         if (isPopupShowing())
             loadNetworks();
+        m_busyWidget->hide();
+        m_scrollWidget->widget()->show();
     }
     Plasma::PopupApplet::setBusy(busy);
 }

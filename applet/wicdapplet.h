@@ -63,6 +63,7 @@ protected slots:
     void configAccepted();
 
 private slots:
+    void autoScroll();
     void updateColors();
     void launchProfileManager();
     void cancelConnect() const;
