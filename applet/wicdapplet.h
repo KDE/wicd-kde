@@ -31,18 +31,13 @@
 #include <Plasma/BusyWidget>
 #include <Plasma/ScrollWidget>
 
-class QSizeF;
-
-// Define our plasma Applet
 class WicdApplet : public Plasma::PopupApplet
 {
     Q_OBJECT
 public:
-    // Basic Create/Destroy
     WicdApplet(QObject *parent, const QVariantList &args);
     ~WicdApplet();
 
-    // The paintInterface procedure paints the applet to the desktop
     void paintInterface(QPainter *painter,
                         const QStyleOptionGraphicsItem *option,
                         const QRect& contentsRect);

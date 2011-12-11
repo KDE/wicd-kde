@@ -23,7 +23,6 @@
 #include "infodialog.h"
 #include "adhocdialog.h"
 
-#include <QPainter>
 #include <QToolButton>
 #include <QTimer>
 
