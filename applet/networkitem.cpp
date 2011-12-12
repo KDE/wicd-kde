@@ -86,10 +86,8 @@ void NetworkItem::animationFinished()
 
 void NetworkItem::askProperties()
 {
-    //FIXME: Still crashes if the network list is updated while the properties dialog is open (i.e. after scan)
     QPointer<NetworkPropertiesDialog> dialog = new NetworkPropertiesDialog(m_info);
-    dialog->exec();
-    delete dialog;
+    dialog->open();
 }
 
 void NetworkItem::askMore()
