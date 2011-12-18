@@ -1,14 +1,19 @@
+v0.3.0
+------------------------------------------------
 - Wicd 1.7.1 compatibility
 - Port to Plasma
+
 v0.2.3
 ------------------------------------------------
 - Fix wicd-kde.kcfg
+
 v0.2.2
 ------------------------------------------------
 - Use KXmlGuiWindow (customizable toolbar and optional menubar)
 - The application now depends on KDE 4.5
 - The icons do not conflict with knetworkmanager anymore
 - Rename binary to wicd-kde
+
 v0.2.1
 ------------------------------------------------
 - Fix potential crash when the connection is toggled with a double-click
@@ -20,6 +25,7 @@ v0.2.1
 - Add czech translation
 - Add brazilian portuguese translation
 - Add hungarian translation
+
 v0.2.0
 ------------------------------------------------
 - The preferences panel is now a KCM.
