@@ -33,17 +33,26 @@ WicdEngine::WicdEngine(QObject* parent, const QVariantList& args)
     connect(DBusHandler::instance(), SIGNAL(launchChooser()), this, SLOT(profileNeeded()));
     connect(DBusHandler::instance(), SIGNAL(chooserLaunched()), this, SLOT(profileNotNeeded()));
     connect(DBusHandler::instance(), SIGNAL(connectionResultSend(QString)), this, SLOT(resultReceived(QString)));
+    connect(DBusHandler::instance(), SIGNAL(daemonStarting()), this, SLOT(daemonStarted()));
+    connect(DBusHandler::instance(), SIGNAL(daemonClosing()), this, SLOT(daemonClosed()));
 }
 
 void WicdEngine::init()
 {
     m_scanning = false;
     m_profileNeeded = false;
+    m_daemonRunning = false;
+
+    if (!DBusHandler::instance()->callDaemon("Hello").toString().isEmpty())
+        m_daemonRunning = true;
 
     //we need a current profile
     QString profile = DBusHandler::instance()->callWired("GetDefaultWiredNetwork").toString();
-    if (profile.isEmpty())
-        profile = DBusHandler::instance()->callWired("GetWiredProfileList").toStringList().at(0);
+    if (profile.isEmpty()) {
+        QStringList profileList = DBusHandler::instance()->callWired("GetWiredProfileList").toStringList();
+        if (!profileList.isEmpty())
+            profile = DBusHandler::instance()->callWired("GetWiredProfileList").toStringList().first();
+    }
     DBusHandler::instance()->setCurrentProfile(profile);
 
     //check if the profile manager is needed
@@ -109,6 +118,7 @@ bool WicdEngine::updateSourceEvent(const QString &source)
         return true;
     }
     if (source == "daemon") {
+        setData(source, "running", m_daemonRunning);
         setData(source, "profileNeeded", m_profileNeeded);
         setData(source, "scanning", m_scanning);
         setData(source, "connectionResult", m_connectionResult);
@@ -167,6 +177,21 @@ void WicdEngine::scanEnded()
 void WicdEngine::resultReceived(const QString& result)
 {
     m_connectionResult = result;
+    updateSourceEvent("daemon");
+}
+
+void WicdEngine::daemonStarted()
+{
+    init();
+}
+
+void WicdEngine::daemonClosed()
+{
+    m_status.State = WicdState::NOT_CONNECTED;
+    m_status.Info.clear();
+    updateSourceEvent("status");
+
+    m_daemonRunning = false;
     updateSourceEvent("daemon");
 }
 

@@ -79,6 +79,20 @@ DBusHandler::DBusHandler()
                                          this,
                                          SIGNAL(scanEnded())
                                          );
+    QDBusConnection::systemBus().connect("org.wicd.daemon",
+                                         "/org/wicd/daemon",
+                                         "org.wicd.daemon",
+                                         "DaemonStarting",
+                                         this,
+                                         SIGNAL(daemonStarting())
+                                         );
+    QDBusConnection::systemBus().connect("org.wicd.daemon",
+                                         "/org/wicd/daemon",
+                                         "org.wicd.daemon",
+                                         "DaemonClosing",
+                                         this,
+                                         SIGNAL(daemonClosing())
+                                         );
 
     s_instance = this;
 }

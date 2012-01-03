@@ -47,6 +47,8 @@ private slots:
     void scanStarted();
     void scanEnded();
     void resultReceived(const QString& result);
+    void daemonStarted();
+    void daemonClosed();
 
 private:
     Status m_status;
@@ -54,6 +56,7 @@ private:
     QString m_interface;
     bool m_profileNeeded;
     bool m_scanning;
+    bool m_daemonRunning;
     QString m_connectionResult;
 };
 

@@ -260,6 +260,10 @@ void WicdApplet::dataUpdated(const QString& source, const Plasma::DataEngine::Da
         m_messageBox->setText(m_message);
         update();
     } else if (source == "daemon") {
+        if (!data["running"].toBool()) {
+            m_message = i18n("The Wicd daemon is not running.");
+            m_messageBox->setText(m_message);
+        }
         if (data["profileNeeded"].toBool()) {
             //QTimer::singleShot ensures the applet is done with init()
             QTimer::singleShot(0, this, SLOT(launchProfileManager()));

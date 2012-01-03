@@ -80,6 +80,8 @@ signals:
     void chooserLaunched();
     void scanStarted();
     void scanEnded();
+    void daemonStarting();
+    void daemonClosing();
 
 private:
     DBusHandler();
