@@ -76,7 +76,7 @@ ProfileWidget::ProfileWidget(QGraphicsItem * parent, Qt::WindowFlags wFlags)
     //for the profile dialog
     if (currentProfileIndex < 0)
         currentProfileIndex = 0;
-    m_comboBox->setCurrentIndex(currentProfileIndex);
+    m_comboBox->nativeWidget()->setCurrentIndex(currentProfileIndex);
 }
 
 Plasma::DataEngine* ProfileWidget::engine()
@@ -125,7 +125,7 @@ void ProfileWidget::addProfile()
     op.writeEntry("profile", newprofile);
     m_wicdService->startOperationCall(op);
     m_comboBox->nativeWidget()->insertItem(0, newprofile);
-    m_comboBox->setCurrentIndex(0);
+    m_comboBox->nativeWidget()->setCurrentIndex(0);
 }
 
 void ProfileWidget::removeProfile()
@@ -134,8 +134,8 @@ void ProfileWidget::removeProfile()
     KConfigGroup op = m_wicdService->operationDescription("deleteWiredNetworkProfile");
     op.writeEntry("profile", profile);
     m_wicdService->startOperationCall(op);
-    m_comboBox->nativeWidget()->removeItem(m_comboBox->currentIndex());
-    m_comboBox->setCurrentIndex(0);
+    m_comboBox->nativeWidget()->removeItem(m_comboBox->nativeWidget()->currentIndex());
+    m_comboBox->nativeWidget()->setCurrentIndex(0);
 }
 
 ProfileDialog::ProfileDialog(QGraphicsWidget *parent)
