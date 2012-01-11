@@ -57,7 +57,9 @@ private:
     bool m_profileNeeded;
     bool m_scanning;
     bool m_daemonRunning;
-    QString m_connectionResult;
+    QString m_error;
+    //for translations
+    QHash<QString, QString> m_messageTable;
 };
 
 K_EXPORT_PLASMA_DATAENGINE(wicd, WicdEngine)

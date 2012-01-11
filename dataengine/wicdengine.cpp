@@ -35,6 +35,24 @@ WicdEngine::WicdEngine(QObject* parent, const QVariantList& args)
     connect(DBusHandler::instance(), SIGNAL(connectionResultSend(QString)), this, SLOT(resultReceived(QString)));
     connect(DBusHandler::instance(), SIGNAL(daemonStarting()), this, SLOT(daemonStarted()));
     connect(DBusHandler::instance(), SIGNAL(daemonClosing()), this, SLOT(daemonClosed()));
+
+    //to ease translations
+    m_messageTable.insert("interface_down", i18n("Putting interface down..."));
+    m_messageTable.insert("resetting_ip_address", i18n("Resetting IP address..."));
+    m_messageTable.insert("interface_up", i18n("Putting interface up..."));
+    m_messageTable.insert("generating_psk", i18n("Generating PSK..."));
+    m_messageTable.insert("bad_pass", i18n("Connection Failed: Bad password."));
+    m_messageTable.insert("generating_wpa_config", i18n("Generating WPA configuration"));
+    m_messageTable.insert("validating_authentication", i18n("Validating authentication..."));
+    m_messageTable.insert("running_dhcp", i18n("Obtaining IP address..."));
+    m_messageTable.insert("done", i18n("Done connecting..."));
+    m_messageTable.insert("dhcp_failed", i18n("Connection Failed: Unable to Get IP Address"));
+    m_messageTable.insert("no_dhcp_offers", i18n("Connection Failed: No DHCP offers received."));
+    m_messageTable.insert("verifying_association", i18n("Verifying access point association..."));
+    m_messageTable.insert("association_failed", i18n("Connection failed: Could not contact the wireless access point."));
+    m_messageTable.insert("setting_static_ip", i18n("Setting static IP addresses..."));
+    m_messageTable.insert("aborted", i18n("Aborted"));
+    m_messageTable.insert("failed", i18n("Failed"));
 }
 
 void WicdEngine::init()
@@ -121,9 +139,9 @@ bool WicdEngine::updateSourceEvent(const QString &source)
         setData(source, "running", m_daemonRunning);
         setData(source, "profileNeeded", m_profileNeeded);
         setData(source, "scanning", m_scanning);
-        setData(source, "connectionResult", m_connectionResult);
+        setData(source, "error", m_error);
         //to simulate a "signal-like" behaviour
-        m_connectionResult = "";
+        m_error = "";
         return true;
     }
     return false;
@@ -139,6 +157,7 @@ void WicdEngine::updateStatus(Status status)
         } else {
             m_message = DBusHandler::instance()->callWireless("CheckWirelessConnectingMessage").toString();
         }
+        m_message = m_messageTable.value(m_message, m_message);
         QTimer::singleShot(500, this, SLOT(forceUpdateStatus()));
     }
     m_status = status;
@@ -176,8 +195,12 @@ void WicdEngine::scanEnded()
 
 void WicdEngine::resultReceived(const QString& result)
 {
-    m_connectionResult = result;
-    updateSourceEvent("daemon");
+    QStringList validMessages;
+    validMessages << "success" << "aborted" << QString();
+    if (!validMessages.contains(result.toLower())) {
+        m_error = m_messageTable.value(result.toLower());
+        updateSourceEvent("daemon");
+    }
 }
 
 void WicdEngine::daemonStarted()

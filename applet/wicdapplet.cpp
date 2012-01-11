@@ -59,24 +59,6 @@ WicdApplet::WicdApplet(QObject *parent, const QVariantList &args)
     
     // this will get us the standard applet background, for free!
     setBackgroundHints(DefaultBackground);
-
-    //to ease translations
-    m_messageTable.insert("interface_down", i18n("Putting interface down..."));
-    m_messageTable.insert("resetting_ip_address", i18n("Resetting IP address..."));
-    m_messageTable.insert("interface_up", i18n("Putting interface up..."));
-    m_messageTable.insert("generating_psk", i18n("Generating PSK..."));
-    m_messageTable.insert("bad_pass", i18n("Connection Failed: Bad password."));
-    m_messageTable.insert("generating_wpa_config", i18n("Generating WPA configuration"));
-    m_messageTable.insert("validating_authentication", i18n("Validating authentication..."));
-    m_messageTable.insert("running_dhcp", i18n("Obtaining IP address..."));
-    m_messageTable.insert("done", i18n("Done connecting..."));
-    m_messageTable.insert("dhcp_failed", i18n("Connection Failed: Unable to Get IP Address"));
-    m_messageTable.insert("no_dhcp_offers", i18n("Connection Failed: No DHCP offers received."));
-    m_messageTable.insert("verifying_association", i18n("Verifying access point association..."));
-    m_messageTable.insert("association_failed", i18n("Connection failed: Could not contact the wireless access point."));
-    m_messageTable.insert("setting_static_ip", i18n("Setting static IP addresses..."));
-    m_messageTable.insert("aborted", i18n("Aborted"));
-    m_messageTable.insert("failed", i18n("Failed"));
 }
 
 
@@ -250,7 +232,6 @@ void WicdApplet::dataUpdated(const QString& source, const Plasma::DataEngine::Da
             m_icon = "network-wired";
             bool wired = (status.Info.at(0)=="wired");
             message = data["message"].toString();
-            message = m_messageTable.value(message, message);
             wired ? message.prepend(i18n("Wired network: ")) : message.prepend(status.Info.at(1)+": ");
         } else {
             m_icon = "network-wired";
@@ -272,7 +253,9 @@ void WicdApplet::dataUpdated(const QString& source, const Plasma::DataEngine::Da
             m_isScanning = data["scanning"].toBool();
             setBusy(m_isScanning);
         }
-        checkConnectionResult(data["connectionResult"].toString());
+        if (!data["error"].toString().isEmpty()) {
+            notify("error", data["error"].toString());
+        }
     }
 }
 
@@ -309,15 +292,6 @@ void WicdApplet::paintInterface(QPainter *p,
     p->setRenderHint(QPainter::Antialiasing);
 
     m_theme->paint(p, contentsRect, m_icon);
-}
-
-void WicdApplet::checkConnectionResult(const QString &result)
-{
-    QStringList validMessages;
-    validMessages << "success" << "aborted" << QString();
-    if (!validMessages.contains(result.toLower())) {
-        notify("error", m_messageTable.value(result.toLower()));
-    }
 }
 
 void WicdApplet::launchProfileManager()

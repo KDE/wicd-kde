@@ -75,7 +75,6 @@ private:
     void setBusy(bool busy);
     void showPlotter(bool show);
     void notify(const QString& event, const QString& message) const;
-    void checkConnectionResult(const QString& result);
 
     // Configuration dialog
     Ui::WicdAppletConfig ui;
@@ -84,8 +83,6 @@ private:
     bool m_showPlotter;
 
     Plasma::Svg *m_theme;
-    //for translations
-    QHash<QString, QString> m_messageTable;
 
     //dataengine management
     QString m_icon;
