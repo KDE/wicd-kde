@@ -150,7 +150,7 @@ ProfileDialog::ProfileDialog(QGraphicsWidget *parent)
     mainLayout->addItem(m_profileWidget);
     Plasma::PushButton *okButton = new Plasma::PushButton(mainWidget);
     okButton->setIcon(KIcon("dialog-ok"));
-    okButton->setText(i18n("Ok"));
+    okButton->setText(i18n("OK"));
     QGraphicsLinearLayout *bottomLayout = new QGraphicsLinearLayout(Qt::Horizontal);
     bottomLayout->addStretch();
     bottomLayout->addItem(okButton);
