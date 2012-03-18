@@ -1,3 +1,4 @@
+- Always hide password input
 - Fix crash if the applet is started and the daemon is not running
 - Fix KDE 4.5 build
 - Fix arm build

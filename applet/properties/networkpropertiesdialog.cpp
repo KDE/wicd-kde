@@ -298,7 +298,7 @@ void NetworkPropertiesDialog::encryptMethodChanged()
             QString key = field.toStringList().value(0);
             //new field implies new label entry
             LabelEntry* entry = new LabelEntry(name.replace('_', ' ').remove('*')+" :");
-            entry->setEchoMode(QLineEdit::PasswordEchoOnEdit);
+            entry->setEchoMode(QLineEdit::Password);
             entry->setText(networkProperty(key).toString());
             m_encryptlayout->addWidget(entry);
             //keep trace of this LabelEntry
