@@ -111,7 +111,8 @@ namespace Wicd {
             QByteArray line = file.readLine();
             QString cleanPath = QString(line);
             //remove new line
-            cleanPath.chop(1);
+            if (cleanPath.endsWith("\n"))
+                cleanPath.chop(1);
             encryptionlist.append(encryption(cleanPath));
         }
         file.close();
