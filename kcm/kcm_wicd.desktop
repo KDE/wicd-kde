@@ -72,6 +72,7 @@ Comment[zh_CN]=Wicd 进程的系统级首选项
 Comment[zh_TW]=Wicd 伺服程式的系統喜好設定
 
 X-KDE-Keywords=wicd,network,wireless,wired,connection
+X-KDE-Keywords[cs]=wicd,síť,bezdrátové,drátové,spojení
 X-KDE-Keywords[da]=wicd,netværk,trådløst,kablet,forbindelse
 X-KDE-Keywords[de]=wicd,network,wireless,wired,connection
 X-KDE-Keywords[el]=wicd,δίκτυο,ασύρματο,ενσύρματο,σύνδεση
