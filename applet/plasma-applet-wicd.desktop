@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Wicd client
+Name[bs]=Wicd klijent
 Name[cs]=Klient Wicd
 Name[da]=Wicd-klient
 Name[de]=Wicd-Oberfläche
@@ -32,6 +33,7 @@ Name[x-test]=xxWicd clientxx
 Name[zh_CN]=Wicd 客户端
 Name[zh_TW]=Wicd 客戶端程式
 Comment=Wicd Client KDE
+Comment[bs]=Wicd klijent za KDE
 Comment[cs]=Klient Wicd pro KDE
 Comment[da]=Wicd Client KDE
 Comment[de]=Wicd-Oberfläche (KDE)

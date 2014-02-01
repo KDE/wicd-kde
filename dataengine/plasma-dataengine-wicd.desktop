@@ -35,6 +35,7 @@ Name[zh_CN]=Wicd
 Name[zh_TW]=Wicd
 
 Comment=A Wicd data engine
+Comment[bs]=Wicd pogon podataka
 Comment[cs]=Datový nástroj Wicd
 Comment[da]=En datamotor til Wicd
 Comment[de]=Ein Datenmodul für Wicd
