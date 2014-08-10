@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Wicd
 Name[bs]=Vicd
+Name[ca]=Wicd
 Name[cs]=Wicd
 Name[da]=Wicd
 Name[de]=Wicd
@@ -39,6 +40,7 @@ Name[zh_TW]=Wicd
 
 Comment=A Wicd data engine
 Comment[bs]=Wicd pogon podataka
+Comment[ca]=Un motor de dades pel Wicd
 Comment[cs]=Datový nástroj Wicd
 Comment[da]=En datamotor til Wicd
 Comment[de]=Ein Datenmodul für Wicd

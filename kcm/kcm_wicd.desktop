@@ -11,6 +11,7 @@ X-KDE-System-Settings-Parent-Category=network-settings
 
 Name=Wicd preferences
 Name[bs]=Wicd postavke
+Name[ca]=Preferències pel Wicd
 Name[cs]=Nastavení Wicd
 Name[da]=Indstillinger for Wicd
 Name[de]=Wicd-Einstellungen
@@ -47,6 +48,7 @@ Name[zh_TW]=Wicd 喜好設定
 
 Comment=System-wide preferences for the Wicd daemon
 Comment[bs]=Sistemske postavke za Wicd demon
+Comment[ca]=Les preferències de tot el sistema pel dimoni Wicd
 Comment[cs]=Systémová nastavení pro démona Wicd
 Comment[da]=Systemomfattende indstillinger for Wicd-dæmonen
 Comment[de]=Systemweite Einstellungen für den Wicd-Dienst
@@ -82,6 +84,7 @@ Comment[zh_TW]=Wicd 伺服程式的系統喜好設定
 
 X-KDE-Keywords=wicd,network,wireless,wired,connection
 X-KDE-Keywords[bs]=wicd,merža,bežično,žičano,konekcija
+X-KDE-Keywords[ca]=wicd,xarxa,sense fils,per cable,connexió
 X-KDE-Keywords[cs]=wicd,síť,bezdrátové,drátové,spojení
 X-KDE-Keywords[da]=wicd,netværk,trådløst,kablet,forbindelse
 X-KDE-Keywords[de]=wicd,network,wireless,wired,connection
