@@ -42,7 +42,6 @@ Name[sl]=Možnosti Wicd
 Name[sv]=Inställningar av WICD
 Name[tr]=Wicd tercihleri
 Name[uk]=Налаштування Wicd
-Name[x-test]=xxWicd preferencesxx
 Name[zh_CN]=Wicd 首选项
 Name[zh_TW]=Wicd 喜好設定
 
@@ -78,7 +77,6 @@ Comment[sl]=Sistemske možnosti za ozadnji program Wicd
 Comment[sv]=Systemomfattande inställningar för WICD-demonen
 Comment[tr]=Wicd uygulaması için sistem çapında tercihler
 Comment[uk]=Загальносистемні налаштування фонової служби Wicd
-Comment[x-test]=xxSystem-wide preferences for the Wicd daemonxx
 Comment[zh_CN]=Wicd 进程的系统级首选项
 Comment[zh_TW]=Wicd 伺服程式的系統喜好設定
 
@@ -114,7 +112,6 @@ X-KDE-Keywords[sl]=wicd,omrežje,brezžično,žično,povezava
 X-KDE-Keywords[sv]=WICD,nätverk,trådlös,trådbunden,anslutning
 X-KDE-Keywords[tr]=wicd,ağ,kablosuz,kablolu,bağlantı
 X-KDE-Keywords[uk]=wicd,network,wireless,wired,connection,мережа,дротова,бездротова,з’єднання,з'єднання
-X-KDE-Keywords[x-test]=xxwicd,network,wireless,wired,connectionxx
 X-KDE-Keywords[zh_CN]=wicd,network,wireless,wired,connection,网络,无线,有线,连接
 X-KDE-Keywords[zh_TW]=wicd,network,wireless,wired,connection
 

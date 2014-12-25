@@ -34,7 +34,6 @@ Name[sv]=WICD
 Name[tr]=Wicd
 Name[ug]=Wicd
 Name[uk]=Wicd
-Name[x-test]=xxWicdxx
 Name[zh_CN]=Wicd
 Name[zh_TW]=Wicd
 
@@ -71,7 +70,6 @@ Comment[sl]=Podatkovni pogon Wicd
 Comment[sv]=Ett WICD-datagränssnitt
 Comment[tr]=Bir Wicd veri motoru
 Comment[uk]=Рушій даних Wicd
-Comment[x-test]=xxA Wicd data enginexx
 Comment[zh_CN]=Wicd 数据引擎
 Comment[zh_TW]=Wicd 資料引擎
 
