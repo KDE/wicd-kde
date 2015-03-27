@@ -31,6 +31,7 @@
     </entry>
   </group>
   <group name="scan"/>
+  <group name="rfkill"/>
   <group name="getWiredProfileList"/>
   <group name="setProfileDefaultProperty">
     <entry name="profile" type="String">

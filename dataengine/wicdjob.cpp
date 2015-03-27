@@ -75,6 +75,8 @@ void WicdJob::start()
         m_dbus->scan();
     } else if (operation == "scan") {
         m_dbus->scan();
+    } else if (operation == "rfkill") {
+           m_dbus->rfkill();
     } else if (operation == "getWiredProfileList") {
         setResult(m_dbus->callWired("GetWiredProfileList"));
     } else if (operation == "setProfileDefaultProperty") {

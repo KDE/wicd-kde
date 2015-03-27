@@ -127,6 +127,11 @@ void DBusHandler::scan() const
         m_wireless->call("Scan");
 }
 
+void DBusHandler::rfkill() const
+{
+    m_wireless->call("SwitchRfKill");
+}
+
 void DBusHandler::disconnect() const
 {
     m_daemon->call("Disconnect");

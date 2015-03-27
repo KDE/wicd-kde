@@ -67,6 +67,7 @@ public:
                           const QVariant &arg8 = QVariant()) const;
 
 public slots:
+    void rfkill() const;
     void scan() const;
     void disconnect() const;
 

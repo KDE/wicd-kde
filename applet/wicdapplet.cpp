@@ -163,6 +163,10 @@ void WicdApplet::setupActions()
     findnetworkAction->setShortcuts(KShortcut("Ctrl+F"));
     addAction("findnetwork", findnetworkAction);
     connect(findnetworkAction, SIGNAL(triggered()), this, SLOT(findHiddenDialog()));
+    KAction* rfkillAction = new KAction(i18n("RfKill"), this);
+    rfkillAction->setShortcuts(KShortcut("Ctrl+K"));
+    addAction("rfkill", rfkillAction);
+    connect(rfkillAction, SIGNAL(triggered()), this, SLOT(rfkill()));
     
     KAction* reloadAction = new KAction(KIcon("view-refresh"), i18n("Reload"), this);
     reloadAction->setShortcuts(KShortcut("Ctrl+R"));
@@ -178,7 +182,9 @@ QList<QAction*> WicdApplet::contextualActions()
     QAction *actcrea = action("createadhoc");
     QAction *actfind = action("findnetwork");
     QAction *actconf = action("configure_wicd");
-    rv << actinfo << actcrea << actfind << actconf;
+    QAction *actrfki = action("rfkill");
+    rv << actinfo << actcrea << actfind << actconf << actrfki;
+
     return rv;
 }
 
@@ -400,6 +406,12 @@ void WicdApplet::findHiddenDialog() const
 void WicdApplet::scan() const
 {
     KConfigGroup op = m_wicdService->operationDescription("scan");
+    m_wicdService->startOperationCall(op);
+}
+
+void WicdApplet::rfkill() const
+{
+    KConfigGroup op = m_wicdService->operationDescription("rfkill");
     m_wicdService->startOperationCall(op);
 }
 

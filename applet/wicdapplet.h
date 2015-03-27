@@ -66,6 +66,7 @@ private slots:
     void createAdhocDialog() const;
     void findHiddenDialog() const;
     void scan() const;
+    void rfkill() const;
     void connectionInfoRequested();
 
 private:
