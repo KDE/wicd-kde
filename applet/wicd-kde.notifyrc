@@ -154,6 +154,7 @@ Action=None
 
 [Event/error]
 Name=Error
+Name[ast]=Fallu
 Name[bs]=Greška
 Name[ca]=Error
 Name[cs]=Chyba
